@@ -1,0 +1,307 @@
+<!-- <div class="card">
+  <div class="card-body">
+    <div class="content-wrapper container-xxl p-0">
+      <div class="content-body"> -->
+        <!-- User List -->
+        <section class="users-list-wrapper">
+          <!-- users filter start -->
+          <!-- <div class="card">
+            <h5 class="card-header">Search Filter</h5>
+            <div class="card-body">
+              <div class="users-list-filter">
+                <form>
+                  <div class="row">
+                    <div class="col-12 col-md-4">
+                      <fieldset class="form-group">
+                        <ng-select
+                          [items]="selectRole"
+                          [(ngModel)]="selectedRole"
+                          name="selectedRole"
+                          bindLabel="name"
+                          placeholder="Select Role"
+                          (change)="filterByRole($event)"
+                        ></ng-select>
+                      </fieldset>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <fieldset class="form-group">
+                        <ng-select
+                          [items]="selectPlan"
+                          [(ngModel)]="selectedPlan"
+                          name="selectedPlan"
+                          bindLabel="name"
+                          placeholder="Select Plan"
+                          (change)="filterByPlan($event)"
+                        ></ng-select>
+                      </fieldset>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <fieldset class="form-group">
+                        <ng-select
+                          [items]="selectStatus"
+                          [(ngModel)]="selectedStatus"
+                          name="selectedStatus"
+                          bindLabel="name"
+                          placeholder="Select Status"
+                          (change)="filterByStatus($event)"
+                        ></ng-select>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div> -->
+          <!-- users filter end -->
+    
+          <!-- <div class="card">
+            <ngx-datatable
+              [rows]="rows"
+              [rowHeight]="50"
+              class="bootstrap core-bootstrap"
+              [limit]="10"
+              [columnMode]="ColumnMode.force"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [scrollbarH]="true"
+            >
+              <ngx-datatable-column name="Seller" prop="seller" [width]="50">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div>
+                    {{row.seller.firstName + ' ' +row.seller.lastName}}
+                  </div> 
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Product Name" prop="product" [width]="50">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div>
+                    {{row.sellerproduct.product.name }}
+                  </div> 
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Buyer" prop="user" [width]="50">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div>
+                    {{row.user.firstName + ' ' +row.user.lastName}}
+                  </div> 
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Price" prop="ammount" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Quantity" prop="quantity" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Discount" prop="discount" [width]="100"></ngx-datatable-column>
+            
+              <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
+                <ng-template ngx-datatable-cell-template let-row="row">
+                  <div ngbDropdown container="body">
+                    <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                      <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+                    </button>
+                    <div ngbDropdownMenu>
+                      <a ngbDropdownItem
+                        ><span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details</a
+                      >
+                    </div>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div> -->
+        </section>
+  
+  
+        <section class="users-list-wrapper">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center mt-1 ml-1">
+                <!-- <label class="d-flex align-items-center"
+                >Show
+                <select class="form-control mx-25" [(ngModel)]="pageSize" (change)="searchProductName()">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                entries</label
+              > -->
+  
+               
+                <div class="">
+                  <ngb-pagination  [(page)]="pageNo"  
+                  [pageSize]="pageSize"
+                  [maxSize]="5" [rotate]="true"
+                   [boundaryLinks]="true"
+                  (pageChange)="loadPage($event)"  [collectionSize]="total" > 
+                  </ngb-pagination>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end mt-1">
+              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0 mb-1">
+                <!-- <button class="btn btn-primary ml-1" rippleEffect (click)="toggleSidebar('new-user-sidebar')">
+                  <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+                  ><span class="d-none d-sm-inline-block">Add New Product</span>
+                </button> -->
+                <!-- <a class="btn  btn-primary ml-1"  (click)="exportOrders()"
+                      >Export Orders</a
+                    > -->
+              </div>
+            </div>
+          </div>
+          <div class="">
+         
+            <ngx-datatable
+            #tableRowDetails
+              [rows]="rows"
+              [rowHeight]="50"
+              class="bootstrap core-bootstrap"
+              [columnMode]="ColumnMode.force"
+              [headerHeight]="50"
+              [scrollbarH]="true"
+              [limit]="pageSize"
+            >
+  
+  <!-- 
+            <ngx-datatable-row-detail [rowHeight]="'auto'" style="padding: 0px 20px;">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template >
+                <ngx-datatable
+                [rows]="row.orderDetails"
+                [rowHeight]="50"
+                class="bootstrap core-bootstrap"
+                [limit]="10"
+                [columnMode]="ColumnMode.force"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [scrollbarH]="true"
+              >
+                <ngx-datatable-column name="Seller" prop="seller" [width]="50">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div>
+                      {{row.seller.firstName + ' ' +row.seller.lastName}}
+                    </div> 
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Product Name" prop="product" [width]="50">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div>
+                      {{row.sellerProduct.product.name }}
+                    </div> 
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Buyer" prop="buyer" [width]="50">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div>
+                      {{row.buyer.firstName + ' ' +row.buyer.lastName}}
+                    </div> 
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Price" prop="ammount" [width]="200"></ngx-datatable-column>
+                <ngx-datatable-column name="Quantity" prop="quantity" [width]="100"></ngx-datatable-column>
+                <ngx-datatable-column name="Discount" prop="discount" [width]="100"></ngx-datatable-column>
+            
+              </ngx-datatable>
+  
+  
+              </ng-template>
+            </ngx-datatable-row-detail>
+            <ngx-datatable-column
+              [width]="50"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  class="text-body"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="rowDetailsToggleExpand(row)"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+  
+            <ngx-datatable-column name="Price" prop="totalAmmount" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="Discount" prop="discount" [width]="100"></ngx-datatable-column>
+            
+           <ngx-datatable-column name="Order Date" prop="createdAt" [width]="50">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div>
+                    {{row.createdAt | date}}
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+  
+     
+            <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
+              <ng-template ngx-datatable-cell-template let-row="row">
+                <div ngbDropdown container="body">
+                  <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                    <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <a ngbDropdownItem
+                      ><span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details</a
+                    >
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column> -->
+            <ngx-datatable-column name="Order Number" prop="orderNum" [width]="10"></ngx-datatable-column>
+
+            <ngx-datatable-column name="Seller" prop="seller" [width]="50">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div>
+                  {{row.seller.firstName + ' ' +row.seller.lastName}}
+                </div> 
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Service" prop="product" [width]="200" >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div title="{{row.sellerproduct.product.name}}" style="    width: 275px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; cursor: pointer;">
+                  {{row.sellerproduct.product.name }}
+                </div> 
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Customer" prop="user" [width]="50">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div>
+                  {{row.user.firstName + ' ' +row.user.lastName}}
+                </div> 
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Ammount" prop="ammount" [width]="50"></ngx-datatable-column>
+            <ngx-datatable-column name="Status" prop="status" [width]="120">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div>
+                  <select class="form-control" (change)="changeOrderStatus($event, row)" style="min-width: 165px;">
+                    <option value="PROCESSING" [selected]="row.status === 'PROCESSING'? 'selected':''"> Processing </option>
+                    <option value="READY_TO_SHIP"  [selected]="row.status === 'READY_TO_SHIP'? 'selected':''"> Ready To Ship </option>
+                    <option value="SHIPPED"  [selected]="row.status === 'SHIPPED'? 'selected':''"> Shipped </option>
+                    <option value="DELIVERED"  [selected]="row.status === 'DELIVERD'? 'selected':''"> Delivered </option>
+                    <option value="CANCEL"  [selected]="row.status === 'CANCEL'? 'selected':''"> Cancel </option>
+                    <option value="REFUNDRETURN"  [selected]="row.status === 'REFUNDRETURN'? 'selected':''"> Refund/Return </option>
+
+                  </select>
+                </div> 
+              </ng-template>
+            </ngx-datatable-column>
+           
+            
+            </ngx-datatable>
+          </div>
+        </section>
+        <!--/ User List -->
+      <!-- </div>
+    
+    
+    </div>
+    
+  </div>
+</div> -->

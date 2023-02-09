@@ -1,0 +1,383 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <!-- User List -->
+      <section class="users-list-wrapper">
+        <!-- users filter start -->
+        <!-- <div class="card">
+          <h5 class="card-header">Search Filter</h5>
+          <div class="card-body">
+            <div class="users-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select
+                        [items]="selectRole"
+                        [(ngModel)]="selectedRole"
+                        name="selectedRole"
+                        bindLabel="name"
+                        placeholder="Select Role"
+                        (change)="filterByRole($event)"
+                      ></ng-select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select
+                        [items]="selectPlan"
+                        [(ngModel)]="selectedPlan"
+                        name="selectedPlan"
+                        bindLabel="name"
+                        placeholder="Select Plan"
+                        (change)="filterByPlan($event)"
+                      ></ng-select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select
+                        [items]="selectStatus"
+                        [(ngModel)]="selectedStatus"
+                        name="selectedStatus"
+                        bindLabel="name"
+                        placeholder="Select Status"
+                        (change)="filterByStatus($event)"
+                      ></ng-select>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> -->
+        <!-- users filter end -->
+  
+        <div class="">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center mt-1 ml-1">
+                <!-- <label class="d-flex align-items-center"
+                >Show
+                <select class="form-control mx-25" [(ngModel)]="pageSize" (change)="searchProductName()">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                entries</label
+              > -->
+
+                <div class="">
+                  <ngb-pagination  [(page)]="pageNo"  
+                  [pageSize]="pageSize"
+                  [maxSize]="5" [rotate]="true"
+                   [boundaryLinks]="true"
+                  (pageChange)="loadPage($event)"  [collectionSize]="total" > 
+                  </ngb-pagination>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end mt-1">
+              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+              
+                <!-- <a class="btn  btn-primary ml-1" routerLink="/pages/admin/add-new-product" 
+                      >Add New Product </a
+                    > -->
+                    <!-- <a class="btn  btn-primary ml-1"  (click)="exportProducts()"
+                  >Export Products</a
+                > -->
+                <!-- <a type="button"
+                class="btn btn-outline-primary  ml-1"
+                (click)="isCollapseExportSection = !isCollapseExportSection; isCollapseSearchSection = true;"
+                [attr.aria-expanded]="!isCollapseExportSection"
+                aria-controls="collapseExample4"
+                rippleEffect>
+                  Export Products
+                </a> -->
+                <!-- <a class="btn  btn-primary ml-1" (click)="exportProducts()" 
+                >Export Product </a
+                > -->
+                <!-- <a type="button"
+                class="btn btn-outline-primary  ml-1"
+                (click)="isCollapseSearchSection = !isCollapseSearchSection; isCollapseExportSection = true;"
+                [attr.aria-expanded]="!isCollapseSearchSection"
+                aria-controls="collapseExample4"
+                rippleEffect>
+                  Filters
+                </a> -->
+              </div>
+            </div>
+            <div class="col-md-12 col-12 ">
+                <div [ngbCollapse]="isCollapseSearchSection">
+                  <div class="card mb-0">
+                    <div class="card-body">
+                        <form class="mt-2" [formGroup]="searchProductForm" (ngSubmit)="searchProduct()">
+                          <div class="row">
+                            <div class="col-4">
+                              <div class="form-group">
+                                <label class="form-label" for="login-email"><b>Name</b></label>
+                                <input
+                                  type="text"
+                                  formControlName="productName"
+                                  class="form-control"
+                                  autofocus=""
+                                  tabindex="1"
+                                />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="form-group">
+                                <label class="form-label" for="login-email"><b>SKU</b></label>
+                                <input
+                                  type="text"
+                                  formControlName="sku"
+                                  class="form-control"
+                                  autofocus=""
+                                  tabindex="1"
+                                />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="form-group">
+                                <label class="form-label" for="login-email"><b>Price</b></label>
+                                <input
+                                  type="text"
+                                  formControlName="price"
+                                  class="form-control"
+                                  autofocus=""
+                                  tabindex="1"
+                                />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                              <b>Categories</b>
+                              <div class="form-group d-flex">
+                               
+                                 <div *ngFor="let category of categories; let i = index" formArrayName="categories" class="mr-2">
+                                  <!-- <input type="checkbox" [formControlName]="i" >
+                                   <span>{{category.title}}</span> -->
+
+                                   <div class="custom-control custom-checkbox"><input type="checkbox"  [formControlName]="i"
+                                    id="customCheck{{i}}" checked="" class="custom-control-input">
+                                    <label for="customCheck{{i}}" class="custom-control-label">{{category.title}}</label></div>
+                                 </div>
+                                 </div>
+                              </div>
+                              
+                              
+                              <div class="col-6">
+                                <b>Sort By</b>
+                                <div class="form-group d-flex">
+                                   <div class="mr-2">
+                                    <!-- <input type="radio" name="sortBy" value="name" formControlName="sortBy" >
+                                     <span>Name</span> -->
+                                     <div class="custom-control custom-radio">
+                                      <input type="radio" id="customRadio1" formControlName="sortBy" name="sortBy" value="name" checked="" class="custom-control-input">
+                                      <label for="customRadio1" class="custom-control-label">Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="mr-2">
+                                    <!-- <input type="radio" name="sortBy" value="sku" formControlName="sortBy" >
+                                     <span>SKU</span> -->
+                                     <div class="custom-control custom-radio">
+                                      <input type="radio" id="customRadio2" formControlName="sortBy" name="sortBy" value="sku" checked="" class="custom-control-input">
+                                      <label for="customRadio2" class="custom-control-label">SKU</label>
+                                    </div>
+                                   </div>
+                                  <div class="mr-2">
+                                    <!-- <input type="radio" name="sortBy" value="price" formControlName="sortBy" >
+                                     <span>Price</span> -->
+
+                                     <div class="custom-control custom-radio">
+                                      <input type="radio" id="customRadio3" formControlName="sortBy" name="sortBy" value="price" checked="" class="custom-control-input">
+                                      <label for="customRadio3" class="custom-control-label">Price</label>
+                                    </div>
+                                   </div>
+                                </div>
+                                  </div>
+                                  <div class="col-8">
+                                    <b>Order By</b>
+                                    <div class="form-group d-flex">
+                                       <div class="mr-2">
+                                        <!-- <input type="radio" name="orderBy" value="asc" formControlName="orderBy" >
+                                         <span>Ascending</span> -->
+                                         <div class="custom-control custom-radio">
+                                          <input type="radio" id="customRadio11" formControlName="orderBy" name="orderBy" value="asc" checked="" class="custom-control-input">
+                                          <label for="customRadio11" class="custom-control-label">Ascending</label>
+                                        </div>
+                                       </div>
+                                       <div class="mr-2">
+                                        <div class="custom-control custom-radio">
+                                          <input type="radio" id="customRadio12" formControlName="orderBy" name="orderBy" value="desc" checked="" class="custom-control-input">
+                                          <label for="customRadio12" class="custom-control-label">Descending</label>
+                                        </div>
+                                        <!-- <input type="radio" name="orderBy" value="desc" formControlName="orderBy" >
+                                         <span>Descending</span> -->
+                                       </div>
+                                      </div>
+                                  </div>
+                         </div>
+                          <div class="d-flex justify-content-end">
+                            <button  style="width: 20%;" type="submit" class="btn btn-primary btn-block" tabindex="4" rippleEffect>
+                              <span  class="mr-1"></span>Search
+                            </button>
+                          </div>
+                         
+                          </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-12 col-12 ">
+            <div [ngbCollapse]="isCollapseExportSection">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div> Total Products is {{totlalProducts}}. You can export maximum 20,000 products at a time.</div>
+                  <div>
+                    Pages
+                    <div class="form-group">
+                      <select class="form-control" [(ngModel)]="selectedPageForExport">
+                        <option *ngFor="let item of noOfPagesForExport" value="{{item}}" >{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button  style="width: 20%;" (click)="exportProducts()" class="btn btn-primary btn-block" tabindex="4" rippleEffect>
+                      <span  class="mr-1"></span>Export Product
+                    </button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+          <ngx-datatable
+            [rows]="products"
+            [rowHeight]="50"
+            class="bootstrap core-bootstrap"
+            [limit]="pageSize"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [scrollbarH]="true"
+          >
+            <ngx-datatable-column name="Name" prop="name" [width]="300">
+              <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+                <div class="d-flex align-items-center">
+                  <div *ngIf="row.imageUrl !== ''; else customAvatar">
+                    <img
+                      class="rounded-circle mr-1"
+                      src="{{basePath}}{{ row.imageUrl }}"
+                      height="32"
+                      width="32"
+                      alt=""
+                    />
+                  </div>
+                  <ng-template #customAvatar>
+                    <div
+                      class="avatar mr-1 ml-0 bg-light-success"
+                      [ngClass]="{
+                        'bg-light-success': row.status == 'active',
+                        'bg-light-secondary': row.status == 'inactive',
+                        'bg-light-warning': row.status == 'pending'
+                      }"
+                    >
+                      <div class="avatar-content">{{ shortName(name) | initials }}</div>
+                    </div>
+                  </ng-template>
+                  <div class="cell-line-height">
+                    <a class="font-medium-1 d-block" (click)="productDetail(row)"
+                      ><span class="font-weight-bold">{{ name }}</span></a
+                    >
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Ammount" prop="price" [width]="100"></ngx-datatable-column>
+            <!-- <ngx-datatable-column name="SKU" prop="sku" [width]="100"></ngx-datatable-column> -->
+
+            <!-- <ngx-datatable-column name="Status" prop="status" [width]="50">
+              <ng-template let-status="value" ngx-datatable-cell-template>
+                <div
+                  class="badge badge-pill"
+                  [ngClass]="{
+                    'badge-light-success': status == 'active',
+                    'badge-light-secondary': status == 'inactive',
+                    'badge-light-warning': status == 'pending'
+                  }"
+                >
+                  {{ status }}
+                </div>
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column name="Category" prop="category" [width]="50">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div *ngIf="row.category ">
+                  {{row.category.title}}
+                </div> 
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
+              <ng-template ngx-datatable-cell-template let-row="row">
+                <div ngbDropdown container="body">
+                  <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                    <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <a (click)="productDetail(row)" ngbDropdownItem
+                      ><span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details</a
+                    ><a (click)="productEdit(row)" ngbDropdownItem
+                      ><span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit</a
+                    >
+                    <a (click)="modalOpenDefault(modalDefault,row)" ngbDropdownItem
+                    ><span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
+                  >
+                    <!-- <a href="javascript:;" ngbDropdownItem
+                      ><span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
+                    > -->
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+         
+          </div>
+        
+      </section>
+      <!--/ User List -->
+    </div>
+  
+    <!-- New User Sidebar -->
+    <core-sidebar
+      class="modal modal-slide-in sidebar-todo-modal fade"
+      name="new-user-sidebar"
+      overlayClass="modal-backdrop"
+    >
+      <app-add-product></app-add-product>
+    </core-sidebar>
+    <!--/ New User Sidebar -->
+  </div>
+  <!-- Modal -->
+  <ng-template #modalDefault let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">Confirmation</h5>
+      <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+     You realy want to delete the product?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click');productDelete()" rippleEffect>
+        Delete
+      </button>
+      <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')" rippleEffect>
+        Cancel
+      </button>
+    </div>
+  </ng-template>
+  <!-- / Modal -->
