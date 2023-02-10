@@ -39,6 +39,34 @@
 
         <form class="auth-login-form mt-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
+            <label class="form-label" for="login-email">First Name</label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              placeholder="Your Business Name"
+              aria-describedby="login-email"
+              autofocus=""
+              tabindex="1"
+            />
+            
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-email">Last Name</label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              placeholder="Your Business Name"
+              aria-describedby="login-email"
+              autofocus=""
+              tabindex="1"
+            />
+            
+          </div>
+          <div class="form-group">
             <label class="form-label" for="login-email">Professional/Company Name</label>
             <input
               type="text"
