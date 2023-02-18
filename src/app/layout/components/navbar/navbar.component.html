@@ -79,6 +79,9 @@
           ><span [data-feather]="'message-square'" [class]="'mr-50'"></span> Chats</a
         > -->
         <!-- <div class="dropdown-divider"></div> -->
+        <a ngbDropdownItem [routerLink]="['/pages/seller/profile']"
+          ><span [data-feather]="'user'" [class]="'mr-50'"></span> Profile</a
+        >
         <a ngbDropdownItem (click)="logout()"
           ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
         >

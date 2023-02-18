@@ -17,13 +17,11 @@ import { coreConfig } from 'app/app-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
 import { ErrorComponent } from './main/pages/public/error/error.component';
-import { LoginComponent } from './main/pages/public/login/login.component';
 import { HeaderInterceptor } from '@core/interceptors/header.interceptor';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { SecureModule } from './main/pages/secure/secure.module';
-import { AdminLoginComponent } from './main/pages/public/admin-login/admin-login.component';
+import { LoginComponent } from './main/pages/public/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SignupComponent } from './main/pages/public/signup/signup.component';
 import { ForgotPasswordComponent } from './main/pages/public/forgot-password/forgot-password.component';
@@ -41,7 +39,7 @@ const appRoutes: Routes = [
   {
     path: 'login',
     canActivate: [LoginGuard],
-    component: AdminLoginComponent,
+    component: LoginComponent,
     data: { animation: 'auth' }
 
   },
@@ -92,7 +90,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ErrorComponent, LoginComponent, AdminLoginComponent, SignupComponent, 
+  declarations: [AppComponent, ErrorComponent, LoginComponent, SignupComponent, 
     ForgotPasswordComponent, AuthResetPasswordComponent, VerifyEmailComponent],
   imports: [
     BrowserModule,
@@ -117,7 +115,6 @@ const appRoutes: Routes = [
 
     // App modules
     LayoutModule,
-    SampleModule,
     SecureModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],

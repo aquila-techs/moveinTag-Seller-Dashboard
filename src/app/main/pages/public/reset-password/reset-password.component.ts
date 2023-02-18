@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 
 import { CoreConfigService } from '@core/services/config.service';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from '@core/services/admin-services/admin.service';
+import { AdminService } from '@core/services/services/admin.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({

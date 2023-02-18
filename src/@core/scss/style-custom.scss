@@ -1,0 +1,125 @@
+$light1: #666666;
+$dark1: #2B2931;
+$purple1: #4B465C;
+
+.dark-layout {
+  h1, h2, h3, h4, h5, h6 {
+    color: $purple1;
+  }
+  .auth-wrapper {
+    label {
+      font-size: 15px;
+    }
+  }
+}
+.auth-wrapper {
+  background: $white;
+  label {
+    font-size: 13px;
+    color: $purple1;
+  }
+  .form-control {
+    font-size: 15px;
+  }
+  .img-wrapper {
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 40px;
+      top: 40px;
+      right: 40px;
+      bottom: 40px;
+      background: #F8F7FA;
+      border-radius: 20px;
+    }
+    img {
+      z-index: 2;
+    }
+    img.max-500 {
+      max-width: 450px;
+    }
+    .btn {
+      margin: 5px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .auth-footer-btn {
+    .btn {
+      margin: 5px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+      img.hover-icon {
+        display: none;
+      }
+      &:hover,
+      &:focus {
+        img.hover-icon {
+          display: block;
+        }
+        img.active-icon {
+          display: none;
+        }
+      }
+    }
+    .btn-facebook {
+      svg {
+        fill: #3b5998;
+        stroke-width: 0;
+      }
+      &:hover,
+      &:focus {
+        background-color: #3b5998 !important;
+        svg {
+          fill: $white;
+        }
+      }
+    }
+    .btn-twitter {
+      svg {
+        fill: #00acee;
+        stroke-width: 0;
+      }
+      &:hover,
+      &:focus {
+        background-color: #00acee !important;
+        svg {
+          fill: $white;
+        }
+      }
+    }
+    .btn-google {
+      svg {
+        color: #f9e1df;
+        fill: #db3236;
+      }
+      &:hover,
+      &:focus {
+        background-color: #db3236 !important;
+        svg {
+          color: #db3236;
+          fill: $white;
+        }
+      }
+    }
+  }
+}
+
+

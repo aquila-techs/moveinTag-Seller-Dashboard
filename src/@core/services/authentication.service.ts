@@ -57,7 +57,7 @@ export class AuthenticationService {
    * @returns user
    */
   loginAdmin(data) {
-    return this._http.post('user/login', data)
+    return this._http.post('user/slogin', data)
       .pipe(
         map(res => {
           // login successful if there's a jwt token in the response

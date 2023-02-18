@@ -22,7 +22,7 @@ export class UserService {
   /**
    * Get user by id
    */
-  getById(id: number) {
-    return this._http.get<User>(`${environment.apiUrl}/users/${id}`);
+  getById(id) {
+    return this._http.get<User>(`${environment.apiUrl}user/me/${id}`);
   }
 }

@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { CoreConfigService } from '@core/services/config.service';
-import { AdminService } from '@core/services/admin-services/admin.service';
+import { AdminService } from '@core/services/services/admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
