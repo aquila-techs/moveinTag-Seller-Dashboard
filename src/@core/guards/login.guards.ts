@@ -20,10 +20,8 @@ export class LoginGuard implements CanActivate {
     if (currentUser) {
         let jwtdecode: any = jwt_decode(currentUser.accessToken);
         console.log(jwtdecode);
-        if(jwtdecode && jwtdecode?.isAdmin){
-          this._router.navigate(['/pages/admin/dashboard'])
-        }if(jwtdecode && !jwtdecode?.isAdmin){
-          this._router.navigate(['/pages/seller/dashboard'])
+        if(jwtdecode && jwtdecode?.role === 'Seller' && window.localStorage.getItem('currentUser')){
+          this._router.navigate(['/pages/seller/home'])
         }
         return true;
     }

@@ -23,6 +23,13 @@ import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { ChartsModule } from 'ng2-charts';
 import { ProfileComponent } from './profile/profile.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { HomeComponent } from './home/home.component';
+import { OrdermanagementComponent } from './order-management/ordermanagement.component';
+import { CustomerlistingsComponent } from './customer-listing/customerlistings.component';
+import { EarningsComponent } from './earnings/earnings.component';
+import { RefferalsComponent } from './refferals/refferals.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 const routes: Routes = [
   {
@@ -34,7 +41,43 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuard],
     component: ProfileComponent
-  }
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'home' }
+  },
+  {
+    path: 'order-management',
+    component: OrdermanagementComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'order-management' }
+  },
+  {
+    path: 'customer-listing',
+    component: CustomerlistingsComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'customer-listing' }
+  },
+  {
+    path: 'earnings',
+    component: EarningsComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'earnings' }
+  },
+  {
+    path: 'refferals',
+    component: RefferalsComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'refferals' }
+  },
+  {
+    path: 'settings',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'settings' }
+  },
 ]
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -44,7 +87,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
   declarations: [
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +108,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     FileUploadModule,
     Ng2FlatpickrModule,
     ChartsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    ClipboardModule
   ],
   providers: [
     DashboardService,

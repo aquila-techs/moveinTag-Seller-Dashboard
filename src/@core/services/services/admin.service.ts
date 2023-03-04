@@ -21,7 +21,7 @@ export class AdminService {
   }
 
   createSeller(data){
-    return this._http.post('user/sign-up',data)
+    return this._http.post('user/seller-sign-up',data)
   }
 
   getProfile(id){

@@ -8,9 +8,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CoreCommonModule } from '@core/common.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 
-import { AuthenticationModule } from './authentication/authentication.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [],
@@ -21,9 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgbModule,
     NgSelectModule,
     FormsModule,
-    AuthenticationModule,
-    MiscellaneousModule,
-    TranslateModule
+    MiscellaneousModule
   ],
 
   providers: []

@@ -6,8 +6,6 @@ export const environment = {
   production: false,
   hmr: false,
   apiUrl: 'http://localhost:4000/'
-  // apiUrl: 'https://api.medstock.app/'
-  // apiUrl: 'http://198.199.69.91:4000/'
 };
 
 /*

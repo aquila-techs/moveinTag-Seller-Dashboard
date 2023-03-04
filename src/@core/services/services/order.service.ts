@@ -25,8 +25,20 @@ export class OrderService {
     return this._http.get('order/get-all-orders')
   }
 
-  getAllSellerOrders(queryParams){
-    return this._http.get('order/get-seller-all-order'+queryParams)
+  getAllCompleteSellerOrders(queryParams){
+    return this._http.get('order/get-all-orders'+queryParams)
+  }
+
+  getAllQuotesOrders(queryParams){
+    return this._http.get('order/get-all-orders'+queryParams)
+  }
+
+  getAllActiveSellerOrders(queryParams){
+    return this._http.get('order/get-all-orders'+queryParams)
+  }
+
+  getAllCancelledSellerOrders(queryParams){
+    return this._http.get('order/get-all-orders'+queryParams)
   }
 
   getAllBuyerOrders(queryParams){

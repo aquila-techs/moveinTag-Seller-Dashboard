@@ -16,9 +16,9 @@ import { CoreConfig } from '@core/types';
 // prettier-ignore
 export const coreConfig: CoreConfig = {
   app: {
-    appName     : '',                                        // App Name
-    appTitle    : 'MIAO', // App Title
-    appLogoImage: 'assets/images/site/logo.png',                  // App Logo
+    appName     : 'MOVENTAG',                                        // App Name
+    appTitle    : 'MOVENTAG - Angular 14+ Bootstrap Admin Template', // App Title
+    appLogoImage: 'assets/images/logo/logo.png',                  // App Logo
     appLanguage : 'en',                                           // App Default Language (en, fr, de, pt etc..)
   },
   layout: {

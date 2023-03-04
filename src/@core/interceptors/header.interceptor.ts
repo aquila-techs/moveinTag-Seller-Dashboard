@@ -18,7 +18,7 @@ export class HeaderInterceptor implements HttpInterceptor {
    */
    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.show('main');
-    const currentUser = this.authenticationService.currentUserValue;
+    const currentUser = this.authenticationService.currentUserValue || window.localStorage.getItem('currentUser') && JSON.parse(window.localStorage.getItem('currentUser'));
     const isLoggedIn = currentUser && currentUser.accessToken;
     const isApiUrl = request.url.startsWith(environment.apiUrl);
     if (isLoggedIn && isApiUrl) {

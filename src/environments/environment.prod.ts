@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl: 'https://api.miao.app/'
+  apiUrl: 'https://apim.aquilatechs.com/'
 };

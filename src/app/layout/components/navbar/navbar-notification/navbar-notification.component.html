@@ -36,24 +36,24 @@
           </div>
         </div></a
       >
-      <div class="media d-flex align-items-center">
-        <h6 class="font-weight-bolder mr-auto mb-0">System Notifications</h6>
-        <div class="custom-control custom-control-primary custom-switch">
-          <input
-            class="custom-control-input"
-            id="systemNotification"
-            type="checkbox"
-            [checked]="notifications.system"
-          />
-          <label class="custom-control-label" for="systemNotification"></label>
-        </div>
-      </div>
+<!--      <div class="media d-flex align-items-center">-->
+<!--        <h6 class="font-weight-bolder mr-auto mb-0">System Notifications</h6>-->
+<!--        <div class="custom-control custom-control-primary custom-switch">-->
+<!--          <input-->
+<!--                  class="custom-control-input"-->
+<!--                  id="systemNotification"-->
+<!--                  type="checkbox"-->
+<!--                  [checked]="notifications.system"-->
+<!--          />-->
+<!--          <label class="custom-control-label" for="systemNotification"></label>-->
+<!--        </div>-->
+<!--      </div>-->
       <a class="d-flex" href="javascript:void(0)" *ngFor="let systemMessage of notifications.systemMessages">
         <div class="media d-flex align-items-start">
           <div class="media-left">
             <div
-              class="avatar"
-              [ngClass]="{
+                    class="avatar"
+                    [ngClass]="{
                 'bg-light-danger': systemMessage.icon === 'x',
                 'bg-light-success': systemMessage.icon === 'check',
                 'bg-light-warning': systemMessage.icon === 'alert-triangle'
@@ -72,7 +72,7 @@
     <!--/ Notifications content -->
 
     <!-- Notifications footer -->
-    <li class="dropdown-menu-footer">
+    <li class="dropdown-menu-footer d-none">
       <a class="btn btn-primary btn-block" href="javascript:void(0)">Read all notifications</a>
     </li>
     <!--/ Notifications footer -->

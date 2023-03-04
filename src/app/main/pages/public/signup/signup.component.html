@@ -38,7 +38,7 @@
         </ngb-alert>
 
         <form class="auth-login-form mt-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label class="form-label" for="login-email">First Name</label>
             <input
               type="text"
@@ -51,8 +51,8 @@
               tabindex="1"
             />
             
-          </div>
-          <div class="form-group">
+          </div> -->
+          <!-- <div class="form-group">
             <label class="form-label" for="login-email">Last Name</label>
             <input
               type="text"
@@ -65,22 +65,21 @@
               tabindex="1"
             />
             
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="form-label" for="login-email">Professional/Company Name</label>
             <input
               type="text"
-              formControlName="pharmacyName"
+              formControlName="companyName"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+              [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }"
               placeholder="Your Business Name"
               aria-describedby="login-email"
               autofocus=""
               tabindex="1"
             />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required">Email is required</div>
-              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+              <div *ngIf="f.companyName.errors.required">Company Name is required</div>
             </div>
           </div>
           <div class="form-group">

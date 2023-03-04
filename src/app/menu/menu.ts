@@ -1,96 +1,71 @@
 import { CoreMenu } from '@core/types'
 
-export const adminMenu: CoreMenu[] = [
-  {
-    id: 'home',
-    title: 'Dashboard',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'home',
-    url: 'pages/seller/dashboard'
-  },
-  {
-    id: 'view',
-    title: 'View',
-    translate: 'MENU.ORDERS',
-    type: 'item',
-    icon: 'shopping-bag',
-    url: 'pages/seller/orders'
-  },
-  {
-    id: 'customers',
-    title: 'Customer',
-    type: 'item',
-    icon: 'users',
-    url: 'pages/seller/customers'
-  },
-  {
-    id: 'business',
-    title: 'Businees',
-    type: 'item',
-    icon: 'users',
-    url: 'pages/seller/business'
-  },
-  {
-    id: 'reporting',
-    title: 'Reporting ',
-    type: 'item',
-    icon: 'briefcase',
-    url: 'pages/seller/reporting'
-  },
-  {
-    id: 'setting',
-    title: 'Setting',
-    type: 'item',
-    icon: 'twitch',
-    url: 'pages/seller/setting'
-  },
-];
+export const menu: CoreMenu[] = [
+  // {
+  //   id: 'home',
+  //   title: 'Home',
+  //   translate: 'MENU.HOME',
+  //   type: 'item',
+  //   icon: 'home',
+  //   url: 'home'
+  // },
+  // {
+  //   id: 'sample',
+  //   title: 'Sample',
+  //   translate: 'MENU.SAMPLE',
+  //   type: 'item',
+  //   icon: 'file',
+  //   url: 'sample'
+  // },
 
-export const sellerMenu: CoreMenu[] = [
+
+
   {
     id: 'home',
     title: 'Dashboard',
     translate: 'MENU.HOME',
     type: 'item',
     icon: 'home',
-    url: 'pages/seller/dashboard'
+    url: 'pages/seller/home'
   },
   {
-    id: 'view',
-    title: 'View',
-    translate: 'MENU.ORDERS',
+    id: 'order-management',
+    title: 'Order Management',
+    translate: 'MENU.HOME',
     type: 'item',
-    icon: 'shopping-bag',
-    url: 'pages/seller/orders'
+    icon: 'home',
+    url: 'pages/seller/order-management'
   },
   {
-    id: 'customers',
-    title: 'Customer',
+    id: 'customer-listing',
+    title: 'Customer Listing',
+    translate: 'MENU.HOME',
     type: 'item',
-    icon: 'users',
-    url: 'pages/seller/customers'
+    icon: 'home',
+    url: 'pages/seller/customer-listing'
   },
   {
-    id: 'business',
-    title: 'Businees',
+    id: 'earnings',
+    title: 'Earnings',
+    translate: 'MENU.HOME',
     type: 'item',
-    icon: 'users',
-    url: 'pages/seller/business'
+    icon: 'home',
+    url: 'pages/seller/earnings'
   },
   {
-    id: 'reporting',
-    title: 'Reporting ',
+    id: 'refferals',
+    title: 'Refferals',
+    translate: 'MENU.HOME',
     type: 'item',
-    icon: 'briefcase',
-    url: 'pages/seller/reporting'
+    icon: 'home',
+    url: 'pages/seller/refferals'
   },
   {
-    id: 'setting',
-    title: 'Setting',
+    id: 'settings',
+    title: 'Settings',
+    translate: 'MENU.HOME',
     type: 'item',
-    icon: 'twitch',
-    url: 'pages/seller/setting'
+    icon: 'home',
+    url: 'pages/seller/settings'
   },
 ]
-

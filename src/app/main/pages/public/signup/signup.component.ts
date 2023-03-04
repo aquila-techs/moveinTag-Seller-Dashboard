@@ -80,8 +80,6 @@ export class SignupComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    var data = this.registerForm.value;
-    data['isSeller'] = true;
     this._adminService.createSeller(this.registerForm.value).subscribe({
       next: (res)=>{
         console.log(res)
@@ -104,9 +102,7 @@ export class SignupComponent implements OnInit {
     this.registerForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      pharmacyName: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      companyName: ['', Validators.required]
     });
     
     // Subscribe to config changes

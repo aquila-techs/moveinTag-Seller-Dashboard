@@ -6,7 +6,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import { CoreConfigService } from '@core/services/config.service';
 import { CoreMenuService } from '@core/components/core-menu/core-menu.service';
-import { User } from '@core/models';
+import { User } from 'app/auth/models';
 
 
 @Component({

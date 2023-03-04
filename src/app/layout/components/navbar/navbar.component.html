@@ -3,9 +3,9 @@
   <ul class="nav navbar-nav flex-row">
     <li class="nav-item">
       <a class="navbar-brand" [routerLink]="['/']">
-        <!-- <span class="brand-logo">
+        <span class="brand-logo">
           <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" width="36" />
-        </span> -->
+        </span>
         <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
       </a>
     </li>
@@ -26,11 +26,11 @@
     <!--/ Menu Toggler -->
 
     <!-- Toggle skin -->
-    <!-- <li class="nav-item d-none d-lg-block">
-      <a type="button" class="nav-link nav-link-style btn" (click)="toggleDarkSkin()">
-        <span [ngClass]="currentSkin === 'dark' ? 'icon-sun' : 'icon-moon'" class="ficon font-medium-5 feather"></span>
-      </a>
-    </li> -->
+<!--    <li class="nav-item d-none d-lg-block">-->
+<!--      <a type="button" class="nav-link nav-link-style btn" (click)="toggleDarkSkin()">-->
+<!--        <span [ngClass]="currentSkin === 'dark' ? 'icon-sun' : 'icon-moon'" class="ficon font-medium-5 feather"></span>-->
+<!--      </a>-->
+<!--    </li>-->
     <!--/ Toggle skin -->
   </div>
 
@@ -49,6 +49,10 @@
     </li> -->
     <!--/ Language selection -->
 
+    <!-- Notification -->
+    <app-navbar-notification></app-navbar-notification>
+    <!--/ Notification -->
+
     <!-- User Dropdown -->
     <li ngbDropdown class="nav-item dropdown-user">
       <a
@@ -60,31 +64,21 @@
         aria-expanded="false"
       >
         <div class="user-nav d-sm-flex d-none">
-          <span class="user-name font-weight-bolder">{{currentUser?.firstName}}</span>
+<!--          <span class="user-name font-weight-bolder">John Doe</span><span class="user-status">Sample</span>-->
         </div>
         <span class="avatar"
           ><img
             class="round"
-            src="../../../../assets/images/portrait/small/avatar-s-2.jpg"
+            src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
             alt="avatar"
             height="40"
             width="40" /><span class="avatar-status-online"></span
         ></span>
       </a>
       <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
-        <!-- <a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'user'" [class]="'mr-50'"></span> Profile</a -->
-        <!-- ><a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'mail'" [class]="'mr-50'"></span> Inbox</a -->
-        <!-- ><a ngbDropdownItem [routerLink]="['/']"><span [data-feather]="'check-square'" [class]="'mr-50'"></span> Task</a -->
-        <!-- ><a ngbDropdownItem [routerLink]="['/']"
-          ><span [data-feather]="'message-square'" [class]="'mr-50'"></span> Chats</a
-        > -->
-        <!-- <div class="dropdown-divider"></div> -->
-        <a ngbDropdownItem [routerLink]="['/pages/seller/profile']"
-          ><span [data-feather]="'user'" [class]="'mr-50'"></span> Profile</a
-        >
         <a ngbDropdownItem (click)="logout()"
-          ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
-        >
+        ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
+      >
       </div>
     </li>
     <!--/ User Dropdown -->

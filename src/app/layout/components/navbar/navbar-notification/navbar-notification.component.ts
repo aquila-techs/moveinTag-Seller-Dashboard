@@ -4,7 +4,18 @@ import { NotificationsService } from 'app/layout/components/navbar/navbar-notifi
 
 // Interface
 interface notification {
-  messages: [];
+  messages: [
+    {
+      image: '',
+      heading: 'Title',
+      text: 'You have got a quote request from customer xyz'
+    },
+    {
+      image: '',
+      heading: 'Title',
+      text: 'You have got a quote request from customer xyz'
+    }
+  ];
   systemMessages: [];
   system: Boolean;
 }

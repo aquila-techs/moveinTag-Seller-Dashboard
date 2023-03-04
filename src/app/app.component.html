@@ -12,18 +12,17 @@
 
 <!-- theme customizer -->
 <core-sidebar
-  name="themeCustomizer"
-  class="customizer d-none d-md-block"
-  [invisibleOverlay]="true"
-  *ngIf="coreConfig.layout.customizer"
+        name="themeCustomizer"
+        class="customizer d-none d-md-block"
+        [invisibleOverlay]="true"
+        *ngIf="coreConfig.layout.customizer"
 >
   <a
-    class="customizer-toggle d-flex align-items-center justify-content-center"
-    (click)="toggleSidebar('themeCustomizer')"
+          class="customizer-toggle d-flex align-items-center justify-content-center"
+          (click)="toggleSidebar('themeCustomizer')"
   >
     <span [data-feather]="'settings'" [class]="'spinner'"></span>
   </a>
   <core-theme-customizer></core-theme-customizer>
 </core-sidebar>
 <!-- / theme customizer -->
-<ngx-spinner name="main" type="ball-scale-multiple"></ngx-spinner>

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@core/models';
-import { AuthenticationService } from '@core/services/authentication.service';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
+import { AuthenticationService } from 'app/auth/service';
+import { User } from 'app/auth/models';
 
 @Injectable({
   providedIn: 'root'

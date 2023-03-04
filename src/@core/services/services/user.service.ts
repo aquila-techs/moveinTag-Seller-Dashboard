@@ -21,19 +21,31 @@ export class UserService {
   }
 
   createSeller(data){
-    return this._http.post('user/sign-up',data)
+    return this._http.post('user/seller-sign-up',data)
   }
 
   getProfile(id){
-    return this._http.get('user/me/'+id)
+    return this._http.get('user/seller/'+id)
   }
 
   updateProfile(body){
-    return this._http.put('user/me', body)
+    return this._http.put('user/update', body)
+  }
+
+  addUserSerivesPhotos(data){
+    return this._http.post('user/add-seller-service-photo',data)
+  }
+
+  saveSellerCategories(data){
+    return this._http.post('seller-category/create-seller-categories',data)
+  }
+
+  getUserSerivesPhotos(id){
+    return this._http.get('user/seller-images/'+id)
   }
 
   updateCoverPhoto(body){
-    return this._http.put('user/updateCoverPhoto', body)
+    return this._http.put('user/update-cover-photo', body)
   }
   
 
@@ -48,6 +60,10 @@ export class UserService {
 
   getAllPendingApprovalSeller(queryParams){
     return this._http.post('admin/get-all-pending-approval-seller'+queryParams,{})
+  }
+
+  getSellerRefferal(id){
+    return this._http.get('user/seller--refferal/'+id)
   }
 
   buyerApproved(id){
@@ -110,6 +126,11 @@ export class UserService {
   getAllCategoriesWithSubCategories(){
     return this._http.get('category/getAllCategoryWithSubCategory');
   }
+
+  getSellerCategoriesWithSubCategories(id){
+    return this._http.get('seller-category/get-seller-categories?userId='+id);
+  }
+  
   
 
   getAnalytics(){
