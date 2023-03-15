@@ -30,6 +30,7 @@ import { EarningsComponent } from './earnings/earnings.component';
 import { RefferalsComponent } from './refferals/refferals.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 const routes: Routes = [
   {
@@ -109,7 +110,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     Ng2FlatpickrModule,
     ChartsModule,
     ImageCropperModule,
-    ClipboardModule
+    ClipboardModule,
+    GoogleMapsModule
   ],
   providers: [
     DashboardService,

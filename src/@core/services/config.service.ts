@@ -26,11 +26,11 @@ export class CoreConfigService {
    */
   constructor(private _router: Router, @Inject(CORE_CUSTOM_CONFIG) private _config) {
     // Get the config from local storage
-    if (_config.layout.enableLocalStorage) {
-      this.localConfig = JSON.parse(localStorage.getItem('config'));
-    } else {
+    // if (_config.layout.enableLocalStorage) {
+    //   this.localConfig = JSON.parse(localStorage.getItem('config'));
+    // } else {
       localStorage.removeItem('config');
-    }
+    // }
 
     // Set the defaultConfig to localConfig if we have else appConfig (app-config.ts)
     this._defaultConfig = this.localConfig ? this.localConfig : _config;

@@ -31,13 +31,13 @@ export class AuthGuard implements CanActivate {
     }
     window.localStorage.removeItem('currentUser');
     // not logged in so redirect to login page with the return url
-    console.log(state.url);
-    if(state.url.includes('/seller/')){
-      this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    }else{
-      this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    }
-    // this._router.navigate(['/login']);
+    // console.log(state.url);
+    // if(state.url.includes('/seller/')){
+    //   this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    // }else{
+    //   this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    // }
+    this._router.navigate(['/login']);
     return false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { Form, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from '@core/services/services/user.service';
 import { CoreConfigService } from '@core/services/config.service';
@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { base64ToFile, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { ClipboardService } from 'ngx-clipboard';
+import { MapCircle } from '@angular/google-maps';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -24,7 +26,44 @@ export class ProfileComponent implements OnInit {
   public sellerServicePhotos: any;
   myFiles:string [] = [];
   public sellerWebLinksForm: UntypedFormGroup;
+  public markerCirclePolygonCenter = { lat: 37.421995, lng: -122.084092 };
+  public markerCirclePolygonZoom = 15;
+  public mapCircleCenter: google.maps.LatLngLiteral = { lat: 37.421995, lng: -122.084092 };
+  @ViewChild("mapCircle") circle: MapCircle;
+  public sliderWithNgModel: number = 100;
+  @ViewChild('map') mapElement: any;
+  map: google.maps.Map;
+  public mapCircleOptions = {
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    radius: this.sliderWithNgModel,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35,
+    draggable: true,
+    center: { lat: 37.421995, lng: -122.084092 }
+  };
 
+  // // Define the LatLng coordinates for the polygon's  outer path.
+  // private polygonCoords = [
+  //   { lat: 37.421834, lng: -122.079971 },
+  //   { lat: 37.421672, lng: -122.07273 },
+  //   { lat: 37.419884, lng: -122.079213 }
+  // ];
+
+  // public mapPolygonPaths = [this.polygonCoords];
+
+  // public mapPolygonOptions = {
+  //   strokeColor: '#3164bf',
+  //   strokeOpacity: 0.8,
+  //   strokeWeight: 2,
+  //   radius: 200,
+  //   fillColor: '#3164bf',
+  //   fillOpacity: 0.35,
+  //   draggable: true,
+  //   center: { lat: 37.421995, lng: -122.084092 }
+  // };
+  
   constructor(
       private _coreConfigService: CoreConfigService,
       private modalService: NgbModal,
@@ -34,39 +73,66 @@ export class ProfileComponent implements OnInit {
       ) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
   }
+  radiusChanged(){
+    if(this.circle){
+      console.log(this.circle.getRadius());
+    }
+  }
   public selectedCategories: any = [];
-  selectCategory(categry, subcategry){
-    if(categry && this.selectedCategories.length > 0){
-      let indexOf = -1;
-      this.selectedCategories.find((cat, index)=>{
-        if(cat._id === categry._id){
-          indexOf = index;
-        }
+  selectCategory(categryId, midLevelId, subcategry){
+    // if(categry && this.selectedCategories.length > 0){
+    //   let indexOf = -1;
+    //   this.selectedCategories.find((cat, index)=>{
+    //     if(cat._id === categry._id){
+    //       indexOf = index;
+    //     }
+    //   })
+    //   if(indexOf != -1 && this.selectedCategories.length > 0 && this.selectedCategories[indexOf]['subCategory'].length  > 0){
+    //     let subIndex = -1;
+    //     this.selectedCategories[indexOf]['subCategory'].find((subcat, index)=>{
+    //       if(subcat._id === subcategry._id){
+    //         subIndex = index;
+    //       }
+    //     })
+    //     if(subIndex == -1){
+    //       this.selectedCategories[indexOf]['subCategory'].push(subcategry);
+    //     }else{
+    //       this.selectedCategories[indexOf]['subCategory'].splice(subIndex,1);
+    //       if(this.selectedCategories[indexOf]['subCategory'].length <= 0){
+    //         this.selectedCategories.splice(indexOf,1);
+    //       }
+    //     }
+    //   }else{
+    //     categry['subCategory'] = [];
+    //     categry['subCategory'].push(subcategry);
+    //     this.selectedCategories.push(categry);
+    //   }
+    // }else{
+    //   categry['subCategory'] = [];
+    //   categry['subCategory'].push(subcategry);
+    //   this.selectedCategories.push(categry);
+    // }
+
+    if(this.selectedCategories && this.selectedCategories.length > 0){
+      let index = -1;
+      this.selectedCategories.find((elem, i) => {
+        if(elem._id === subcategry._id){
+          index = i;
+        } 
       })
-      if(indexOf != -1 && this.selectedCategories.length > 0 && this.selectedCategories[indexOf]['subCategory'].length  > 0){
-        let subIndex = -1;
-        this.selectedCategories[indexOf]['subCategory'].find((subcat, index)=>{
-          if(subcat._id === subcategry._id){
-            subIndex = index;
-          }
-        })
-        if(subIndex == -1){
-          this.selectedCategories[indexOf]['subCategory'].push(subcategry);
-        }else{
-          this.selectedCategories[indexOf]['subCategory'].splice(subIndex,1);
-          if(this.selectedCategories[indexOf]['subCategory'].length <= 0){
-            this.selectedCategories.splice(indexOf,1);
-          }
-        }
+      if(subcategry && index > -1){
+        this.selectedCategories.splice(index, 1)
       }else{
-        categry['subCategory'] = [];
-        categry['subCategory'].push(subcategry);
-        this.selectedCategories.push(categry);
+        let item = subcategry;
+        item['categoryId'] = categryId;
+        item['midLevelCategoryId'] = midLevelId;
+        this.selectedCategories.push(item)
       }
     }else{
-      categry['subCategory'] = [];
-      categry['subCategory'].push(subcategry);
-      this.selectedCategories.push(categry);
+      let item = subcategry;
+      item['categoryId'] = categryId;
+      item['midLevelCategoryId'] = midLevelId;
+      this.selectedCategories.push(item)
     }
   }
   saveCategories(){
@@ -75,12 +141,39 @@ export class ProfileComponent implements OnInit {
     data['addCategories']= this.selectedCategories;
     this.userService.saveSellerCategories(data)
     .subscribe(res => {
-      this.modalService.dismissAll();
-      this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
-        next: (res: any)=>{
-          this.sellerCategories = res[0]['results'];
-        }
-      })
+      this.selectedCategories = [];
+      setTimeout(()=>{
+        this.modalService.dismissAll();
+        this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
+          next: (res: any)=>{
+            this.filterCategories = [];
+            this.sellerCategories = res[0]['results'];
+            this.sellerCategories.forEach(element => {
+              if(this.filterCategories.length <= 0){
+                let item = element.category;
+                item['subcategory'] = [];
+                item['subcategory'].push(element.subcategory);
+                this.filterCategories.push(item);
+              }else{
+                let matchAdded = false;
+                this.filterCategories.forEach(item =>{
+                  if(item._id === element.category._id){
+                    matchAdded = true;
+                    item['subcategory'].push(element.subcategory);
+                  }
+                })
+                if(!matchAdded){
+                  let item = element.category;
+                  item['subcategory'] = [];
+                  item['subcategory'].push(element.subcategory);
+                  this.filterCategories.push(item);
+                }
+              }
+            });
+            console.log(this.filterCategories);
+          }
+        })
+    },3000)
     })
   }
 
@@ -103,10 +196,17 @@ export class ProfileComponent implements OnInit {
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
   public show = false;
+  public filterCategories = [];
   /**
    * On init
    */
   ngOnInit() {
+    // const mapProperties = {
+    //   center: new google.maps.LatLng(36.2271, -80.8431),
+    //   zoom: 15,
+    //   mapTypeId: google.maps.MapTypeId.ROADMAP
+    //   };
+    // this.map = new google.maps.Map(this.mapElement.nativeElement,    mapProperties);
    
     this.contentHeader = {
       headerTitle: 'Home',
@@ -134,15 +234,38 @@ export class ProfileComponent implements OnInit {
       }
     })
     // this.selectBasicMethod();
-    this.userService.getAllCategoriesWithSubCategories().subscribe({
-      next: (res: any)=>{
-        this.categories = res[0]['results'];
-      }
-    })
+    // this.userService.getAllCategoriesWithSubCategories().subscribe({
+    //   next: (res: any)=>{
+    //     this.categories = res[0]['results'];
+    //   }
+    // })
     
     this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
       next: (res: any)=>{
         this.sellerCategories = res[0]['results'];
+        this.sellerCategories.forEach(element => {
+          if(this.filterCategories.length <= 0){
+            let item = element.category;
+            item['subcategory'] = [];
+            item['subcategory'].push(element.subcategory);
+            this.filterCategories.push(item);
+          }else{
+            let matchAdded = false;
+            this.filterCategories.forEach(item =>{
+              if(item._id === element.category._id){
+                matchAdded = true;
+                item['subcategory'].push(element.subcategory);
+              }
+            })
+            if(!matchAdded){
+              let item = element.category;
+              item['subcategory'] = [];
+              item['subcategory'].push(element.subcategory);
+              this.filterCategories.push(item);
+            }
+          }
+        });
+        console.log(this.filterCategories);
       }
     })
     this.getAllSellerServiceImages();
@@ -380,5 +503,13 @@ export class ProfileComponent implements OnInit {
         console.log(res);
         this.getAllSellerServiceImages();
       })
+  }
+
+  public findCheckOrNot(id){
+    let findIdExists = this.sellerCategories.find(elem => elem.subCategoryId === id);
+    if(findIdExists){
+      return true;
+    }
+    return false;
   }
 }

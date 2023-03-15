@@ -339,18 +339,5 @@ export class SettingsComponent implements OnInit, AfterContentChecked {
   }
 
 
-  uploadServicePhotos(){
-    const formData = new FormData();
- 
-    // for (var i = 0; i < this.myFiles.length; i++) { 
-      formData.append("servicePhotos", this.myFiles[0]);
-    // }
-    formData.append("id", this.userId);
-    this.userService.addUserSerivesPhotos(formData)
-      .subscribe(res => {
-        this.modalService.dismissAll();
-        console.log(res);
-        this.getAllSellerServiceImages();
-      })
-  }
+
 }
