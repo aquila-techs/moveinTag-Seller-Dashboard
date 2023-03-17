@@ -63,7 +63,8 @@ export class ProfileComponent implements OnInit {
   //   draggable: true,
   //   center: { lat: 37.421995, lng: -122.084092 }
   // };
-  
+  public postalCode = "";
+  public nearByZipCodes = [];
   constructor(
       private _coreConfigService: CoreConfigService,
       private modalService: NgbModal,
@@ -77,6 +78,13 @@ export class ProfileComponent implements OnInit {
     if(this.circle){
       console.log(this.circle.getRadius());
     }
+  }
+  public findNearByPostalCode(){
+    let queryParam = '?zipcode='+this.postalCode+'&miles='+this.sliderWithNgModel;
+    this.userService.getNearByPostalCode(queryParam)
+    .subscribe(res => {
+      this.nearByZipCodes = res;
+    })
   }
   public selectedCategories: any = [];
   selectCategory(categryId, midLevelId, subcategry){
@@ -230,6 +238,25 @@ export class ProfileComponent implements OnInit {
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any)=>{
         this.sellerProfile = res;
+        if(this.sellerProfile.postalCode){
+          this.postalCode = this.sellerProfile.postalCode;
+        }
+        if(this.sellerProfile.nearByPostalCodes){
+          this.nearByZipCodes = this.sellerProfile.nearByPostalCodes.split(',');
+        }
+        if(this.sellerProfile.radius){
+          this.sliderWithNgModel =parseInt(this.sellerProfile.radius);
+          this.mapCircleOptions = {
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            radius: this.sliderWithNgModel,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            draggable: true,
+            center: { lat: 37.421995, lng: -122.084092 }
+          };
+        }
         this.profileUpdateFormBuilder();
       }
     })
@@ -445,6 +472,29 @@ export class ProfileComponent implements OnInit {
       // return;
     }
     let data = this.profileUpdateForm.value;
+    data['id']= this.userId;
+    this.userService.updateProfile(data).subscribe({
+      next: (res)=> {
+        this.modalService.dismissAll();
+        this.sellerProfile = res;
+      },
+      error: (err)=>  {
+        console.log(err);
+      },
+    })
+  }
+
+
+  onSaveNearByZipCode() {
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.postalCode === '' || this.nearByZipCodes.length <= 0) {
+      return;
+    }
+    let data = {};
+    data['postalCode'] = this.postalCode;
+    data['radius'] = this.sliderWithNgModel;
+    data['nearByPostalCodes'] = this.nearByZipCodes.toString();
     data['id']= this.userId;
     this.userService.updateProfile(data).subscribe({
       next: (res)=> {

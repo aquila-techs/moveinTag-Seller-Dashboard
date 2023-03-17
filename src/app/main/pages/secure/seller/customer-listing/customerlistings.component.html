@@ -58,7 +58,7 @@
         <form action="">
           <div class="form-group">
             <label for="basicInput">What do you need to be done?</label>
-            <input readonly type="text"   [value]="selectedOrder?.category?.title" class="form-control" id="basicInput" placeholder="" />
+            <input readonly type="text"   [value]="selectedOrder?.subCategory?.title" class="form-control" id="basicInput" placeholder="" />
           </div>
           <div class="form-group">
             <label for="basicInput">What do you need to be done?</label>
@@ -87,16 +87,16 @@
           </div>
           <div class="form-group my-2">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <button type="button" class="btn btn-success w-100" (click)="changeOrderStatus(selectedOrder, 'ACTIVE')" rippleEffect>
                    Approve
                 </button>
               </div>
-              <div class="col-lg-6">
-                <button type="button" class="btn btn-danger w-100" (click)="changeOrderStatus(selectedOrder, 'DENY')" rippleEffect>
+              <!-- <div class="col-lg-6"> -->
+                <!-- <button type="button" class="btn btn-danger w-100" (click)="changeOrderStatus(selectedOrder, 'DENY')" rippleEffect>
                   Deny
-                </button>
-              </div>
+                </button> -->
+              <!-- </div> -->
             </div>
           </div>
         </form>

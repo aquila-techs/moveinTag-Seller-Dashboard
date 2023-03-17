@@ -56,7 +56,7 @@ export class CustomerlistingsComponent implements OnInit {
   }
   public userQuote:any;
   getAllQuotesOrders(){
-    let queryParams = '?userId='+this.userId+'&status=QUOTE';
+    let queryParams = '?&status=QUOTE'; //userId='+this.userId+'
     this.orderService.getAllQuotesOrders(queryParams)
     .subscribe(res => {
       this.userQuote =  res[0].results;
@@ -65,7 +65,8 @@ export class CustomerlistingsComponent implements OnInit {
   changeOrderStatus(order, status){
     let data = {
       "orderId":order._id,
-      "status": status
+      "status": status,
+      "sellerId": this.userId
     }
     this.orderService.changeOrderStatus(data)
     .subscribe(res => {

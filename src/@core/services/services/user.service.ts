@@ -40,6 +40,11 @@ export class UserService {
     return this._http.post('seller-category/create-seller-categories',data)
   }
 
+  getNearByPostalCode(queryParam){
+    return this._http.get('seller-category/get-nearby-zipcode'+queryParam)
+
+  }
+
   getUserSerivesPhotos(id){
     return this._http.get('user/seller-images/'+id)
   }
