@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { Form, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from '@core/services/services/user.service';
 import { CoreConfigService } from '@core/services/config.service';
@@ -7,13 +7,15 @@ import { environment } from 'environments/environment';
 import { base64ToFile, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { ClipboardService } from 'ngx-clipboard';
 import { MapCircle } from '@angular/google-maps';
+import { GoogleMapsService } from '@core/services/services/googlemap.service';
+declare var google: any;
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   public baseURL: any = environment.apiUrl;
   public contentHeader: object;
   public progressbarHeight = '.857rem';
@@ -26,24 +28,14 @@ export class ProfileComponent implements OnInit {
   public sellerServicePhotos: any;
   myFiles:string [] = [];
   public sellerWebLinksForm: UntypedFormGroup;
-  public markerCirclePolygonCenter = { lat: 37.421995, lng: -122.084092 };
-  public markerCirclePolygonZoom = 15;
-  public mapCircleCenter: google.maps.LatLngLiteral = { lat: 37.421995, lng: -122.084092 };
+  public markerCirclePolygonCenter;
+  public markerCirclePolygonZoom = 13;
   @ViewChild("mapCircle") circle: MapCircle;
-  public sliderWithNgModel: number = 100;
+  public sliderWithNgModel: number = 5;
   @ViewChild('map') mapElement: any;
-  map: google.maps.Map;
-  public mapCircleOptions = {
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    radius: this.sliderWithNgModel,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35,
-    draggable: true,
-    center: { lat: 37.421995, lng: -122.084092 }
-  };
-
+  map: any;
+  public mapCircleCenter: google.maps.LatLngLiteral;
+  public mapCircleOptions;
   // // Define the LatLng coordinates for the polygon's  outer path.
   // private polygonCoords = [
   //   { lat: 37.421834, lng: -122.079971 },
@@ -65,27 +57,28 @@ export class ProfileComponent implements OnInit {
   // };
   public postalCode = "";
   public nearByZipCodes = [];
+  zipCode: string = '';
+  radius: number = 0;
+  zipCodes: string[] = [];
   constructor(
       private _coreConfigService: CoreConfigService,
       private modalService: NgbModal,
       private userService: UserService,
       private _formBuilder: UntypedFormBuilder,
-      private clipboardService: ClipboardService
+      private clipboardService: ClipboardService,
+      private googleMapsService: GoogleMapsService
       ) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
+  }
+  ngAfterViewInit(): void {
+    this.getLocation();
   }
   radiusChanged(){
     if(this.circle){
       console.log(this.circle.getRadius());
     }
   }
-  public findNearByPostalCode(){
-    let queryParam = '?zipcode='+this.postalCode+'&miles='+this.sliderWithNgModel;
-    this.userService.getNearByPostalCode(queryParam)
-    .subscribe(res => {
-      this.nearByZipCodes = res;
-    })
-  }
+ 
   public selectedCategories: any = [];
   selectCategory(categryId, midLevelId, subcategry){
     // if(categry && this.selectedCategories.length > 0){
@@ -208,6 +201,7 @@ export class ProfileComponent implements OnInit {
   /**
    * On init
    */
+  center: google.maps.LatLngLiteral;
   ngOnInit() {
     // const mapProperties = {
     //   center: new google.maps.LatLng(36.2271, -80.8431),
@@ -215,7 +209,18 @@ export class ProfileComponent implements OnInit {
     //   mapTypeId: google.maps.MapTypeId.ROADMAP
     //   };
     // this.map = new google.maps.Map(this.mapElement.nativeElement,    mapProperties);
-   
+    // const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
+    //   center: { lat: 37.7749, lng: -122.4194 },
+    //   zoom: 8,
+    // });
+    // const geocoder = new google.maps.Geocoder();
+    // geocoder.geocode({ address: 'San Francisco' }, (results, status) => {
+    //   if (status === 'OK') {
+    //     this.center = results[0].geometry.location.toJSON() as google.maps.LatLngLiteral;
+    //     this.radius = 10000; // set radius to 10 km
+    //     this.getZipCodes(map, this.center, this.sliderWithNgModel);
+    //   }
+    // });
     this.contentHeader = {
       headerTitle: 'Home',
       actionButton: true,
@@ -246,16 +251,6 @@ export class ProfileComponent implements OnInit {
         }
         if(this.sellerProfile.radius){
           this.sliderWithNgModel =parseInt(this.sellerProfile.radius);
-          this.mapCircleOptions = {
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            radius: this.sliderWithNgModel,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35,
-            draggable: true,
-            center: { lat: 37.421995, lng: -122.084092 }
-          };
         }
         this.profileUpdateFormBuilder();
       }
@@ -358,6 +353,7 @@ export class ProfileComponent implements OnInit {
       centered: true,
       size: 'xl' // size: 'xs' | 'sm' | 'lg' | 'xl'
     });
+    this.getLocation();
   }
   profileUpdateFormBuilder(){
     this.profileUpdateForm = this._formBuilder.group({
@@ -562,4 +558,118 @@ export class ProfileComponent implements OnInit {
     }
     return false;
   }
+
+
+
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition.bind(this));
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  showPosition(position) {
+    const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: latLng,
+      zoom: 10
+    });
+
+    const geocoder = new google.maps.Geocoder();
+    // geocoder.geocode({ address: latLng }, (results, status) => {
+    //   if (status === 'OK') {
+    //     this.center = results[0].geometry.location.toJSON() as google.maps.LatLngLiteral;
+    //     this.radius = 10000; // set radius to 10 km
+    //     this.getZipCodes(this.map, this.center, this.sliderWithNgModel);
+    //   }
+    // });
+    geocoder.geocode({ location: latLng }, (results, status) => {
+      if (status === 'OK') {
+        const addressComponents = results[0].address_components;
+        this.postalCode = addressComponents.find(component => component.types.includes('postal_code')).long_name;
+        // this.getZipCodes(this.map, latLng, this.sliderWithNgModel);
+
+        // Do something with the zipCode value
+      }
+    });
+
+    
+    // Extract the postal codes from the nearby locations
+  this.mapCircleCenter = { lat: latLng.lat(), lng: latLng.lng() };
+  this.mapCircleOptions = {
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    radius: this.sliderWithNgModel*1609.344,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35,
+    draggable: true,
+    center: {lat: latLng.lat(), lng: latLng.lng()}
+  };
+  this.markerCirclePolygonCenter ={ lat: latLng.lat(), lng: latLng.lng() };
+    // this.getZipCodes(latLng, this.radius);
+  }
+
+  // setRadius(radius: number) {
+  //   this.radius = radius;
+  //   // this.getZipCodes(this.map.center, radius);
+  // }
+  // getZipCodes(map: google.maps.Map, center: google.maps.LatLngLiteral, radius: number) {
+  //   const request = {
+  //     location: center,
+  //     radius: radius,
+  //     type: 'postal_code'
+  //   };
+  //   const service = new google.maps.places.PlacesService(map);
+  //   service.nearbySearch(request, (results, status) => {
+  //     if (status === 'OK') {
+  //       this.zipCodes = results.map(result => result.postal_code);
+  //     }
+  //   });
+  // }
+  // getZipCodes(latLng, radius) {
+  //   const request = {
+  //     location: latLng,
+  //     radius: radius.toString(),
+  //     type: ['postal_code']
+  //   };
+
+  //   const service = new google.maps.places.PlacesService(this.map);
+  //   service.nearbySearch(request, this.callback.bind(this));
+  // }
+  
+
+  callback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      for (let i = 0; i < results.length; i++) {
+        const place = results[i];
+        const marker = new google.maps.Marker({
+          position: place.geometry.location,
+          map: this.map
+        });
+      }
+    }
+  }
+
+  public findNearByPostalCode(){
+    let queryParam = '?zipcode='+this.postalCode+'&miles='+this.sliderWithNgModel*1609.344;
+    this.userService.getNearByPostalCode(queryParam)
+    .subscribe(res => {
+      this.nearByZipCodes = res;
+    })
+    //  Call the getZipCodesInRadius method of the GoogleMapsService
+    //  this.googleMapsService.findNearbyZipcodes(this.mapCircleCenter.lat, this.mapCircleCenter.lng, this.sliderWithNgModel)
+    //  .then((zipCodes) => {
+    //    // Update the zipCodes array with the results
+    //    this.zipCodes = zipCodes;
+    //  })
+    //  .catch((error) => {
+    //    console.error(error);
+    //    alert('An error occurred. Please try again later.');
+    //  });
+
+    //  this.setRadius(this.sliderWithNgModel);
+ }
 }
