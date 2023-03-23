@@ -38,11 +38,55 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'customer-listing',
-    title: 'Customer Listing',
+    title: 'Quotation Listing',
     translate: 'MENU.HOME',
-    type: 'item',
     icon: 'home',
-    url: 'pages/seller/customer-listing'
+    type: 'collapsible',
+    children: [
+      {
+        id: 'moving-service',
+        icon: 'home',
+        title: 'Moving Services',
+        type: 'item',
+        url: 'pages/seller/quotation-listing/640dfae607de5a58ffdd8a25'
+      },
+      {
+        id: 'home-services',
+        icon: 'home',
+        title: 'Home Services',
+        type: 'item',
+        url: 'pages/seller/quotation-listing/640f3a8107de5a58ffdd8a3e'
+      },
+      {
+        id: 'home-services',
+        icon: 'home',
+        title: 'Legal Services',
+        type: 'item',
+        url: 'pages/seller/quotation-listing/640f3ab407de5a58ffdd8a40'
+      },
+      {
+        id: 'home-services',
+        icon: 'home',
+        title: 'Financial Services',
+        type: 'item',
+        url: 'pages/seller/quotation-listing/640f3ccb07de5a58ffdd8a47'
+      },
+      {
+        id: 'home-services',
+        icon: 'home',
+        title: 'Insurance Services',
+        type: 'item',
+        url: 'pages/seller/quotation-listing/640f3d0707de5a58ffdd8a4c'
+      },
+      {
+        id: 'home-services',
+        icon: 'home',
+        title: 'Hotels and Travel',
+        type: 'item',
+        url: 'pages/seller/quotation-listing/640f3d4407de5a58ffdd8a4f'
+      },
+
+    ]
   },
   {
     id: 'earnings',

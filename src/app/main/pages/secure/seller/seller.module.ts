@@ -56,7 +56,7 @@ const routes: Routes = [
     data: { animation: 'order-management' }
   },
   {
-    path: 'customer-listing',
+    path: 'quotation-listing/:id',
     component: CustomerlistingsComponent,
     canActivate: [AuthGuard],
     data: { animation: 'customer-listing' }

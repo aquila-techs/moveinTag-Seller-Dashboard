@@ -1,8 +1,27 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <!-- content-header component -->
-    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+   <h4>{{category.title}}</h4>
 
+
+   <section class="mb-1" *ngIf="userQuote.length <= 0">
+    <div class="table-wrapper">
+      <div class="row" id="basic-table">
+        <div class="col-12">
+          <div class="card auto">
+            <h4 class="table-title"></h4>
+            <div class="table-responsive" style="
+            font-size: 20px;
+            text-align: center;
+            margin: 30px;
+        ">
+              No Quotation Found
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
     <section class="mb-1" *ngFor="let item of userQuote">
       <div class="table-wrapper">
         <div class="row" id="basic-table">
@@ -13,10 +32,10 @@
                 <table class="table table-s1">
                   <thead>
                   <tr>
-                    <th>Consumers</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th>{{item?.category?.title}} - {{item?.subCategory?.title}}</th>
+                    <th>Order Number - {{item.orderNum}}</th>
+                    <th><span *ngIf="item.postal_code">Postal Code - {{item?.postal_code}}</span></th>
+                    <th><span *ngIf="item.seller" class="blink" style="color:red">Direct Quote</span></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -27,7 +46,9 @@
                         <span class="font-weight-bold">{{item?.buyer?.firstName}}</span>
                       </div>
                     </td>
-                    <td><div class="font-weight-bolder">$40</div> <span class="font-small-3">$40</span></td>
+                    <td><div class="font-weight-bolder">$40</div> 
+                      <!-- <span class="font-small-3">$40</span> -->
+                    </td>
                     <td><span class="badge badge-pill badge-light-success mr-1">
                         <span *ngIf="item?.status === 'QUOTE'" > Pending </span>
                         <span  *ngIf="item?.status === 'ACTIVE'"> Approved </span>

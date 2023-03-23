@@ -127,6 +127,9 @@ export class UserService {
   getAllCategories(){
     return this._http.get('category/');
   }
+  getACategory(id){
+    return this._http.get('category/'+id);
+  }
 
   getAllCategoriesWithSubCategories(){
     return this._http.get('category/getAllCategoryWithMidLevelAndSubCategory');
