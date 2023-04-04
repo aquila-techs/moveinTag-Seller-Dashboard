@@ -5,8 +5,13 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'http://localhost:4000/'
+  // apiUrl: 'http://localhost:4000/',
+  // socketURL:'http://localhost:4000',
+  apiUrl: 'https://apim.aquilatechs.com/',
+  socketURL:'https://apim.aquilatechs.com',
+
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

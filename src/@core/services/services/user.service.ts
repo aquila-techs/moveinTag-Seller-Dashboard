@@ -144,5 +144,9 @@ export class UserService {
   getAnalytics(){
     return this._http.get('admin/get-analytics');
   }
+
+  createChatRoom(body){
+    return this._http.post('chat/createChatRoom',body);
+  }
   
 }

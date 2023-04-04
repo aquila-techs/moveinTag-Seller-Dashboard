@@ -96,13 +96,20 @@ export const menu: CoreMenu[] = [
     icon: 'home',
     url: 'pages/seller/earnings'
   },
+  // {
+  //   id: 'refferals',
+  //   title: 'Refferals',
+  //   translate: 'MENU.HOME',
+  //   type: 'item',
+  //   icon: 'home',
+  //   url: 'pages/seller/refferals'
+  // },
   {
-    id: 'refferals',
-    title: 'Refferals',
-    translate: 'MENU.HOME',
+    id: 'chat',
+    title: 'Chat',
     type: 'item',
     icon: 'home',
-    url: 'pages/seller/refferals'
+    url: 'pages/seller/chats'
   },
   {
     id: 'settings',

@@ -31,6 +31,7 @@ import { RefferalsComponent } from './refferals/refferals.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,10 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
     data: { animation: 'settings' }
+  },
+  {
+    path: 'chats',
+    loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
   },
 ]
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {

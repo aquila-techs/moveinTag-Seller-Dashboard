@@ -92,4 +92,25 @@ export class CustomerlistingsComponent implements OnInit {
       this.getAllQuotesOrders();
     })
   }
+
+  startChat(selectedOrder){
+    let body: any = {
+      'chatroom':'',
+      'userId':'',
+      'sellerId':'',
+      'orderId':'',
+    };
+    let emailString = selectedOrder.buyer.email+''+selectedOrder.seller.email;
+    body.chatroom = emailString.split('').sort().join('')
+    body.userId = selectedOrder.buyer._id;
+    body.sellerId = selectedOrder.seller._id;
+    body.orderId =selectedOrder._id
+    this.userService.createChatRoom(body).subscribe({
+      next:(value)=>{
+        this.modalService.dismissAll();
+        this.router.navigate(['/pages/seller/chats'])
+      }
+    })
+
+  }
 }
