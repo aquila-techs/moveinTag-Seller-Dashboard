@@ -356,7 +356,7 @@ export class ChatService {
   }
 
   public getNewMessage = () => {
-    this.socket.off('message').on('message', (message) =>{
+    this.socket.once('message', (message) =>{
       this.message$.next(message);
     });
     
