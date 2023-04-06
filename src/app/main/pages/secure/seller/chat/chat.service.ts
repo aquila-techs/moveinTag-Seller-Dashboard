@@ -356,7 +356,7 @@ export class ChatService {
   }
 
   public getNewMessage = () => {
-    this.socket.on('message', (message) =>{
+    this.socket.off('message').on('message', (message) =>{
       this.message$.next(message);
     });
     
@@ -365,7 +365,12 @@ export class ChatService {
 
   public connectChatRoom(chatRoom) {
     // this.socket.emit('message', {message,roomName});
-    if (this.socket) this.socket.emit('join', chatRoom);
+    if (this.socket) this.socket.emit('joinRoom', chatRoom);
+  }
+
+  public LeaveChatRoom(chatRoom) {
+    // this.socket.emit('message', {message,roomName});
+    if (this.socket) this.socket.emit('leaveRoom', chatRoom);
   }
 
   public getAllChatsRoom(id){

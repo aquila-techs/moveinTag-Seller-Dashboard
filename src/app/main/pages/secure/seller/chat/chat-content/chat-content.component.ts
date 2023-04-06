@@ -114,8 +114,14 @@ export class ChatContentComponent implements OnInit {
     // Subscribe to Selected Chat Change
     this._chatService.onSelectedChatChange.subscribe(res => {
       this.chats = res;
+      if(this.chatRoom){
+        this._chatService.LeaveChatRoom(this.chatRoom);
+      }
       this.chatRoom = this.chats.chatroom;
       this._chatService.connectChatRoom(this.chatRoom);
+      setTimeout(() => {
+        this.scrolltop = this.scrollMe?.nativeElement.scrollHeight;
+      }, 0);
     });
 
     // Subscribe to Selected Chat User Change

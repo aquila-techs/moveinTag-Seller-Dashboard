@@ -13,13 +13,15 @@ import { environment } from 'environments/environment';
 export class CustomerlistingsComponent implements OnInit {
   public baseURL = environment.apiUrl;
   public userId = '';
+  public currentUser: any;
   public category: any  = {};
   public categoryId = '';
   constructor(private modalService: NgbModal,
      private orderService: OrderService,
      private userService: UserService,  private activateRoute: ActivatedRoute,
      private router:Router) {
-      this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
+      this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
+      this.userId = this.currentUser._id;
       router.events.subscribe((val) => {
         if(this.categoryId !== this.activateRoute.snapshot.paramMap.get('id')){
           this.categoryId = this.activateRoute.snapshot.paramMap.get('id');
@@ -100,10 +102,10 @@ export class CustomerlistingsComponent implements OnInit {
       'sellerId':'',
       'orderId':'',
     };
-    let emailString = selectedOrder.buyer.email+''+selectedOrder.seller.email;
-    body.chatroom = emailString.split('').sort().join('')
+    let emailString = selectedOrder.buyer.email+''+this.currentUser.email;
+    body.chatroom = emailString.split('').sort().join('') + '_' + selectedOrder._id
     body.userId = selectedOrder.buyer._id;
-    body.sellerId = selectedOrder.seller._id;
+    body.sellerId = this.currentUser._id;
     body.orderId =selectedOrder._id
     this.userService.createChatRoom(body).subscribe({
       next:(value)=>{
