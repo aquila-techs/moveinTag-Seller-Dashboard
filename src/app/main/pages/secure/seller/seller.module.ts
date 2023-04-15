@@ -33,6 +33,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ChatComponent } from './chat/chat.component';
 
+import { Checkout1Component } from './checkout1/checkout1.component';
+
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -81,6 +83,12 @@ const routes: Routes = [
     data: { animation: 'settings' }
   },
   {
+    path: 'subscription-plan',
+    component: Checkout1Component,
+    canActivate: [AuthGuard],
+    data: { animation: 'about-your-business' }
+  },
+  {
     path: 'chats',
     loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
   },
@@ -94,7 +102,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     DashboardComponent,
     ProfileComponent,
-    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent
+    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component
   ],
   imports: [
     CommonModule,
@@ -116,7 +124,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ChartsModule,
     ImageCropperModule,
     ClipboardModule,
-    GoogleMapsModule
+    GoogleMapsModule,
   ],
   providers: [
     DashboardService,

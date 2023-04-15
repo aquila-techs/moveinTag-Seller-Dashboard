@@ -148,5 +148,10 @@ export class UserService {
   createChatRoom(body){
     return this._http.post('chat/createChatRoom',body);
   }
-  
+  createStripeToken(body){
+    return this._http.post('payment/create-token',body);
+  }
+  createSubscriptionCustomer(body){
+    return this._http.post('payment/createSubscriptionCustomer',body);
+  }
 }

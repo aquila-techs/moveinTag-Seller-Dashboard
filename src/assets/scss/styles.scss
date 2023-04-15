@@ -29,7 +29,7 @@ $green: #34A853;
 $red: #FF0000;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
-
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -99,6 +99,9 @@ body {
   }
   .text-warning {
     color: $yellow !important;
+  }
+  .text-black {
+    color: $black !important;
   }
   .progress {
     background-color: #D7D6DB;
@@ -671,6 +674,177 @@ body {
       }
     }
   }
+  .checkout-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    .step-header {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba($black, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .logo {
+        max-width: 250px;
+      }
+      .list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+          position: relative;
+          color: $lightGray;
+          display: inline-block;
+          padding: 0 20px;
+          &:first-child {
+            padding-left: 0;
+          }
+          // &:after {
+          //   content: '\203A';
+          //   font-size: 26px;
+          //   position: absolute;
+          //   right: 0;
+          //   top: 50%;
+          //   transform: translate(0, -50%);
+          //   color: $gray;
+          //   opacity: 0.5;
+          // }
+        }
+        li.active {
+          color: $black;
+          &:after {
+            color: $gray;
+          }
+        }
+      }
+    }
+    .pricing-card {
+      padding: 80px 0;
+      .card {
+        min-height: 404px;
+        box-shadow: 0 20px 20px rgba($black, 0.3);
+        background: rgb(17,22,26);
+        background: -moz-linear-gradient(96deg, rgba(17,22,26,1) 0%, rgba(31,42,51,1) 100%);
+        background: -webkit-linear-gradient(96deg, rgba(17,22,26,1) 0%, rgba(31,42,51,1) 100%);
+        background: linear-gradient(96deg, rgba(17,22,26,1) 0%, rgba(31,42,51,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#11161a",endColorstr="#1f2a33",GradientType=1);
+        border-color: transparent;
+        border-radius: 16px;
+        color: $white;
+        padding: 30px 15px;
+        .divider {
+          margin: 20px 0;
+          height: 1px;
+          background-color: rgba($white, 0.1);
+          position: relative;
+          z-index: 2;
+        }
+        svg {
+          max-width: 80px;
+          height: 80px;
+          margin-bottom: 30px;
+          path {
+            fill: $white;
+          }
+        }
+        .main-title {
+          color: $white;
+          font-size: 56px;
+        }
+        .title {
+          color: $white;
+        }
+        p {
+          color: $white;
+          line-height: 28px;
+        }
+        .sub-title {
+          color: $white;
+          line-height: 28px;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          line-height: 28px;
+          li {
+
+          }
+        }
+      }
+      .card.popular {
+        position: relative;
+        background: rgb(42,72,99);
+        background: -moz-linear-gradient(96deg, rgba(42,72,99,1) 0%, rgba(25,46,63,1) 100%);
+        background: -webkit-linear-gradient(96deg, rgba(42,72,99,1) 0%, rgba(25,46,63,1) 100%);
+        background: linear-gradient(96deg, rgba(42,72,99,1) 0%, rgba(25,46,63,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2a4863",endColorstr="#192e3f",GradientType=1);
+        border-color: #284759 !important;
+        margin-top: -40px;
+        margin-left: -40px;
+        margin-right: -40px;
+        overflow: hidden;
+        z-index: 2;
+        &:after {
+          content: '';
+          position: absolute;
+          left: -20px;
+          top: 40%;
+          transform: translate(0, -50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: #4587af;
+          box-shadow: 0 0 50px 50px #4587af;
+        }
+      }
+    }
+    .sidebar {
+      border: 1px solid rgba($black, 0.1);
+      border-radius: 8px;
+      box-shadow: 0 0 4px rgba($black, 0.1);
+      padding: 30px;
+      margin: 30px 0;
+      .label {
+        color: $white;
+        padding: 5px;
+        font-size: 12px;
+        display: inline-block;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        background-color: $primary;
+      }
+      .list {
+        list-style: none;
+        margin: 20px 0 30px;
+        padding: 0;
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          line-height: 28px;
+        }
+      }
+    }
+
+    .btn-secondary {
+      background-color: $yellow !important;
+      border: none;
+      &:hover,
+      &:focus {
+        background-color: $black !important;
+      }
+    }
+    .btn-outline-dark {
+      border-color: #d8d6de !important;
+    }
+    .btn-group-toggle {
+      .btn {
+        border-right: 1px solid $primary !important;
+        position: relative;
+        margin-bottom: 15px;
+      }
+    }
+  }
 
   @media (min-width: 1440px) {
     .container-xxl,
@@ -783,6 +957,26 @@ body {
         }
       }
     }
+    .checkout-wrapper {
+      .step-header {
+        padding: 20px 0;
+        display: block;
+        .logo {
+          max-width: 180px;
+          margin-bottom: 10px;
+        }
+        .list {
+          margin: 10px 0 0;
+        }
+      }
+      .pricing-card {
+        .card.popular {
+          margin-top: 0;
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
   }
   @media (max-width: 575px) {
     .profile_banner {
@@ -806,6 +1000,26 @@ body {
       .gallery {
         img {
           max-width: calc(50% - 9px);
+        }
+      }
+    }
+    .checkout-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      .step-header {
+        display: flex;
+        .logo {
+          max-width: 180px;
+          margin-bottom: 0;
+        }
+        .list {
+          margin: 0;
+          li {
+            display: none;
+          }
+          li.active {
+            display: block;
+          }
         }
       }
     }

@@ -1,0 +1,356 @@
+<div *ngIf="getSellerProfile">
+  <div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+      <section class="checkout-wrapper">
+        <div class="container-lg">
+          <div class="step-header">
+            <img src="../assets/images/logo/logo.png" alt="" class="logo" style="background-color: black;">
+            <ul class="list">
+              <li ngbDropdown class="nav-item dropdown-user">
+                <a
+                  class="nav-link dropdown-toggle dropdown-user-link"
+                  id="dropdown-user"
+                  ngbDropdownToggle
+                  id="navbarUserDropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <div class="user-nav d-sm-flex d-none">
+                  </div>
+                  <span class="avatar"
+                    ><img
+                      class="round"
+                      src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+                      alt="avatar"
+                      height="40"
+                      width="40" /><span class="avatar-status-online"></span
+                  ></span>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
+                  <a ngbDropdownItem (click)="logout()"
+                  ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
+                >
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="step">
+            <div class="row align-items-center">
+              <div class="col-lg-6 d-none d-lg-block">
+                <img src="../assets/images/site/girl-illustration.png" alt="" class="img-fluid" width="90%">
+              </div>
+              <div class="col-lg-6">
+                <div class="py-4 py-lg-5 pr-xl-5">
+                  <div class="title-area mb-2">
+                    <h2 class="mb-2">Let's get started by creating your profile</h2>
+                    <p>Reach over 65 million homeoweners on Moventag</p>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="basicInput">Business name *</label>
+                    <input type="text" class="form-control" id="basicInput" placeholder="Enter your business name here" />
+                  </div> -->
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div ngbDropdown class="input-group-prepend">
+                        <button type="button" class="btn btn-outline-dark" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" rippleEffect>+1</button>
+                        <div ngbDropdownMenu>
+                          <a ngbDropdownItem>+1</a>
+                          <a ngbDropdownItem>+44</a>
+                        </div>
+                      </div>
+                      <input type="text" [(ngModel)]="phone" required class="form-control" placeholder="For potential clients to reach you" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="basicInput">Country *</label>
+                    <ng-select [(ngModel)]="country" required>
+                      <ng-option *ngFor="let country of countryId" [value]="country.id">{{country.name}}</ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="form-group">
+                    <label for="basicInput">Contact name</label>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <input type="text" [(ngModel)]="firstName" required class="form-control" id="firstName" placeholder="First name" />
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <input type="text"  [(ngModel)]="lastName"  required class="form-control" id="lastName" placeholder="Last name" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1"/>
+                      <label class="custom-control-label" for="customCheck1">
+                        <strong>Enable text messages (recommended)</strong>
+                        <span class="d-block font-small-2">I agree to receive text messages about new business leads, product news,
+                      and best practices at the number provided pursuant to <a href="">Moveintag Terms of Use</a></span>
+                      </label>
+                    </div>
+                  </div>
+                  <a (click)="goToNextStep()" class="btn btn-primary btn-lg mb-2">Next</a>
+                  <p class="font-small-2 text-dark">By clicking or tapping "next", I agree to the <a href="">Moveintag Terms and Conditions</a></p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ----------- -->
+
+
+<div *ngIf="subscriptionPacakge">
+  <div class="content-wrapper">
+    <div class="content-body">
+  
+      <section class="checkout-wrapper" id="pricing-plan">
+        <div class="container-lg">
+          <div class="step-header">
+            <img src="../assets/images/logo/logo.png" alt="" class="logo" style="background-color: black;">
+            <ul class="list">
+              <li ngbDropdown class="nav-item dropdown-user">
+                <a
+                  class="nav-link dropdown-toggle dropdown-user-link"
+                  id="dropdown-user"
+                  ngbDropdownToggle
+                  id="navbarUserDropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <div class="user-nav d-sm-flex d-none">
+                  </div>
+                  <span class="avatar"
+                    ><img
+                      class="round"
+                      src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+                      alt="avatar"
+                      height="40"
+                      width="40" /><span class="avatar-status-online"></span
+                  ></span>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
+                  <a ngbDropdownItem (click)="logout()"
+                  ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
+                >
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M255 16C114.39 16 0 116.928 0 241c0 52.412 20.742 103.198 58.491 143.452 7.471 30.806-1.597 63.442-24.097 85.942C24.986 479.803 31.639 496 45 496c42.744 0 83.95-16.743 114.565-46.274C189.858 460.536 221.909 466 255 466c140.61 0 257-100.928 257-225S395.61 16 255 16zM137 286c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45zm120 0c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45zm120 0c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45z" fill="#000000" data-original="#000000" class=""></path></g></svg>
+                    <h3 class="title text-uppercase">Live Chat</h3>
+                    <div class="divider"></div>
+                    <p class="card-text">Live chat with your lead via your dashboard.</p>
+                    <p class="card-text">Leads can be accepted/rejected via the dashboard</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="card text-center popular">
+                  <div class="card-body">
+                    <h1 class="main-title">$0</h1>
+                    <h6 class="sub-title"><span class="font-weight-light">90 day free trial, then</span><br>$9.99/mo or $99/yr</h6>
+                    <div class="divider"></div>
+                    <p class="card-text">Keep track of your leads</p>
+                    <p class="card-text">Your profile can be modified as you wish</p>
+                    <ul>
+                      <li>Customer Support</li>
+                      <li>Email</li>
+                      <li>Phone</li>
+                      <li>Dedicated</li>
+                      <li>Onboarding Experts</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512.007 512.007" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M497 482.006h-16v-296c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v296h-30v-196c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v196h-30v-141c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v141h-30v-105c0-8.284-6.716-15-15-15H46c-8.284 0-15 6.716-15 15v105H15c-8.284 0-15 6.716-15 15s6.716 15 15 15h482c8.284 0 15-6.716 15-15s-6.716-15-15-15z" fill="#000000" data-original="#000000" class=""></path><path d="M15 322.31c93.618 0 195.14-33.622 285.866-94.673 71.055-47.815 130.286-108.898 167.078-171.445l14.568 54.367c1.796 6.702 10.467 12.492 18.371 10.606 8.058-1.922 12.75-10.369 10.606-18.371l-24.563-91.67C484.781 3.123 476.56-1.627 468.555.518l-91.67 24.563c-8.002 2.144-12.75 10.369-10.606 18.371 2.145 8.002 10.366 12.752 18.371 10.606l59.055-15.824C409.38 97.88 352.652 156.628 284.117 202.747 198.289 260.503 102.715 292.31 15 292.31c-8.284 0-15 6.716-15 15s6.716 15 15 15z" fill="#000000" data-original="#000000" class=""></path></g></svg>
+                    <h3 class="title text-uppercase">Growth</h3>
+                    <div class="divider"></div>
+                    <p class="card-text">Make sure the job is done and get reviews</p>
+                    <p class="card-text">By improving your rating. you will attract more customers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <a (click)="goToFinalStep()" class="btn btn-secondary btn-lg">Join Pro</a>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+  
+    </div>
+  </div>
+</div>
+
+
+<!-- ----------- -->
+
+
+<div  *ngIf="cardDetail">
+  <div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+  
+      <section class="checkout-wrapper">
+        <div class="container-lg">
+          <div class="step-header">
+            <img src="../assets/images/logo/logo.png" alt="" class="logo" style="background-color: black;">
+            <ul class="list">
+              <li ngbDropdown class="nav-item dropdown-user">
+                <a
+                  class="nav-link dropdown-toggle dropdown-user-link"
+                  id="dropdown-user"
+                  ngbDropdownToggle
+                  id="navbarUserDropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <div class="user-nav d-sm-flex d-none">
+                  </div>
+                  <span class="avatar"
+                    ><img
+                      class="round"
+                      src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+                      alt="avatar"
+                      height="40"
+                      width="40" /><span class="avatar-status-online"></span
+                  ></span>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
+                  <a ngbDropdownItem (click)="logout()"
+                  ><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a
+                >
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="step">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <div class="py-4 py-lg-5 pr-xl-5">
+                  <div class="title-area mb-2">
+                    <h2 class="mb-2">Ready to try?</h2>
+                    <p>It's easy! Start your <strong>90-day free trial</strong>, Cancel anytime before the free trial ends.</p>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h4>Moveintag Pro Essential Plan</h4>
+                      <a href="">Change Plan</a>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="basicInput">Name on Card *</label>
+                    <input type="text" [(ngModel)]="cardname" name="name" class="form-control" id="basicInput" placeholder="" />
+                  </div>
+                  <div class="form-group">
+                    <label for="basicInput2">Card Number *</label>
+                    <input type="text" [(ngModel)]="cardNumber" name="cardNumber" class="form-control" id="basicInput2" placeholder="" />
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <label for="basicInput">Expiration Date *</label>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <ng-select [(ngModel)]="selectedMonth" name="month">
+                              <ng-option *ngFor="let month of months" [value]="month.id">{{month.name}}</ng-option>
+                            </ng-select>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <ng-select [(ngModel)]="selectedYear" name="year">
+                              <ng-option *ngFor="let year of years" [value]="year.id">{{year.name}}</ng-option>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="basicInput3">Security Code *</label>
+                        <input type="text" class="form-control" [(ngModel)]="cvc" name="cvc" id="basicInput3" placeholder="CVV" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="basicInput4">Postal Code</label>
+                        <input type="text" class="form-control"  [(ngModel)]="postalCode" id="basicInput4" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <div class="form-group">
+                        <label for="basicInput">Country</label>
+                        <ng-select [(ngModel)]="country">
+                          <ng-option *ngFor="let country of countryId" [value]="country.id">{{country.name}}</ng-option>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="12" height="12" x="0" y="0" viewBox="0 0 229.5 229.5" style="opacity: 0.2;enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M214.419 32.12A7.502 7.502 0 0 0 209 25.927L116.76.275a7.496 7.496 0 0 0-4.02 0L20.5 25.927a7.5 7.5 0 0 0-5.419 6.193c-.535 3.847-12.74 94.743 18.565 139.961 31.268 45.164 77.395 56.738 79.343 57.209a7.484 7.484 0 0 0 3.522 0c1.949-.471 48.076-12.045 79.343-57.209 31.305-45.217 19.1-136.113 18.565-139.961zm-40.186 53.066-62.917 62.917c-1.464 1.464-3.384 2.197-5.303 2.197s-3.839-.732-5.303-2.197l-38.901-38.901a7.497 7.497 0 0 1 0-10.606l7.724-7.724a7.5 7.5 0 0 1 10.606 0l25.874 25.874 49.89-49.891a7.497 7.497 0 0 1 10.606 0l7.724 7.724a7.5 7.5 0 0 1 0 10.607z" fill="#000000" data-original="#000000" class=""></path></g></svg>
+                    <p class="font-small-2 text-dark ml-25 mb-0">Payments are secure and encrypted</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="sidebar">
+                  <h3 class="title">Payment Option</h3>
+                  <span class="label">30-DAY-FREE TRIAL</span>
+                  <p>Billing starts only after your 30-day free trial ends</p>
+                  <div class="btn-group-toggle d-block" ngbRadioGroup name="radioBasic" [(ngModel)]="radioModel">
+                      <label ngbButtonLabel class="btn-outline-primary d-block text-left py-2 npr" rippleEffect>
+                        <input ngbButton type="radio" [value]="1" />
+                        <span class="font-medium-3 d-block mb-1 text-black font-weight-bolder">Monthly <span class="font-small-2 font-weight-light">(annual commitment)</span></span>
+                        <span class="font-medium-3 d-block mb-2 text-black font-weight-bolder">$65 <span class="font-small-2 font-weight-light">/month</span></span>
+                        <span class="text-dark d-block mb-1"><del>$129/month</del> <span class="text-primary"> 50% off first 3 months</span></span>
+                        <span class="text-dark d-block">Billed monthly</span>
+                      </label>
+  
+                    <label ngbButtonLabel class="btn-outline-primary d-block text-left py-2 npr" rippleEffect>
+                      <input ngbButton type="radio" [value]="2" />
+                      <span class="font-medium-3 d-block mb-1 text-black font-weight-bolder">Annual <span class="font-small-2 font-weight-light">(pay upfront)</span></span>
+                      <span class="font-medium-3 d-block mb-2 text-black font-weight-bolder">$79 <span class="font-small-2 font-weight-light">/month</span></span>
+                      <span class="text-dark d-block mb-1"><span class="text-primary"> Save $408</span></span>
+                      <span class="text-dark d-block">Billed annually $948</span>
+                    </label>
+                  </div>
+                  <ul class="list">
+                    <li><span>Essential Plan - 1 User Included</span> <span>$129.00</span></li>
+                    <li class="text-primary"><span>Discount - First 3 Months</span> <span>-$64.00</span></li>
+                    <li><span>Total</span> <span>$65.00</span></li>
+                    <li class="font-medium-1 font-weight-bolder text-black"><span>Due Today</span> <span>$0.00</span></li>
+                  </ul>
+                  <button class="btn btn-primary w-100 btn-lg" (click)="payment()">Start Free Trial</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+  
+    </div>
+  </div>
+</div>

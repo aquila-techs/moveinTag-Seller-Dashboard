@@ -12,5 +12,6 @@ export class User {
     permissions: [];
     title: string;
   };
+  payment?: boolean;
   accessToken?: string;
 }

@@ -357,18 +357,26 @@ export class ChatService {
 
   public getNewMessage = () => {
     this.socket.off('message').on('message', (message) =>{
-      this.message$.next(message);
+      if(message != ''){
+        this.message$.next(message);
+      }
     });
     
     return this.message$.asObservable();
   };
 
   public connectChatRoom(chatRoom) {
+    if(!chatRoom){
+      return;
+    }
     // this.socket.emit('message', {message,roomName});
     if (this.socket) this.socket.emit('joinRoom', chatRoom);
   }
 
   public LeaveChatRoom(chatRoom) {
+    if(!chatRoom){
+      return;
+    }
     // this.socket.emit('message', {message,roomName});
     if (this.socket) this.socket.emit('leaveRoom', chatRoom);
   }

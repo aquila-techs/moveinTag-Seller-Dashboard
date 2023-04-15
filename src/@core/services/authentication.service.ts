@@ -82,6 +82,12 @@ export class AuthenticationService {
       );
   }
 
+  updateUserData(user){
+    localStorage.removeItem('currentUser');
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
   /**
    * Seller login
    *

@@ -25,7 +25,10 @@ export class AuthGuard implements CanActivate {
         this._router.navigate(['/pages/miscellaneous/not-authorized']);
         return false;
       }
-
+      if(!currentUser.payment && route.routeConfig.path !== 'subscription-plan'){
+        this._router.navigate(['/pages/seller/subscription-plan']);
+        return false;
+      }
       // authorised so return true
       return true;
     }
