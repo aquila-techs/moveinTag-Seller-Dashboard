@@ -32,9 +32,9 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     { id: 4, name: 'Pakistan' },
   ];
   user = null;
-  public getSellerProfile = false;
+  public getSellerProfile = true;
   public subscriptionPacakge = false;
-  public cardDetail = true;
+  public cardDetail = false;
   public postalCode = "";
   // private stripe: any;
 
