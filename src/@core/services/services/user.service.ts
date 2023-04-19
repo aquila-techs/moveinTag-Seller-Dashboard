@@ -154,4 +154,10 @@ export class UserService {
   createSubscriptionCustomer(body){
     return this._http.post('payment/createSubscriptionCustomer',body);
   }
+  getSubscriptionCustomerInfo(body){
+    return this._http.post('payment/subscription-info',body);
+  }
+  cancelSubscriptionCustomer(body){
+    return this._http.post('payment/cancel-subscription',body);
+  }
 }

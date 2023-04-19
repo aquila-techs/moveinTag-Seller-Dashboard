@@ -24,6 +24,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   cvc="";
   cardNumber="";
   cardname="";
+  public isAfterSingup = false;
   countryId = [
     { id: 1, name: 'United States' },
     { id: 2, name: 'Canada' },
@@ -31,9 +32,9 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     { id: 4, name: 'Pakistan' },
   ];
   user = null;
-  public getSellerProfile = true;
+  public getSellerProfile = false;
   public subscriptionPacakge = false;
-  public cardDetail = false;
+  public cardDetail = true;
   public postalCode = "";
   // private stripe: any;
 
@@ -81,7 +82,11 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
      private _router: Router,
       private toastrService: ToastrService, private userService: UserService) {
       // this.stripe = Stripe('pk_test_krO93K0IJTYIZQI4Kji8oDtK'); // Replace with your Stripe public key
-    this.user = JSON.parse(window.localStorage.getItem('currentUser'));
+    this.user = window.localStorage.getItem('currentUser') && JSON.parse(window.localStorage.getItem('currentUser')) ||  window.sessionStorage.getItem('currentUser') && JSON.parse(window.sessionStorage.getItem('currentUser'));
+    if(window.sessionStorage.getItem('currentUser')){
+      window.sessionStorage.removeItem('currentUser');
+      this.isAfterSingup = true;
+    }
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
@@ -160,14 +165,21 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             'lastName' : this.lastName,
             'country' : this.country,
             'postalCode' : this.postalCode,
-            'phone': this.phone
+            'phone': this.phone,
+            'priceId': this.priceId
           }
           this.userService.createSubscriptionCustomer(subscriptionData).subscribe({
             next: (res)=> {
               console.log(res);
-              this.user['payment']=true;
-              this._authenticationService.updateUserData(this.user);
-              this._router.navigate(['/pages/seller/home']);
+              if(this.isAfterSingup){
+                this.toastrService.success('You have successfully subscribed.')
+                this._router.navigate(['/login']);
+              }else{
+                this.user['payment']=true;
+                this._authenticationService.updateUserData(this.user);
+                this._router.navigate(['/pages/seller/home']);
+              }
+             
             },
           })
         },
@@ -206,4 +218,21 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   //     }
   //   });
   // }
+  priceId = 'price_1MyGJ2DmnN3Lb8U75UesYONG';
+  charges = '9.99';
+  discount = '0.00';
+  total = '9.99';
+  selectPackage(){
+   if(this.radioModel === 1){
+    this.priceId = 'price_1MyGJ2DmnN3Lb8U75UesYONG';
+    this.charges = '9.99';
+    this.discount = '0.00';
+    this.total = '9.99';
+   } else{
+    this.priceId = 'price_1MyGHvDmnN3Lb8U7i0pZEcMZ'
+    this.charges = '8.25';
+    this.discount = '20.88';
+    this.total = '99.00';
+   }
+  }
 }

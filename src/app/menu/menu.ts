@@ -113,10 +113,18 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'settings',
-    title: 'Settings',
+    title: 'Profile',
     translate: 'MENU.HOME',
     type: 'item',
     icon: 'home',
-    url: 'pages/seller/settings'
+    url: 'pages/seller/profile'
+  },
+  {
+    id: 'payment',
+    title: 'Payment',
+    translate: 'MENU.HOME',
+    type: 'item',
+    icon: 'home',
+    url: 'pages/seller/payment'
   },
 ]

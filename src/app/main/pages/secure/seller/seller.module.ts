@@ -34,6 +34,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ChatComponent } from './chat/chat.component';
 
 import { Checkout1Component } from './checkout1/checkout1.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   {
@@ -77,10 +78,16 @@ const routes: Routes = [
     data: { animation: 'refferals' }
   },
   {
-    path: 'settings',
+    path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'settings' }
+    data: { animation: 'profile' }
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'payment' }
   },
   {
     path: 'subscription-plan',
@@ -102,7 +109,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     DashboardComponent,
     ProfileComponent,
-    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component
+    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

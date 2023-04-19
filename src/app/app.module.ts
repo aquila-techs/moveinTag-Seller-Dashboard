@@ -28,6 +28,8 @@ import { ForgotPasswordComponent } from './main/pages/public/forgot-password/for
 import { LoginGuard } from '@core/guards/login.guards';
 import { AuthResetPasswordComponent } from './main/pages/public/reset-password/reset-password.component';
 import { VerifyEmailComponent } from './main/pages/public/verify-email/verify-email.component';
+import { Checkout1Component } from './main/pages/secure/seller/checkout1/checkout1.component';
+import { PaymentGuard } from '@core/guards/payment.guards';
 
 
 const appRoutes: Routes = [
@@ -47,6 +49,13 @@ const appRoutes: Routes = [
     path: 'signup',
     canActivate: [LoginGuard],
     component: SignupComponent,
+    data: { animation: 'auth' }
+
+  },
+  {
+    path: 'subscription-detail',
+    canActivate: [PaymentGuard],
+    component: Checkout1Component,
     data: { animation: 'auth' }
 
   },

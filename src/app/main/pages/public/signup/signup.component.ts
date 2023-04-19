@@ -83,8 +83,9 @@ export class SignupComponent implements OnInit {
     this._adminService.createSeller(this.registerForm.value).subscribe({
       next: (res)=>{
         console.log(res)
+        window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
         this._toastrService.success('','Seller register please wait for admin approval');
-        this._rotuer.navigate(['/login'])
+        this._rotuer.navigate(['/subscription-detail'])
       },
       error: (err)=> {
         
