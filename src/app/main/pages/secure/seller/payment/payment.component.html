@@ -37,7 +37,7 @@
                 <table>
                   <tbody>
                     <tr>
-                      <td class="pr-1">Card#:</td>
+                      <td class="pr-1">Card#</td>
                       <td>...........{{subscription.card.last4}}</td>
                     </tr>
                     <tr>
@@ -46,7 +46,7 @@
                     </tr>
                     <tr>
                       <td class="pr-1">Amount:</td>
-                      <td>{{subscription.subscription.items.data[0].plan.amount}}</td>
+                      <td>${{subscription.subscription.items.data[0].plan.amount/100}}</td>
                     </tr>
                     <tr>
                       <td class="pr-1">Interval:</td>
