@@ -51,10 +51,10 @@
                       <table class="table table-s1">
                         <thead>
                         <tr>
+                          <th>Order#</th>
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Total</th>
                           <th>Note</th>
                           <th>Status</th>
                         </tr>
@@ -64,10 +64,10 @@
                             <td colspan="6">No Acive orders to show</td>
                           </tr>
                         <tr *ngFor="let item of activeOrders">
+                          <td>{{item?.orderNum}}</td>
                           <td>{{item?.buyer?.firstName}}</td>
                           <td>{{item?.category?.title}}</td>
-                          <td>March, 25 2023</td>
-                          <td>{{item.ammount}}</td>
+                          <td>{{item.updatedAt | date}}</td>
                           <td>{{item.notes}}</td>
                           <td>
                             <select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
@@ -100,10 +100,10 @@
                       <table class="table table-s1">
                         <thead>
                         <tr>
+                          <th>Order#</th>
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Total</th>
                           <th>Note</th>
                           <th>Status</th>
                         </tr>
@@ -113,10 +113,10 @@
                             <td colspan="6">No Late orders to show</td>
                           </tr>
                           <tr *ngFor="let item of latedOrder">
+                            <td>{{item?.orderNum}}</td>
                             <td>{{item?.buyer?.firstName}}</td>
                             <td>{{item?.category?.title}}</td>
-                            <td>{{item.updatedAt}}</td>
-                            <td>{{item.ammount}}</td>
+                            <td>{{item.updatedAt | date}}</td>
                             <td>{{item.notes}}</td>
                             <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                               <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
@@ -146,10 +146,10 @@
                       <table class="table table-s1">
                         <thead>
                         <tr>
+                          <th>Order#</th>
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Total</th>
                           <th>Note</th>
                           <th>Status</th>
                         </tr>
@@ -159,17 +159,18 @@
                             <td colspan="6">No Complete orders to show</td>
                           </tr>
                         <tr *ngFor="let item of completedOrders">
+                          <td>{{item?.orderNum}}</td>
                           <td>{{item?.buyer?.firstName}}</td>
                           <td>{{item?.category?.title}}</td>
-                          <td>{{item.updatedAt}}</td>
-                          <td>{{item.ammount}}</td>
+                          <td>{{item.updatedAt | date}}</td>
                           <td>{{item.notes}}</td>
-                          <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
+                          <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                             <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                             <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
                             <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                             <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
-                              </select></td>
+                              </select></td> -->
+                              <td>Completed</td>
                         </tr>
                         
                         </tbody>
@@ -193,10 +194,10 @@
                       <table class="table table-s1">
                         <thead>
                         <tr>
+                          <th>Order#</th>
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Total</th>
                           <th>Note</th>
                           <th>Status</th>
                         </tr>
@@ -206,10 +207,10 @@
                             <td colspan="6">No Canceled orders to show</td>
                           </tr>
                           <tr *ngFor="let item of cancelledOrder">
+                            <td>{{item?.orderNum}}</td>
                             <td>{{item?.buyer?.firstName}}</td>
                             <td>{{item?.category?.title}}</td>
                             <td>{{item.updatedAt}}</td>
-                            <td>{{item.ammount}}</td>
                             <td>{{item.notes}}</td>
                             <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                               <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>

@@ -1,0 +1,75 @@
+<div class="content-wrapper container-xxl" style="background: none;">
+    <div class="content-body">
+        <!-- Content-Header Component -->
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <section>
+            <div class="table-wrapper">
+                <div class="row" id="basic-table">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- <h4 class="table-title"></h4> -->
+                            <ngx-datatable
+                                #myTable
+                                class="bootstrap core-bootstrap"
+                                [columnMode]="ColumnMode.force"
+                                [headerHeight]="50"
+                                [footerHeight]="50"
+                                [rowHeight]="50"
+                                [scrollbarV]="false"
+                                [rows]="userQuote"
+                                (page)="onPage($event)"
+                                [limit]="10"
+                            >
+                                
+                               
+                                <ngx-datatable-column name="Order Number" [width]="140" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <strong>{{ row.order.orderNum }}</strong>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <!-- <ngx-datatable-column name="Business Name" [width]="200" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <strong>{{ row.orderNum }}</strong>
+                                    </ng-template>
+                                </ngx-datatable-column> -->
+                                <ngx-datatable-column name="Rating" [width]="200" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <div class="rating text-center">
+                                            <ngb-rating [(rate)]="row.ratingCount" [max]="5" readonly="true">
+                                            <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                                            </ngb-rating>
+                                        </div>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column name="Description" [width]="300" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                               <div style="margin-left: 0px;width: 300px;overflow: hidden;text-overflow: ellipsis;">{{row.description}}</div> 
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                
+                                
+
+                               
+                            </ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mr-1">
+                <ngb-pagination [collectionSize]="total" [(page)]="pageNo"  aria-label="Custom pagination"
+                (pageChange)="loadPage($event)" >
+                  <ng-template ngbPaginationPrevious
+                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                  </ng-template>
+                  <ng-template ngbPaginationNext
+                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                  </ng-template>
+                </ngb-pagination>
+        
+              </div>
+        </section>
+
+    
+    </div>
+</div>

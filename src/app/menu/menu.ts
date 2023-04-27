@@ -127,4 +127,12 @@ export const menu: CoreMenu[] = [
     icon: 'dollar-sign',
     url: 'pages/seller/payment'
   },
+  {
+    id: 'review',
+    title: 'Reviews',
+    translate: 'MENU.HOME',
+    type: 'item',
+    icon: 'pocket',
+    url: 'pages/seller/reviews'
+  },
 ]

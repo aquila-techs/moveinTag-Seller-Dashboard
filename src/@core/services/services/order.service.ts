@@ -53,4 +53,9 @@ export class OrderService {
     return this._http.get('order/export-orders')
   }
 
+  getAllReviews(queryParams){
+    return this._http.get('reviews'+queryParams)
+
+  }
+
 }
