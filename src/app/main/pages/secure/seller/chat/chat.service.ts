@@ -348,7 +348,7 @@ export class ChatService {
   
   public message$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  socket = io(environment.socketURL);
+  socket = io(environment.socketURL+"/chat");
 
   public sendMessage(message: any, roomName: any) {
     // this.socket.emit('message', {message,roomName});

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { OrderService } from '@core/services/services/order.service';
+import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 
 @Component({
   selector: 'app-ordermanagement',
@@ -8,7 +9,7 @@ import { OrderService } from '@core/services/services/order.service';
 })
 export class OrdermanagementComponent implements OnInit {
   public userId = '';
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private notificationService: NotificationsService) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
   }
 
@@ -89,8 +90,18 @@ export class OrdermanagementComponent implements OnInit {
       "orderId":order._id,
       "status": event.target.value
     }
+
     this.orderService.changeOrderStatus(data)
     .subscribe(res => {
+      if(order.buyer._id){
+        let data={
+          'heading': order.orderNum + ' Order Status Changed To '+event.target.value,
+          'message': 'Please check orders page for detail.',
+          'receiverId': order.buyer._id,
+          'senderId':  order.seller._id
+        }
+        this.notificationService.sendMessage(data, order.buyer._id)
+      }
       this.getUserActiveOrder();
       this.getUSerCanceledOrder();
       this.getUserCompletedOrders();

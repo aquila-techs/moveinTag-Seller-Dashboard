@@ -160,4 +160,9 @@ export class UserService {
   cancelSubscriptionCustomer(body){
     return this._http.post('payment/cancel-subscription',body);
   }
+
+  getSellerAnalytics(queryParam){
+    return this._http.get('user/get-seller-analytics?'+queryParam);
+
+  }
 }

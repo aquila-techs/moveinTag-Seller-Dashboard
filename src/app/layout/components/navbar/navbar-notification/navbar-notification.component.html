@@ -1,8 +1,8 @@
 <li ngbDropdown class="nav-item dropdown-notification mr-25">
-  <a class="nav-link" ngbDropdownToggle id="navbarNotificationDropdown"
+  <a class="nav-link" ngbDropdownToggle id="navbarNotificationDropdown" 
     ><i class="ficon" data-feather="bell"></i
     ><span class="badge badge-pill badge-danger badge-up">{{
-      notifications.messages?.length + notifications.systemMessages?.length
+      notifications.length
     }}</span></a
   >
   <ul
@@ -15,7 +15,7 @@
       <div class="dropdown-header d-flex">
         <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
         <div class="badge badge-pill badge-light-primary">
-          {{ notifications.messages?.length + notifications.systemMessages?.length }} New
+          {{ notifications?.length}} New
         </div>
       </div>
     </li>
@@ -23,16 +23,16 @@
 
     <!-- Notifications content -->
     <li class="scrollable-container media-list" [perfectScrollbar]>
-      <a class="d-flex" href="javascript:void(0)" *ngFor="let message of notifications.messages">
+      <a class="d-flex" href="javascript:void(0)" *ngFor="let message of notifications">
         <div class="media d-flex align-items-start">
           <div class="media-left">
-            <div class="avatar">
+            <!-- <div class="avatar">
               <img [src]="message.image" alt="avatar" width="32" height="32" />
-            </div>
+            </div> -->
           </div>
           <div class="media-body">
             <p class="media-heading" [innerHTML]="message.heading"></p>
-            <small class="notification-text">{{ message.text }}</small>
+            <small class="notification-text">{{ message.message }}</small>
           </div>
         </div></a
       >
@@ -48,7 +48,7 @@
 <!--          <label class="custom-control-label" for="systemNotification"></label>-->
 <!--        </div>-->
 <!--      </div>-->
-      <a class="d-flex" href="javascript:void(0)" *ngFor="let systemMessage of notifications.systemMessages">
+      <!-- <a class="d-flex" href="javascript:void(0)" *ngFor="let systemMessage of notifications.systemMessages">
         <div class="media d-flex align-items-start">
           <div class="media-left">
             <div
@@ -67,13 +67,13 @@
             <small class="notification-text">{{ systemMessage.text }}</small>
           </div>
         </div></a
-      >
+      > -->
     </li>
     <!--/ Notifications content -->
 
     <!-- Notifications footer -->
-    <li class="dropdown-menu-footer d-none">
-      <a class="btn btn-primary btn-block" href="javascript:void(0)">Read all notifications</a>
+    <li class="dropdown-menu-footer ">
+      <a class="btn btn-primary btn-block" (click)="messageRead()" >Read all notifications</a>
     </li>
     <!--/ Notifications footer -->
   </ul>

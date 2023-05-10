@@ -34,20 +34,7 @@ export class ReviewComponent implements OnInit {
      private tosterService: ToastrService) {
     this.authenticationService.currentUser.subscribe(x => (this.user = x));
 
-    this._coreConfigService.config = {
-      layout: {
-        navbar: {
-          hidden: true,
-          showNavbarDashboard: true
-        },
-        menu: {
-          hidden: false
-        },
-        footer: {
-          hidden: true,
-        },
-      }
-    };
+   
   }
   onPage(event) {
     clearTimeout(this.timeout);
@@ -79,21 +66,20 @@ export class ReviewComponent implements OnInit {
   public selectOrder: any;
   public baseURL = environment.apiUrl;
   public readOnlyRating = false;
+  public ratingImagePath = "";
+
   modalOpenVC(modalVC, selectOrder) {
     this.selectOrder = selectOrder;
     this.modalService.open(modalVC, {
       centered: true
     });
-    // if(this.selectOrder['review']){
-    //   this.iconsCurrentRate = this.selectOrder.review.ratingCount;
-    //   this.description = this.selectOrder.review.description;
-    //   this.readOnlyRating = true;
+    if(this.selectOrder){
+      this.iconsCurrentRate = this.selectOrder.ratingCount;
+      this.description = this.selectOrder.description;
+      this.ratingImagePath = this.selectOrder?.reviewsImages[0]?.path;
+      this.readOnlyRating = true;
 
-    // }else{
-    //   this.iconsCurrentRate = 0;
-    //   this.description = "";
-    //   this.readOnlyRating = false;
-    // }
+    }
     
   }
 

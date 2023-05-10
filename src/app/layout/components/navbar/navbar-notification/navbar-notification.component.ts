@@ -2,23 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 
-// Interface
-interface notification {
-  messages: [
-    {
-      image: '',
-      heading: 'Title',
-      text: 'You have got a quote request from customer xyz'
-    },
-    {
-      image: '',
-      heading: 'Title',
-      text: 'You have got a quote request from customer xyz'
-    }
-  ];
-  systemMessages: [];
-  system: Boolean;
-}
 
 @Component({
   selector: 'app-navbar-notification',
@@ -26,13 +9,18 @@ interface notification {
 })
 export class NavbarNotificationComponent implements OnInit {
   // Public
-  public notifications: notification;
+   // Public
+   public notifications= [];
+   public user: any;
 
   /**
    *
    * @param {NotificationsService} _notificationsService
    */
-  constructor(private _notificationsService: NotificationsService) {}
+  constructor(private _notificationsService: NotificationsService) {
+    this.user = JSON.parse(window.localStorage.getItem('currentUser'));
+
+  }
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -41,8 +29,30 @@ export class NavbarNotificationComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this._notificationsService.onApiDataChange.subscribe(res => {
-      this.notifications = res;
-    });
+    this.getAllNotification(); 
+    this._notificationsService.connectChatRoom(this.user._id);
+    this._notificationsService.getNewMessage().subscribe((message: any) => {
+     if(message && message.text != ""){
+       this.notifications.push(message);
+     }
+    })
+  }
+  getAllNotification(){
+   let queryParam = 'receiverId='+ this.user._id
+   this._notificationsService.getAllNotificationFromDB(queryParam).subscribe({
+     next: (res: any)=>{
+       this.notifications = res[0].results;
+     }
+   })
+  }
+ 
+  messageRead(){
+    this.notifications = [];
+   let queryParam = 'receiverId='+ this.user._id
+   this._notificationsService.setNotificationRead(queryParam).subscribe({
+     next: (res: any)=>{
+      //  this.notifications = res;
+     }
+   })
   }
 }

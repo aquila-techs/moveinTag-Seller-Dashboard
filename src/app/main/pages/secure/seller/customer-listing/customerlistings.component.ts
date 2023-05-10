@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '@core/services/services/order.service';
 import { UserService } from '@core/services/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -19,7 +20,7 @@ export class CustomerlistingsComponent implements OnInit {
   constructor(private modalService: NgbModal,
      private orderService: OrderService,
      private userService: UserService,  private activateRoute: ActivatedRoute,
-     private router:Router) {
+     private router:Router, private notificationService: NotificationsService) {
       this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
       this.userId = this.currentUser._id;
       router.events.subscribe((val) => {
@@ -88,6 +89,15 @@ export class CustomerlistingsComponent implements OnInit {
       "status": status,
       "sellerId": this.userId
     }
+    if(order.buyer._id){
+      let data={
+        'heading': order.orderNum + ' Order Approved',
+        'message': 'Please check orders page for detail.',
+        'receiverId': order.buyer._id,
+        'senderId':  this.userId
+      }
+      this.notificationService.sendMessage(data, order.buyer._id)
+    }
     this.orderService.changeOrderStatus(data)
     .subscribe(res => {
       this.modalService.dismissAll();
@@ -102,6 +112,7 @@ export class CustomerlistingsComponent implements OnInit {
       'sellerId':'',
       'orderId':'',
     };
+    
     let emailString = selectedOrder.buyer.email+''+this.currentUser.email;
     body.chatroom = emailString.split('').sort().join('') + '_' + selectedOrder._id
     body.userId = selectedOrder.buyer._id;
@@ -109,6 +120,15 @@ export class CustomerlistingsComponent implements OnInit {
     body.orderId =selectedOrder._id
     this.userService.createChatRoom(body).subscribe({
       next:(value)=>{
+        if(selectedOrder.buyer._id){
+          let data={
+            'heading': selectedOrder.orderNum + ' Order New Chat Received',
+            'message': 'Please check chats page for detail.',
+            'receiverId': selectedOrder.buyer._id,
+            'senderId':  this.currentUser._id
+          }
+          this.notificationService.sendMessage(data, selectedOrder.buyer._id)
+        }
         this.modalService.dismissAll();
         this.router.navigate(['/pages/seller/chats'])
       }
