@@ -96,17 +96,7 @@
                 </ngb-rating>
             </div>
         </div>
-        <div *ngIf="!selectedRatingImagePath && !ratingImagePath" >
-            <label for="file-upload" style="width: 100%;" 
-            class="py-5 mb-3 text-center file-drop-zone">
-            <h6>Drop/Select picture of provided service for rating.</h6>
-            </label>
-            <input id="file-upload"  
-            class="form-control"
-            (change)="onFileChange($event)" type="file" />
-        </div>
         <div>
-            <img height="100" width="100" *ngIf="selectedRatingImagePath"  (click)="selectedRatingImagePath=''" src="{{selectedRatingImagePath}}" alt="" >
             <img height="100" width="100" *ngIf="ratingImagePath" src="{{baseURL}}{{ratingImagePath}}" alt="" >
         </div>
         <div class="form-group">
