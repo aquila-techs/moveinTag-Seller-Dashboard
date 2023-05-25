@@ -36,6 +36,7 @@ export class ChatService {
     this.onChatUsersChange = new BehaviorSubject([]);
     this.onChatOpenChange = new BehaviorSubject(false);
     this.onUserProfileChange = new BehaviorSubject([]);
+    this.chatUsers=[];
   }
 
   /**
@@ -48,6 +49,7 @@ export class ChatService {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     return new Promise<void>((resolve, reject) => {
       Promise.all([
+        
         // this.getContacts(),
         // this.getChats(),
         this.getUserProfile(),
@@ -152,7 +154,6 @@ export class ChatService {
     return new Promise((resolve, reject) => {
       this.userProfile = JSON.parse(window.localStorage.getItem('currentUser'));
       this.onUserProfileChange.next(this.userProfile);
-      
       resolve(this.userProfile);
     });
   }
@@ -361,7 +362,6 @@ export class ChatService {
         this.message$.next(message);
       }
     });
-    
     return this.message$.asObservable();
   };
 

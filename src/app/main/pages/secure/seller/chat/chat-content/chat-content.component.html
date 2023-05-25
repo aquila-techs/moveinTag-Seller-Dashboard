@@ -90,7 +90,7 @@
           </div>
           <div class="chat-body">
             <div class="chat-content">
-              <p>{{ chatRef.message }}</p>
+              <span>{{ chatRef.message }}</span>
             </div>
           </div>
         </div>
@@ -111,6 +111,7 @@
           class="form-control message"
           placeholder="Type your message or use speech to text"
           [(ngModel)]="chatMessage"
+          (keydown.enter)="sendMessage()"
           name="chat-message"
         />
         <!-- <div class="input-group-append">
@@ -121,7 +122,7 @@
           ></span>
         </div> -->
       </div>
-      <button type="button" class="btn btn-primary send" (click)="sendMessage()" rippleEffect>
+      <button type="button" class="btn btn-primary send" (keydown.enter)="sendMessage()" (click)="sendMessage()" rippleEffect>
         <i data-feather="send" class="d-lg-none"></i>
         <span class="d-none d-lg-block">Send</span>
       </button>

@@ -103,6 +103,7 @@ export class ChatContentComponent implements OnInit {
   ngOnInit(): void {
     // this._chatService.connectChatRoom();
     // Subscribe to Chat Change
+    this.chatUser = [];
     this._chatService.onChatOpenChange.subscribe(res => {
       this.chatMessage = '';
       this.activeChat = res;
@@ -130,16 +131,19 @@ export class ChatContentComponent implements OnInit {
     });
     this.userProfile = this._chatService.userProfile;
     this._chatService.getNewMessage().subscribe((message: string) => {
-      this.newChat = {
-        message: message,
-        uId: this.chatUser?._id
-      };
-      if(this.chats['chat']){
-        this.chats.chat.push(this.newChat);
+      if(message != ""){
+        this.newChat = {
+          message: message,
+          uId: this.chatUser?._id
+        };
+        if(this.chats['chat']){
+          this.chats.chat.push(this.newChat);
+        }
+        setTimeout(() => {
+          this.scrolltop = this.scrollMe?.nativeElement.scrollHeight;
+        }, 0);
       }
-      setTimeout(() => {
-        this.scrolltop = this.scrollMe?.nativeElement.scrollHeight;
-      }, 0);
+      
     })
   }
 }
