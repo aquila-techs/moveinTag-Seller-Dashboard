@@ -6,39 +6,6 @@
 
     <section>
       <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <!-- <li [ngbNavItem]="1">
-          <a ngbNavLink>Priority</a>
-          <ng-template ngbNavContent>
-            <div class="table-wrapper">
-              <div class="row" id="basic-table">
-                <div class="col-12">
-                  <div class="card">
-                    <h4 class="table-title">Priority Orders</h4>
-                    <div class="table-responsive">
-                      <table class="table table-s1">
-                        <thead>
-                        <tr>
-                          <th>Consumers</th>
-                          <th>Services</th>
-                          <th>Due On</th>
-                          <th>Total</th>
-                          <th>Note</th>
-                          <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td colspan="6">No Priority orders to show</td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </li> -->
         <li [ngbNavItem]="2">
           <a ngbNavLink>Active</a>
           <ng-template ngbNavContent>
@@ -72,59 +39,13 @@
                           <td>
                             <select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                             <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                            <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
+                            <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                             <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                             <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                               </select>
 
                             </td>
                         </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="3">
-          <a ngbNavLink>Late</a>
-          <ng-template ngbNavContent>
-            <div class="table-wrapper">
-              <div class="row" id="basic-table">
-                <div class="col-12">
-                  <div class="card">
-                    <h4 class="table-title">Late</h4>
-                    <div class="table-responsive">
-                      <table class="table table-s1">
-                        <thead>
-                        <tr>
-                          <th>Order#</th>
-                          <th>Consumers</th>
-                          <th>Services</th>
-                          <th>Due On</th>
-                          <th>Note</th>
-                          <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngIf="!latedOrder || latedOrder.length <=0 ">
-                            <td colspan="6">No Late orders to show</td>
-                          </tr>
-                          <tr *ngFor="let item of latedOrder">
-                            <td>{{item?.orderNum}}</td>
-                            <td>{{item?.buyer?.firstName}}</td>
-                            <td>{{item?.category?.title}}</td>
-                            <td>{{item.updatedAt | date}}</td>
-                            <td>{{item.notes}}</td>
-                            <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
-                              <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                              <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
-                              <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
-                              <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
-                                </select></td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -214,43 +135,10 @@
                             <td>{{item.notes}}</td>
                             <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                               <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                              <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
+                              <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                               <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                               <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                                 </select></td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="6">
-          <a ngbNavLink>Starred</a>
-          <ng-template ngbNavContent>
-            <div class="table-wrapper">
-              <div class="row" id="basic-table">
-                <div class="col-12">
-                  <div class="card">
-                    <h4 class="table-title">Starred</h4>
-                    <div class="table-responsive">
-                      <table class="table table-s1">
-                        <thead>
-                        <tr>
-                          <th>Consumers</th>
-                          <th>Services</th>
-                          <th>Due On</th>
-                          <th>Total</th>
-                          <th>Note</th>
-                          <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                          <td colspan="6">No Priority orders to show</td>
                         </tr>
                         </tbody>
                       </table>

@@ -88,4 +88,8 @@ public connectChatRoom(chatRoom) {
   public createNotification(body){
     return this._httpClient.post(this.baseURL+'notification/createNotifiation',body)
   }
+  public setNotificationHide(queryParam){
+    return this._httpClient.get(this.baseURL+'notification/hideNoification?'+queryParam)
+  }
+  
 }

@@ -45,7 +45,7 @@ export class OrdermanagementComponent implements OnInit {
     this.getUserActiveOrder();
     this.getUSerCanceledOrder();
     this.getUserCompletedOrders();
-    this.getUserlatedOrders();
+    // this.getUserlatedOrders();
 
   }
 
@@ -105,7 +105,7 @@ export class OrdermanagementComponent implements OnInit {
       this.getUserActiveOrder();
       this.getUSerCanceledOrder();
       this.getUserCompletedOrders();
-      this.getUserlatedOrders();
+      // this.getUserlatedOrders();
     })
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 
@@ -12,12 +13,14 @@ export class NavbarNotificationComponent implements OnInit {
    // Public
    public notifications= [];
    public user: any;
+   public unreadMessage = 0;
 
   /**
    *
    * @param {NotificationsService} _notificationsService
    */
-  constructor(private _notificationsService: NotificationsService) {
+  constructor(private _notificationsService: NotificationsService,
+     private router: Router) {
     this.user = JSON.parse(window.localStorage.getItem('currentUser'));
 
   }
@@ -33,7 +36,8 @@ export class NavbarNotificationComponent implements OnInit {
     this._notificationsService.connectChatRoom(this.user._id);
     this._notificationsService.getNewMessage().subscribe((message: any) => {
      if(message && message.text != ""){
-       this.notifications.push(message);
+      this.unreadMessage++;
+      this.notifications.push(message);
      }
     })
   }
@@ -42,17 +46,41 @@ export class NavbarNotificationComponent implements OnInit {
    this._notificationsService.getAllNotificationFromDB(queryParam).subscribe({
      next: (res: any)=>{
        this.notifications = res[0].results;
+       this.unreadMessage = 0;
+       this.notifications.forEach(item => {
+        if(!item.viewed){
+          this.unreadMessage++;
+        }
+      });
      }
    })
   }
  
   messageRead(){
-    this.notifications = [];
+    // this.notifications = [];
    let queryParam = 'receiverId='+ this.user._id
    this._notificationsService.setNotificationRead(queryParam).subscribe({
      next: (res: any)=>{
-      //  this.notifications = res;
+      this.getAllNotification();
      }
    })
   }
+
+  messageHide(message){
+    let queryParam = 'receiverId='+ this.user._id+"&heading="+message;
+    this._notificationsService.setNotificationHide(queryParam).subscribe({
+      next: (res: any)=>{
+        this.getAllNotification();
+      }
+    })
+   }
+  goToMessagePage(heading: String){
+    if(heading.toLowerCase().indexOf('chat') > -1){
+      this.router.navigate(['/pages/seller/chats']);
+    }else if(heading.toLowerCase().indexOf('order rating') > -1){
+      this.router.navigate(['pages/seller/reviews']);
+    }    else if(heading.toLowerCase().indexOf('quote') > -1){
+      this.router.navigate(['/pages/seller/quotation-listing/640dfae607de5a58ffdd8a25']);
+    }
+   }
 }

@@ -2,7 +2,7 @@
   <a class="nav-link" ngbDropdownToggle id="navbarNotificationDropdown" 
     ><i class="ficon" data-feather="bell"></i
     ><span class="badge badge-pill badge-danger badge-up">{{
-      notifications.length
+      unreadMessage
     }}</span></a
   >
   <ul
@@ -15,7 +15,7 @@
       <div class="dropdown-header d-flex">
         <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
         <div class="badge badge-pill badge-light-primary">
-          {{ notifications?.length}} New
+          {{ unreadMessage}} New
         </div>
       </div>
     </li>
@@ -23,15 +23,23 @@
 
     <!-- Notifications content -->
     <li class="scrollable-container media-list" [perfectScrollbar]>
-      <a class="d-flex" href="javascript:void(0)" *ngFor="let message of notifications">
-        <div class="media d-flex align-items-start">
+      <a class="d-flex"*ngFor="let message of notifications">
+        <div class="media d-flex align-items-start"  (click)="goToMessagePage(message.heading)"  
+        [ngClass]="{'new-notification' : !message?.viewed}">
           <div class="media-left">
             <!-- <div class="avatar">
               <img [src]="message.image" alt="avatar" width="32" height="32" />
             </div> -->
           </div>
           <div class="media-body">
-            <p class="media-heading" [innerHTML]="message.heading"></p>
+            <div class="row">
+              <div class="col-sm-10">
+                <p class="media-heading" [innerHTML]="message.heading"></p>
+              </div>
+              <div class="col-sm-2" style="text-align: right;">
+                <span (click)="messageHide(message.heading)"><i class="ficon" data-feather="x"  ></i></span>
+              </div>
+            </div>
             <small class="notification-text">{{ message.message }}</small>
           </div>
         </div></a
@@ -73,7 +81,7 @@
 
     <!-- Notifications footer -->
     <li class="dropdown-menu-footer ">
-      <a class="btn btn-primary btn-block" (click)="messageRead()" >Read all notifications</a>
+      <a class="btn btn-primary btn-block" (click)="messageRead()" >Mark as read all notificaiton</a>
     </li>
     <!--/ Notifications footer -->
   </ul>
