@@ -675,7 +675,8 @@ body {
     }
   }
   .checkout-wrapper {
-    max-width: 1200px;
+    max-width: auto;
+    // max-width: 1200px;
     margin: 0 auto;
     .step-header {
       padding: 10px 0;
