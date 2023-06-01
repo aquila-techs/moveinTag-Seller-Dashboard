@@ -139,7 +139,9 @@ export class UserService {
     return this._http.get('seller-category/get-seller-categories?userId='+id);
   }
   
-  
+  getSellerCategoriesOnly(id){
+    return this._http.get('seller-category/get-seller-categories-only?userId='+id);
+  }
 
   getAnalytics(){
     return this._http.get('admin/get-analytics');

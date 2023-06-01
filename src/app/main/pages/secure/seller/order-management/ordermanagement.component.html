@@ -104,13 +104,13 @@
           </ng-template>
         </li>
         <li [ngbNavItem]="5">
-          <a ngbNavLink>Canceled</a>
+          <a ngbNavLink>Cancelled</a>
           <ng-template ngbNavContent>
             <div class="table-wrapper">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
-                    <h4 class="table-title">Canceled</h4>
+                    <h4 class="table-title">Cancelled</h4>
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
@@ -125,7 +125,7 @@
                         </thead>
                         <tbody>
                           <tr *ngIf="!cancelledOrder || cancelledOrder.length <=0 ">
-                            <td colspan="6">No Canceled orders to show</td>
+                            <td colspan="6">No Cancelled orders to show</td>
                           </tr>
                           <tr *ngFor="let item of cancelledOrder">
                             <td>{{item?.orderNum}}</td>

@@ -428,7 +428,7 @@
                 [center]="markerCirclePolygonCenter"
 
                 >
-                <map-circle circleDrag="false" #mapCircle [(options)]="mapCircleOptions" [radius]="sliderWithNgModel*1609.344"  (radiusChanged) ="radiusChanged()" [(center)]="mapCircleCenter"></map-circle>
+                <map-circle circleDrag="false" #mapCircle [(options)]="mapCircleOptions" [radius]="sliderWithNgModel*1609.34"  (radiusChanged) ="radiusChanged()" [(center)]="mapCircleCenter"></map-circle>
                 </google-map>
                 <div class="d-flex justify-content-center my-2">
                     <button type="button"  (click)="onSaveNearByZipCode()" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>

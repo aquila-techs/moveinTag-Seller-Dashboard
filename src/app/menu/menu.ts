@@ -43,48 +43,7 @@ export const menu: CoreMenu[] = [
     icon: 'trello',
     type: 'collapsible',
     children: [
-      {
-        id: 'moving-service',
-        icon: '',
-        title: 'Moving Services',
-        type: 'item',
-        url: 'pages/seller/quotation-listing/640dfae607de5a58ffdd8a25'
-      },
-      {
-        id: 'home-services',
-        icon: '',
-        title: 'Home Services',
-        type: 'item',
-        url: 'pages/seller/quotation-listing/640f3a8107de5a58ffdd8a3e'
-      },
-      {
-        id: 'home-services',
-        icon: '',
-        title: 'Legal Services',
-        type: 'item',
-        url: 'pages/seller/quotation-listing/640f3ab407de5a58ffdd8a40'
-      },
-      {
-        id: 'home-services',
-        icon: '',
-        title: 'Financial Services',
-        type: 'item',
-        url: 'pages/seller/quotation-listing/640f3ccb07de5a58ffdd8a47'
-      },
-      {
-        id: 'home-services',
-        icon: '',
-        title: 'Insurance Services',
-        type: 'item',
-        url: 'pages/seller/quotation-listing/640f3d0707de5a58ffdd8a4c'
-      },
-      {
-        id: 'home-services',
-        icon: '',
-        title: 'Hotels and Travel',
-        type: 'item',
-        url: 'pages/seller/quotation-listing/640f3d4407de5a58ffdd8a4f'
-      },
+     
 
     ]
   },
@@ -113,20 +72,28 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'settings',
-    title: 'Profile',
-    translate: 'MENU.HOME',
-    type: 'item',
+    title: 'Setting',
     icon: 'user',
-    url: 'pages/seller/profile'
+    type: 'collapsible',
+    children: [
+      {
+        id: 'profile',
+        title: 'Profile',
+        type: 'item',
+        icon: 'user',
+        url: 'pages/seller/profile'
+      },
+      {
+        id: 'payment',
+        title: 'Payment',
+        type: 'item',
+        icon: 'dollar-sign',
+        url: 'pages/seller/payment'
+      },
+    ]
   },
-  {
-    id: 'payment',
-    title: 'Payment',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'dollar-sign',
-    url: 'pages/seller/payment'
-  },
+ 
+  
   {
     id: 'review',
     title: 'Reviews',

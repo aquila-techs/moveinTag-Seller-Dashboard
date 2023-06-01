@@ -602,7 +602,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     strokeColor: '#FF0000',
     strokeOpacity: 0.8,
     strokeWeight: 2,
-    radius: this.sliderWithNgModel*1609.344,
+    radius: this.sliderWithNgModel*1609.34,
     fillColor: '#FF0000',
     fillOpacity: 0.35,
     draggable: true,
