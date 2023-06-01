@@ -7,8 +7,8 @@ export const environment = {
   hmr: false,
   // apiUrl: 'http://localhost:4000/',
   // socketURL:'http://localhost:4000',
-  apiUrl: 'https://apim.aquilatechs.com/',
-  socketURL:'https://apim.aquilatechs.com',
+  apiUrl: 'https://api.moventag.com/',
+  socketURL:'https://api.moventag.com/',
 
 };
 
