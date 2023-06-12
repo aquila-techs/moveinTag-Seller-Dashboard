@@ -1,7 +1,6 @@
 <div *ngIf="getSellerProfile">
   <div class="content-wrapper container-xxl p-0">
     <div class="content-body">
-
       <section class="checkout-wrapper">
         <div class="container-lg">
           <div class="step-header">
@@ -98,7 +97,130 @@
           </div>
         </div>
       </section>
+    </div>
+  </div>
+</div>
 
+
+<!-- ----------- -->
+
+<div *ngIf="subscriptionPacakge">
+  <div class="content-wrapper">
+    <div class="content-body">
+
+      <section class="checkout-wrapper" id="pricing-plan">
+        <div class="step-header" style="background-color: #ffffff;">
+          <img src="../assets/images/logo/logo.png" alt="" class="logo"
+            style="width: 200px; height:50px; margin-left:10px">
+          <ul class="list">
+            <li ngbDropdown class="nav-item dropdown-user">
+              <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" ngbDropdownToggle
+                id="navbarUserDropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="user-nav d-sm-flex d-none">
+                </div>
+                <span class="avatar"><img class="round" src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+                    alt="avatar" height="40" width="40" /><span class="avatar-status-online"></span></span>
+              </a>
+              <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
+                <a ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span>
+                  Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="masthead" style="background-image: url('../../../../../../assets/images/site/banner.png');">
+          <div class="color-overlay-bg d-flex justify-content-center align-items-center">
+
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-7">
+                  <div class="pricing-card">
+                    <div class="row">
+                      <div class="col-12 col-md-4">
+                        <div class="card text-center">
+                          <div class="card-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"
+                              width="512" height="512" x="0" y="0" viewBox="0 0 512 512"
+                              style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                              <g>
+                                <path
+                                  d="M255 16C114.39 16 0 116.928 0 241c0 52.412 20.742 103.198 58.491 143.452 7.471 30.806-1.597 63.442-24.097 85.942C24.986 479.803 31.639 496 45 496c42.744 0 83.95-16.743 114.565-46.274C189.858 460.536 221.909 466 255 466c140.61 0 257-100.928 257-225S395.61 16 255 16zM137 286c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45zm120 0c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45zm120 0c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45z"
+                                  fill="#000000" data-original="#000000" class=""></path>
+                              </g>
+                            </svg>
+                            <h3 class="title text-uppercase">Live Chat</h3>
+                            <div class="divider"></div>
+                            <p class="card-text">Live chat with your lead via your dashboard.</p>
+                            <p class="card-text">Leads can be accepted/rejected via the dashboard</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="card text-center popular">
+                          <div class="card-body">
+                            <h1 class="main-title">$0</h1>
+                            <h6 class="sub-title"><span class="font-weight-light">90 day free trial,
+                                then</span><br>$9.99/mo or
+                              $99/yr</h6>
+                            <div class="divider"></div>
+                            <p class="card-text">Keep track of your leads</p>
+                            <p class="card-text">Your profile can be modified as you wish</p>
+                            <ul>
+                              <li>Customer Support</li>
+                              <li>Email</li>
+                              <li>Phone</li>
+                              <li>Dedicated</li>
+                              <li>Onboarding Experts</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="card text-center">
+                          <div class="card-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"
+                              width="512" height="512" x="0" y="0" viewBox="0 0 512.007 512.007"
+                              style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                              <g>
+                                <path
+                                  d="M497 482.006h-16v-296c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v296h-30v-196c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v196h-30v-141c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v141h-30v-105c0-8.284-6.716-15-15-15H46c-8.284 0-15 6.716-15 15v105H15c-8.284 0-15 6.716-15 15s6.716 15 15 15h482c8.284 0 15-6.716 15-15s-6.716-15-15-15z"
+                                  fill="#000000" data-original="#000000" class=""></path>
+                                <path
+                                  d="M15 322.31c93.618 0 195.14-33.622 285.866-94.673 71.055-47.815 130.286-108.898 167.078-171.445l14.568 54.367c1.796 6.702 10.467 12.492 18.371 10.606 8.058-1.922 12.75-10.369 10.606-18.371l-24.563-91.67C484.781 3.123 476.56-1.627 468.555.518l-91.67 24.563c-8.002 2.144-12.75 10.369-10.606 18.371 2.145 8.002 10.366 12.752 18.371 10.606l59.055-15.824C409.38 97.88 352.652 156.628 284.117 202.747 198.289 260.503 102.715 292.31 15 292.31c-8.284 0-15 6.716-15 15s6.716 15 15 15z"
+                                  fill="#000000" data-original="#000000" class=""></path>
+                              </g>
+                            </svg>
+                            <h3 class="title text-uppercase">Growth</h3>
+                            <div class="divider"></div>
+                            <p class="card-text">Make sure the job is done and get reviews</p>
+                            <p class="card-text">By improving your rating. you will attract more customers</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="mt-5">
+                    <h1 class="text-white" style="font-size: 70px; font-weight: bold;">Be your</h1>
+                    <h1 class="text-white" style="font-size: 70px; font-weight: bold; margin-top:-18px">own</h1>
+                    <h1 class="text-white" style="font-size: 70px; font-weight: bold; margin-top:-30px">success</h1>
+                    <a (click)="goToFinalStep()" class="btn btn-secondary btn-lg" style="width:200px">Next</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+      </section>
 
     </div>
   </div>
@@ -108,13 +230,13 @@
 <!-- ----------- -->
 
 
-<div *ngIf="subscriptionPacakge">
-  <div class="content-wrapper">
+<div *ngIf="cardDetail">
+  <div class="content-wrapper container-xxl p-0">
     <div class="content-body">
 
-      <section class="checkout-wrapper" id="pricing-plan">
-        <div class="container-lg">
-          <div class="step-header">
+      <section class="checkout-wrapper">
+        <div>
+          <div class="step-header" style="background-color: #ffffff;">
             <img src="../assets/images/logo/logo.png" alt="" class="logo"
               style="width: 200px; height:50px; margin-left:10px">
             <ul class="list">
@@ -133,113 +255,10 @@
               </li>
             </ul>
           </div>
-          <div class="pricing-card">
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <div class="card text-center">
-                  <div class="card-body">
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                      xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 512 512"
-                      style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                      <g>
-                        <path
-                          d="M255 16C114.39 16 0 116.928 0 241c0 52.412 20.742 103.198 58.491 143.452 7.471 30.806-1.597 63.442-24.097 85.942C24.986 479.803 31.639 496 45 496c42.744 0 83.95-16.743 114.565-46.274C189.858 460.536 221.909 466 255 466c140.61 0 257-100.928 257-225S395.61 16 255 16zM137 286c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45zm120 0c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45zm120 0c-24.814 0-45-20.186-45-45s20.186-45 45-45 45 20.186 45 45-20.186 45-45 45z"
-                          fill="#000000" data-original="#000000" class=""></path>
-                      </g>
-                    </svg>
-                    <h3 class="title text-uppercase">Live Chat</h3>
-                    <div class="divider"></div>
-                    <p class="card-text">Live chat with your lead via your dashboard.</p>
-                    <p class="card-text">Leads can be accepted/rejected via the dashboard</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-4">
-                <div class="card text-center popular">
-                  <div class="card-body">
-                    <h1 class="main-title">$0</h1>
-                    <h6 class="sub-title"><span class="font-weight-light">90 day free trial, then</span><br>$9.99/mo or
-                      $99/yr</h6>
-                    <div class="divider"></div>
-                    <p class="card-text">Keep track of your leads</p>
-                    <p class="card-text">Your profile can be modified as you wish</p>
-                    <ul>
-                      <li>Customer Support</li>
-                      <li>Email</li>
-                      <li>Phone</li>
-                      <li>Dedicated</li>
-                      <li>Onboarding Experts</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-4">
-                <div class="card text-center">
-                  <div class="card-body">
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                      xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0"
-                      viewBox="0 0 512.007 512.007" style="enable-background:new 0 0 512 512" xml:space="preserve"
-                      class="">
-                      <g>
-                        <path
-                          d="M497 482.006h-16v-296c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v296h-30v-196c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v196h-30v-141c0-8.284-6.716-15-15-15h-60c-8.284 0-15 6.716-15 15v141h-30v-105c0-8.284-6.716-15-15-15H46c-8.284 0-15 6.716-15 15v105H15c-8.284 0-15 6.716-15 15s6.716 15 15 15h482c8.284 0 15-6.716 15-15s-6.716-15-15-15z"
-                          fill="#000000" data-original="#000000" class=""></path>
-                        <path
-                          d="M15 322.31c93.618 0 195.14-33.622 285.866-94.673 71.055-47.815 130.286-108.898 167.078-171.445l14.568 54.367c1.796 6.702 10.467 12.492 18.371 10.606 8.058-1.922 12.75-10.369 10.606-18.371l-24.563-91.67C484.781 3.123 476.56-1.627 468.555.518l-91.67 24.563c-8.002 2.144-12.75 10.369-10.606 18.371 2.145 8.002 10.366 12.752 18.371 10.606l59.055-15.824C409.38 97.88 352.652 156.628 284.117 202.747 198.289 260.503 102.715 292.31 15 292.31c-8.284 0-15 6.716-15 15s6.716 15 15 15z"
-                          fill="#000000" data-original="#000000" class=""></path>
-                      </g>
-                    </svg>
-                    <h3 class="title text-uppercase">Growth</h3>
-                    <div class="divider"></div>
-                    <p class="card-text">Make sure the job is done and get reviews</p>
-                    <p class="card-text">By improving your rating. you will attract more customers</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="text-center">
-              <a (click)="goToFinalStep()" class="btn btn-secondary btn-lg">Join Pro</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-    </div>
-  </div>
-</div>
-
-
-<!-- ----------- -->
-
-
-<div *ngIf="cardDetail">
-  <div class="content-wrapper container-xxl p-0">
-    <div class="content-body">
-
-      <section class="checkout-wrapper">
-        <div class="container-lg">
-          <div class="step-header">
-            <img src="../assets/images/logo/logo.png" alt="" class="logo" style="background-color: black;">
-            <ul class="list">
-              <li ngbDropdown class="nav-item dropdown-user">
-                <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" ngbDropdownToggle
-                  id="navbarUserDropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="user-nav d-sm-flex d-none">
-                  </div>
-                  <span class="avatar"><img class="round" src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
-                      alt="avatar" height="40" width="40" /><span class="avatar-status-online"></span></span>
-                </a>
-                <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
-                  <a ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span>
-                    Logout</a>
-                </div>
-              </li>
-            </ul>
-          </div>
           <div class="step">
             <div class="row align-items-center">
-              <div class="col-lg-6">
+              <div class="col-lg-1"></div>
+              <div class="col-lg-5">
                 <div class="py-4 py-lg-5 pr-xl-5">
                   <div class="title-area mb-2">
                     <h2 class="mb-2">Ready to try?</h2>
@@ -319,7 +338,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-5">
                 <div class="sidebar">
                   <h3 class="title">Payment Option</h3>
                   <span class="label">90-DAY-FREE TRIAL</span>
@@ -357,6 +376,8 @@
                   <button class="btn btn-primary w-100 btn-lg" (click)="payment()">Start Free Trial</button>
                 </div>
               </div>
+              <div class="col-lg-1"></div>
+
             </div>
           </div>
         </div>
