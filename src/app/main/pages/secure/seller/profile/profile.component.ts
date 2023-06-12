@@ -8,6 +8,7 @@ import { base64ToFile, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper'
 import { ClipboardService } from 'ngx-clipboard';
 import { MapCircle } from '@angular/google-maps';
 import { GoogleMapsService } from '@core/services/services/googlemap.service';
+import { AuthenticationService } from '@core/services/authentication.service';
 declare var google: any;
 
 @Component({
@@ -66,7 +67,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       private userService: UserService,
       private _formBuilder: UntypedFormBuilder,
       private clipboardService: ClipboardService,
-      private googleMapsService: GoogleMapsService
+      private googleMapsService: GoogleMapsService,
+       private authenticationSerive: AuthenticationService
       ) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
   }
@@ -469,7 +471,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
     let data = this.profileUpdateForm.value;
     data['id']= this.userId;
-    this.userService.updateProfile(data).subscribe({
+    this.authenticationSerive.updateProfile(data).subscribe({
       next: (res)=> {
         this.modalService.dismissAll();
         this.sellerProfile = res;
@@ -525,7 +527,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       let data :FormData = new FormData();
       data.append('profileImage', this.CompanyPhotoCroppedImageFile)
       data.append('id', this.userId)
-      this.userService.updateProfile(data).subscribe({
+      this.authenticationSerive.updateProfile(data).subscribe({
         next: (res)=> {
           this.modalService.dismissAll();
           this.sellerProfile = res;

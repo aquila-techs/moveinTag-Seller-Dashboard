@@ -10,10 +10,10 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   //public
-  public currentUser: Observable<User>;
+  public currentUser: Observable<any>;
 
   //private
-  private currentUserSubject: BehaviorSubject<User>;
+  private currentUserSubject: BehaviorSubject<any>;
 
   /**
    *
@@ -21,7 +21,7 @@ export class AuthenticationService {
    * @param {ToastrService} _toastrService
    */
   constructor(private _http: HttpClient, private _toastrService: ToastrService) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 

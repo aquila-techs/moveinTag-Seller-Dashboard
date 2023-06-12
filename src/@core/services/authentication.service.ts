@@ -11,10 +11,10 @@ import { HttpService } from './http.service';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   //public
-  public currentUser: Observable<User>;
+  public currentUser: Observable<any>;
 
   //private
-  private currentUserSubject: BehaviorSubject<User>;
+  private currentUserSubject: BehaviorSubject<any>;
 
   /**
    *
@@ -22,7 +22,7 @@ export class AuthenticationService {
    * @param {ToastrService} _toastrService
    */
   constructor(private _http: HttpService, private _toastrService: ToastrService) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(window.localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(window.localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -130,5 +130,22 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     // notify
     this.currentUserSubject.next(null);
+  }
+
+  updateProfile(body){
+    return this._http.put('user/update', body)
+    .pipe(
+      map(res => {
+        // login successful if there's a jwt token in the response
+        if (res) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          res.accessToken =  this.currentUserSubject.value.accessToken;
+          localStorage.setItem('currentUser', JSON.stringify(res));
+          this.currentUserSubject.next(res);
+        }
+  
+        return res;
+      })
+    );
   }
 }

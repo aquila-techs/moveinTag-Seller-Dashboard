@@ -50,7 +50,7 @@
         [class.active]="selectedIndex === i"
         (click)="openChat(chatUser); toggleSidebar('chat-sidebar'); setIndex(i)"
       >
-        <span class="avatar"
+        <!-- <span class="avatar"
           ><img src="{{baseURL}}{{chatUser.user.profileImage}}" height="42" width="42" alt="Generic placeholder image" />
           <span
             [ngClass]="{
@@ -60,7 +60,29 @@
               'avatar-status-away': chatUser.status == 'away'
             }"
           ></span>
-        </span>
+        </span> -->
+
+        <div *ngIf="chatUser.user.profileImage; else customAvatar">
+          <img
+            class="rounded-circle mr-1"
+            src="{{baseURL}}{{chatUser.user.profileImage}}" 
+            height="32"
+            width="32"
+          />
+        </div>
+        <ng-template #customAvatar>
+          <div
+            class="avatar mr-1 ml-0"
+            [ngClass]="{
+              'avatar-status-offline': chatUser.status == 'offline',
+              'avatar-status-online': chatUser.status == 'online',
+              'avatar-status-busy': chatUser.status == 'busy',
+              'avatar-status-away': chatUser.status == 'away'
+            }"
+          >
+            <div class="avatar-content">{{ chatUser.user.firstName + " " + chatUser.user.lastName | initials }}</div>
+          </div>
+        </ng-template>
         <div class="chat-info flex-grow-1">
           <h5 class="mb-0">{{ chatUser.user.firstName }} {{ chatUser.user.lastName }}</h5>
           <p class="card-text text-truncate">

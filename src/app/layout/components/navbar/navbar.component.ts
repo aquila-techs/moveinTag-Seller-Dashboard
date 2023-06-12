@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AuthenticationService } from 'app/auth/service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { CoreConfigService } from '@core/services/config.service';
 import { CoreMediaService } from '@core/services/media.service';
@@ -15,6 +14,8 @@ import { User } from 'app/auth/models';
 
 import { coreConfig } from 'app/app-config';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@core/services/authentication.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public currentSkin: string;
   public prevSkin: string;
 
-  public currentUser: User;
+  public currentUser: any;
 
   public languageOptions: any;
   public navigation: any;
@@ -41,7 +42,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   @HostBinding('class.navbar-static-style-on-scroll')
   public windowScrolled = false;
-
+  public baseURL = environment.serverURL;
   // Add .navbar-static-style-on-scroll on scroll using HostListener & HostBinding
   @HostListener('window:scroll', [])
   onWindowScroll() {

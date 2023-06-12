@@ -22,7 +22,7 @@ export class ChatContentComponent implements OnInit {
   public userProfile;
   public chatMessage = '';
   public newChat;
-  public baseURL = environment.apiUrl;
+  public baseURL = environment.serverURL;
   public chatRoom;
   /**
    * Constructor

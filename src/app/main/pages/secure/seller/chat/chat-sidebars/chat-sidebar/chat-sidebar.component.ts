@@ -18,7 +18,7 @@ export class ChatSidebarComponent implements OnInit {
   public chats;
   public selectedIndex = null;
   public userProfile;
-  public baseURL = environment.apiUrl;
+  public baseURL = environment.serverURL;
   /**
    * Constructor
    *

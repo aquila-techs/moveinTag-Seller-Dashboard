@@ -3,5 +3,5 @@ export const environment = {
   hmr: false,
   apiUrl: 'https://api.moventag.com/',
   socketURL: 'https://api.moventag.com',
-
+  serverURL: 'https://api.moventag.com/',
 };

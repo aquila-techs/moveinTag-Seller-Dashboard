@@ -22,21 +22,28 @@
           <button class="btn sidebar-toggle d-block d-lg-none mr-1 p-0" (click)="toggleSidebar('chat-sidebar')">
             <i data-feather="menu" class="font-medium-5"></i>
           </button>
-          <button
-            class="btn avatar avatar-border user-profile-toggle bg-transparent m-0 mr-1 p-0"
-            
-          >
-          <!-- (click)="toggleSidebar('chat-active-sidebar')" -->
-            <img src="{{baseURL}}{{chatUser.profileImage}}" alt="avatar" height="36" width="36" />
-            <span
+        
+          <div *ngIf="chatUser.profileImage; else customAvatar">
+            <img
+              class="rounded-circle mr-1"
+              src="{{baseURL}}{{chatUser.profileImage}}" 
+              height="32"
+              width="32"
+            />
+          </div>
+          <ng-template #customAvatar>
+            <div
+              class="avatar mr-1 ml-0"
               [ngClass]="{
                 'avatar-status-offline': chatUser.status == 'offline',
                 'avatar-status-online': chatUser.status == 'online',
                 'avatar-status-busy': chatUser.status == 'busy',
                 'avatar-status-away': chatUser.status == 'away'
               }"
-            ></span>
-          </button>
+            >
+              <div class="avatar-content">{{ chatUser.firstName + " " + chatUser.lastName | initials }}</div>
+            </div>
+          </ng-template>
           <h6 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h6>
         </div>
         <div class="d-flex align-items-center">
@@ -75,17 +82,67 @@
           [ngClass]="{ 'chat-left': chatRef.uId != userProfile._id }"
         >
           <div class="chat-avatar">
-            <span class="avatar box-shadow-1 cursor-pointer">
-              <img
-                *ngIf="chatRef.uId != userProfile._id; else alternateAvatar"
+            <span >
+              
+              <div *ngIf="chatRef.uId != userProfile._id; else alternateAvatar">
+                <!-- <img
                 src="{{baseURL}}{{chatUser.profileImage}}"
                 alt="avatar"
                 height="36"
                 width="36"
-              />
-              <ng-template #alternateAvatar>
-                <img src="{{baseURL}}{{userProfile.profileImage}}" alt="avatar" height="36" width="36" />
+              /> -->
+
+              <div *ngIf="chatUser.profileImage; else customAvatar">
+                <img
+                  class="rounded-circle mr-1"
+                  src="{{baseURL}}{{chatUser.profileImage}}" 
+                  height="32"
+                  width="32"
+                />
+              </div>
+              <ng-template #customAvatar>
+                <div
+                  class="avatar mr-1 ml-0"
+                  [ngClass]="{
+                    'avatar-status-offline': chatUser.status == 'offline',
+                    'avatar-status-online': chatUser.status == 'online',
+                    'avatar-status-busy': chatUser.status == 'busy',
+                    'avatar-status-away': chatUser.status == 'away'
+                  }"
+                >
+                  <div class="avatar-content">{{ chatUser.firstName + " " + chatUser.lastName | initials }}</div>
+                </div>
               </ng-template>
+              </div>
+              <ng-template #alternateAvatar>
+                <div>
+                  <div *ngIf="userProfile.profileImage; else customAvatar">
+                    <img
+                      class="rounded-circle mr-1"
+                      src="{{baseURL}}{{userProfile.profileImage}}" 
+                      height="32"
+                      width="32"
+                    />
+                  </div>
+                  <ng-template #customAvatar>
+                    <div
+                      class="avatar mr-1 ml-0"
+                      [ngClass]="{
+                        'avatar-status-offline': chatUser.status == 'offline',
+                        'avatar-status-online': chatUser.status == 'online',
+                        'avatar-status-busy': chatUser.status == 'busy',
+                        'avatar-status-away': chatUser.status == 'away'
+                      }"
+                    >
+                      <div class="avatar-content">{{ userProfile.companyName | initials }}</div>
+                    </div>
+                  </ng-template>
+                  <!-- <img src="{{baseURL}}{{userProfile.profileImage}}" alt="avatar" height="36" width="36" /> -->
+                </div>
+              </ng-template>
+
+
+              
             </span>
           </div>
           <div class="chat-body">

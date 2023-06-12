@@ -66,14 +66,35 @@
         <div class="user-nav d-sm-flex d-none">
 <!--          <span class="user-name font-weight-bolder">John Doe</span><span class="user-status">Sample</span>-->
         </div>
-        <span class="avatar"
+        <!-- <span class="avatar"
           ><img
             class="round"
             src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
             alt="avatar"
             height="40"
             width="40" /><span class="avatar-status-online"></span
-        ></span>
+        ></span> -->
+        <div *ngIf="currentUser.profileImage; else customAvatar">
+          <img
+            class="rounded-circle mr-1"
+            src="{{baseURL}}{{currentUser.profileImage}}" 
+            height="42"
+            width="42"
+          />
+        </div>
+        <ng-template #customAvatar>
+          <div
+            class="avatar mr-1 ml-0"
+            [ngClass]="{
+              'avatar-status-offline': currentUser.status == 'offline',
+              'avatar-status-online': currentUser.status == 'online',
+              'avatar-status-busy': currentUser.status == 'busy',
+              'avatar-status-away': currentUser.status == 'away'
+            }"
+          >
+            <div class="avatar-content">{{ currentUser.companyName| initials }}</div>
+          </div>
+        </ng-template>
       </a>
       <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
         <a ngbDropdownItem (click)="logout()"
