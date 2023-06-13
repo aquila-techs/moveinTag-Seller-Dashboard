@@ -77,19 +77,19 @@
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <form action="">
-          <div class="form-group">
+          <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
             <label for="basicInput">What do you need to be done?</label>
             <input readonly type="text"   [value]="selectedOrder?.subCategory?.title" class="form-control" id="basicInput" placeholder="" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [hidden]="!selectedOrder?.place">
             <label for="basicInput">What do you need to be done?</label>
             <input readonly type="text" class="form-control" [value]="selectedOrder?.place" id="basicInput" placeholder="Townhall" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [hidden]="!selectedOrder?.startTime">
             <label for="basicInput">When do you want to start this project?</label>
             <input readonly type="text" class="form-control" [value]="selectedOrder?.startTime" id="basicInput" placeholder="Within a week" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [hidden]="!selectedOrder?.notes">
             <label for="basicInput">Please provide some details about project? </label>
             <textarea readonly style="height: 150px;" [value]="selectedOrder?.notes" class="form-control"></textarea>
           </div>
@@ -97,7 +97,7 @@
             <label for="basicInput">Price</label>
             <input readonly type="text" class="form-control" id="basicInput" [value]="selectedOrder?.ammount"  placeholder="$50" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [hidden]="!selectedOrder.orderImages[0].path">
             <label for="basicInput">Service Images</label>
             <div class="row px-1">
               <div class="col-lg-3 px-50">
