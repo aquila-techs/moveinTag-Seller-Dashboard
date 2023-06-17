@@ -17,7 +17,7 @@ declare var google: any;
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
-  public baseURL: any = environment.apiUrl;
+  public baseURL: any = environment.serverURL;
   public contentHeader: object;
   public progressbarHeight = '.857rem';
   public sellerProfile: any;
@@ -673,5 +673,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     //  });
 
     //  this.setRadius(this.sliderWithNgModel);
+ }
+ public   isReadMore = true;
+ showFullDescription(){
+  this.isReadMore = !this.isReadMore
  }
 }

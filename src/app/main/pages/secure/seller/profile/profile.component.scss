@@ -68,4 +68,7 @@ input[type="file"] {
       }
     }
   }
-  
+  .limitTextHeight {
+    height: 20px;
+    overflow: hidden;
+}

@@ -12,7 +12,7 @@ export class NotificationsService {
   // Public
   public apiData = [];
   public onApiDataChange: BehaviorSubject<any>;
-  public baseURL = environment.apiUrl;
+  public baseURL = environment.serverURL;
   /**
    *
    * @param {HttpClient} _httpClient

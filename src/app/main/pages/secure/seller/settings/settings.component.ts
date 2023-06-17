@@ -16,7 +16,7 @@ import { base64ToFile, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper'
 })
 export class SettingsComponent implements OnInit, AfterContentChecked {
   // public
-  public baseURL: any = environment.apiUrl;
+  public baseURL: any = environment.serverURL;
   public contentHeader: object;
   public sellerProfile: any;
   public profileUpdateForm: UntypedFormGroup;

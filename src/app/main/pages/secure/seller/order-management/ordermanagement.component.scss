@@ -1,5 +1,17 @@
 @import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/angular/libs/ratings.component.scss';
 
 .datatable-scroll {
   width: auto !important;
+}
+.page-item.active .page-link {
+  border-radius: 0rem !important;
+  background-color: #FCA311 !important;
+  color: #fff !important;
+}
+
+.page-link:hover {
+  border-radius: 0rem !important;
+  background-color: white !important;
+  color: #FCA311 !important;
 }

@@ -44,7 +44,10 @@
                   <button class="edit absolute" (click)="modalOpenVCAbout(modalVCAbout)"><img src="../../../assets/images/site/edit.png" alt=""></button>
                 </div>
                 <div class="card-body pt-0">
-                  <p>{{sellerProfile?.description}}</p>
+                  <p [ngClass]="{'limitTextHeight': isReadMore}">{{sellerProfile?.description}}</p>
+                  <a  style=" color: #7367f0; float: right; " (click)="showFullDescription()">
+                    {{ isReadMore ? 'Read More': 'Read Less' }}
+                  </a>
                 </div>
               </div>
             </div>

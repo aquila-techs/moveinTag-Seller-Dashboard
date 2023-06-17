@@ -12,7 +12,7 @@ import { environment } from 'environments/environment';
   styleUrls: ['./customerlistings.component.scss']
 })
 export class CustomerlistingsComponent implements OnInit {
-  public baseURL = environment.apiUrl;
+  public baseURL = environment.serverURL;
   public userId = '';
   public currentUser: any;
   public category: any  = {};

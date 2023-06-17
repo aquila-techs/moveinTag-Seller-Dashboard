@@ -45,18 +45,25 @@ export class OrdermanagementComponent implements OnInit {
     this.getUserActiveOrder();
     this.getUSerCanceledOrder();
     this.getUserCompletedOrders();
-    // this.getUserlatedOrders();
 
   }
 
   public completedOrders = [];
+  public completedOrderTotal = 0;
+  public completedOrderPage = 1;
   public activeOrders = [];
+  public activeOrderTotal = 0;
+  public activeOrderPage = 1;
+  public pageSize = 10;
   public cancelledOrder = [];
+  public cancelledOrderTotal = 0;
+  public cancelledOrderPage = 1;
   public latedOrder = [];
   getUserCompletedOrders(){
-    let queryParams = '?userId='+this.userId+'&status=COMPLETED';
+    let queryParams = '?userId='+this.userId+'&status=COMPLETED'+'&pageSize='+this.pageSize+'&pageNo='+this.completedOrderPage+'&sortBy=updatedAt&order=desc';;
     this.orderService.getAllCompleteSellerOrders(queryParams)
     .subscribe(res => {
+      this.completedOrderTotal = res[0]['count'][0].totalCount;
       this.completedOrders =  res[0].results;
     })
   }
@@ -70,22 +77,24 @@ export class OrdermanagementComponent implements OnInit {
   }
 
   getUserActiveOrder(){
-    let queryParams = '?userId='+this.userId+'&status=ACTIVE';
+    let queryParams = '?userId='+this.userId+'&status=ACTIVE'+'&pageSize='+this.pageSize+'&pageNo='+this.activeOrderPage+'&sortBy=updatedAt&order=desc';
     this.orderService.getAllActiveSellerOrders(queryParams)
     .subscribe(res => {
+      this.activeOrderTotal = res[0]['count'][0].totalCount;
       this.activeOrders =  res[0].results;
     })
   }
   
   getUSerCanceledOrder(){
-    let queryParams = '?userId='+this.userId+'&status=CANCELLED';
+    let queryParams = '?userId='+this.userId+'&status=CANCELLED'+'&pageSize='+this.pageSize+'&pageNo='+this.cancelledOrderPage+'&sortBy=updatedAt&order=desc';
     this.orderService.getAllCancelledSellerOrders(queryParams)
     .subscribe(res => {
+      this.cancelledOrderTotal = res[0]['count'][0].totalCount;
       this.cancelledOrder =  res[0].results;
     })
   }
 
-  changeOrderStatus(order, event){
+  changeOrderStatus(order, event, type){
     let data = {
       "orderId":order._id,
       "status": event.target.value
@@ -102,10 +111,26 @@ export class OrdermanagementComponent implements OnInit {
         }
         this.notificationService.sendMessage(data, order.buyer._id)
       }
-      this.getUserActiveOrder();
-      this.getUSerCanceledOrder();
-      this.getUserCompletedOrders();
-      // this.getUserlatedOrders();
+      // this.getUserActiveOrder();
+      if(type === 'active'){
+        this.getUserActiveOrder();
+      }
+      if(type === 'cancelled'){
+        this.getUSerCanceledOrder();
+      }
     })
+  }
+
+  loadCompletedPage(event){
+    this.completedOrderPage = event;
+    this.getUserCompletedOrders();
+  }
+  loadCancelledPage(event){
+    this.cancelledOrderPage = event;
+    this.getUSerCanceledOrder();
+  }
+  loadActivePage(event){
+    this.activeOrderPage = event;
+    this.getUserActiveOrder();
   }
 }

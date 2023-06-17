@@ -114,6 +114,7 @@ export class HomeComponent implements OnInit {
    */
   public cards: any;
   public analytics: any;
+  public user: any;
   ngOnInit() {
 
     this.contentHeader = {
@@ -125,8 +126,8 @@ export class HomeComponent implements OnInit {
         ]
       }
     }
-    let user = JSON.parse(window.localStorage.getItem('currentUser'));
-    this.userService.getSellerAnalytics("sellerId=" + user._id).subscribe({
+    this.user = JSON.parse(window.localStorage.getItem('currentUser'));
+    this.userService.getSellerAnalytics("sellerId=" + this.user._id).subscribe({
       next: (res: any) => {
         this.analytics = res;
         this.cards = [
