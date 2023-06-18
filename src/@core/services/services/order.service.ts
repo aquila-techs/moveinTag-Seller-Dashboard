@@ -28,6 +28,9 @@ export class OrderService {
   getAllCompleteSellerOrders(queryParams){
     return this._http.get('order/get-all-orders'+queryParams)
   }
+  getEarningAnalytics(queryParams){
+    return this._http.get('order/get-all-earning-analytics'+queryParams)
+  }
 
   getAllQuotesOrders(queryParams){
     return this._http.get('order/get-all-orders'+queryParams)
@@ -35,6 +38,9 @@ export class OrderService {
 
   getAllActiveSellerOrders(queryParams){
     return this._http.get('order/get-all-orders'+queryParams)
+  }
+  getAllUserEarningOrders(queryParams){
+    return this._http.get('order/get-all-earning'+queryParams)
   }
 
   getAllCancelledSellerOrders(queryParams){

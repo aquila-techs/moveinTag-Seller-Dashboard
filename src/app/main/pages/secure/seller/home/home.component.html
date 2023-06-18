@@ -31,8 +31,8 @@
               <div class="row">
                 <div class="col-8">
                   <h2>Welcome {{user?.companyName}}</h2>
-                  <p class="card-text font-small-5">You have 8/12 pending tasks</p>
-                  <button type="button" class="btn btn-primary waves-effect waves-float waves-light mt-2"
+                  <p class="card-text font-small-5">You have {{analytics['total-pending-orders']}}/{{analytics['total']}} pending tasks</p>
+                  <button routerLink="/pages/seller/order-management" type="button" class="btn btn-primary waves-effect waves-float waves-light mt-2"
                     rippleEffect>View</button>
                 </div>
                 <div class="col-4">
@@ -50,7 +50,7 @@
               <h2 class="mt-2">Star Score</h2>
               <div class="row text-center mt-2 mb-0" style="justify-content: center">
                 <img src="assets/images/site/star-big.png" style="width: 30px; height:30px; margin-right: 5px;" />
-                <h1 style="font-size: 30px;">4%</h1>
+                <h1 style="font-size: 30px;">{{sellerProfile.totalRating}}%</h1>
               </div>
               <!-- <small class="text-muted">Past 12 Months</small> -->
             </div>
@@ -60,7 +60,7 @@
         <div class="col-xl-4 col-md-4 col-6">
           <div class="card">
             <div class="card-body text-center mb-2 mt-2">
-              <h2 class="mt-2">3222$</h2>
+              <h2 class="mt-2">${{allEarningAnalytics.totalAmmount}}</h2>
               <h2 class="mt-2">Total Revenue</h2>
             </div>
           </div>
@@ -70,7 +70,7 @@
     </div>
 
     <!-- Statistics Card -->
-    <div class="col-xl-12 col-md-6 col-12">
+    <!-- <div class="col-xl-12 col-md-6 col-12">
       <div class="card card-statistics">
         <div class="card-header">
           <h2>Statistics</h2>
@@ -134,7 +134,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!--/ Statistics Card -->
     <div class="col-lg-12">
@@ -154,7 +154,7 @@
               <div class="row">
                 <div class="col-12 col-md-4 d-flex flex-column align-self-center">
                   <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-                    <h1 class="mb-0" style="margin-right: 5px; font-size: 35px;">$468</h1>
+                    <h1 class="mb-0" style="margin-right: 5px; font-size: 35px;">${{allEarningAnalytics.totalAmmount}}</h1>
                   </div>
                 </div>
                 <div class="col-12 col-md-8">
@@ -177,7 +177,7 @@
                       </div>
                       <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Daily</h5>
                     </div>
-                    <h3 class="my-2 pt-1">$545.69</h3>
+                    <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountDaily}}</h3>
                     <div class="progress w-75" style="height: 4px">
                       <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65"
                         aria-valuemin="0" aria-valuemax="100"></div>
@@ -192,7 +192,7 @@
                       </div>
                       <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Monthly</h5>
                     </div>
-                    <h3 class="my-2 pt-1">$256.34</h3>
+                    <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountMonthly}}</h3>
                     <div class="progress w-75" style="height: 4px">
                       <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
                         aria-valuemin="0" aria-valuemax="100"></div>
@@ -205,9 +205,9 @@
                           <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Total</h5>
+                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Yealy</h5>
                     </div>
-                    <h3 class="my-2 pt-1">$74.19</h3>
+                    <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountYealy}}</h3>
                     <div class="progress w-75" style="height: 4px">
                       <div class="progress-bar bg-danger" role="progressbar" style="width: 65%" aria-valuenow="65"
                         aria-valuemin="0" aria-valuemax="100"></div>
@@ -241,12 +241,12 @@
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Profile View</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.viewedCount}}</b></p>
                     </div>
                   </div>
                 </li>
 
-                <li class="pb-0 d-flex justify-content-between align-items-center">
+                <!-- <li class="pb-0 d-flex justify-content-between align-items-center">
                   <div class="avatar bg-light-primary rounded ">
                     <div class="avatar-content">
                       <i data-feather="clock" class="avatar-icon font-medium-3"></i>
@@ -258,7 +258,7 @@
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
                     </div>
                   </div>
-                </li>
+                </li> -->
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
                   <div class="avatar bg-light-primary rounded ">
@@ -269,7 +269,7 @@
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Email</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.emailCount}}</b></p>
                     </div>
                   </div>
                 </li>
@@ -283,7 +283,7 @@
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Phone Number</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.phoneCount}}</b></p>
                     </div>
                   </div>
                 </li>
@@ -297,7 +297,7 @@
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Website Clicks</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.webCount}}</b></p>
                     </div>
                   </div>
                 </li>
@@ -311,7 +311,7 @@
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Facebook</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.fbCount}}</b></p>
                     </div>
                   </div>
                 </li>
@@ -325,7 +325,7 @@
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Instagram</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.instCount}}</b></p>
                     </div>
                   </div>
                 </li>
@@ -336,10 +336,10 @@
                       <i data-feather="clock" class="avatar-icon font-medium-3"></i>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
+                  <div class="d-flex justify-content-between w-100 flex-wrap" >
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Twitter</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>12,346</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.twitterCount}}</b></p>
                     </div>
                   </div>
                 </li>
@@ -366,7 +366,7 @@
               <div class="card-body mt-1">
                 <div class="row">
                   <div class="col-8">
-                    <h2>164</h2>
+                    <h2>{{analytics['total']}}</h2>
                     <p class="card-text font-small-5">Total Tickets</p>
                   </div>
                 </div>
@@ -382,7 +382,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="transaction-title">Active</h6>
-                      <small>100</small>
+                      <small>{{analytics['total-approved-orders']}}</small>
                     </div>
                   </div>
                 </div>
@@ -395,7 +395,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="transaction-title">Completed</h6>
-                      <small>150</small>
+                      <small>{{analytics['total-completed-orders']}}</small>
                     </div>
                   </div>
                 </div>
@@ -408,7 +408,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="transaction-title">Pending</h6>
-                      <small>5</small>
+                      <small>{{analytics['total-pending-orders']}}</small>
                     </div>
                   </div>
                 </div>
@@ -421,7 +421,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="transaction-title">Canceled</h6>
-                      <small>7</small>
+                      <small>{{analytics['total-cancelled-orders']}}</small>
                     </div>
                   </div>
                 </div>
@@ -436,125 +436,36 @@
     <div class="col-lg-12 mb-12 mb-lg-0">
       <div class="card h-100">
         <div class="table-responsive">
-          <table class="table table-borderless border-top">
+          <table class="table table-s1">
             <thead>
-              <tr>
-                <th>Order Number</th>
-                <th>Consumer</th>
-                <th>Detail</th>
-                <th>Earning</th>
-                <th>Order Status</th>
-                <th>Review</th>
-              </tr>
+            <tr>
+              <th>Order#</th>
+              <th>Consumers</th>
+              <th>Services</th>
+              <th>Due On</th>
+              <th>Note</th>
+              <th>Status</th>
+            </tr>
             </thead>
             <tbody>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-                <td>
-                  <p class="pt-1">Completed</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
+              <tr *ngIf="!completedOrders || completedOrders.length <=0 ">
+                <td colspan="6">No Complete orders to show</td>
               </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-                <td>
-                  <p class="pt-1">Completed</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-                <td>
-                  <p class="pt-1">Completed</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-                <td>
-                  <p class="pt-1">Completed</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-                <td>
-                  <p class="pt-1">Completed</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-              </tr>
-
-
+            <tr *ngFor="let item of completedOrders">
+              <td>{{item?.orderNum}}</td>
+              <td>{{item?.buyer?.firstName}}</td>
+              <td>{{item?.category?.title}}</td>
+              <td>{{item.updatedAt | date}}</td>
+              <td>{{item.notes}}</td>
+              <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
+                <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
+                <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
+                <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
+                <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
+                  </select></td> -->
+                  <td>Completed</td>
+            </tr>
+            
             </tbody>
           </table>
         </div>

@@ -37,7 +37,7 @@
                           <td>{{item.updatedAt | date}}</td>
                           <td>{{item.notes}}</td>
                           <td>
-                            <select class="form-control" (change)="changeOrderStatus(item, $event,'active')" style="min-width: 165px;">
+                            <select class="form-control" (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)" style="min-width: 165px;">
                             <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                             <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                             <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
@@ -191,3 +191,25 @@
 
   </div>
 </div>
+<ng-template #modalCompleteOderGetAmmount let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Please enter total charges you have taken from the customer</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <form [formGroup]="completedOrderAmmountForm"  class="px-1" >
+      <div class="form-group">
+        <label for="email">Enter total charges</label>
+        <input type="number" class="form-control" formControlName="ammount"  />
+      </div>
+      
+    </form>
+    
+    <div class="d-flex justify-content-center my-2">
+      <button type="button"  (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmount.invalid" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
+      <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+    </div>
+  </div>
+</ng-template>

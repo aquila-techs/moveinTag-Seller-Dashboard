@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { OrderService } from '@core/services/services/order.service';
 import { UserService } from '@core/services/services/user.service';
 import { colors } from 'app/colors.const';
 
@@ -9,7 +10,7 @@ import { colors } from 'app/colors.const';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private orderService: OrderService) { }
 
   public contentHeader: object;
   public progressbarHeight = '.857rem';
@@ -35,14 +36,14 @@ export class HomeComponent implements OnInit {
     chartType: 'bar',
     datasets: [
       {
-        data: [275, 90, 190, 205, 125, 85, 55, 87, 127, 150, 230, 280, 190],
+        data: [],
         backgroundColor: this.successColorShade,
         borderColor: 'transparent',
         hoverBackgroundColor: this.successColorShade,
         hoverBorderColor: this.successColorShade
       }
     ],
-    labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    labels: [ 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr'],
     options: {
       elements: {
         rectangle: {
@@ -113,8 +114,9 @@ export class HomeComponent implements OnInit {
    * On init
    */
   public cards: any;
-  public analytics: any;
+  public analytics: any = [];
   public user: any;
+  public sellerProfile: any;
   ngOnInit() {
 
     this.contentHeader = {
@@ -140,6 +142,50 @@ export class HomeComponent implements OnInit {
           res['total-pending-orders'] + res['total-cancelled-orders'] + res['total-approved-orders'];
 
       }
+    });
+    this.userService.getSellerProfile(this.user._id).subscribe({
+      next: (res: any)=>{
+        this.sellerProfile = res;
+        this.sellerProfile.totalReview = 0;
+        this.sellerProfile.totlaStarts = 0;
+        this.sellerProfile.totalRating = 0;
+        if(this.sellerProfile['reviews']&& this.sellerProfile['reviews'].length > 0 ){
+          let totalReview = 0;
+          let totlaStarts = 0;
+          this.sellerProfile['reviews'].forEach((item)=>{
+            totlaStarts =+ item.ratingCount;
+            totalReview++;
+          })
+          if(totalReview > 0 && totlaStarts > 0){
+            this.sellerProfile.totalRating = ((totlaStarts/(totalReview*5))*100).toFixed(0);
+          }else if(totalReview > 0 && totlaStarts <= 0){
+            this.sellerProfile.totalRating = 0;
+          }else{
+            this.sellerProfile.totalRating = 0;
+          }
+        }
+      }
+    })
+    this.getUserCompletedOrders();
+    this.getEarningAnalytics();
+  }
+  public completedOrders: any = [];
+  getUserCompletedOrders(){
+    let queryParams = '?userId='+this.user._id+'&status=COMPLETED'+'&pageSize=10'+'&pageNo=1'+'&sortBy=updatedAt&order=desc';;
+    this.orderService.getAllCompleteSellerOrders(queryParams)
+    .subscribe(res => {
+      this.completedOrders =  res[0].results;
+    })
+  }
+
+  public allEarningAnalytics :any = [];
+  getEarningAnalytics(){
+    let queryParams = '?userId='+this.user._id;
+    this.orderService.getEarningAnalytics(queryParams)
+    .subscribe(res => {
+      this.allEarningAnalytics = res;
+      this.barChart['datasets'][0]['data'] = res.totalAmountWeekly
+      console.log(res);
     })
   }
 

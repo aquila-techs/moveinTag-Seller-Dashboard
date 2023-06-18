@@ -195,7 +195,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.sellerServicePhotos = res;
       })
   }
-
+  deleteImage(item){
+    this.userService.deleteUserSerivesPhoto(item._id)
+    .subscribe(res => {
+      this.getAllSellerServiceImages();
+    })
+  }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
   public show = false;
@@ -420,8 +425,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.coverPhotoCroppedImage = '';
     this.companyPhotoChangedEvent = '';
     this.CompanyPhotoCroppedImage = '';
+    this.servicePhotoChangedEvent = '';
+    this.servicePhotoCroppedImage = '';
     this.coverPhotoCroppedImageFile = null;
     this.CompanyPhotoCroppedImageFile = null;
+    this.servicePhotoCroppedImageFile = null;
     this.modalService.open(modalUpdatePhoto, {
       centered: true,
       size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
@@ -437,6 +445,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   CompanyPhotoCroppedImage: any = '';
   CompanyPhotoCroppedImageFile: any;
 
+  servicePhotoChangedEvent: any = '';
+  servicePhotoCroppedImage: any = '';
+  servicePhotoCroppedImageFile: any;
+
+
   coverfileChangeEvent(event: any): void {
       this.coverPhotoChangedEvent = event;
   }
@@ -449,10 +462,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.companyPhotoChangedEvent = event;
 }
 
+servicefileChangeEvent(event: any): void {
+  this.servicePhotoChangedEvent = event;
+}
+
   companyimageCropped(event: ImageCroppedEvent) {
       this.CompanyPhotoCroppedImage = event.base64;
       this.CompanyPhotoCroppedImageFile = base64ToFile(this.CompanyPhotoCroppedImage);
   }
+
+ serviceImageCropped(event: ImageCroppedEvent) {
+    this.servicePhotoCroppedImage = event.base64;
+    this.servicePhotoCroppedImageFile = base64ToFile(this.servicePhotoCroppedImage);
+}
   imageLoaded(image?: LoadedImage) {
       // show cropper
   }
@@ -540,15 +562,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   uploadServicePhotos(){
     const formData = new FormData();
- 
-    // for (var i = 0; i < this.myFiles.length; i++) { 
-      formData.append("servicePhotos", this.myFiles[0]);
-    // }
+    formData.append("servicePhotos", this.servicePhotoCroppedImageFile);
     formData.append("id", this.userId);
     this.userService.addUserSerivesPhotos(formData)
       .subscribe(res => {
         this.modalService.dismissAll();
-        console.log(res);
         this.getAllSellerServiceImages();
       })
   }

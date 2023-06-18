@@ -49,10 +49,16 @@ export class UserService {
     return this._http.get('user/seller-images/'+id)
   }
 
+  deleteUserSerivesPhoto(id){
+    return this._http.delete('user/seller-image/'+id)
+  }
+
   updateCoverPhoto(body){
     return this._http.put('user/update-cover-photo', body)
   }
-  
+  getSellerProfile(id){
+    return this._http.get('user/seller/'+id)
+  }
 
   getAllSeller(queryParams){
     return this._http.post('admin/get-all-seller'+queryParams,{})

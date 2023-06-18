@@ -11,92 +11,41 @@
               <tr>
                 <th>Order Number</th>
                 <th>Consumer</th>
-                <th>Detail</th>
                 <th>Earning</th>
               </tr>
             </thead>
             <tbody>
-
-              <tr>
+              
+              <tr *ngFor="let item of earningOrders">
                 <td>
-                  <p class="pt-1">10023</p>
+                  <p class="pt-1">{{item.orderNum}}</p>
                 </td>
                 <td>
-                  <p class="pt-1">John</p>
+                  <p class="pt-1">{{item.buyer.firstName}} {{item.buyer.lastName}}</p>
                 </td>
-                <td>
+                <!-- <td>
                   <p class="pt-1">View</p>
-                </td>
+                </td> -->
                 <td>
-                  <p class="pt-1">500$</p>
+                  <p class="pt-1">{{item.ammount}}</p>
                 </td>
               </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <p class="pt-1">10023</p>
-                </td>
-                <td>
-                  <p class="pt-1">John</p>
-                </td>
-                <td>
-                  <p class="pt-1">View</p>
-                </td>
-                <td>
-                  <p class="pt-1">500$</p>
-                </td>
-              </tr>
-
-         
-
-
             </tbody>
           </table>
+          <div style="padding: 50px; text-align: center; font-size: 16px;" *ngIf="earningOrders && earningOrders.length <= 0">
+            Currently You have not any earning becuase you have not complete any order.
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mr-1" *ngIf="earningOrders && earningOrders.length > 0">
+          <ngb-pagination [collectionSize]="earningTotal" [(page)]="earningPage"  aria-label="Custom pagination"
+          (pageChange)="loadEarningdPage($event)" >
+            <ng-template ngbPaginationPrevious
+              ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+            </ng-template>
+            <ng-template ngbPaginationNext
+              >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+            </ng-template>
+          </ngb-pagination>
         </div>
       </div>
     </div>

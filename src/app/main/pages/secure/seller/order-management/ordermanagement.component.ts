@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { OrderService } from '@core/services/services/order.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 
 @Component({
@@ -9,7 +11,9 @@ import { NotificationsService } from 'app/layout/components/navbar/navbar-notifi
 })
 export class OrdermanagementComponent implements OnInit {
   public userId = '';
-  constructor(private orderService: OrderService, private notificationService: NotificationsService) {
+  constructor(       private modalService: NgbModal,
+    private _formBuilder: UntypedFormBuilder,
+    private orderService: OrderService, private notificationService: NotificationsService) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
   }
 
@@ -42,6 +46,7 @@ export class OrdermanagementComponent implements OnInit {
         ]
       }
     }
+    this.completedOrderAmmountFormBuilder();
     this.getUserActiveOrder();
     this.getUSerCanceledOrder();
     this.getUserCompletedOrders();
@@ -59,6 +64,8 @@ export class OrdermanagementComponent implements OnInit {
   public cancelledOrderTotal = 0;
   public cancelledOrderPage = 1;
   public latedOrder = [];
+  public completedOrderAmmountForm: UntypedFormGroup;
+
   getUserCompletedOrders(){
     let queryParams = '?userId='+this.userId+'&status=COMPLETED'+'&pageSize='+this.pageSize+'&pageNo='+this.completedOrderPage+'&sortBy=updatedAt&order=desc';;
     this.orderService.getAllCompleteSellerOrders(queryParams)
@@ -93,8 +100,22 @@ export class OrdermanagementComponent implements OnInit {
       this.cancelledOrder =  res[0].results;
     })
   }
-
-  changeOrderStatus(order, event, type){
+  modalOpenVC(modalVC) {
+    this.modalService.open(modalVC, {
+      centered: true,
+      size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+    });
+  }
+  public selectedOrderForComplete: any;
+  public selectedType:any;
+  changeOrderStatus(order, event, type, modalComplete){
+    if(event.target.value === 'COMPLETED'){
+      this.selectedOrderForComplete = order;
+      this.selectedType = type;
+      event.target.value = 'ACTIVE';
+      this.modalOpenVC(modalComplete);
+      return;
+    }
     let data = {
       "orderId":order._id,
       "status": event.target.value
@@ -102,6 +123,7 @@ export class OrdermanagementComponent implements OnInit {
 
     this.orderService.changeOrderStatus(data)
     .subscribe(res => {
+      this.completedOrderAmmountFormBuilder();
       if(order.buyer._id){
         let data={
           'heading': order.orderNum + ' Order Status Changed To '+event.target.value,
@@ -121,6 +143,42 @@ export class OrdermanagementComponent implements OnInit {
     })
   }
 
+
+  changeOrderStatusComplete(){
+    if (this.completedOrderAmmountForm.invalid) {
+      return;
+    }
+    let data = {
+      "orderId":this.selectedOrderForComplete._id,
+      "status": 'COMPLETED',
+      "ammount": this.completedOrderAmmountForm.value.ammount
+    }
+
+    this.orderService.changeOrderStatus(data)
+    .subscribe(res => {
+      this.completedOrderAmmountFormBuilder();
+      this.modalService.dismissAll();
+      this.selectedOrderForComplete = null;
+      this.selectedType = null;
+      if(this.selectedOrderForComplete.buyer._id){
+        let data={
+          'heading': this.selectedOrderForComplete.orderNum + ' Order Status Changed To '+'COMPLETED',
+          'message': 'Please check orders page for detail.',
+          'receiverId': this.selectedOrderForComplete.buyer._id,
+          'senderId':  this.selectedOrderForComplete.seller._id
+        }
+        this.notificationService.sendMessage(data, this.selectedOrderForComplete.buyer._id)
+      }
+      // this.getUserActiveOrder();
+      if(this.selectedType === 'active'){
+        this.getUserActiveOrder();
+      }
+      if(this.selectedType === 'cancelled'){
+        this.getUSerCanceledOrder();
+      }
+    })
+  }
+
   loadCompletedPage(event){
     this.completedOrderPage = event;
     this.getUserCompletedOrders();
@@ -132,5 +190,11 @@ export class OrdermanagementComponent implements OnInit {
   loadActivePage(event){
     this.activeOrderPage = event;
     this.getUserActiveOrder();
+  }
+
+  completedOrderAmmountFormBuilder(){
+    this.completedOrderAmmountForm = this._formBuilder.group({
+      ammount: ['', Validators.required],
+    });
   }
 }

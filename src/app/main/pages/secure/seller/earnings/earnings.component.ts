@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { OrderService } from '@core/services/services/order.service';
 import { colors } from 'app/colors.const';
 
 @Component({
@@ -8,7 +9,9 @@ import { colors } from 'app/colors.const';
 })
 export class EarningsComponent implements OnInit {
 
-  constructor() {}
+  constructor(private orderService: OrderService) {
+    this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
+  }
 
   public contentHeader: object;
   public radioModel = 1;
@@ -133,5 +136,26 @@ export class EarningsComponent implements OnInit {
       //   ]
       // }
     }
+
+    this.getUserEatnings();
+  }
+  public earningTotal = 0;
+  public earningOrders = [];
+  public earningPage = 1;
+  public pageSize = 10;
+  public userId = '';
+
+  getUserEatnings(){
+    let queryParams = '?userId='+this.userId+'&pageSize='+this.pageSize+'&pageNo='+this.earningPage+'&sortBy=createdAt&order=desc';
+    this.orderService.getAllUserEarningOrders(queryParams)
+    .subscribe(res => {
+      this.earningTotal = res[0]['count'][0].totalCount;
+      this.earningOrders =  res[0].results;
+    })
+  }
+
+  loadEarningdPage(event){
+    this.earningPage = event;
+    this.getUserEatnings();
   }
 }
