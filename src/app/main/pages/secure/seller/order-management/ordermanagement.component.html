@@ -208,7 +208,7 @@
     </form>
     
     <div class="d-flex justify-content-center my-2">
-      <button type="button"  (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmount.invalid" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
+      <button type="button"  (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmountForm.invalid" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
       <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
     </div>
   </div>

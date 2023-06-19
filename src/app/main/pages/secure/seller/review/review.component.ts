@@ -118,7 +118,7 @@ export class ReviewComponent implements OnInit {
   public pageNo=1;
   public total=0;
   getAllReviews(){
-    let queryParams = '?sellerId='+this.user._id +'&pageSize='+this.pageSize +'&pageNo=1'+'&sortBy=createdAt&order=desc';
+    let queryParams = '?sellerId='+this.user._id +'&pageSize='+this.pageSize +'&pageNo='+this.pageNo+'&sortBy=createdAt&order=desc';
     this.orderService.getAllReviews(queryParams)
     .subscribe(res => {
       this.userQuote =  res[0].results;
@@ -127,12 +127,7 @@ export class ReviewComponent implements OnInit {
   }
   loadPage(event){
     this.pageNo = event;
-    let queryParams = '?buyerId='+this.user._id +'&pageSize='+this.pageSize+'&pageNo='+event+'&sortBy=createdAt&order=desc';
-    this.orderService.getAllQuotesOrders(queryParams)
-    .subscribe(res => {
-      this.userQuote =  res[0].results;
-      this.total = res[0]['count'][0].totalCount;
-    })
+    this.getAllReviews();
   }
 
   

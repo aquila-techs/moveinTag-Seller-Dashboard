@@ -158,8 +158,7 @@ export class OrdermanagementComponent implements OnInit {
     .subscribe(res => {
       this.completedOrderAmmountFormBuilder();
       this.modalService.dismissAll();
-      this.selectedOrderForComplete = null;
-      this.selectedType = null;
+      
       if(this.selectedOrderForComplete.buyer._id){
         let data={
           'heading': this.selectedOrderForComplete.orderNum + ' Order Status Changed To '+'COMPLETED',
@@ -176,6 +175,8 @@ export class OrdermanagementComponent implements OnInit {
       if(this.selectedType === 'cancelled'){
         this.getUSerCanceledOrder();
       }
+      this.selectedOrderForComplete = null;
+      this.selectedType = null;
     })
   }
 

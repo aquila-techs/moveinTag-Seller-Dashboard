@@ -46,13 +46,15 @@
                         <span class="font-weight-bold">{{item?.buyer?.firstName}}</span>
                       </div>
                     </td>
-                    <td><div class="font-weight-bolder">$40</div> 
+                    <!-- <td><div class="font-weight-bolder">$40</div>  -->
                       <!-- <span class="font-small-3">$40</span> -->
-                    </td>
+                    <!-- </td> -->
+                    
                     <td><span class="badge badge-pill badge-light-success mr-1">
                         <span *ngIf="item?.status === 'QUOTE'" > Pending </span>
                         <span  *ngIf="item?.status === 'ACTIVE'"> Approved </span>
                     </span></td>
+                    <td></td>
                     <td>
                       <a class="text-success px-2 py-1 box-shadow-0" (click)="modalOpenVC(modalVC, item)" rippleEffect>View</a>
                     </td>
