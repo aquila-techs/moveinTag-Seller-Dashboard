@@ -9,8 +9,14 @@ import { colors } from 'app/colors.const';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private userService: UserService, private orderService: OrderService) { }
+  public currentDayIndex: number = 0;
+  constructor(private userService: UserService, private orderService: OrderService) { 
+    const currentDate = new Date();
+    this.currentDayIndex = currentDate.getDay()+1;
+    if(this.currentDayIndex >= 7){
+      this.currentDayIndex = 0;
+    }
+  }
 
   public contentHeader: object;
   public progressbarHeight = '.857rem';
@@ -53,7 +59,7 @@ export class HomeComponent implements OnInit {
       },
       responsive: true,
       maintainAspectRatio: false,
-      responsiveAnimationDuration: 500,
+      responsiveAnimationDuration: 100,
       legend: {
         display: false
       },
@@ -70,7 +76,7 @@ export class HomeComponent implements OnInit {
       scales: {
         xAxes: [
           {
-            barThickness: 25,
+            barThickness: 15,
             display: true,
             gridLines: {
               display: false,
@@ -95,9 +101,9 @@ export class HomeComponent implements OnInit {
               zeroLineColor: this.grid_line_color
             },
             ticks: {
-              stepSize: 100,
-              min: 0,
-              max: 400,
+              stepSize: 100000,
+              min: 100,
+              max: 100000,
               fontColor: this.labelColor
             }
           }
@@ -153,7 +159,7 @@ export class HomeComponent implements OnInit {
           let totalReview = 0;
           let totlaStarts = 0;
           this.sellerProfile['reviews'].forEach((item)=>{
-            totlaStarts =+ item.ratingCount;
+            totlaStarts += item.ratingCount;
             totalReview++;
           })
           if(totalReview > 0 && totlaStarts > 0){

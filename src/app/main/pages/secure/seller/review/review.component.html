@@ -91,7 +91,34 @@
         Provided Stars
         <div class="form-group">
             <div class="rating text-center">
-                <ngb-rating [(rate)]="iconsCurrentRate" [max]="5" [readonly]="readOnlyRating">
+                <ngb-rating [(rate)]="ratingCount" [max]="5" [readonly]="readOnlyRating">
+                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                </ngb-rating>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            Response
+            <div class="rating text-center">
+                <ngb-rating [(rate)]="responsivenessCount" [max]="5" [readonly]="readOnlyRating">
+                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                </ngb-rating>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            Reputation
+            <div class="rating text-center">
+                <ngb-rating [(rate)]="reputationCount" [max]="5" [readonly]="readOnlyRating">
+                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                </ngb-rating>
+            </div>
+        </div>
+        
+        <div class="form-group">
+           Recency
+            <div class="rating text-center">
+                <ngb-rating [(rate)]="recencyCount" [max]="5" [readonly]="readOnlyRating">
                 <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
                 </ngb-rating>
             </div>

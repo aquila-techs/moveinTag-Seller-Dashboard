@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { OrderService } from '@core/services/services/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-ordermanagement',
@@ -11,6 +12,7 @@ import { NotificationsService } from 'app/layout/components/navbar/navbar-notifi
 })
 export class OrdermanagementComponent implements OnInit {
   public userId = '';
+  public baseURL = environment.serverURL;
   constructor(       private modalService: NgbModal,
     private _formBuilder: UntypedFormBuilder,
     private orderService: OrderService, private notificationService: NotificationsService) {
@@ -70,8 +72,14 @@ export class OrdermanagementComponent implements OnInit {
     let queryParams = '?userId='+this.userId+'&status=COMPLETED'+'&pageSize='+this.pageSize+'&pageNo='+this.completedOrderPage+'&sortBy=updatedAt&order=desc';;
     this.orderService.getAllCompleteSellerOrders(queryParams)
     .subscribe(res => {
-      this.completedOrderTotal = res[0]['count'][0].totalCount;
+      
+      if(res[0].results.length > 0){
+        this.completedOrderTotal = res[0]['count'][0].totalCount;
       this.completedOrders =  res[0].results;
+      }else{
+        this.completedOrderTotal = 0;
+      this.completedOrders =  [];
+      }
     })
   }
 
@@ -87,8 +95,14 @@ export class OrdermanagementComponent implements OnInit {
     let queryParams = '?userId='+this.userId+'&status=ACTIVE'+'&pageSize='+this.pageSize+'&pageNo='+this.activeOrderPage+'&sortBy=updatedAt&order=desc';
     this.orderService.getAllActiveSellerOrders(queryParams)
     .subscribe(res => {
-      this.activeOrderTotal = res[0]['count'][0].totalCount;
-      this.activeOrders =  res[0].results;
+      if(res[0].results.length > 0){
+        this.activeOrderTotal = res[0]['count'][0].totalCount;
+        this.activeOrders =  res[0].results;
+      }else{
+        this.activeOrderTotal = 0;
+        this.activeOrders =  [];
+      }
+      
     })
   }
   
@@ -96,11 +110,26 @@ export class OrdermanagementComponent implements OnInit {
     let queryParams = '?userId='+this.userId+'&status=CANCELLED'+'&pageSize='+this.pageSize+'&pageNo='+this.cancelledOrderPage+'&sortBy=updatedAt&order=desc';
     this.orderService.getAllCancelledSellerOrders(queryParams)
     .subscribe(res => {
-      this.cancelledOrderTotal = res[0]['count'][0].totalCount;
-      this.cancelledOrder =  res[0].results;
+      if(res[0].results.length > 0){
+        this.cancelledOrderTotal = res[0]['count'][0].totalCount;
+        this.cancelledOrder =  res[0].results;
+      }else{
+        this.cancelledOrderTotal = 0;
+        this.cancelledOrder = [];
+      }
+      
     })
   }
+  selectedOrder: any = [];
   modalOpenVC(modalVC) {
+    this.modalService.open(modalVC, {
+      centered: true,
+      size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+    });
+  }
+  openOrderDetailPopup(modalVC,selectedOrders) {
+    this.selectedOrder = selectedOrders;
+
     this.modalService.open(modalVC, {
       centered: true,
       size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'

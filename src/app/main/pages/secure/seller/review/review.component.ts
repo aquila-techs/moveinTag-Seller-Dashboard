@@ -67,14 +67,20 @@ export class ReviewComponent implements OnInit {
   public baseURL = environment.apiUrl;
   public readOnlyRating = false;
   public ratingImagePath = "";
-
+  public ratingCount = 0;
+  public recencyCount = 0;
+  public reputationCount = 0;
+  public responsivenessCount = 0;
   modalOpenVC(modalVC, selectOrder) {
     this.selectOrder = selectOrder;
     this.modalService.open(modalVC, {
       centered: true
     });
     if(this.selectOrder){
-      this.iconsCurrentRate = this.selectOrder.ratingCount;
+      this.ratingCount = this.selectOrder.ratingCount;
+      this.recencyCount = this.selectOrder.recencyCount;
+      this.reputationCount = this.selectOrder.reputationCount;
+      this.responsivenessCount = this.selectOrder.responsivenessCount;
       this.description = this.selectOrder.description;
       this.ratingImagePath = this.selectOrder?.reviewsImages[0]?.path;
       this.readOnlyRating = true;

@@ -9,7 +9,7 @@
         <li [ngbNavItem]="2">
           <a ngbNavLink (click)="getUserActiveOrder()">Active</a>
           <ng-template ngbNavContent>
-            <div class="table-wrapper">
+            <div class="table-wrapper card">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
@@ -22,8 +22,8 @@
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Note</th>
                           <th>Status</th>
+                          <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,7 +35,6 @@
                           <td>{{item?.buyer?.firstName}}</td>
                           <td>{{item?.category?.title}}</td>
                           <td>{{item.updatedAt | date}}</td>
-                          <td>{{item.notes}}</td>
                           <td>
                             <select class="form-control" (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)" style="min-width: 165px;">
                             <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
@@ -45,32 +44,38 @@
                               </select>
 
                             </td>
+                            <td>
+                              <a class="text-success px-2 py-1 box-shadow-0" (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
+                            </td>
                         </tr>
                         </tbody>
                       </table>
                       
                     </div>
-                    <div class="d-flex justify-content-end mr-1">
-                      <ngb-pagination [collectionSize]="activeOrderTotal" [(page)]="activeOrderPage"  aria-label="Custom pagination"
-                      (pageChange)="loadActivePage($event)" >
-                        <ng-template ngbPaginationPrevious
-                          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-                        </ng-template>
-                        <ng-template ngbPaginationNext
-                          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-                        </ng-template>
-                      </ngb-pagination>
-                    </div>
-                  </div>
+                    
                 </div>
+                
+              </div>
+              <div class="d-flex justify-content-end mr-1" style=" bottom: 0; position: absolute; right: 0; ">
+                <ngb-pagination [collectionSize]="activeOrderTotal" [(page)]="activeOrderPage"  aria-label="Custom pagination"
+                (pageChange)="loadActivePage($event)" >
+                  <ng-template ngbPaginationPrevious
+                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                  </ng-template>
+                  <ng-template ngbPaginationNext
+                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                  </ng-template>
+                </ngb-pagination>
               </div>
             </div>
+            </div>
+            
           </ng-template>
         </li>
         <li [ngbNavItem]="4">
           <a ngbNavLink (click)="getUserCompletedOrders()">Completed</a>
           <ng-template ngbNavContent>
-            <div class="table-wrapper">
+            <div class="table-wrapper card">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
@@ -83,8 +88,8 @@
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Note</th>
                           <th>Status</th>
+                          <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,7 +101,6 @@
                           <td>{{item?.buyer?.firstName}}</td>
                           <td>{{item?.category?.title}}</td>
                           <td>{{item.updatedAt | date}}</td>
-                          <td>{{item.notes}}</td>
                           <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                             <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                             <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
@@ -104,24 +108,28 @@
                             <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                               </select></td> -->
                               <td>Completed</td>
+                              <td>
+                                <a class="text-success px-2 py-1 box-shadow-0" (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
+                              </td>
                         </tr>
                         
                         </tbody>
                       </table>
                     </div>
-                    <div class="d-flex justify-content-end mr-1">
-                      <ngb-pagination [collectionSize]="completedOrderTotal" [(page)]="completedOrderPage"  aria-label="Custom pagination"
-                      (pageChange)="loadCompletedPage($event)" >
-                        <ng-template ngbPaginationPrevious
-                          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-                        </ng-template>
-                        <ng-template ngbPaginationNext
-                          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-                        </ng-template>
-                      </ngb-pagination>
-                    </div>
+                   
                   </div>
                 </div>
+              </div>
+              <div class="d-flex justify-content-end mr-1" style=" bottom: 0; position: absolute; right: 0; ">
+                <ngb-pagination [collectionSize]="completedOrderTotal" [(page)]="completedOrderPage"  aria-label="Custom pagination"
+                (pageChange)="loadCompletedPage($event)" >
+                  <ng-template ngbPaginationPrevious
+                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                  </ng-template>
+                  <ng-template ngbPaginationNext
+                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                  </ng-template>
+                </ngb-pagination>
               </div>
             </div>
           </ng-template>
@@ -129,7 +137,7 @@
         <li [ngbNavItem]="5">
           <a ngbNavLink (click)="getUSerCanceledOrder()">Cancelled</a>
           <ng-template ngbNavContent>
-            <div class="table-wrapper">
+            <div class="table-wrapper card">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
@@ -142,8 +150,8 @@
                           <th>Consumers</th>
                           <th>Services</th>
                           <th>Due On</th>
-                          <th>Note</th>
                           <th>Status</th>
+                          <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -155,30 +163,33 @@
                             <td>{{item?.buyer?.firstName}}</td>
                             <td>{{item?.category?.title}}</td>
                             <td>{{item.updatedAt}}</td>
-                            <td>{{item.notes}}</td>
                             <td><select class="form-control" (change)="changeOrderStatus(item, $event,'cancelled')" style="min-width: 165px;">
                               <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                               <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                               <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                               <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                                 </select></td>
+                                <td>
+                                  <a class="text-success px-2 py-1 box-shadow-0" (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
+                                </td>
                         </tr>
                         </tbody>
                       </table>
                     </div>
-                    <div class="d-flex justify-content-end mr-1">
-                      <ngb-pagination [collectionSize]="cancelledOrderTotal" [(page)]="cancelledOrderPage"  aria-label="Custom pagination"
-                      (pageChange)="loadCancelledPage($event)" >
-                        <ng-template ngbPaginationPrevious
-                          ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-                        </ng-template>
-                        <ng-template ngbPaginationNext
-                          >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-                        </ng-template>
-                      </ngb-pagination>
-                    </div>
+                   
                   </div>
                 </div>
+              </div>
+              <div class="d-flex justify-content-end mr-1" style=" bottom: 0; position: absolute; right: 0; ">
+                <ngb-pagination [collectionSize]="cancelledOrderTotal" [(page)]="cancelledOrderPage"  aria-label="Custom pagination"
+                (pageChange)="loadCancelledPage($event)" >
+                  <ng-template ngbPaginationPrevious
+                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                  </ng-template>
+                  <ng-template ngbPaginationNext
+                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                  </ng-template>
+                </ngb-pagination>
               </div>
             </div>
           </ng-template>
@@ -211,5 +222,43 @@
       <button type="button"  (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmountForm.invalid" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
       <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #modalVC let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalCenterTitle">Order Info</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <form action="">
+      <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
+        <label for="basicInput">What do you need to be done?</label>
+        <input readonly type="text"   [value]="selectedOrder?.subCategory?.title" class="form-control" id="basicInput" placeholder="" />
+      </div>
+      <div class="form-group" [hidden]="!selectedOrder?.place">
+        <label for="basicInput">What do you need to be done?</label>
+        <input readonly type="text" class="form-control" [value]="selectedOrder?.place" id="basicInput" placeholder="Townhall" />
+      </div>
+      <div class="form-group" [hidden]="!selectedOrder?.startTime">
+        <label for="basicInput">When do you want to start this project?</label>
+        <input readonly type="text" class="form-control" [value]="selectedOrder?.startTime" id="basicInput" placeholder="Within a week" />
+      </div>
+      <div class="form-group" [hidden]="!selectedOrder?.notes">
+        <label for="basicInput">Please provide some details about project? </label>
+        <textarea readonly style="height: 150px;" [value]="selectedOrder?.notes" class="form-control"></textarea>
+      </div>
+      <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
+        <label for="basicInput">Service Images</label>
+        <div class="row px-1">
+          <div class="col-lg-3 px-50">
+            <img src="{{baseURL}}{{selectedOrder.orderImages[0].path}}" alt="" class="img-fluid w-100">
+          </div>
+         
+        </div>
+      </div>
+    </form>
   </div>
 </ng-template>
