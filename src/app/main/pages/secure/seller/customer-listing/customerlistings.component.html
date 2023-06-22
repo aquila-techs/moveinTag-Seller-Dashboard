@@ -95,7 +95,7 @@
             <label for="basicInput">Please provide some details about project? </label>
             <textarea readonly style="height: 150px;" [value]="selectedOrder?.notes" class="form-control"></textarea>
           </div>
-          <div class="form-group" [hidden]="!selectedOrder.orderImages[0].path">
+          <div class="form-group" [hidden]="selectedOrder.orderImages.length <= 0">
             <label for="basicInput">Service Images</label>
             <div class="row px-1">
               <div class="col-lg-3 px-50">

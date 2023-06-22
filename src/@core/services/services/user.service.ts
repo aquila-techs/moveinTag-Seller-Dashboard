@@ -168,6 +168,12 @@ export class UserService {
   cancelSubscriptionCustomer(body){
     return this._http.post('payment/cancel-subscription',body);
   }
+  pauseSubscriptionCustomer(body){
+    return this._http.post('payment/pause-subscription',body);
+  }
+  activeSubscriptionCustomer(body){
+    return this._http.post('payment/resume-subscription',body);
+  }
 
   getSellerAnalytics(queryParam){
     return this._http.get('user/get-seller-analytics?'+queryParam);

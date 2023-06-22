@@ -83,6 +83,28 @@ export class PaymentComponent implements OnInit {
     })
   }
 
+  activePayment(){
+    let data = {
+      "_id": this.userId
+    }
+    this.userService.activeSubscriptionCustomer(data)
+    .subscribe(res => {
+      this.modalService.dismissAll();
+      this.getPaymentStatus();
+    })
+  }
+
+  pausePayment(){
+    let data = {
+      "_id": this.userId
+    }
+    this.userService.pauseSubscriptionCustomer(data)
+    .subscribe(res => {
+      this.modalService.dismissAll();
+      this.getPaymentStatus();
+    })
+  }
+
   getDateFormat(miliseconds){
     return moment(miliseconds*1000).format("DD/MMM/YYYY")
   }

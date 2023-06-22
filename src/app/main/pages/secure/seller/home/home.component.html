@@ -443,7 +443,6 @@
               <th>Consumers</th>
               <th>Services</th>
               <th>Due On</th>
-              <th>Note</th>
               <th>Status</th>
             </tr>
             </thead>
@@ -456,7 +455,6 @@
               <td>{{item?.buyer?.firstName}}</td>
               <td>{{item?.category?.title}}</td>
               <td>{{item.updatedAt | date}}</td>
-              <td>{{item.notes}}</td>
               <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                 <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>

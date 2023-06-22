@@ -18,8 +18,8 @@
               <span >No subscription found</span>
             </div>
             <div *ngIf="subscription" class="row" style="padding: 20px;">
-              <h6 class="mb-2" style="margin-left: 20px;">Payment Details:</h6>
-              <div class="col-xl-4 ml-25 mt-xl-0 mt-2">
+              <h6 class="mb-2 col-sm-12" style="margin-left: 20px;">Payment Details:</h6>
+              <div class="col-xl-6 ">
                 <table>
                   <tbody>
                     <tr>
@@ -32,7 +32,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="col-xl-4 ml-25 mt-xl-0 mt-2">
+              <div class="col-xl-6">
                 <h6 class="mb-2"></h6>
                 <table>
                   <tbody>
@@ -67,8 +67,13 @@
                   </tbody>
                 </table>
               </div>
-              <div class="float-right">
-                <button *ngIf="subscription.subscription.status !== 'canceled'" type="button" class="btn btn-dark2 btn-md px-3 mb-2" (click)="cancelPayment()" rippleEffect>Cancel Subscription</button>
+              <div class="col-sm-12" *ngIf="subscription.subscription.status === 'trialing'">
+                *<b>NOTE: </b>Currently your subscription status is 'trialing' that why you didn't pause or cancel your subscription. 
+              </div>
+              <div class="col-sm-12 float-right" style=" text-align: end; ">
+                <button *ngIf="subscription.subscription.status !== 'active' && subscription.subscription.status !== 'trialing'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="activePayment()" rippleEffect>Activate Subscription</button>
+                <button *ngIf="subscription.subscription.status === 'canceled'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="pausePayment()" rippleEffect>Pause Subscription</button>
+                <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="cancelPayment()" rippleEffect>Cancel Subscription</button>
               </div>
             </div>
           </div>
