@@ -74,12 +74,15 @@ export class NavbarNotificationComponent implements OnInit {
       }
     })
    }
-  goToMessagePage(heading: String){
-    if(heading.toLowerCase().indexOf('chat') > -1){
+  goToMessagePage(message: any){
+    if(message.heading.toLowerCase().indexOf('chat') > -1){
+      if(message?.chatRoomId){
+        window.localStorage.setItem('chatRoomId',message.chatRoomId);
+      }
       this.router.navigate(['/pages/seller/chats']);
-    }else if(heading.toLowerCase().indexOf('order rating') > -1){
+    }else if(message.heading.toLowerCase().indexOf('order rating') > -1){
       this.router.navigate(['pages/seller/reviews']);
-    }    else if(heading.toLowerCase().indexOf('quote') > -1){
+    }    else if(message.heading.toLowerCase().indexOf('quote') > -1){
       this.router.navigate(['/pages/seller/quotation-listing/640dfae607de5a58ffdd8a25']);
     }
    }

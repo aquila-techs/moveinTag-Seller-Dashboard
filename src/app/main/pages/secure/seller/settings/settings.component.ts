@@ -252,7 +252,7 @@ export class SettingsComponent implements OnInit, AfterContentChecked {
   uploadCoverPhoto(){
       if(this.coverPhotoCroppedImageFile){
         let data :FormData = new FormData();
-        data.append('coverImage', this.coverPhotoCroppedImageFile)
+        data.append('coverImage', this.coverPhotoCroppedImageFile, 'image/png')
         data.append('id', this.userId)
         this.userService.updateCoverPhoto(data).subscribe({
           next: (res)=> {
@@ -269,7 +269,7 @@ export class SettingsComponent implements OnInit, AfterContentChecked {
   uploadProfilePhoto(){
     if(this.CompanyPhotoCroppedImageFile){
       let data :FormData = new FormData();
-      data.append('profileImage', this.CompanyPhotoCroppedImageFile)
+      data.append('profileImage', this.CompanyPhotoCroppedImageFile , 'image/png')
       data.append('id', this.userId)
       this.userService.updateProfile(data).subscribe({
         next: (res)=> {

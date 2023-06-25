@@ -123,8 +123,11 @@
                 </ngb-rating>
             </div>
         </div>
-        <div>
-            <img height="100" width="100" *ngIf="ratingImagePath" src="{{baseURL}}{{ratingImagePath}}" alt="" >
+        <div class="row">
+            <div class="col-lg-3 px-50" *ngFor="let item of reviewImages" >
+                <img height="100" width="100"  src="{{baseURL}}{{item.path}}" alt="" class="img-fluid w-100">
+              </div>
+            <!-- <img height="100" width="100" *ngIf="ratingImagePath" src="{{baseURL}}{{ratingImagePath}}" alt="" > -->
         </div>
         <div class="form-group">
             <label for="basicInput">Description</label>

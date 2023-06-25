@@ -530,7 +530,7 @@ servicefileChangeEvent(event: any): void {
   uploadCoverPhoto(){
       if(this.coverPhotoCroppedImageFile){
         let data :FormData = new FormData();
-        data.append('coverImage', this.coverPhotoCroppedImageFile)
+        data.append('coverImage', this.coverPhotoCroppedImageFile, 'image/png')
         data.append('id', this.userId)
         this.userService.updateCoverPhoto(data).subscribe({
           next: (res)=> {
@@ -547,7 +547,7 @@ servicefileChangeEvent(event: any): void {
   uploadProfilePhoto(){
     if(this.CompanyPhotoCroppedImageFile){
       let data :FormData = new FormData();
-      data.append('profileImage', this.CompanyPhotoCroppedImageFile)
+      data.append('profileImage', this.CompanyPhotoCroppedImageFile, 'image/png')
       data.append('id', this.userId)
       this.authenticationSerive.updateProfile(data).subscribe({
         next: (res)=> {
@@ -562,7 +562,7 @@ servicefileChangeEvent(event: any): void {
   }
   uploadServicePhotos(){
     const formData = new FormData();
-    formData.append("servicePhotos", this.servicePhotoCroppedImageFile);
+    formData.append("servicePhotos", this.servicePhotoCroppedImageFile, 'image/png');
     formData.append("id", this.userId);
     this.userService.addUserSerivesPhotos(formData)
       .subscribe(res => {

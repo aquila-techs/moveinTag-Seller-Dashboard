@@ -66,7 +66,7 @@ export class ReviewComponent implements OnInit {
   public selectOrder: any;
   public baseURL = environment.apiUrl;
   public readOnlyRating = false;
-  public ratingImagePath = "";
+  public reviewImages = "";
   public ratingCount = 0;
   public recencyCount = 0;
   public reputationCount = 0;
@@ -82,7 +82,7 @@ export class ReviewComponent implements OnInit {
       this.reputationCount = this.selectOrder.reputationCount;
       this.responsivenessCount = this.selectOrder.responsivenessCount;
       this.description = this.selectOrder.description;
-      this.ratingImagePath = this.selectOrder?.reviewsImages[0]?.path;
+      this.reviewImages = this.selectOrder?.reviewsImages;
       this.readOnlyRating = true;
 
     }

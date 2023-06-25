@@ -83,6 +83,19 @@ export class ChatSidebarComponent implements OnInit {
     // Subscribe to chat users
     this._chatService.onChatUsersChange.subscribe(res => {
       this.chatUsers = res;
+      if(window.localStorage.getItem('chatRoomId')){
+        let chatroomIndex = this.chatUsers.findIndex(item=>{
+          return item._id === window.localStorage.getItem('chatRoomId');
+        })
+        this.openChat(this.chatUsers[chatroomIndex]);
+        this.selectedIndex = chatroomIndex;
+        setTimeout(()=>{
+          window.localStorage.removeItem('chatRoomId')
+        },1000)
+      }else{
+        this.openChat(this.chatUsers[0]);
+        this.selectedIndex = 0;
+      }
 
       // Skip setIndex first time when initialized
       if (skipFirst >= 1) {

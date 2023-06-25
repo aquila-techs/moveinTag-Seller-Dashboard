@@ -119,17 +119,19 @@ export class CustomerlistingsComponent implements OnInit {
     body.sellerId = this.currentUser._id;
     body.orderId =selectedOrder._id
     this.userService.createChatRoom(body).subscribe({
-      next:(value)=>{
+      next:(res)=>{
         if(selectedOrder.buyer._id){
           let data={
             'heading': selectedOrder.orderNum + ' Order New Chat Received',
             'message': 'Please check chats page for detail.',
             'receiverId': selectedOrder.buyer._id,
-            'senderId':  this.currentUser._id
+            'senderId':  this.currentUser._id,
+            'chatRoomId': res._id
           }
           this.notificationService.sendMessage(data, selectedOrder.buyer._id)
         }
         this.modalService.dismissAll();
+        window.localStorage.setItem('chatRoomId',res._id);
         this.router.navigate(['/pages/seller/chats'])
       }
     })
