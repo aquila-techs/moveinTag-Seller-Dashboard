@@ -38,7 +38,7 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'customer-listing',
-    title: 'Quotation Listing',
+    title: 'Active Listing',
     translate: 'MENU.HOME',
     icon: 'trello',
     type: 'collapsible',
@@ -101,5 +101,13 @@ export const menu: CoreMenu[] = [
     type: 'item',
     icon: 'pocket',
     url: 'pages/seller/reviews'
+  },
+  {
+    id: 'contact',
+    title: 'Help',
+    translate: 'MENU.HOME',
+    type: 'item',
+    icon: 'help-circle',
+    url: 'pages/seller/help'
   },
 ]

@@ -36,6 +36,7 @@ import { ChatComponent } from './chat/chat.component';
 import { Checkout1Component } from './checkout1/checkout1.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReviewComponent } from './review/review.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,12 @@ const routes: Routes = [
     data: { animation: 'review' }
   },
   {
+    path: 'help',
+    component: ContactComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'help' }
+  },
+  {
     path: 'subscription-plan',
     component: Checkout1Component,
     canActivate: [AuthGuard],
@@ -117,7 +124,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   declarations: [
     DashboardComponent,
     ProfileComponent,
-    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component,
+    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component,ContactComponent,
     ReviewComponent,
     PaymentComponent
   ],

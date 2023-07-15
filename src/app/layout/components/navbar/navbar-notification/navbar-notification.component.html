@@ -24,7 +24,7 @@
     <!-- Notifications content -->
     <li class="scrollable-container media-list" [perfectScrollbar]>
       <a class="d-flex"*ngFor="let message of notifications">
-        <div class="media d-flex align-items-start"  (click)="goToMessagePage(message.heading)"  
+        <div class="media d-flex align-items-start"  (click)="goToMessagePage(message)"  
         [ngClass]="{'new-notification' : !message?.viewed}">
           <div class="media-left">
             <!-- <div class="avatar">

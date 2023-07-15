@@ -77,7 +77,7 @@ export class CustomerlistingsComponent implements OnInit {
   }
   public userQuote:any;
   getAllQuotesOrders(){
-    let queryParams = '?&status=QUOTE&searchByQuote=true&categoryId='+this.categoryId+'&userId='+this.userId;
+    let queryParams = '?&status=QUOTE&searchByQuote=true&categoryId='+this.categoryId+'&userId='+this.userId+"&sortBy=createdAt&order=desc";
     this.orderService.getAllQuotesOrders(queryParams)
     .subscribe(res => {
       this.userQuote =  res[0].results;
