@@ -43,7 +43,7 @@ export const menu: CoreMenu[] = [
     icon: 'trello',
     type: 'collapsible',
     children: [
-     
+
 
     ]
   },
@@ -73,7 +73,7 @@ export const menu: CoreMenu[] = [
   {
     id: 'settings',
     title: 'Setting',
-    icon: 'user',
+    icon: 'settings',
     type: 'collapsible',
     children: [
       {
@@ -92,8 +92,8 @@ export const menu: CoreMenu[] = [
       },
     ]
   },
- 
-  
+
+
   {
     id: 'review',
     title: 'Reviews',

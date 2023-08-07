@@ -31,12 +31,14 @@
               <div class="row">
                 <div class="col-8">
                   <h2>Welcome {{user?.companyName}}</h2>
-                  <p class="card-text font-small-5">You have {{analytics['total-pending-orders']}}/{{analytics['total']}} pending tasks</p>
-                  <button routerLink="/pages/seller/order-management" type="button" class="btn btn-primary waves-effect waves-float waves-light mt-2"
-                    rippleEffect>View</button>
+                  <p class="card-text font-small-5">You have
+                    {{analytics['total-pending-orders']}}/{{analytics['total']}} pending tasks</p>
+                  <button routerLink="/pages/seller/order-management" type="button"
+                    class="btn btn-primary waves-effect waves-float waves-light mt-2" rippleEffect>View</button>
                 </div>
                 <div class="col-4">
-                  <img width="147px" height="147px" style="margin-left: -20px;"  src="assets/images/site/dashboard_icon.png" class="v-img__img v-img__img--contain"
+                  <img width="147px" height="147px" style="margin-left: -20px;"
+                    src="assets/images/site/dashboard_icon.png" class="v-img__img v-img__img--contain"
                     alt="Medal Pic" />
                 </div>
               </div>
@@ -154,7 +156,8 @@
               <div class="row">
                 <div class="col-12 col-md-4 d-flex flex-column align-self-center">
                   <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-                    <h1 class="mb-0" style="margin-right: 5px; font-size: 35px;">${{allEarningAnalytics.totalAmountWeekly[currentDayIndex]}}</h1>
+                    <h1 class="mb-0" style="margin-right: 5px; font-size: 35px;">
+                      ${{allEarningAnalytics.totalAmountWeekly[currentDayIndex]}}</h1>
                   </div>
                 </div>
                 <div class="col-12 col-md-8">
@@ -205,7 +208,7 @@
                           <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Yealy</h5>
+                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Yearly</h5>
                     </div>
                     <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountYealy}}</h3>
                     <div class="progress w-75" style="height: 4px">
@@ -233,15 +236,17 @@
               <ul class="p-0 m-0">
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/profile.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Profile View</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.viewedCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.viewedCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
@@ -261,85 +266,97 @@
                 </li> -->
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/email.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Email</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.emailCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.emailCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/phone.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Phone Number</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.phoneCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.phoneCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/website.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Website Clicks</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.webCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.webCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/facebook.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Facebook</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.fbCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.fbCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/instagram.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Instagram</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.instCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.instCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
 
                 <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded ">
+                  <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                      <img src="assets/images/icons/new/twitter.png" style="width: 20px; height: 20px;" />
                     </div>
                   </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap" >
+                  <div class="d-flex justify-content-between w-100 flex-wrap">
                     <h5 class="mb-0 ms-3 p-1 align-self-center">Twitter</h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;"><b>{{sellerProfile.twitterCount}}</b></p>
+                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
+                        <b>{{sellerProfile.twitterCount}}</b>
+                      </p>
                     </div>
                   </div>
                 </li>
@@ -377,7 +394,7 @@
                   <div class="media">
                     <div class="avatar bg-light-primary rounded">
                       <div class="avatar-content">
-                        <i data-feather="clock" class="avatar-icon font-medium-3"></i>
+                        <img src="assets/images/icons/new/active.png" style="width: 25px; height: 25px;" />
                       </div>
                     </div>
                     <div class="media-body">
@@ -388,9 +405,9 @@
                 </div>
                 <div class="transaction-item mb-2">
                   <div class="media">
-                    <div class="avatar bg-light-success rounded">
+                    <div class="avatar bg-light-primary rounded">
                       <div class="avatar-content">
-                        <i data-feather="check" class="avatar-icon font-medium-3"></i>
+                        <img src="assets/images/icons/new/complete.png" style="width: 25px; height: 25px;" />
                       </div>
                     </div>
                     <div class="media-body">
@@ -401,9 +418,9 @@
                 </div>
                 <div class="transaction-item mb-2">
                   <div class="media">
-                    <div class="avatar bg-light-danger rounded">
+                    <div class="avatar bg-light-primary rounded">
                       <div class="avatar-content">
-                        <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
+                        <img src="assets/images/icons/new/pending.png" style="width: 25px; height: 25px;" />
                       </div>
                     </div>
                     <div class="media-body">
@@ -414,13 +431,13 @@
                 </div>
                 <div class="transaction-item mb-5">
                   <div class="media">
-                    <div class="avatar bg-light-danger rounded">
+                    <div class="avatar bg-light-primary rounded">
                       <div class="avatar-content">
-                        <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
+                        <img src="assets/images/icons/new/cancel.png" style="width: 25px; height: 25px;" />
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title">Canceled</h6>
+                      <h6 class="transaction-title">Cancelled</h6>
                       <small>{{analytics['total-cancelled-orders']}}</small>
                     </div>
                   </div>
@@ -438,32 +455,32 @@
         <div class="table-responsive">
           <table class="table table-s1">
             <thead>
-            <tr>
-              <th>Order#</th>
-              <th>Consumers</th>
-              <th>Services</th>
-              <th>Due On</th>
-              <th>Status</th>
-            </tr>
+              <tr>
+                <th>Order#</th>
+                <th>Consumers</th>
+                <th>Services</th>
+                <th>Due On</th>
+                <th>Status</th>
+              </tr>
             </thead>
             <tbody>
               <tr *ngIf="!completedOrders || completedOrders.length <=0 ">
                 <td colspan="6">No Complete orders to show</td>
               </tr>
-            <tr *ngFor="let item of completedOrders">
-              <td>{{item?.orderNum}}</td>
-              <td>{{item?.buyer?.firstName}}</td>
-              <td>{{item?.category?.title}}</td>
-              <td>{{item.updatedAt | date}}</td>
-              <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
+              <tr *ngFor="let item of completedOrders">
+                <td>{{item?.orderNum}}</td>
+                <td>{{item?.buyer?.firstName}}</td>
+                <td>{{item?.category?.title}}</td>
+                <td>{{item.updatedAt | date}}</td>
+                <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                 <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
                 <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                 <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                   </select></td> -->
-                  <td>Completed</td>
-            </tr>
-            
+                <td>Completed</td>
+              </tr>
+
             </tbody>
           </table>
         </div>
