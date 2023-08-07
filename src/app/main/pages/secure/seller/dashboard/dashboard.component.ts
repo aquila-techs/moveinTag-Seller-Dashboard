@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   public radioModel = 1;
   analyticsArray = [];
   isMenuToggled  = true;
-  private $primary = '#7367F0';
+  private $primary = '#38b6ff';
   private $warning = '#FF9F43';
   private $info = '#00cfe8';
   private $info_light = '#1edec5';

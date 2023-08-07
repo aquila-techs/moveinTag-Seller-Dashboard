@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   public radioModel = 1;
 
   // Color Variables
-  private successColorShade = 'rgba(115, 103, 240, 0.85)';
+  private successColorShade = '#38b6ff';
   private tooltipShadow = 'rgba(0, 0, 0, 0.25)';
   private labelColor = '#6e6b7b';
   private grid_line_color = 'rgba(200, 200, 200, 0.2)'; // RGBA color helps in dark layout
