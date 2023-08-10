@@ -37,9 +37,28 @@
                     class="btn btn-primary waves-effect waves-float waves-light mt-2" rippleEffect>View</button>
                 </div>
                 <div class="col-4">
-                  <img width="147px" height="147px" style="margin-left: -20px;"
+                  <!-- <img width="147px" height="147px" style="margin-left: -20px;"
                     src="assets/images/site/dashboard_icon.png" class="v-img__img v-img__img--contain"
-                    alt="Medal Pic" />
+                    alt="Medal Pic" /> -->
+                    <div *ngIf="user?.profileImage; else customAvatar">
+                      <img style="background: white;box-shadow: 1px 5px 8px gray;"
+                        class="rounded-circle mr-1 v-img__img v-img__img--contain"
+                        src="{{baseURL}}{{user?.profileImage}}" 
+                        height="100"
+                        width="100"
+                      />
+                    </div>
+                    <ng-template #customAvatar>
+                      <div
+                        class="avatar mr-1 ml-0"
+                      >
+                        <div style="
+                        height: 100px;
+                        width: 100px;
+                        font-size: 30px;;box-shadow: 1px 5px 8px gray;
+                    " class="avatar-content">{{ user?.companyName| initials }}</div>
+                      </div>
+                    </ng-template>
                 </div>
               </div>
             </div>

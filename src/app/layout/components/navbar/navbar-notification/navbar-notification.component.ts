@@ -37,7 +37,7 @@ export class NavbarNotificationComponent implements OnInit {
     this._notificationsService.getNewMessage().subscribe((message: any) => {
      if(message && message.text != ""){
       this.unreadMessage++;
-      this.notifications.push(message);
+      this.notifications.unshift(message);
      }
     })
   }

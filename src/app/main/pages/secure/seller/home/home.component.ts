@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { OrderService } from '@core/services/services/order.service';
 import { UserService } from '@core/services/services/user.service';
 import { colors } from 'app/colors.const';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
   private tooltipShadow = 'rgba(0, 0, 0, 0.25)';
   private labelColor = '#6e6b7b';
   private grid_line_color = 'rgba(200, 200, 200, 0.2)'; // RGBA color helps in dark layout
+  public baseURL = environment.serverURL;
 
   // ng2-flatpickr options
   public DateRangeOptions = {

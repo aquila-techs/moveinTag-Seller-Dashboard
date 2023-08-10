@@ -13,20 +13,20 @@ export class ContactComponent implements OnInit {
   public pageBasicText = 3;
   constructor(private adminService: AdminService, private _coreConfigService: CoreConfigService) {
   
-    this._coreConfigService.config = {
-      layout: {
-        navbar: {
-          hidden: true,
-          showNavbarDashboard: true
-        },
-        menu: {
-          hidden: false
-        },
-        footer: {
-          hidden: true,
-        },
-      }
-    };
+    // this._coreConfigService.config = {
+    //   layout: {
+    //     navbar: {
+    //       hidden: true,
+    //       showNavbarDashboard: true
+    //     },
+    //     menu: {
+    //       hidden: false
+    //     },
+    //     footer: {
+    //       hidden: true,
+    //     },
+    //   }
+    // };
   }
   /**
    * On init
