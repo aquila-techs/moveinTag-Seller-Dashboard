@@ -1,29 +1,12 @@
 <!-- Menu header -->
-<div class="navbar-header">
-  <ul class="nav navbar-nav flex-row">
-    <li class="nav-item mr-auto">
-      <!-- App Branding -->
-      <a class="navbar-brand" [routerLink]="['/']">
-        <span class="brand-logo">
-          <img style=" -webkit-filter: invert(100%) !important; 
-          filter: invert(100%) !important; " src="./../assets/images/logo/logo.png" alt="brand-logo" />
-        </span>
-      </a>
-    </li>
-
-    <!-- Menu Toggler -->
-    <li class="nav-item nav-toggle">
-      <!-- <a class="nav-link modern-nav-toggle d-none d-xl-block pr-0" (click)="toggleSidebarCollapsible()">
-        <i
-          [ngClass]="isCollapsed === true ? 'icon-circle' : 'icon-disc'"
-          class="toggle-icon feather font-medium-4 collapse-toggle-icon text-primary"
-        ></i>
-      </a>
-      <a class="nav-link modern-nav-toggle d-block d-xl-none pr-0" (click)="toggleSidebar()">
-        <i data-feather="x" class="font-medium-4 text-primary toggle-icon"></i>
-      </a> -->
-    </li>
-  </ul>
+<div class="text-center">
+  <a style=" -webkit-filter: invert(100%) !important; 
+  filter: invert(100%) !important; " [routerLink]="['/']">
+    <span class="brand-logo">
+      <img src="{{ coreConfig.app.appLogoImage }}" style="width: 180px; height: 3.2rem; margin-top: 30px;"
+        alt="brand-logo" />
+    </span>
+  </a>
 </div>
 <!--/ Menu header -->
 

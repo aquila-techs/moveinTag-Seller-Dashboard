@@ -40,4 +40,8 @@ export class MenuComponent {
     // Add the new class name from native element
     this._renderer.addClass(this._elementRef.nativeElement, value);
   }
+
+  someUrl() {
+    window.open('https://moventag.com/','_self');
+  }
 }
