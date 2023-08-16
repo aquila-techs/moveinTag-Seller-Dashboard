@@ -112,10 +112,15 @@
                 </button>
               </div>
               <div class="col-lg-6">
+                <button type="button" class="btn btn-success w-100" (click)="modal.dismiss('Cross click')" rippleEffect>
+                   Decline
+                </button>
+              </div>
+              <!-- <div class="col-lg-6">
                 <button type="button" class="btn btn-success w-100" (click)="changeOrderStatus(selectedOrder, 'ACTIVE')" rippleEffect>
                    Approve
                 </button>
-              </div>
+              </div> -->
               <!-- <div class="col-lg-6"> -->
                 <!-- <button type="button" class="btn btn-danger w-100" (click)="changeOrderStatus(selectedOrder, 'DENY')" rippleEffect>
                   Deny
