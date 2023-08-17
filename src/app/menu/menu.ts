@@ -18,6 +18,15 @@ export const menu: CoreMenu[] = [
   //   url: 'sample'
   // },
 
+  // {
+  //   id: 'refferals',
+  //   title: 'Refferals',
+  //   translate: 'MENU.HOME',
+  //   type: 'item',
+  //   icon: 'home',
+  //   url: 'pages/seller/refferals'
+  // },
+
 
 
   {
@@ -43,9 +52,22 @@ export const menu: CoreMenu[] = [
     icon: 'trello',
     type: 'collapsible',
     children: [
-
-
     ]
+  },
+  {
+    id: 'chat',
+    title: 'Chat',
+    type: 'item',
+    icon: 'message-square',
+    url: 'pages/seller/chats'
+  },
+  {
+    id: 'review',
+    title: 'Reviews',
+    translate: 'MENU.HOME',
+    type: 'item',
+    icon: 'pocket',
+    url: 'pages/seller/reviews'
   },
   {
     id: 'earnings',
@@ -54,21 +76,6 @@ export const menu: CoreMenu[] = [
     type: 'item',
     icon: 'pocket',
     url: 'pages/seller/earnings'
-  },
-  // {
-  //   id: 'refferals',
-  //   title: 'Refferals',
-  //   translate: 'MENU.HOME',
-  //   type: 'item',
-  //   icon: 'home',
-  //   url: 'pages/seller/refferals'
-  // },
-  {
-    id: 'chat',
-    title: 'Chat',
-    type: 'item',
-    icon: 'message-square',
-    url: 'pages/seller/chats'
   },
   {
     id: 'settings',
@@ -91,16 +98,6 @@ export const menu: CoreMenu[] = [
         url: 'pages/seller/payment'
       },
     ]
-  },
-
-
-  {
-    id: 'review',
-    title: 'Reviews',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'pocket',
-    url: 'pages/seller/reviews'
   },
   {
     id: 'contact',

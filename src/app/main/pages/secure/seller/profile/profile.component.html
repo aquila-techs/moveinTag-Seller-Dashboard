@@ -1,95 +1,114 @@
 <div class="content-wrapper container-xxl p-0">
-    <div class="content-body">
-  
-      <section>
-        <div class="container">
-          
-          <div class="profile_banner">
-            <div class="banner_wrapper">
-              <img *ngIf="!sellerProfile?.coverImage" src="../../../assets/images/site/no-cover.png" alt="" class="banner_img">
-              <img *ngIf="sellerProfile?.coverImage" src="{{baseURL}}{{sellerProfile?.coverImage}}"  alt="" class="banner_img">
-              <div class="action_wrapper">
-                  <button class="btn btn-dark2" (click)="modalUpdatePhoto(modalVCCover)"><img src="../../../assets/images/site/highlight.png" alt="">Update Cover Photo</button>
+  <div class="content-body">
+
+    <section>
+      <div class="container">
+
+        <div class="profile_banner">
+          <div class="banner_wrapper">
+            <img *ngIf="!sellerProfile?.coverImage" src="../../../assets/images/site/no-cover.png" alt=""
+              class="banner_img">
+            <img *ngIf="sellerProfile?.coverImage" src="{{baseURL}}{{sellerProfile?.coverImage}}" alt=""
+              class="banner_img">
+            <div class="action_wrapper">
+              <button class="btn btn-dark2" (click)="modalUpdatePhoto(modalVCCover)"><img
+                  src="../../../assets/images/site/highlight.png" alt="">Update Cover Photo</button>
+            </div>
+          </div>
+          <div class="info_wrapper">
+            <div class="profile_img_wrapper">
+              <img *ngIf="!sellerProfile?.profileImage" src="../../../assets/images/site/no-profile.png"
+                (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
+              <img *ngIf="sellerProfile?.profileImage" src="{{baseURL}}{{sellerProfile?.profileImage}}"
+                (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
+            </div>
+            <div class="profile_details">
+              <h1 class="title">{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</h1>
+              <ul>
+                <li *ngIf="sellerProfile?.address"><img src="../../../assets/images/site/map-pin-2.png"
+                    alt="">{{sellerProfile?.address ? sellerProfile.address: ''}}
+                </li>
+              </ul>
+            </div>
+            <ul>
+              <li><img src="../../../assets/images/site/color-swatch.png" alt="">{{sellerProfile?.companyName ?
+                sellerProfile.companyName: ''}}
+              </li>
+              <li><img src="../../../assets/images/site/tool.png" alt="">{{sellerProfile?.companyType ?
+                sellerProfile.companyType: ''}}</li>
+              <li><img src="../../../assets/images/site/map-pin-2.png" alt="">{{sellerProfile?.address ?
+                sellerProfile.address: ''}}
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-terms">
+              <div class="card-header pb-1">
+                <h5 class="mb-0">Description:</h5>
+                <button class="edit absolute" (click)="modalOpenVCAbout(modalVCAbout)"><img
+                    src="../../../assets/images/site/edit.png" alt=""></button>
+              </div>
+              <div class="card-body pt-0">
+                <p [ngClass]="{'limitTextHeight': isReadMore}">{{sellerProfile?.description}}</p>
+                <a style=" color: #38b6ff; float: right; " (click)="showFullDescription()">
+                  {{ isReadMore ? 'Read More': 'Read Less' }}
+                </a>
               </div>
             </div>
-            <div class="info_wrapper">
-                <div class="profile_img_wrapper">
-                <img *ngIf="!sellerProfile?.profileImage"src="../../../assets/images/site/no-profile.png" (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
-                <img *ngIf="sellerProfile?.profileImage" src="{{baseURL}}{{sellerProfile?.profileImage}}" (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
+          </div>
+        </div>
+        <div class="row equal">
+          <div class="col-lg-4 col-md-5">
+            <div class="card card-about">
+              <div class="card-header">
+                <button class="edit absolute" (click)="modalOpenVCCategories(modalGoogleMap)"><img
+                    src="../../../assets/images/site/edit.png" alt=""></button>
+                <h1 class="card-title">ABOUT</h1>
               </div>
-                <div class="profile_details">
-                    <h1 class="title">{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</h1>
-                    <ul>
-                        <li *ngIf="sellerProfile?.address"><img src="../../../assets/images/site/map-pin-2.png" alt="">{{sellerProfile?.address ? sellerProfile.address: ''}} 
-                        </li>
-                    </ul>
-                </div>
-                <ul>
-                    <li><img src="../../../assets/images/site/color-swatch.png" alt="">{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}
-                    </li>
-                    <li><img src="../../../assets/images/site/tool.png" alt="">{{sellerProfile?.companyType ? sellerProfile.companyType: ''}}</li>
-                    <li><img src="../../../assets/images/site/map-pin-2.png" alt="">{{sellerProfile?.address ? sellerProfile.address: ''}} 
-                    </li>
+              <div class="card-body">
+                <ul class="">
+                  <li><img src="../../../assets/images/site/user.png" alt=""><span>Company Name:
+                    </span>{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</li>
+                  <li><img src="../../../assets/images/site/check.png" alt=""><span>No. of Employees:
+                    </span>{{sellerProfile?.noOfEmployee ? sellerProfile.noOfEmployee: ''}}</li>
+                  <li><img src="../../../assets/images/site/crown.png" alt=""><span>Return Policy:
+                    </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy: ''}}</li>
+                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Liability Insurance:
+                    </span>{{sellerProfile?.liabilityInsurance ? "Yes": 'No'}}</li>
+                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Workers Compensation:
+                    </span>{{sellerProfile?.workerCompensation ? "Yes": 'No'}}</li>
+                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Project Minimum:
+                    </span>{{sellerProfile?.projectMinimum ? "Yes": 'No'}}</li>
+                  <!-- <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li> -->
+                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Written Contract:
+                    </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
                 </ul>
-               
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="card card-terms">
-                <div class="card-header pb-1">
-                  <h5 class="mb-0">Description:</h5>
-                  <button class="edit absolute" (click)="modalOpenVCAbout(modalVCAbout)"><img src="../../../assets/images/site/edit.png" alt=""></button>
-                </div>
-                <div class="card-body pt-0">
-                  <p [ngClass]="{'limitTextHeight': isReadMore}">{{sellerProfile?.description}}</p>
-                  <a  style=" color: #38b6ff; float: right; " (click)="showFullDescription()">
-                    {{ isReadMore ? 'Read More': 'Read Less' }}
-                  </a>
-                </div>
               </div>
             </div>
           </div>
-          <div class="row equal">
-            <div class="col-lg-4 col-md-5">
-              <div class="card card-about">
-                <div class="card-header">
-                    <button class="edit absolute" (click)="modalOpenVCCategories(modalGoogleMap)"><img src="../../../assets/images/site/edit.png" alt=""></button>
-                  <h1 class="card-title">ABOUT</h1>
-                </div>
-                <div class="card-body">
-                  <ul class="">
-                      <li><img src="../../../assets/images/site/user.png" alt=""><span>Company Name: </span>{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</li>
-                      <li><img src="../../../assets/images/site/check.png" alt=""><span>No. of Employees: </span>{{sellerProfile?.noOfEmployee ? sellerProfile.noOfEmployee: ''}}</li>
-                      <li><img src="../../../assets/images/site/crown.png" alt=""><span>Return Policy: </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy: ''}}</li>
-                      <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Liability Insurance: </span>{{sellerProfile?.liabilityInsurance ? "Yes": 'No'}}</li>
-                      <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Workers Compensation: </span>{{sellerProfile?.workerCompensation ? "Yes": 'No'}}</li>
-                      <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Project Minimum: </span>{{sellerProfile?.projectMinimum ? "Yes": 'No'}}</li>
-                      <!-- <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li> -->
-                      <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Written Contract: </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
-                  </ul>
+          <div class="col-lg-8 col-md-7">
+            <div class="card card-categories">
+              <div class="card-header">
+                <button class="edit absolute" (click)="modalOpenVCCategories(modalVCCategories)"><img
+                    src="../../../assets/images/site/edit.png" alt=""></button>
+                <img class="card-img" src="../../../assets/images/site/list-details.png">
+                <h1 class="card-title">Categories</h1>
               </div>
-              </div>
-            </div>
-            <div class="col-lg-8 col-md-7">
-              <div class="card card-categories">
-                <div class="card-header">
-                  <button class="edit absolute" (click)="modalOpenVCCategories(modalVCCategories)"><img src="../../../assets/images/site/edit.png" alt=""></button>
-                  <img class="card-img" src="../../../assets/images/site/list-details.png">
-                  <h1 class="card-title">Categories</h1>
-                </div>
-                <div class="card-body">
-                  <div class="row" style="
+              <div class="card-body">
+                <div class="row" style="
                   max-height: 220px;
                   overflow: auto;
               ">
-                    <div class="col-lg-12" *ngFor="let category of filterCategories">
-                      <h2 class="list-title">{{category?.title}}</h2>
-                      <ul class="">
-                        <li *ngFor="let sub of category.subcategory">{{sub?.title}}</li>
-                      </ul>
-                    </div>
-<!-- 
+                  <div class="col-lg-12" *ngFor="let category of filterCategories">
+                    <h2 class="list-title">{{category?.title}}</h2>
+                    <ul class="">
+                      <li *ngFor="let sub of category.subcategory">{{sub?.title}}</li>
+                    </ul>
+                  </div>
+                  <!-- 
                     <div class="col-12 mb-2" *ngFor="let category of categories; let i=index">
                         <h4>{{category?.category?.title}}</h4>
                         <div class="row">
@@ -102,29 +121,35 @@
                         </div>
                        
                     </div> -->
-                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row equal">
-            <div class="col-xl-3 col-md-6 order-xl-1 order-md-1 order-1">
-              <div class="card card-info">
-                <button class="edit absolute" (click)="modalOpenVCContactDet(modalVCContactDet)"><img src="../../../assets/images/site/edit.png" alt=""></button>
-                <div class="card-body">
-                  <ul class="info_list">
-                      <li><a href=""><img src="../../../assets/images/site/phone-call.png" alt="">{{sellerProfile?.phone ? sellerProfile.phone: ''}}</a></li>
-                      <li><a href=""><img src="../../../assets/images/site/brand-dribbble.png" alt="">{{sellerProfile?.webURL ? sellerProfile.webURL: ''}}</a></li>
-                  </ul>
-                  <ul class="social_list">
-                      <li><a href="{{sellerProfile?.facebookURL ? sellerProfile.facebookURL: ''}}"><img src="../../../assets/images/site/brand-facebook.png" alt=""></a></li>
-                      <li><a href="{{sellerProfile?.instagramURL ? sellerProfile.instagramURL: ''}}"><img src="../../../assets/images/site/brand-instagram.png" alt=""></a></li>
-                      <li><a href="{{sellerProfile?.twitterURL ? sellerProfile.twitterURL: ''}}"><img src="../../../assets/images/site/brand-twitter.png" alt=""></a></li>
-                  </ul>
-              </div>
+        </div>
+        <div class="row equal">
+          <div class="col-xl-3 col-md-6 order-xl-1 order-md-1 order-1">
+            <div class="card card-info">
+              <button class="edit absolute" (click)="modalOpenVCContactDet(modalVCContactDet)"><img
+                  src="../../../assets/images/site/edit.png" alt=""></button>
+              <div class="card-body">
+                <ul class="info_list">
+                  <li><a href=""><img src="../../../assets/images/site/phone-call.png" alt="">{{sellerProfile?.phone ?
+                      sellerProfile.phone: ''}}</a></li>
+                  <li><a href=""><img src="../../../assets/images/site/brand-dribbble.png"
+                        alt="">{{sellerProfile?.webURL ? sellerProfile.webURL: ''}}</a></li>
+                </ul>
+                <ul class="social_list">
+                  <li><a href="{{sellerProfile?.facebookURL ? sellerProfile.facebookURL: ''}}"><img
+                        src="../../../assets/images/site/brand-facebook.png" alt=""></a></li>
+                  <li><a href="{{sellerProfile?.instagramURL ? sellerProfile.instagramURL: ''}}"><img
+                        src="../../../assets/images/site/brand-instagram.png" alt=""></a></li>
+                  <li><a href="{{sellerProfile?.twitterURL ? sellerProfile.twitterURL: ''}}"><img
+                        src="../../../assets/images/site/brand-twitter.png" alt=""></a></li>
+                </ul>
               </div>
             </div>
-            <!-- <div class="col-xl-4 col-lg-12 order-xl-2 order-md-3 order-2" *ngIf="sellerProfile?.referralCode">
+          </div>
+          <!-- <div class="col-xl-4 col-lg-12 order-xl-2 order-md-3 order-2" *ngIf="sellerProfile?.referralCode">
               <div class="card">
                 <div class="card-body d-flex align-items-center">
                   <div>
@@ -135,239 +160,226 @@
                 </div>
               </div>
             </div> -->
-            <div class="col-xl-5 col-md-6 order-xl-3 order-md-2 order-3">
-            </div>
+          <div class="col-xl-5 col-md-6 order-xl-3 order-md-2 order-3">
           </div>
-  
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <div class="gallery_wrapper">
-                <div class="d-flex align-items-center mb-2">
-                  <h1 class="title mb-0">Services photos</h1>
-                  <button class="edit ml-2" (click)="modalUpdatePhoto(modalVC)"><img src="../../../assets/images/site/edit.png" alt=""></button>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="gallery_wrapper">
+              <div class="d-flex align-items-center mb-2">
+                <h1 class="title mb-0">Services photos</h1>
+                <button class="edit ml-2" (click)="modalUpdatePhoto(modalVC)"><img
+                    src="../../../assets/images/site/edit.png" alt=""></button>
+              </div>
+              <div class="gallery row">
+                <div class="col-sm-3" *ngFor="let item of sellerServicePhotos">
+                  <img src="{{baseURL}}{{item.path}}" class="imgResponsiveMax" alt="" />
+                  <button class="closeImageBtn" (click)="deleteImage(item)"><i data-feather="x"></i></button>
                 </div>
-                <div class="gallery row" >
-                  <div class="col-sm-3" *ngFor="let item of sellerServicePhotos">
-                    <img src="{{baseURL}}{{item.path}}" class="imgResponsiveMax" alt="" />
-                    <button class="closeImageBtn" (click)="deleteImage(item)" ><i data-feather="x"></i></button>
-                  </div>
-                  <!-- <img *ngFor="let item of sellerServicePhotos" src="{{baseURL}}{{item.path}}" alt=""> -->
-                  
-                </div>
+                <!-- <img *ngFor="let item of sellerServicePhotos" src="{{baseURL}}{{item.path}}" alt=""> -->
+
               </div>
             </div>
           </div>
-        
-        
         </div>
-      </section>
-  
-      <ng-template #modalVCCover let-modal>
-        <div class="modal-header">
-          <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Cover image</h5>
-          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-          <!-- File Uploader -->
-          <section >
-            <label for="file-upload" style="width: 100%;" *ngIf="!coverPhotoCroppedImage"
+
+
+      </div>
+    </section>
+
+    <ng-template #modalVCCover let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Cover image</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <!-- File Uploader -->
+        <section>
+          <label for="file-upload" style="width: 100%;" *ngIf="!coverPhotoCroppedImage"
             class="py-5 mb-3 text-center file-drop-zone">
-          <h6>Drop pictures here or click to upload</h6>
-         </label>
+            <h6>Drop pictures here or click to upload</h6>
+          </label>
           <input id="file-upload" type="file" (change)="coverfileChangeEvent($event)" />
-          <image-cropper
-              [imageChangedEvent]="coverPhotoChangedEvent"
-              format="png"
-              maintainAspectRatio ="true"
-              [aspectRatio]="32/9"
-              (imageCropped)="coverimageCropped($event)"
-              (imageLoaded)="imageLoaded()"
-              (cropperReady)="cropperReady()"
-              (loadImageFailed)="loadImageFailed()"
-          ></image-cropper>
-          
-          </section>
-          <!--/ File Uploader -->
-        </div>
-        <div class="modal-footer justify-content-center my-2">
-          <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="uploadCoverPhoto()" *ngIf="coverPhotoCroppedImage"  rippleEffect><i data-feather="check"></i> Save</button>
-          <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
-        </div>
-      </ng-template>
-      <ng-template #modalVCProfilePic let-modal>
-        <div class="modal-header">
-          <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Profile Picture</h5>
-          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-          <!-- File Uploader -->
-          <section >
-              <label for="file-upload" style="width: 100%;" *ngIf="!CompanyPhotoCroppedImage"
-                  class="py-5 mb-3 text-center file-drop-zone">
-                <h6>Drop pictures here or click to upload</h6>
-              </label>
-              <input id="file-upload" type="file" (change)="companyfileChangeEvent($event)"/>
-              <image-cropper
-                  [imageChangedEvent]="companyPhotoChangedEvent"
-                  format="png"
-                  maintainAspectRatio ="true"
-                  [aspectRatio]="4/4"
-                  (imageCropped)="companyimageCropped($event)"
-                  (imageLoaded)="imageLoaded()"
-                  (cropperReady)="cropperReady()"
-                  (loadImageFailed)="loadImageFailed()"
-              ></image-cropper>
-  
-          </section>
-          <!--/ File Uploader -->
-        </div>
-        <div class="modal-footer justify-content-center my-2">
-          <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="uploadProfilePhoto()" *ngIf="CompanyPhotoCroppedImage" rippleEffect><i data-feather="check"></i> Save</button>
-          <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
-        </div>
-      </ng-template>
-      <ng-template #modalVC let-modal>
-          <div class="modal-header">
-              <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Upload Service Images</h5>
-              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
+          <image-cropper [imageChangedEvent]="coverPhotoChangedEvent" format="png" maintainAspectRatio="true"
+            [aspectRatio]="32/9" (imageCropped)="coverimageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+        </section>
+        <!--/ File Uploader -->
+      </div>
+      <div class="modal-footer justify-content-center my-2">
+        <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="uploadCoverPhoto()"
+          *ngIf="coverPhotoCroppedImage" rippleEffect><i data-feather="check"></i> Save</button>
+        <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+          rippleEffect><i data-feather="x"></i> Discard</button>
+      </div>
+    </ng-template>
+    <ng-template #modalVCProfilePic let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Profile Picture</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <!-- File Uploader -->
+        <section>
+          <label for="file-upload" style="width: 100%;" *ngIf="!CompanyPhotoCroppedImage"
+            class="py-5 mb-3 text-center file-drop-zone">
+            <h6>Drop pictures here or click to upload</h6>
+          </label>
+          <input id="file-upload" type="file" (change)="companyfileChangeEvent($event)" />
+          <image-cropper [imageChangedEvent]="companyPhotoChangedEvent" format="png" maintainAspectRatio="true"
+            [aspectRatio]="4/4" (imageCropped)="companyimageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+        </section>
+        <!--/ File Uploader -->
+      </div>
+      <div class="modal-footer justify-content-center my-2">
+        <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="uploadProfilePhoto()"
+          *ngIf="CompanyPhotoCroppedImage" rippleEffect><i data-feather="check"></i> Save</button>
+        <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+          rippleEffect><i data-feather="x"></i> Discard</button>
+      </div>
+    </ng-template>
+    <ng-template #modalVC let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Upload Service Images</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <!-- File Uploader -->
+        <section>
+          <label for="file-upload" style="width: 100%;" *ngIf="!servicePhotoCroppedImage"
+            class="py-5 mb-3 text-center file-drop-zone">
+            <h6>Drop pictures here or click to upload</h6>
+          </label>
+          <input id="file-upload" type="file" (change)="servicefileChangeEvent($event)" />
+          <image-cropper [imageChangedEvent]="servicePhotoChangedEvent" format="png" maintainAspectRatio="true"
+            [aspectRatio]="4/4" (imageCropped)="serviceImageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" (loadImageFailed)="cropperReady()"></image-cropper>
+
+        </section>
+        <!--/ File Uploader -->
+      </div>
+      <div class="modal-footer justify-content-center my-2">
+        <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" *ngIf="servicePhotoCroppedImage"
+          (click)="uploadServicePhotos()" rippleEffect><i data-feather="check"></i> Save</button>
+        <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+          rippleEffect><i data-feather="x"></i> Discard</button>
+      </div>
+    </ng-template>
+
+    <ng-template #modalVCContactDet let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Change Contact Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <form [formGroup]="sellerWebLinksForm" (ngSubmit)="onUpdateLinks()" class="px-1">
+          <div class="form-group">
+            <label for="email">Phone Number</label>
+            <input type="text" class="form-control" formControlName="phone" placeholder="123-456-789" />
           </div>
-          <div class="modal-body" tabindex="0" ngbAutofocus>
-            <!-- File Uploader -->
-              <section >
-                <label for="file-upload" style="width: 100%;" *ngIf="!servicePhotoCroppedImage"
-                    class="py-5 mb-3 text-center file-drop-zone">
-                  <h6>Drop pictures here or click to upload</h6>
-                </label>
-                <input id="file-upload" type="file" (change)="servicefileChangeEvent($event)"/>
-                <image-cropper
-                    [imageChangedEvent]="servicePhotoChangedEvent"
-                    format="png"
-                    maintainAspectRatio ="true"
-                    [aspectRatio]="4/4"
-                    (imageCropped)="serviceImageCropped($event)"
-                    (imageLoaded)="imageLoaded()"
-                    (cropperReady)="cropperReady()"
-                    (loadImageFailed)="cropperReady()"
-                ></image-cropper>
-    
-            </section>
-            <!--/ File Uploader -->
+          <div class="form-group">
+            <label for="email">Website</label>
+            <input type="text" class="form-control" formControlName="webURL" placeholder="www.domain.com" />
           </div>
-          <div class="modal-footer justify-content-center my-2">
-              <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" *ngIf="servicePhotoCroppedImage" (click)="uploadServicePhotos()" rippleEffect><i data-feather="check"></i> Save</button>
-              <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+          <div class="form-group">
+            <label for="email">Facebook</label>
+            <input type="text" class="form-control" formControlName="facebookURL" placeholder="facebook.com" />
           </div>
-      </ng-template>
-    
-      <ng-template #modalVCContactDet let-modal>
-        <div class="modal-header">
-          <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Change Contact Details</h5>
-          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-          <form  [formGroup]="sellerWebLinksForm" (ngSubmit)="onUpdateLinks()"  class="px-1">
-            <div class="form-group">
-              <label for="email">Phone Number</label>
-              <input type="text" class="form-control" formControlName="phone" placeholder="123-456-789" />
-            </div>
-            <div class="form-group">
-              <label for="email">Website</label>
-              <input type="text" class="form-control" formControlName="webURL" placeholder="www.domain.com" />
-            </div>
-            <div class="form-group">
-              <label for="email">Facebook</label>
-              <input type="text" class="form-control" formControlName="facebookURL" placeholder="facebook.com" />
-            </div>
-            <div class="form-group">
-              <label for="email">Instagram</label>
-              <input type="text" class="form-control" formControlName="instagramURL" placeholder="instagram.com" />
-            </div>
-            <div class="form-group">
-              <label for="email">Twitter</label>
-              <input type="text" class="form-control" formControlName="twitterURL" placeholder="twitter.com" />
-            </div>
-            <button type="submit" class="btn btn-dark2 btn-md px-3 mb-2" rippleEffect>Update</button>
-          </form>
-        </div>
-      </ng-template>
-      <ng-template #modalVCAbout let-modal>
-        <div class="modal-header">
-          <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">About</h5>
-          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-          <form [formGroup]="profileUpdateForm" (ngSubmit)="onSubmit()"  class="px-1" >
-            <div class="form-group">
-              <label for="email">Description</label>
-              <textarea formControlName="description" maxlength="1000" class="form-control" id="" cols="30" rows="4" placeholder="Please enter description in maximum 1000 characters."></textarea>
-            </div>
-            <div class="form-group">
-              <label for="email">Company Name</label>
-              <input type="text" class="form-control" formControlName="companyName" placeholder="XYZ" />
-            </div>
-            
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Address</label>
-                  <input type="text" class="form-control" formControlName="address"  />
-                </div>
+          <div class="form-group">
+            <label for="email">Instagram</label>
+            <input type="text" class="form-control" formControlName="instagramURL" placeholder="instagram.com" />
+          </div>
+          <div class="form-group">
+            <label for="email">Twitter</label>
+            <input type="text" class="form-control" formControlName="twitterURL" placeholder="twitter.com" />
+          </div>
+          <button type="submit" class="btn btn-dark2 btn-md px-3 mb-2" rippleEffect>Update</button>
+        </form>
+      </div>
+    </ng-template>
+    <ng-template #modalVCAbout let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">About</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <form [formGroup]="profileUpdateForm" (ngSubmit)="onSubmit()" class="px-1">
+          <div class="form-group">
+            <label for="email">Description</label>
+            <textarea formControlName="description" maxlength="1000" class="form-control" id="" cols="30" rows="4"
+              placeholder="Please enter description in maximum 1000 characters."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="email">Company Name</label>
+            <input type="text" class="form-control" formControlName="companyName" placeholder="XYZ" />
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Address</label>
+                <input type="text" class="form-control" formControlName="address" />
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Postal Code/Zip Code</label>
-                  <input type="text" class="form-control" formControlName="postalCode" placeholder="77640" />
-                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Postal Code/Zip Code</label>
+                <input type="text" class="form-control" formControlName="postalCode" placeholder="77640" />
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">No. Employees</label>
-                  <input type="text" class="form-control" formControlName="noOfEmployee" placeholder="30" />
-                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">No. Employees</label>
+                <input type="text" class="form-control" formControlName="noOfEmployee" placeholder="30" />
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Return Policy</label>
-                  <input type="text" class="form-control" formControlName="returnPolicy" />
-                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Return Policy</label>
+                <input type="text" class="form-control" formControlName="returnPolicy" />
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Liability Insurance</label>
-                  <select class="form-control" formControlName="liabilityInsurance" >
-                    <option>Select a choice</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Liability Insurance</label>
+                <select class="form-control" formControlName="liabilityInsurance">
+                  <option>Select a choice</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Workers Compensation</label>
-                  <select class="form-control"  formControlName="workerCompensation" >
-                    <option>Select a choice</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Workers Compensation</label>
+                <select class="form-control" formControlName="workerCompensation">
+                  <option>Select a choice</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Project Minimum</label>
-                  <input type="text" class="form-control"  formControlName="projectMinimum"  />
-                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Project Minimum</label>
+                <input type="text" class="form-control" formControlName="projectMinimum" />
               </div>
-              <!-- <div class="col-lg-6">
+            </div>
+            <!-- <div class="col-lg-6">
                 <div class="form-group">
                   <label for="email">Bonded</label>
                   <select class="form-control" formControlName="bonded">
@@ -377,130 +389,178 @@
                   </select>
                 </div>
               </div> -->
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="email">Written Contract</label>
-                  <select class="form-control" formControlName="writtenContract" >
-                    <option>Select a choice</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Written Contract</label>
+                <select class="form-control" formControlName="writtenContract">
+                  <option>Select a choice</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
               </div>
             </div>
-            
-          </form>
-          
-          <div class="d-flex justify-content-center my-2">
-            <button type="button"  (click)="onSubmit()" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
-            <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template #modalGoogleMap let-modal>
-        <div class="modal-header">
-            <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Address With Radius</h5>
-            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="card-body">
-                <div class="row form-group">
-                    <div class="col-sm-8 ">
-                        <input type="text" class="form-control" placeholder="Please enter you postal code e.g. A1A 1A1" [(ngModel)]="postalCode">
-                    </div>
-                    <div class="col-sm-4">
-                        <button type="button"  (click)="findNearByPostalCode()" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Find Nearby Postal Code</button>
-                    </div>
-                    <div *ngIf="nearByZipCodes && nearByZipCodes.length > 0" class="card-categories col-sm-12 mt-1">
-                        <div class="card-body" style="padding: 0px;"> 
-                            <ul style="max-height: 100px; overflow-y: auto;">
-                                <li *ngFor="let item of nearByZipCodes">{{item}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <p >Set Radius On Map</p>
-                <div class="noUi-wrapper">
-                    <nouislider
-                            [min]="1"
-                            [connect]="'lower'"
-                            [behaviour]="'tap'"
-                            [max]="100"
-                            [step]="1"
-                            [tooltips]="true"
-                            [(ngModel)]="sliderWithNgModel"
-                    ></nouislider>
-                    <div class="bottom">
-                        <p class="font-weight-bold">1m</p>
-                        <p class="font-weight-bold">100m</p>
-                    </div>
-                </div>
-                <google-map
-                height="400px"
-                width="'100%'"
-                [(zoom)]="markerCirclePolygonZoom"
-                [center]="markerCirclePolygonCenter"
 
-                >
-                <map-circle circleDrag="false" #mapCircle [(options)]="mapCircleOptions" [radius]="sliderWithNgModel*1609.34"  (radiusChanged) ="radiusChanged()" [(center)]="mapCircleCenter"></map-circle>
-                </google-map>
-                <div class="d-flex justify-content-center my-2">
-                    <button type="button"  (click)="onSaveNearByZipCode()" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
-                    <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
-                  </div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Country</label>
+                <ng-select [(ngModel)]="country" (change)="onCountryChange($event)" required>
+                  <ng-option *ngFor="let country of countriesList" [value]="country">{{country}}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Province/State</label>
+                <ng-select [(ngModel)]="states" (change)="onStateChange($event)" required>
+                  <ng-option *ngFor="let states of countryStates" [value]="states">{{states}}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">City</label>
+                <ng-select [(ngModel)]="cities"  required>
+                  <ng-option *ngFor="let cities of countryCities" [value]="cities.name">{{cities.name}}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Bonded</label>
+                <input type="text" class="form-control" formControlName="bonded" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Payment method</label>
+                <input type="text" class="form-control" formControlName="paymentMethod" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">Warrenty Terms</label>
+                <input type="text" class="form-control" formControlName="warrentyTerms" />
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+
+        <div class="d-flex justify-content-center my-2">
+          <button type="button" (click)="onSubmit()" class="btn btn-dark2 mx-1 btn-md px-3" rippleEffect><i
+              data-feather="check"></i> Save</button>
+          <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+            rippleEffect><i data-feather="x"></i> Discard</button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #modalGoogleMap let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Address With Radius</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="row form-group">
+            <div class="col-sm-8 ">
+              <input type="text" class="form-control" placeholder="Please enter you postal code e.g. A1A 1A1"
+                [(ngModel)]="postalCode">
+            </div>
+            <div class="col-sm-4">
+              <button type="button" (click)="findNearByPostalCode()" class="btn btn-dark2 mx-1 btn-md px-3"
+                rippleEffect><i data-feather="check"></i> Find Nearby Postal Code</button>
+            </div>
+            <div *ngIf="nearByZipCodes && nearByZipCodes.length > 0" class="card-categories col-sm-12 mt-1">
+              <div class="card-body" style="padding: 0px;">
+                <ul style="max-height: 100px; overflow-y: auto;">
+                  <li *ngFor="let item of nearByZipCodes">{{item}}</li>
+                </ul>
+              </div>
             </div>
           </div>
-        
-      </ng-template>
-      <ng-template #modalVCCategories let-modal>
-        <div class="modal-header">
-          <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Categories</h5>
-          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="accordion" tabindex="0" ngbAutofocus>
-          <div class="modal-body " tabindex="0" ngbAutofocus>
-            <div class="collapse-default collapse-icon">
-                <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
-                  <ngb-panel *ngFor="let category of categories; let i=index" id="category{{i}}">
-                    <ng-template ngbPanelTitle>
-                      <span>{{category.title}} </span>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
-                            <ngb-panel *ngFor="let midLevelCate of category.midLevelCategory; let c=index" id="midLevelCategory{{c}}">
-                              <ng-template ngbPanelTitle>
-                                <span>{{midLevelCate.title}} </span>
-                              </ng-template>
-                              <ng-template ngbPanelContent>
-                                <div class="row">
-                                    <div class="col-3" *ngFor="let subCate of midLevelCate.subcategory; let d=index">
-                                        <div class="custom-control custom-checkbox ">
-                                            <input type="checkbox"  [checked]="findCheckOrNot(subCate._id)" class="custom-control-input" (click)="selectCategory(category._id,midLevelCate._id,subCate)" id="customCheck{{i}}{{c}}{{d}}"/>
-                                            <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
-                                        </div>
-                                    </div>
-                                </div>
-                              </ng-template>
-                            </ngb-panel>
-                          </ngb-accordion>
-                    </ng-template>
-                  </ngb-panel>
-                  
-                </ngb-accordion>
-              </div>
-           </div>
-          
+          <p>Set Radius On Map</p>
+          <div class="noUi-wrapper">
+            <nouislider [min]="1" [connect]="'lower'" [behaviour]="'tap'" [max]="100" [step]="1" [tooltips]="true"
+              [(ngModel)]="sliderWithNgModel"></nouislider>
+            <div class="bottom">
+              <p class="font-weight-bold">1m</p>
+              <p class="font-weight-bold">100m</p>
+            </div>
+          </div>
+          <google-map height="400px" width="'100%'" [(zoom)]="markerCirclePolygonZoom"
+            [center]="markerCirclePolygonCenter">
+            <map-circle circleDrag="false" #mapCircle [(options)]="mapCircleOptions"
+              [radius]="sliderWithNgModel*1609.34" (radiusChanged)="radiusChanged()"
+              [(center)]="mapCircleCenter"></map-circle>
+          </google-map>
           <div class="d-flex justify-content-center my-2">
-            <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="saveCategories()" rippleEffect><i data-feather="check"></i> Save</button>
-            <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+            <button type="button" (click)="onSaveNearByZipCode()" class="btn btn-dark2 mx-1 btn-md px-3" rippleEffect><i
+                data-feather="check"></i> Save</button>
+            <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+              rippleEffect><i data-feather="x"></i> Discard</button>
           </div>
         </div>
-      </ng-template>
-  
-    </div>
+      </div>
+
+    </ng-template>
+    <ng-template #modalVCCategories let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Categories</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="accordion" tabindex="0" ngbAutofocus>
+        <div class="modal-body " tabindex="0" ngbAutofocus>
+          <div class="collapse-default collapse-icon">
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel *ngFor="let category of categories; let i=index" id="category{{i}}">
+                <ng-template ngbPanelTitle>
+                  <span>{{category.title}} </span>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+                    <ngb-panel *ngFor="let midLevelCate of category.midLevelCategory; let c=index"
+                      id="midLevelCategory{{c}}">
+                      <ng-template ngbPanelTitle>
+                        <span>{{midLevelCate.title}} </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        <div class="row">
+                          <div class="col-3" *ngFor="let subCate of midLevelCate.subcategory; let d=index">
+                            <div class="custom-control custom-checkbox ">
+                              <input type="checkbox" [checked]="findCheckOrNot(subCate._id)"
+                                class="custom-control-input"
+                                (click)="selectCategory(category._id,midLevelCate._id,subCate)"
+                                id="customCheck{{i}}{{c}}{{d}}" />
+                              <label class="custom-control-label"
+                                for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                </ng-template>
+              </ngb-panel>
+
+            </ngb-accordion>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center my-2">
+          <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="saveCategories()" rippleEffect><i
+              data-feather="check"></i> Save</button>
+          <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+            rippleEffect><i data-feather="x"></i> Discard</button>
+        </div>
+      </div>
+    </ng-template>
+
   </div>
-  <div id="map"></div>
+</div>
+<div id="map"></div>

@@ -9,6 +9,9 @@ import { ClipboardService } from 'ngx-clipboard';
 import { MapCircle } from '@angular/google-maps';
 import { GoogleMapsService } from '@core/services/services/googlemap.service';
 import { AuthenticationService } from '@core/services/authentication.service';
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 declare var google: any;
 
 @Component({
@@ -27,7 +30,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public categories: any;
   public sellerCategories: any;
   public sellerServicePhotos: any;
-  myFiles:string [] = [];
+  myFiles: string[] = [];
   public sellerWebLinksForm: UntypedFormGroup;
   public markerCirclePolygonCenter;
   public markerCirclePolygonZoom = 13;
@@ -37,6 +40,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   map: any;
   public mapCircleCenter: google.maps.LatLngLiteral;
   public mapCircleOptions;
+  public countriesData: any;
+
+  public countriesList = [];
+  countries: string[] = [];
+  countryStates: string[] = [];
+  countryCities: string[] = [];
+  country: number;
+
   // // Define the LatLng coordinates for the polygon's  outer path.
   // private polygonCoords = [
   //   { lat: 37.421834, lng: -122.079971 },
@@ -62,27 +73,28 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   radius: number = 0;
   zipCodes: string[] = [];
   constructor(
-      private _coreConfigService: CoreConfigService,
-      private modalService: NgbModal,
-      private userService: UserService,
-      private _formBuilder: UntypedFormBuilder,
-      private clipboardService: ClipboardService,
-      private googleMapsService: GoogleMapsService,
-       private authenticationSerive: AuthenticationService
-      ) {
+    private _coreConfigService: CoreConfigService,
+    private modalService: NgbModal,
+    private userService: UserService,
+    private _formBuilder: UntypedFormBuilder,
+    private clipboardService: ClipboardService,
+    private googleMapsService: GoogleMapsService,
+    private authenticationSerive: AuthenticationService,
+    private http: HttpClient
+  ) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
   }
   ngAfterViewInit(): void {
     this.getLocation();
   }
-  radiusChanged(){
-    if(this.circle){
+  radiusChanged() {
+    if (this.circle) {
       console.log(this.circle.getRadius());
     }
   }
- 
+
   public selectedCategories: any = [];
-  selectCategory(categryId, midLevelId, subcategry){
+  selectCategory(categryId, midLevelId, subcategry) {
     // if(categry && this.selectedCategories.length > 0){
     //   let indexOf = -1;
     //   this.selectedCategories.find((cat, index)=>{
@@ -116,90 +128,116 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     //   this.selectedCategories.push(categry);
     // }
 
-    if(this.selectedCategories && this.selectedCategories.length > 0){
+    if (this.selectedCategories && this.selectedCategories.length > 0) {
       let index = -1;
       this.selectedCategories.find((elem, i) => {
-        if(elem._id === subcategry._id){
+        if (elem._id === subcategry._id) {
           index = i;
-        } 
+        }
       })
-      if(subcategry && index > -1){
+      if (subcategry && index > -1) {
         this.selectedCategories.splice(index, 1)
-      }else{
+      } else {
         let item = subcategry;
         item['categoryId'] = categryId;
         item['midLevelCategoryId'] = midLevelId;
         this.selectedCategories.push(item)
       }
-    }else{
+    } else {
       let item = subcategry;
       item['categoryId'] = categryId;
       item['midLevelCategoryId'] = midLevelId;
       this.selectedCategories.push(item)
     }
   }
-  saveCategories(){
+  saveCategories() {
     let data = {};
-    data ['userId'] = this.userId;
-    data['addCategories']= this.selectedCategories;
+    data['userId'] = this.userId;
+    data['addCategories'] = this.selectedCategories;
     this.userService.saveSellerCategories(data)
-    .subscribe(res => {
-      this.selectedCategories = [];
-      setTimeout(()=>{
-        this.modalService.dismissAll();
-        this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
-          next: (res: any)=>{
-            this.filterCategories = [];
-            this.sellerCategories = res[0]['results'];
-            this.sellerCategories.forEach(element => {
-              if(this.filterCategories.length <= 0){
-                let item = element.category;
-                item['subcategory'] = [];
-                item['subcategory'].push(element.subcategory);
-                this.filterCategories.push(item);
-              }else{
-                let matchAdded = false;
-                this.filterCategories.forEach(item =>{
-                  if(item._id === element.category._id){
-                    matchAdded = true;
-                    item['subcategory'].push(element.subcategory);
-                  }
-                })
-                if(!matchAdded){
+      .subscribe(res => {
+        this.selectedCategories = [];
+        setTimeout(() => {
+          this.modalService.dismissAll();
+          this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
+            next: (res: any) => {
+              this.filterCategories = [];
+              this.sellerCategories = res[0]['results'];
+              this.sellerCategories.forEach(element => {
+                if (this.filterCategories.length <= 0) {
                   let item = element.category;
                   item['subcategory'] = [];
                   item['subcategory'].push(element.subcategory);
                   this.filterCategories.push(item);
+                } else {
+                  let matchAdded = false;
+                  this.filterCategories.forEach(item => {
+                    if (item._id === element.category._id) {
+                      matchAdded = true;
+                      item['subcategory'].push(element.subcategory);
+                    }
+                  })
+                  if (!matchAdded) {
+                    let item = element.category;
+                    item['subcategory'] = [];
+                    item['subcategory'].push(element.subcategory);
+                    this.filterCategories.push(item);
+                  }
                 }
-              }
-            });
-            console.log(this.filterCategories);
-          }
-        })
-    },3000)
+              });
+              console.log(this.filterCategories);
+            }
+          })
+        }, 3000)
+      })
+  }
+
+  getCountries() {
+
+    this.http.get("https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json").subscribe({
+      next: (res: any) => {
+
+        this.countriesData = res;
+
+        const country = [...new Set(this.countriesData.map(item => item.country))];
+        this.countriesList = country;
+
+      }
     })
   }
 
+  onCountryChange(country: any) {
+    let states = this.countriesData.filter(state => state.country === country);
+    states = [...new Set(states.map(item => item.subcountry))];
+    states.sort();
+    this.countryStates = states;
+  }
 
-  onFileChange(event:any) {
-   
-    for (var i = 0; i < event.target.files.length; i++) { 
-        this.myFiles.push(event.target.files[i]);
+  onStateChange(state: any) {
+    let cities = this.countriesData.filter(city => city.subcountry === state);
+    this.countryCities = cities
+  }
+
+
+  onFileChange(event: any) {
+
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.myFiles.push(event.target.files[i]);
     }
-  } 
+  }
 
-  getAllSellerServiceImages(){
-  
+  getAllSellerServiceImages() {
+
     this.userService.getUserSerivesPhotos(this.userId)
       .subscribe(res => {
         this.sellerServicePhotos = res;
       })
   }
-  deleteImage(item){
+  deleteImage(item) {
     this.userService.deleteUserSerivesPhoto(item._id)
-    .subscribe(res => {
-      this.getAllSellerServiceImages();
-    })
+      .subscribe(res => {
+        this.getAllSellerServiceImages();
+      })
   }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -210,6 +248,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    */
   center: google.maps.LatLngLiteral;
   ngOnInit() {
+    this.getCountries();
     // const mapProperties = {
     //   center: new google.maps.LatLng(36.2271, -80.8431),
     //   zoom: 15,
@@ -248,16 +287,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
     this.profileUpdateFormBuilder();
     this.userService.getProfile(this.userId).subscribe({
-      next: (res: any)=>{
+      next: (res: any) => {
         this.sellerProfile = res;
-        if(this.sellerProfile.postalCode){
+        if (this.sellerProfile.postalCode) {
           this.postalCode = this.sellerProfile.postalCode;
         }
-        if(this.sellerProfile.nearByPostalCodes){
+        if (this.sellerProfile.nearByPostalCodes) {
           this.nearByZipCodes = this.sellerProfile.nearByPostalCodes.split(',');
         }
-        if(this.sellerProfile.radius){
-          this.sliderWithNgModel =parseInt(this.sellerProfile.radius);
+        if (this.sellerProfile.radius) {
+          this.sliderWithNgModel = parseInt(this.sellerProfile.radius);
         }
         this.profileUpdateFormBuilder();
       }
@@ -268,25 +307,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     //     this.categories = res[0]['results'];
     //   }
     // })
-    
+
     this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
-      next: (res: any)=>{
+      next: (res: any) => {
         this.sellerCategories = res[0]['results'];
         this.sellerCategories.forEach(element => {
-          if(this.filterCategories.length <= 0){
+          if (this.filterCategories.length <= 0) {
             let item = element.category;
             item['subcategory'] = [];
             item['subcategory'].push(element.subcategory);
             this.filterCategories.push(item);
-          }else{
+          } else {
             let matchAdded = false;
-            this.filterCategories.forEach(item =>{
-              if(item._id === element.category._id){
+            this.filterCategories.forEach(item => {
+              if (item._id === element.category._id) {
                 matchAdded = true;
                 item['subcategory'].push(element.subcategory);
               }
             })
-            if(!matchAdded){
+            if (!matchAdded) {
               let item = element.category;
               item['subcategory'] = [];
               item['subcategory'].push(element.subcategory);
@@ -304,7 +343,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       headerRight: false,
     }
     this.userService.getProfile(this.userId).subscribe({
-      next: (res: any)=>{
+      next: (res: any) => {
         this.sellerProfile = res;
         this.profileUpdateFormBuilder();
       }
@@ -312,7 +351,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // this.profileUpdateFormBuilder();
 
     this.userService.getAllCategoriesWithSubCategories().subscribe({
-      next: (res: any)=>{
+      next: (res: any) => {
         this.categories = res[0]['results'];
       }
     })
@@ -362,47 +401,47 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     });
     this.getLocation();
   }
-  profileUpdateFormBuilder(){
+  profileUpdateFormBuilder() {
     this.profileUpdateForm = this._formBuilder.group({
-      companyName: [this.sellerProfile?.companyName?this.sellerProfile.companyName: '' , [Validators.required]],
-      description: [this.sellerProfile?.description?this.sellerProfile.description: '' , [Validators.required]],
-      companyType: [this.sellerProfile?.companyType?this.sellerProfile.companyType: '', Validators.required],
-      noOfEmployee: [this.sellerProfile?.noOfEmployee?this.sellerProfile.noOfEmployee: '', Validators.required],
-      returnPolicy: [this.sellerProfile?.returnPolicy?this.sellerProfile.returnPolicy: '', Validators.required],
-      liabilityInsurance: [this.sellerProfile?.liabilityInsurance?this.sellerProfile.liabilityInsurance: false, Validators.required],
-      workerCompensation: [this.sellerProfile?.workerCompensation?this.sellerProfile.workerCompensation: false, Validators.required],
-      projectMinimum: [this.sellerProfile?.projectMinimum?this.sellerProfile.projectMinimum: '', Validators.required],
-      bonded: [this.sellerProfile?.bonded?this.sellerProfile.bonded: false, Validators.required],
-      writtenContract: [this.sellerProfile?.writtenContract?this.sellerProfile.writtenContract: false, Validators.required] ,
-      address: [this.sellerProfile?.address?this.sellerProfile.address: '', Validators.required],
-      postalCode: [this.sellerProfile?.postalCode?this.sellerProfile.postalCode: '', Validators.required],
+      companyName: [this.sellerProfile?.companyName ? this.sellerProfile.companyName : '', [Validators.required]],
+      description: [this.sellerProfile?.description ? this.sellerProfile.description : '', [Validators.required]],
+      companyType: [this.sellerProfile?.companyType ? this.sellerProfile.companyType : '', Validators.required],
+      noOfEmployee: [this.sellerProfile?.noOfEmployee ? this.sellerProfile.noOfEmployee : '', Validators.required],
+      returnPolicy: [this.sellerProfile?.returnPolicy ? this.sellerProfile.returnPolicy : '', Validators.required],
+      liabilityInsurance: [this.sellerProfile?.liabilityInsurance ? this.sellerProfile.liabilityInsurance : false, Validators.required],
+      workerCompensation: [this.sellerProfile?.workerCompensation ? this.sellerProfile.workerCompensation : false, Validators.required],
+      projectMinimum: [this.sellerProfile?.projectMinimum ? this.sellerProfile.projectMinimum : '', Validators.required],
+      bonded: [this.sellerProfile?.bonded ? this.sellerProfile.bonded : false, Validators.required],
+      writtenContract: [this.sellerProfile?.writtenContract ? this.sellerProfile.writtenContract : false, Validators.required],
+      address: [this.sellerProfile?.address ? this.sellerProfile.address : '', Validators.required],
+      postalCode: [this.sellerProfile?.postalCode ? this.sellerProfile.postalCode : '', Validators.required],
     });
 
     this.sellerWebLinksForm = this._formBuilder.group({
-      webURL: [this.sellerProfile?.webURL?this.sellerProfile.webURL: ''],
-      facebookURL: [this.sellerProfile?.facebookURL?this.sellerProfile.facebookURL: '', Validators.required],
-      instagramURL: [this.sellerProfile?.instagramURL?this.sellerProfile.instagramURL: '', Validators.required],
-      twitterURL: [this.sellerProfile?.twitterURL?this.sellerProfile.twitterURL: '', Validators.required],
-      phone: [this.sellerProfile?.phone?this.sellerProfile.phone: '', Validators.required],
+      webURL: [this.sellerProfile?.webURL ? this.sellerProfile.webURL : ''],
+      facebookURL: [this.sellerProfile?.facebookURL ? this.sellerProfile.facebookURL : '', Validators.required],
+      instagramURL: [this.sellerProfile?.instagramURL ? this.sellerProfile.instagramURL : '', Validators.required],
+      twitterURL: [this.sellerProfile?.twitterURL ? this.sellerProfile.twitterURL : '', Validators.required],
+      phone: [this.sellerProfile?.phone ? this.sellerProfile.phone : '', Validators.required],
     });
   }
   copyText() {
     this.clipboardService.copyFromContent(this.sellerProfile?.referralCode);
   }
-  onUpdateLinks(){
+  onUpdateLinks() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.sellerWebLinksForm.invalid) {
       return;
     }
     let data = this.sellerWebLinksForm.value;
-    data['id']= this.userId;
+    data['id'] = this.userId;
     this.userService.updateProfile(data).subscribe({
-      next: (res)=> {
+      next: (res) => {
         this.modalService.dismissAll();
         this.sellerProfile = res;
       },
-      error: (err)=>  {
+      error: (err) => {
         console.log(err);
       },
     })
@@ -421,7 +460,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   modalUpdatePhoto(modalUpdatePhoto) {
-    this.coverPhotoChangedEvent= '';
+    this.coverPhotoChangedEvent = '';
     this.coverPhotoCroppedImage = '';
     this.companyPhotoChangedEvent = '';
     this.CompanyPhotoCroppedImage = '';
@@ -436,7 +475,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     });
   }
 
-  
+
   coverPhotoChangedEvent: any = '';
   coverPhotoCroppedImage: any = '';
   coverPhotoCroppedImageFile: any;
@@ -451,38 +490,38 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 
   coverfileChangeEvent(event: any): void {
-      this.coverPhotoChangedEvent = event;
+    this.coverPhotoChangedEvent = event;
   }
 
   coverimageCropped(event: ImageCroppedEvent) {
-      this.coverPhotoCroppedImage = event.base64;
-      this.coverPhotoCroppedImageFile = base64ToFile(this.coverPhotoCroppedImage);
+    this.coverPhotoCroppedImage = event.base64;
+    this.coverPhotoCroppedImageFile = base64ToFile(this.coverPhotoCroppedImage);
   }
   companyfileChangeEvent(event: any): void {
     this.companyPhotoChangedEvent = event;
-}
+  }
 
-servicefileChangeEvent(event: any): void {
-  this.servicePhotoChangedEvent = event;
-}
+  servicefileChangeEvent(event: any): void {
+    this.servicePhotoChangedEvent = event;
+  }
 
   companyimageCropped(event: ImageCroppedEvent) {
-      this.CompanyPhotoCroppedImage = event.base64;
-      this.CompanyPhotoCroppedImageFile = base64ToFile(this.CompanyPhotoCroppedImage);
+    this.CompanyPhotoCroppedImage = event.base64;
+    this.CompanyPhotoCroppedImageFile = base64ToFile(this.CompanyPhotoCroppedImage);
   }
 
- serviceImageCropped(event: ImageCroppedEvent) {
+  serviceImageCropped(event: ImageCroppedEvent) {
     this.servicePhotoCroppedImage = event.base64;
     this.servicePhotoCroppedImageFile = base64ToFile(this.servicePhotoCroppedImage);
-}
+  }
   imageLoaded(image?: LoadedImage) {
-      // show cropper
+    // show cropper
   }
   cropperReady() {
-      // cropper ready
+    // cropper ready
   }
   loadImageFailed() {
-      // show message
+    // show message
   }
 
   onSubmit() {
@@ -492,13 +531,13 @@ servicefileChangeEvent(event: any): void {
       // return;
     }
     let data = this.profileUpdateForm.value;
-    data['id']= this.userId;
+    data['id'] = this.userId;
     this.authenticationSerive.updateProfile(data).subscribe({
-      next: (res)=> {
+      next: (res) => {
         this.modalService.dismissAll();
         this.sellerProfile = res;
       },
-      error: (err)=>  {
+      error: (err) => {
         console.log(err);
       },
     })
@@ -515,52 +554,52 @@ servicefileChangeEvent(event: any): void {
     data['postalCode'] = this.postalCode;
     data['radius'] = this.sliderWithNgModel;
     data['nearByPostalCodes'] = this.nearByZipCodes.toString();
-    data['id']= this.userId;
+    data['id'] = this.userId;
     this.userService.updateProfile(data).subscribe({
-      next: (res)=> {
+      next: (res) => {
         this.modalService.dismissAll();
         this.sellerProfile = res;
       },
-      error: (err)=>  {
+      error: (err) => {
         console.log(err);
       },
     })
   }
 
-  uploadCoverPhoto(){
-      if(this.coverPhotoCroppedImageFile){
-        let data :FormData = new FormData();
-        data.append('coverImage', this.coverPhotoCroppedImageFile, 'image/png')
-        data.append('id', this.userId)
-        this.userService.updateCoverPhoto(data).subscribe({
-          next: (res)=> {
-            this.modalService.dismissAll();
-            this.sellerProfile = res;
-          },
-          error: (err)=>  {
-            console.log(err);
-          },
-        })
-      }
-  }
-
-  uploadProfilePhoto(){
-    if(this.CompanyPhotoCroppedImageFile){
-      let data :FormData = new FormData();
-      data.append('profileImage', this.CompanyPhotoCroppedImageFile, 'image/png')
+  uploadCoverPhoto() {
+    if (this.coverPhotoCroppedImageFile) {
+      let data: FormData = new FormData();
+      data.append('coverImage', this.coverPhotoCroppedImageFile, 'image/png')
       data.append('id', this.userId)
-      this.authenticationSerive.updateProfile(data).subscribe({
-        next: (res)=> {
+      this.userService.updateCoverPhoto(data).subscribe({
+        next: (res) => {
           this.modalService.dismissAll();
           this.sellerProfile = res;
         },
-        error: (err)=>  {
+        error: (err) => {
           console.log(err);
         },
       })
     }
   }
-  uploadServicePhotos(){
+
+  uploadProfilePhoto() {
+    if (this.CompanyPhotoCroppedImageFile) {
+      let data: FormData = new FormData();
+      data.append('profileImage', this.CompanyPhotoCroppedImageFile, 'image/png')
+      data.append('id', this.userId)
+      this.authenticationSerive.updateProfile(data).subscribe({
+        next: (res) => {
+          this.modalService.dismissAll();
+          this.sellerProfile = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      })
+    }
+  }
+  uploadServicePhotos() {
     const formData = new FormData();
     formData.append("servicePhotos", this.servicePhotoCroppedImageFile, 'image/png');
     formData.append("id", this.userId);
@@ -571,9 +610,9 @@ servicefileChangeEvent(event: any): void {
       })
   }
 
-  public findCheckOrNot(id){
+  public findCheckOrNot(id) {
     let findIdExists = this.sellerCategories.find(elem => elem.subCategoryId === id);
-    if(findIdExists){
+    if (findIdExists) {
       return true;
     }
     return false;
@@ -615,20 +654,20 @@ servicefileChangeEvent(event: any): void {
       }
     });
 
-    
+
     // Extract the postal codes from the nearby locations
-  this.mapCircleCenter = { lat: latLng.lat(), lng: latLng.lng() };
-  this.mapCircleOptions = {
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    radius: this.sliderWithNgModel*1609.34,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35,
-    draggable: true,
-    center: {lat: latLng.lat(), lng: latLng.lng()}
-  };
-  this.markerCirclePolygonCenter ={ lat: latLng.lat(), lng: latLng.lng() };
+    this.mapCircleCenter = { lat: latLng.lat(), lng: latLng.lng() };
+    this.mapCircleOptions = {
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      radius: this.sliderWithNgModel * 1609.34,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      draggable: true,
+      center: { lat: latLng.lat(), lng: latLng.lng() }
+    };
+    this.markerCirclePolygonCenter = { lat: latLng.lat(), lng: latLng.lng() };
     // this.getZipCodes(latLng, this.radius);
   }
 
@@ -659,7 +698,7 @@ servicefileChangeEvent(event: any): void {
   //   const service = new google.maps.places.PlacesService(this.map);
   //   service.nearbySearch(request, this.callback.bind(this));
   // }
-  
+
 
   callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -673,12 +712,12 @@ servicefileChangeEvent(event: any): void {
     }
   }
 
-  public findNearByPostalCode(){
-    let queryParam = '?zipcode='+this.postalCode+'&miles='+this.sliderWithNgModel*1609.344;
+  public findNearByPostalCode() {
+    let queryParam = '?zipcode=' + this.postalCode + '&miles=' + this.sliderWithNgModel * 1609.344;
     this.userService.getNearByPostalCode(queryParam)
-    .subscribe(res => {
-      this.nearByZipCodes = res;
-    })
+      .subscribe(res => {
+        this.nearByZipCodes = res;
+      })
     //  Call the getZipCodesInRadius method of the GoogleMapsService
     //  this.googleMapsService.findNearbyZipcodes(this.mapCircleCenter.lat, this.mapCircleCenter.lng, this.sliderWithNgModel)
     //  .then((zipCodes) => {
@@ -691,9 +730,9 @@ servicefileChangeEvent(event: any): void {
     //  });
 
     //  this.setRadius(this.sliderWithNgModel);
- }
- public   isReadMore = true;
- showFullDescription(){
-  this.isReadMore = !this.isReadMore
- }
+  }
+  public isReadMore = true;
+  showFullDescription() {
+    this.isReadMore = !this.isReadMore
+  }
 }

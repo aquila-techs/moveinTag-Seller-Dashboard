@@ -13,7 +13,7 @@ import { environment } from 'environments/environment';
 export class OrdermanagementComponent implements OnInit {
   public userId = '';
   public baseURL = environment.serverURL;
-  constructor(       private modalService: NgbModal,
+  constructor(private modalService: NgbModal,
     private _formBuilder: UntypedFormBuilder,
     private orderService: OrderService, private notificationService: NotificationsService) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
@@ -68,57 +68,57 @@ export class OrdermanagementComponent implements OnInit {
   public latedOrder = [];
   public completedOrderAmmountForm: UntypedFormGroup;
 
-  getUserCompletedOrders(){
-    let queryParams = '?userId='+this.userId+'&status=COMPLETED'+'&pageSize='+this.pageSize+'&pageNo='+this.completedOrderPage+'&sortBy=updatedAt&order=desc';;
+  getUserCompletedOrders() {
+    let queryParams = '?userId=' + this.userId + '&status=COMPLETED' + '&pageSize=' + this.pageSize + '&pageNo=' + this.completedOrderPage + '&sortBy=updatedAt&order=desc';;
     this.orderService.getAllCompleteSellerOrders(queryParams)
-    .subscribe(res => {
-      
-      if(res[0].results.length > 0){
-        this.completedOrderTotal = res[0]['count'][0].totalCount;
-      this.completedOrders =  res[0].results;
-      }else{
-        this.completedOrderTotal = 0;
-      this.completedOrders =  [];
-      }
-    })
+      .subscribe(res => {
+
+        if (res[0].results.length > 0) {
+          this.completedOrderTotal = res[0]['count'][0].totalCount;
+          this.completedOrders = res[0].results;
+        } else {
+          this.completedOrderTotal = 0;
+          this.completedOrders = [];
+        }
+      })
   }
 
-  getUserlatedOrders(){
-    let queryParams = '?userId='+this.userId+'&status=LATE';
+  getUserlatedOrders() {
+    let queryParams = '?userId=' + this.userId + '&status=LATE';
     this.orderService.getAllCompleteSellerOrders(queryParams)
-    .subscribe(res => {
-      this.latedOrder =  res[0].results;
-    })
+      .subscribe(res => {
+        this.latedOrder = res[0].results;
+      })
   }
 
-  getUserActiveOrder(){
-    let queryParams = '?userId='+this.userId+'&status=ACTIVE'+'&pageSize='+this.pageSize+'&pageNo='+this.activeOrderPage+'&sortBy=updatedAt&order=desc';
+  getUserActiveOrder() {
+    let queryParams = '?userId=' + this.userId + '&status=ACTIVE' + '&pageSize=' + this.pageSize + '&pageNo=' + this.activeOrderPage + '&sortBy=updatedAt&order=desc';
     this.orderService.getAllActiveSellerOrders(queryParams)
-    .subscribe(res => {
-      if(res[0].results.length > 0){
-        this.activeOrderTotal = res[0]['count'][0].totalCount;
-        this.activeOrders =  res[0].results;
-      }else{
-        this.activeOrderTotal = 0;
-        this.activeOrders =  [];
-      }
-      
-    })
+      .subscribe(res => {
+        if (res[0].results.length > 0) {
+          this.activeOrderTotal = res[0]['count'][0].totalCount;
+          this.activeOrders = res[0].results;
+        } else {
+          this.activeOrderTotal = 0;
+          this.activeOrders = [];
+        }
+
+      })
   }
-  
-  getUSerCanceledOrder(){
-    let queryParams = '?userId='+this.userId+'&status=CANCELLED'+'&pageSize='+this.pageSize+'&pageNo='+this.cancelledOrderPage+'&sortBy=updatedAt&order=desc';
+
+  getUSerCanceledOrder() {
+    let queryParams = '?userId=' + this.userId + '&status=CANCELLED' + '&pageSize=' + this.pageSize + '&pageNo=' + this.cancelledOrderPage + '&sortBy=updatedAt&order=desc';
     this.orderService.getAllCancelledSellerOrders(queryParams)
-    .subscribe(res => {
-      if(res[0].results.length > 0){
-        this.cancelledOrderTotal = res[0]['count'][0].totalCount;
-        this.cancelledOrder =  res[0].results;
-      }else{
-        this.cancelledOrderTotal = 0;
-        this.cancelledOrder = [];
-      }
-      
-    })
+      .subscribe(res => {
+        if (res[0].results.length > 0) {
+          this.cancelledOrderTotal = res[0]['count'][0].totalCount;
+          this.cancelledOrder = res[0].results;
+        } else {
+          this.cancelledOrderTotal = 0;
+          this.cancelledOrder = [];
+        }
+
+      })
   }
   selectedOrder: any = [];
   modalOpenVC(modalVC) {
@@ -127,7 +127,7 @@ export class OrdermanagementComponent implements OnInit {
       size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
     });
   }
-  openOrderDetailPopup(modalVC,selectedOrders) {
+  openOrderDetailPopup(modalVC, selectedOrders) {
     this.selectedOrder = selectedOrders;
 
     this.modalService.open(modalVC, {
@@ -136,9 +136,9 @@ export class OrdermanagementComponent implements OnInit {
     });
   }
   public selectedOrderForComplete: any;
-  public selectedType:any;
-  changeOrderStatus(order, event, type, modalComplete){
-    if(event.target.value === 'COMPLETED'){
+  public selectedType: any;
+  changeOrderStatus(order, event, type, modalComplete) {
+    if (event.target.value === 'COMPLETED') {
       this.selectedOrderForComplete = order;
       this.selectedType = type;
       event.target.value = 'ACTIVE';
@@ -146,83 +146,83 @@ export class OrdermanagementComponent implements OnInit {
       return;
     }
     let data = {
-      "orderId":order._id,
+      "orderId": order._id,
       "status": event.target.value
     }
 
     this.orderService.changeOrderStatus(data)
-    .subscribe(res => {
-      this.completedOrderAmmountFormBuilder();
-      if(order.buyer._id){
-        let data={
-          'heading': order.orderNum + ' Order Status Changed To '+event.target.value,
-          'message': 'Please check orders page for detail.',
-          'receiverId': order.buyer._id,
-          'senderId':  order.seller._id
+      .subscribe(res => {
+        this.completedOrderAmmountFormBuilder();
+        if (order.buyer._id) {
+          let data = {
+            'heading': order.orderNum + ' Order Status Changed To ' + event.target.value,
+            'message': 'Please check orders page for detail.',
+            'receiverId': order.buyer._id,
+            'senderId': order.seller._id
+          }
+          this.notificationService.sendMessage(data, order.buyer._id)
         }
-        this.notificationService.sendMessage(data, order.buyer._id)
-      }
-      // this.getUserActiveOrder();
-      if(type === 'active'){
-        this.getUserActiveOrder();
-      }
-      if(type === 'cancelled'){
-        this.getUSerCanceledOrder();
-      }
-    })
+        // this.getUserActiveOrder();
+        if (type === 'active') {
+          this.getUserActiveOrder();
+        }
+        if (type === 'cancelled') {
+          this.getUSerCanceledOrder();
+        }
+      })
   }
 
 
-  changeOrderStatusComplete(){
+  changeOrderStatusComplete() {
     if (this.completedOrderAmmountForm.invalid) {
       return;
     }
     let data = {
-      "orderId":this.selectedOrderForComplete._id,
+      "orderId": this.selectedOrderForComplete._id,
       "status": 'COMPLETED',
       "ammount": this.completedOrderAmmountForm.value.ammount
     }
 
     this.orderService.changeOrderStatus(data)
-    .subscribe(res => {
-      this.completedOrderAmmountFormBuilder();
-      this.modalService.dismissAll();
-      
-      if(this.selectedOrderForComplete.buyer._id){
-        let data={
-          'heading': this.selectedOrderForComplete.orderNum + ' Order Status Changed To '+'COMPLETED',
-          'message': 'Please check orders page for detail.',
-          'receiverId': this.selectedOrderForComplete.buyer._id,
-          'senderId':  this.selectedOrderForComplete.seller._id
+      .subscribe(res => {
+        this.completedOrderAmmountFormBuilder();
+        this.modalService.dismissAll();
+
+        if (this.selectedOrderForComplete.buyer._id) {
+          let data = {
+            'heading': this.selectedOrderForComplete.orderNum + ' Order Status Changed To ' + 'COMPLETED',
+            'message': 'Please check orders page for detail.',
+            'receiverId': this.selectedOrderForComplete.buyer._id,
+            'senderId': this.selectedOrderForComplete.seller._id
+          }
+          this.notificationService.sendMessage(data, this.selectedOrderForComplete.buyer._id)
         }
-        this.notificationService.sendMessage(data, this.selectedOrderForComplete.buyer._id)
-      }
-      // this.getUserActiveOrder();
-      if(this.selectedType === 'active'){
-        this.getUserActiveOrder();
-      }
-      if(this.selectedType === 'cancelled'){
-        this.getUSerCanceledOrder();
-      }
-      this.selectedOrderForComplete = null;
-      this.selectedType = null;
-    })
+        // this.getUserActiveOrder();
+        if (this.selectedType === 'active') {
+          this.getUserActiveOrder();
+        }
+        if (this.selectedType === 'cancelled') {
+          this.getUSerCanceledOrder();
+        }
+        this.selectedOrderForComplete = null;
+        this.selectedType = null;
+      })
   }
 
-  loadCompletedPage(event){
+  loadCompletedPage(event) {
     this.completedOrderPage = event;
     this.getUserCompletedOrders();
   }
-  loadCancelledPage(event){
+  loadCancelledPage(event) {
     this.cancelledOrderPage = event;
     this.getUSerCanceledOrder();
   }
-  loadActivePage(event){
+  loadActivePage(event) {
     this.activeOrderPage = event;
     this.getUserActiveOrder();
   }
 
-  completedOrderAmmountFormBuilder(){
+  completedOrderAmmountFormBuilder() {
     this.completedOrderAmmountForm = this._formBuilder.group({
       ammount: ['', Validators.required],
     });
