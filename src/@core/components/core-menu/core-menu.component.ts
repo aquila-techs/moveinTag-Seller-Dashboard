@@ -79,7 +79,7 @@ export class CoreMenuComponent implements OnInit {
                   type: 'item',
                   url: 'pages/seller/quotation-listing/'+element.category._id
                 };
-                this.sidebar[2].children.push(itemData);
+                this.sidebar[1].children.push(itemData);
                 this.filterCategories.push(element.category);
               }else{
                 let matchAdded = false;
@@ -96,7 +96,7 @@ export class CoreMenuComponent implements OnInit {
                     type: 'item',
                     url: 'pages/seller/quotation-listing/'+element.category._id
                   };
-                  this.sidebar[2].children.push(itemData);
+                  this.sidebar[1].children.push(itemData);
                   this.filterCategories.push(element.category);
                 }
               }

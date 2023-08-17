@@ -38,14 +38,6 @@ export const menu: CoreMenu[] = [
     url: 'pages/seller/home'
   },
   {
-    id: 'order-management',
-    title: 'Order Management',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'folder',
-    url: 'pages/seller/order-management'
-  },
-  {
     id: 'customer-listing',
     title: 'Active Listing',
     translate: 'MENU.HOME',
@@ -53,6 +45,14 @@ export const menu: CoreMenu[] = [
     type: 'collapsible',
     children: [
     ]
+  },
+  {
+    id: 'order-management',
+    title: 'Order Management',
+    translate: 'MENU.HOME',
+    type: 'item',
+    icon: 'folder',
+    url: 'pages/seller/order-management'
   },
   {
     id: 'chat',
