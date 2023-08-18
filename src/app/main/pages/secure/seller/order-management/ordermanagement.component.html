@@ -1,4 +1,3 @@
-
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <!-- content-header component -->
@@ -17,59 +16,66 @@
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
-                        <tr>
-                          <th>Order#</th>
-                          <th>Consumers</th>
-                          <th>Services</th>
-                          <th>Due On</th>
-                          <th>Status</th>
-                          <th>Action</th>
-                        </tr>
+                          <tr>
+                            <th>Order#</th>
+                            <th>Consumers</th>
+                            <th>Services</th>
+                            <th>Due On</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
                         </thead>
                         <tbody>
                           <tr *ngIf="!activeOrders || activeOrders.length <=0 ">
                             <td colspan="6">No Acive orders to show</td>
                           </tr>
-                        <tr *ngFor="let item of activeOrders">
-                          <td>{{item?.orderNum}}</td>
-                          <td>{{item?.buyer?.firstName}}</td>
-                          <td>{{item?.category?.title}}</td>
-                          <td>{{item.updatedAt | date}}</td>
-                          <td>
-                            <select class="form-control" (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)" style="min-width: 165px;">
-                            <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                            <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
-                            <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
-                            <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
+                          <tr *ngFor="let item of activeOrders">
+                            <td>{{item?.orderNum}}</td>
+                            <td>{{item?.buyer?.firstName}}</td>
+                            <td>{{item?.category?.title}}</td>
+                            <td>{{item.updatedAt | date}}</td>
+                            <td>
+                              <select class="form-control"
+                                (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)"
+                                style="min-width: 165px;">
+                                <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active
+                                </option>
+                                <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
+                                <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''">
+                                  Completed </option>
+                                <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''">
+                                  Cancelled </option>
                               </select>
 
                             </td>
                             <td>
-                              <a class="text-success px-2 py-1 box-shadow-0" (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
+                              <a class="text-success px-2 py-1 box-shadow-0"
+                                (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
                             </td>
-                        </tr>
+                          </tr>
                         </tbody>
                       </table>
-                      
+
                     </div>
-                    
+
+                  </div>
+
                 </div>
-                
-              </div>
-              <div *ngIf="activeOrders && activeOrders.length > 0 " class="d-flex justify-content-end mr-1" style=" bottom: 0; position: absolute; right: 0; ">
-                <ngb-pagination [collectionSize]="activeOrderTotal" [(page)]="activeOrderPage"  aria-label="Custom pagination"
-                (pageChange)="loadActivePage($event)" >
-                  <ng-template ngbPaginationPrevious
-                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-                  </ng-template>
-                  <ng-template ngbPaginationNext
-                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-                  </ng-template>
-                </ngb-pagination>
+                <div *ngIf="activeOrders && activeOrders.length > 0 " class="d-flex justify-content-end mr-1"
+                  style=" bottom: 0; position: absolute; right: 0; ">
+                  <ngb-pagination [collectionSize]="activeOrderTotal" [(page)]="activeOrderPage"
+                    aria-label="Custom pagination" (pageChange)="loadActivePage($event)">
+                    <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                        [class]="'font-weight-bolder'"></span>Prev
+                    </ng-template>
+                    <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'"
+                        [class]="'font-weight-bolder'"></span>
+                    </ng-template>
+                  </ngb-pagination>
+                </div>
               </div>
             </div>
-            </div>
-            
+
           </ng-template>
         </li>
         <li [ngbNavItem]="4">
@@ -83,51 +89,53 @@
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
-                        <tr>
-                          <th>Order#</th>
-                          <th>Consumers</th>
-                          <th>Services</th>
-                          <th>Due On</th>
-                          <th>Status</th>
-                          <th>Action</th>
-                        </tr>
+                          <tr>
+                            <th>Order#</th>
+                            <th>Consumers</th>
+                            <th>Services</th>
+                            <th>Due On</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
                         </thead>
                         <tbody>
                           <tr *ngIf="!completedOrders || completedOrders.length <=0 ">
                             <td colspan="6">No Complete orders to show</td>
                           </tr>
-                        <tr *ngFor="let item of completedOrders">
-                          <td>{{item?.orderNum}}</td>
-                          <td>{{item?.buyer?.firstName}}</td>
-                          <td>{{item?.category?.title}}</td>
-                          <td>{{item.updatedAt | date}}</td>
-                          <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
+                          <tr *ngFor="let item of completedOrders">
+                            <td>{{item?.orderNum}}</td>
+                            <td>{{item?.buyer?.firstName}}</td>
+                            <td>{{item?.category?.title}}</td>
+                            <td>{{item.updatedAt | date}}</td>
+                            <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
                             <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
                             <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
                             <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                             <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                               </select></td> -->
-                              <td>Completed</td>
-                              <td>
-                                <a class="text-success px-2 py-1 box-shadow-0" (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
-                              </td>
-                        </tr>
-                        
+                            <td>Completed</td>
+                            <td>
+                              <a class="text-success px-2 py-1 box-shadow-0"
+                                (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
+                            </td>
+                          </tr>
+
                         </tbody>
                       </table>
                     </div>
-                   
+
                   </div>
                 </div>
               </div>
-              <div *ngIf="completedOrders && completedOrders.length > 0 "  class="d-flex justify-content-end mr-1" style=" bottom: 0; position: absolute; right: 0; ">
-                <ngb-pagination [collectionSize]="completedOrderTotal" [(page)]="completedOrderPage"  aria-label="Custom pagination"
-                (pageChange)="loadCompletedPage($event)" >
-                  <ng-template ngbPaginationPrevious
-                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+              <div *ngIf="completedOrders && completedOrders.length > 0 " class="d-flex justify-content-end mr-1"
+                style=" bottom: 0; position: absolute; right: 0; ">
+                <ngb-pagination [collectionSize]="completedOrderTotal" [(page)]="completedOrderPage"
+                  aria-label="Custom pagination" (pageChange)="loadCompletedPage($event)">
+                  <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                      [class]="'font-weight-bolder'"></span>Prev
                   </ng-template>
-                  <ng-template ngbPaginationNext
-                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                  <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'"
+                      [class]="'font-weight-bolder'"></span>
                   </ng-template>
                 </ngb-pagination>
               </div>
@@ -145,14 +153,14 @@
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
-                        <tr>
-                          <th>Order#</th>
-                          <th>Consumers</th>
-                          <th>Services</th>
-                          <th>Due On</th>
-                          <th>Status</th>
-                          <th>Action</th>
-                        </tr>
+                          <tr>
+                            <th>Order#</th>
+                            <th>Consumers</th>
+                            <th>Services</th>
+                            <th>Due On</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
                         </thead>
                         <tbody>
                           <tr *ngIf="!cancelledOrder || cancelledOrder.length <=0 ">
@@ -163,31 +171,37 @@
                             <td>{{item?.buyer?.firstName}}</td>
                             <td>{{item?.category?.title}}</td>
                             <td>{{item.updatedAt}}</td>
-                            <td><select class="form-control" (change)="changeOrderStatus(item, $event,'cancelled')" style="min-width: 165px;">
-                              <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                              <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
-                              <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
-                              <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
-                                </select></td>
-                                <td>
-                                  <a class="text-success px-2 py-1 box-shadow-0" (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
-                                </td>
-                        </tr>
+                            <td><select class="form-control" (change)="changeOrderStatus(item, $event,'cancelled')"
+                                style="min-width: 165px;">
+                                <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active
+                                </option>
+                                <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
+                                <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''">
+                                  Completed </option>
+                                <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''">
+                                  Cancelled </option>
+                              </select></td>
+                            <td>
+                              <a class="text-success px-2 py-1 box-shadow-0"
+                                (click)="openOrderDetailPopup(modalVC, item)" rippleEffect>Detail</a>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
-                   
+
                   </div>
                 </div>
               </div>
-              <div *ngIf="cancelledOrder && cancelledOrder.length > 0 " class="d-flex justify-content-end mr-1" style=" bottom: 0; position: absolute; right: 0; ">
-                <ngb-pagination [collectionSize]="cancelledOrderTotal" [(page)]="cancelledOrderPage"  aria-label="Custom pagination"
-                (pageChange)="loadCancelledPage($event)" >
-                  <ng-template ngbPaginationPrevious
-                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+              <div *ngIf="cancelledOrder && cancelledOrder.length > 0 " class="d-flex justify-content-end mr-1"
+                style=" bottom: 0; position: absolute; right: 0; ">
+                <ngb-pagination [collectionSize]="cancelledOrderTotal" [(page)]="cancelledOrderPage"
+                  aria-label="Custom pagination" (pageChange)="loadCancelledPage($event)">
+                  <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                      [class]="'font-weight-bolder'"></span>Prev
                   </ng-template>
-                  <ng-template ngbPaginationNext
-                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                  <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'"
+                      [class]="'font-weight-bolder'"></span>
                   </ng-template>
                 </ngb-pagination>
               </div>
@@ -204,23 +218,26 @@
 </div>
 <ng-template #modalCompleteOderGetAmmount let-modal>
   <div class="modal-header">
-    <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Please enter total charges you have taken from the customer</h5>
+    <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Please enter total charges you have taken
+      from the customer</h5>
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body" tabindex="0" ngbAutofocus>
-    <form [formGroup]="completedOrderAmmountForm"  class="px-1" >
+    <form [formGroup]="completedOrderAmmountForm" class="px-1">
       <div class="form-group">
         <label for="email">Enter total charges</label>
-        <input type="number" class="form-control" formControlName="ammount"  />
+        <input type="number" class="form-control" formControlName="ammount" />
       </div>
-      
+
     </form>
-    
+
     <div class="d-flex justify-content-center my-2">
-      <button type="button"  (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmountForm.invalid" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
-      <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+      <button type="button" (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmountForm.invalid"
+        class="btn btn-dark2 mx-1 btn-md px-3" rippleEffect><i data-feather="check"></i> Save</button>
+      <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i
+          data-feather="x"></i> Discard</button>
     </div>
   </div>
 </ng-template>
@@ -236,15 +253,18 @@
     <form action="">
       <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
         <label for="basicInput">What do you need to be done?</label>
-        <input readonly type="text"   [value]="selectedOrder?.subCategory?.title" class="form-control" id="basicInput" placeholder="" />
+        <input readonly type="text" [value]="selectedOrder?.subCategory?.title" class="form-control" id="basicInput"
+          placeholder="" />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.place">
         <label for="basicInput">What do you need to be done?</label>
-        <input readonly type="text" class="form-control" [value]="selectedOrder?.place" id="basicInput" placeholder="Townhall" />
+        <input readonly type="text" class="form-control" [value]="selectedOrder?.place" id="basicInput"
+          placeholder="Townhall" />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.startTime">
         <label for="basicInput">When do you want to start this project?</label>
-        <input readonly type="text" class="form-control" [value]="selectedOrder?.startTime" id="basicInput" placeholder="Within a week" />
+        <input readonly type="text" class="form-control" [value]="selectedOrder?.startTime" id="basicInput"
+          placeholder="Within a week" />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.notes">
         <label for="basicInput">Please provide some details about project? </label>
@@ -253,13 +273,13 @@
       <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
         <label for="basicInput">Service Images</label>
         <div class="row px-1">
-          <div class="col-lg-3 px-50" *ngFor="let item of selectedOrder.orderImages" >
+          <div class="col-lg-3 px-50" *ngFor="let item of selectedOrder.orderImages">
             <img src="{{baseURL}}{{item.path}}" alt="" class="img-fluid w-100">
           </div>
           <!-- <div class="col-lg-3 px-50">
             <img src="{{baseURL}}{{selectedOrder.orderImages[0].path}}" alt="" class="img-fluid w-100">
           </div> -->
-         
+
         </div>
       </div>
     </form>
