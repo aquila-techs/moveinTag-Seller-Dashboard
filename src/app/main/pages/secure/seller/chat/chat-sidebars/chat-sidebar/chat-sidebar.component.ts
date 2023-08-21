@@ -4,6 +4,11 @@ import { first } from 'rxjs/operators';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { ChatService } from '../../chat.service';
 import { environment } from 'environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OrderService } from '@core/services/services/order.service';
+import { UserService } from 'app/auth/service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 
 
 @Component({
@@ -25,7 +30,11 @@ export class ChatSidebarComponent implements OnInit {
    * @param {ChatService} _chatService
    * @param {CoreSidebarService} _coreSidebarService
    */
-  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService) {}
+  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService,
+    private modalService: NgbModal,
+    private orderService: OrderService,
+    private userService: UserService, private activateRoute: ActivatedRoute,
+    private router: Router, private notificationService: NotificationsService) {}
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -124,5 +133,28 @@ export class ChatSidebarComponent implements OnInit {
     this._chatService.onUserProfileChange.subscribe(response => {
       this.userProfile = response;
     });
+  }
+
+  changeOrderStatus(order) {
+    let currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
+    let userId = currentUser._id;
+    let data = {
+      "orderId": order._id,
+      "status": 'ACTIVE',
+      "sellerId": userId
+    }
+    if (order.buyer._id) {
+      let data = {
+        'heading': order.orderNum + ' Order Approved',
+        'message': 'Please check orders page for detail.',
+        'receiverId': order.buyer._id,
+        'senderId': userId
+      }
+      this.notificationService.sendMessage(data, order.buyer._id)
+    }
+    this.orderService.changeOrderStatus(data)
+      .subscribe(res => {
+        this.modalService.dismissAll();
+      })
   }
 }

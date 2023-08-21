@@ -68,6 +68,19 @@
               <a ngbDropdownItem href="javascript:void(0);">Report</a>
             </div>
           </div> -->
+          <div class="d-flex align-items-center" *ngIf="chats.order.status === 'QUOTE'">
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-success w-100" (click)="modalOpenVC(modalApproval,row)" rippleEffect>
+                 Approve
+              </button>
+            </div>
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-danger w-100" (click)="modalOpenVC(modalDecline,row)" rippleEffect>
+                 Decline
+              </button>
+            </div>
+          </div>
+          
         </div>
       </header>
     </div>
@@ -189,3 +202,46 @@
   <!--/ Active Chat -->
 </section>
 <!--/ Main chat area -->
+
+
+<ng-template #modalDecline let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">Confirmation</h5>
+    <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+   You realy want to decline this quotation?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')" rippleEffect>
+      Decline
+    </button>
+    <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')" rippleEffect>
+      Cancel
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #modalApproval let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">Confirmation</h5>
+    <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+   You realy want to approve this quotation?
+   <br>
+   After approve you can check this order under order management tab.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="changeOrderStatus()" rippleEffect>
+      Approve
+    </button>
+    <button type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')" rippleEffect>
+      Cancel
+    </button>
+  </div>
+</ng-template>

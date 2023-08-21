@@ -3,6 +3,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { environment } from 'environments/environment';
 import { ChatService } from '../chat.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OrderService } from '@core/services/services/order.service';
+import { UserService } from 'app/auth/service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 
 
 @Component({
@@ -30,7 +35,10 @@ export class ChatContentComponent implements OnInit {
    * @param {ChatService} _chatService
    * @param {CoreSidebarService} _coreSidebarService
    */
-  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService) {}
+  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService,private modalService: NgbModal,
+    private orderService: OrderService,
+    private userService: UserService, private activateRoute: ActivatedRoute,
+    private router: Router, private notificationService: NotificationsService) {}
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -145,5 +153,35 @@ export class ChatContentComponent implements OnInit {
       }
       
     })
+  }
+
+  modalOpenVC(modalVC, selectOrder) {
+    this.modalService.open(modalVC, {
+      centered: true
+    });
+  }
+
+  changeOrderStatus() {
+    let currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
+    let userId = currentUser._id;
+    let data = {
+      "orderId": this.chats.orderId,
+      "status": 'ACTIVE',
+      "sellerId": userId
+    }
+    if (this.chats.userId) {
+      let data = {
+        'heading': this.chats.order.orderNum + ' Order Approved',
+        'message': 'Please check orders page for detail.',
+        'receiverId': this.chats.userId,
+        'senderId': userId
+      }
+      this.notificationService.sendMessage(data, this.chats.userId)
+    }
+    this.orderService.changeOrderStatus(data)
+      .subscribe(res => {
+        this.chats.order.status = "ACTIVE";
+        this.modalService.dismissAll();
+      })
   }
 }
