@@ -400,31 +400,33 @@
               </div>
             </div>
 
-
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Country</label>
-                <ng-select [(ngModel)]="country" (change)="onCountryChange($event)" required>
+                <ng-select formControlName="country" (change)="onCountryChange($event)" bindLabel="immigration_s_title">
                   <ng-option *ngFor="let country of countriesList" [value]="country">{{country}}</ng-option>
                 </ng-select>
               </div>
             </div>
+
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Province/State</label>
-                <ng-select [(ngModel)]="states" (change)="onStateChange($event)" required>
-                  <ng-option *ngFor="let states of countryStates" [value]="states">{{states}}</ng-option>
+                <ng-select formControlName="state" (change)="onStateChange($event)">
+                  <ng-option *ngFor="let state of countryStates" [value]="state">{{state}}</ng-option>
                 </ng-select>
               </div>
             </div>
+
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">City</label>
-                <ng-select [(ngModel)]="cities"  required>
-                  <ng-option *ngFor="let cities of countryCities" [value]="cities.name">{{cities.name}}</ng-option>
+                <ng-select formControlName="city" required>
+                  <ng-option *ngFor="let city of countryCities" [value]="city">{{city}}</ng-option>
                 </ng-select>
               </div>
             </div>
+
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Bonded</label>
@@ -440,7 +442,7 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Warrenty Terms</label>
-                <input type="text" class="form-control" formControlName="warrentyTerms" />
+                <input type="text" class="form-control" formControlName="warrantyTerms" />
               </div>
             </div>
 

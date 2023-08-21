@@ -44,9 +44,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   public countriesList = [];
   countries: string[] = [];
-  countryStates: string[] = [];
+  public countryStates = [];
   countryCities: string[] = [];
-  country: number;
+  // country: number;
+  // state: any;
+  // city: any;
 
   // // Define the LatLng coordinates for the polygon's  outer path.
   // private polygonCoords = [
@@ -201,21 +203,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
         const country = [...new Set(this.countriesData.map(item => item.country))];
         this.countriesList = country;
-
       }
     })
   }
 
   onCountryChange(country: any) {
-    let states = this.countriesData.filter(state => state.country === country);
-    states = [...new Set(states.map(item => item.subcountry))];
-    states.sort();
-    this.countryStates = states;
+
+    let state = this.countriesData.filter(state => state.country === country);
+    state = [...new Set(state.map(item => item.subcountry))];
+    state.sort();
+    this.countryStates = state;
+
   }
 
   onStateChange(state: any) {
-    let cities = this.countriesData.filter(city => city.subcountry === state);
-    this.countryCities = cities
+    console.log(state)
+    let city = this.countriesData.filter(city => city.subcountry === state);
+    city = [...new Set(city.map(item => item.name))];
+    city.sort();
+    this.countryCities = city;
   }
 
 
@@ -288,6 +294,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.profileUpdateFormBuilder();
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
+
         this.sellerProfile = res;
         if (this.sellerProfile.postalCode) {
           this.postalCode = this.sellerProfile.postalCode;
@@ -333,7 +340,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             }
           }
         });
-        console.log(this.filterCategories);
+
       }
     })
     this.getAllSellerServiceImages();
@@ -415,6 +422,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       writtenContract: [this.sellerProfile?.writtenContract ? this.sellerProfile.writtenContract : false, Validators.required],
       address: [this.sellerProfile?.address ? this.sellerProfile.address : '', Validators.required],
       postalCode: [this.sellerProfile?.postalCode ? this.sellerProfile.postalCode : '', Validators.required],
+      paymentMethod: [this.sellerProfile?.paymentMethod ? this.sellerProfile.paymentMethod : '', Validators.required],
+      warrantyTerms: [this.sellerProfile?.warrantyTerms ? this.sellerProfile.warrantyTerms : '', Validators.required],
+      country: [this.sellerProfile?.country ? this.sellerProfile.country : '', Validators.required],
+      state: [this.sellerProfile?.state ? this.sellerProfile.state : '', Validators.required],
+      city: [this.sellerProfile?.city ? this.sellerProfile.city : '', Validators.required],
     });
 
     this.sellerWebLinksForm = this._formBuilder.group({
@@ -532,6 +544,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
     let data = this.profileUpdateForm.value;
     data['id'] = this.userId;
+
     this.authenticationSerive.updateProfile(data).subscribe({
       next: (res) => {
         this.modalService.dismissAll();

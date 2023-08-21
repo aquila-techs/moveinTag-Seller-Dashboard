@@ -15,30 +15,30 @@ export class CustomerlistingsComponent implements OnInit {
   public baseURL = environment.serverURL;
   public userId = '';
   public currentUser: any;
-  public category: any  = {};
+  public category: any = {};
   public categoryId = '';
   constructor(private modalService: NgbModal,
-     private orderService: OrderService,
-     private userService: UserService,  private activateRoute: ActivatedRoute,
-     private router:Router, private notificationService: NotificationsService) {
-      this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
-      this.userId = this.currentUser._id;
-      router.events.subscribe((val) => {
-        if(this.categoryId !== this.activateRoute.snapshot.paramMap.get('id')){
-          this.categoryId = this.activateRoute.snapshot.paramMap.get('id');
-          this.userService.getACategory(this.categoryId).subscribe({
-            next: (value)=> {
-              this.category = value;
-              this.getAllQuotesOrders();
-            },
-          })
-        }
+    private orderService: OrderService,
+    private userService: UserService, private activateRoute: ActivatedRoute,
+    private router: Router, private notificationService: NotificationsService) {
+    this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
+    this.userId = this.currentUser._id;
+    router.events.subscribe((val) => {
+      if (this.categoryId !== this.activateRoute.snapshot.paramMap.get('id')) {
+        this.categoryId = this.activateRoute.snapshot.paramMap.get('id');
+        this.userService.getACategory(this.categoryId).subscribe({
+          next: (value) => {
+            this.category = value;
+            this.getAllQuotesOrders();
+          },
+        })
+      }
     });
-     }
+  }
 
   public contentHeader: object;
   public progressbarHeight = '.857rem';
-    public selectedOrder: any;
+  public selectedOrder: any;
   modalOpenVC(modalVC, selectedOrders) {
     this.selectedOrder = selectedOrders;
     this.modalService.open(modalVC, {
@@ -53,7 +53,7 @@ export class CustomerlistingsComponent implements OnInit {
    * On init
    */
   ngOnInit() {
-    
+
     this.getAllQuotesOrders();
     this.contentHeader = {
       headerTitle: '',
@@ -75,63 +75,63 @@ export class CustomerlistingsComponent implements OnInit {
       }
     }
   }
-  public userQuote:any;
-  getAllQuotesOrders(){
-    let queryParams = '?&status=QUOTE&searchByQuote=true&categoryId='+this.categoryId+'&userId='+this.userId+"&sortBy=createdAt&order=desc";
+  public userQuote: any;
+  getAllQuotesOrders() {
+    let queryParams = '?&status=QUOTE&searchByQuote=true&categoryId=' + this.categoryId + '&userId=' + this.userId + "&sortBy=createdAt&order=desc";
     this.orderService.getAllQuotesOrders(queryParams)
-    .subscribe(res => {
-      this.userQuote =  res[0].results;
-    })
+      .subscribe(res => {
+        this.userQuote = res[0].results;
+      })
   }
-  changeOrderStatus(order, status){
+  changeOrderStatus(order, status) {
     let data = {
-      "orderId":order._id,
+      "orderId": order._id,
       "status": status,
       "sellerId": this.userId
     }
-    if(order.buyer._id){
-      let data={
+    if (order.buyer._id) {
+      let data = {
         'heading': order.orderNum + ' Order Approved',
         'message': 'Please check orders page for detail.',
         'receiverId': order.buyer._id,
-        'senderId':  this.userId
+        'senderId': this.userId
       }
       this.notificationService.sendMessage(data, order.buyer._id)
     }
     this.orderService.changeOrderStatus(data)
-    .subscribe(res => {
-      this.modalService.dismissAll();
-      this.getAllQuotesOrders();
-    })
+      .subscribe(res => {
+        this.modalService.dismissAll();
+        this.getAllQuotesOrders();
+      })
   }
 
-  startChat(selectedOrder){
+  startChat(selectedOrder) {
     let body: any = {
-      'chatroom':'',
-      'userId':'',
-      'sellerId':'',
-      'orderId':'',
+      'chatroom': '',
+      'userId': '',
+      'sellerId': '',
+      'orderId': '',
     };
-    
-    let emailString = selectedOrder.buyer.email+''+this.currentUser.email;
+
+    let emailString = selectedOrder.buyer.email + '' + this.currentUser.email;
     body.chatroom = emailString.split('').sort().join('') + '_' + selectedOrder._id
     body.userId = selectedOrder.buyer._id;
     body.sellerId = this.currentUser._id;
-    body.orderId =selectedOrder._id
+    body.orderId = selectedOrder._id
     this.userService.createChatRoom(body).subscribe({
-      next:(res)=>{
-        if(selectedOrder.buyer._id){
-          let data={
+      next: (res) => {
+        if (selectedOrder.buyer._id) {
+          let data = {
             'heading': selectedOrder.orderNum + ' Order New Chat Received',
             'message': 'Please check chats page for detail.',
             'receiverId': selectedOrder.buyer._id,
-            'senderId':  this.currentUser._id,
+            'senderId': this.currentUser._id,
             'chatRoomId': res._id
           }
           this.notificationService.sendMessage(data, selectedOrder.buyer._id)
         }
         this.modalService.dismissAll();
-        window.localStorage.setItem('chatRoomId',res._id);
+        window.localStorage.setItem('chatRoomId', res._id);
         this.router.navigate(['/pages/seller/chats'])
       }
     })
