@@ -218,18 +218,18 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   //     }
   //   });
   // }
-  priceId = 'price_1MyGJ2DmnN3Lb8U75UesYONG';
+  priceId = 'price_1NhaU9DmnN3Lb8U78yKEA2id';
   charges = '9.99';
   discount = '0.00';
   total = '9.99';
   selectPackage(){
    if(this.radioModel === 1){
-    this.priceId = 'price_1MyGJ2DmnN3Lb8U75UesYONG';
+    this.priceId = 'price_1NhaU9DmnN3Lb8U78yKEA2id';
     this.charges = '9.99';
     this.discount = '0.00';
     this.total = '9.99';
    } else{
-    this.priceId = 'price_1MyGHvDmnN3Lb8U7i0pZEcMZ'
+    this.priceId = 'price_1NhaUqDmnN3Lb8U7IsN8Lc5u'
     this.charges = '8.25';
     this.discount = '20.88';
     this.total = '99.00';
