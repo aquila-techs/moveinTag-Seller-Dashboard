@@ -3,26 +3,32 @@
         <!-- Content-Header Component -->
         <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
+        <!-- <div class="input-group">
+            <div class="form-outline">
+                <input type="text" class="form-control" placeholder="Search..." (input)="onInput($event)" />
+            </div>
+            <button type="button" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+            </button>
+        </div> -->
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search..." (keyup)="onInput($event)" />
+            </div>
+        </div>
+
         <section>
             <div class="table-wrapper">
                 <div class="row" id="basic-table">
                     <div class="col-12">
                         <div class="card">
                             <!-- <h4 class="table-title"></h4> -->
-                            <ngx-datatable
-                                #myTable
-                                class="bootstrap core-bootstrap"
-                                [columnMode]="ColumnMode.force"
-                                [headerHeight]="50"
-                                [footerHeight]="50"
-                                [rowHeight]="50"
-                                [scrollbarV]="false"
-                                [rows]="userQuote"
-                                (page)="onPage($event)"
-                                [limit]="10"
-                            >
-                                
-                               
+                            <ngx-datatable #myTable class="bootstrap core-bootstrap" [columnMode]="ColumnMode.force"
+                                [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="false"
+                                [rows]="userQuote" (page)="onPage($event)" [limit]="10">
+
+
                                 <ngx-datatable-column name="Order Number" [width]="140" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <strong>{{ row.order.orderNum }}</strong>
@@ -37,53 +43,58 @@
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <div class="rating text-center">
                                             <ngb-rating [(rate)]="row.ratingCount" [max]="5" readonly="true">
-                                            <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                                                <ng-template let-fill="fill" let-index="index"><span
+                                                        class="fa fa-star-o"
+                                                        [class.fa-star]="fill===100"></span></ng-template>
                                             </ngb-rating>
                                         </div>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column name="Description" [width]="300" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                               <div style="margin-left: 0px;width: 300px;overflow: hidden;text-overflow: ellipsis;">{{row.description}}</div> 
+                                        <div
+                                            style="margin-left: 0px;width: 300px;overflow: hidden;text-overflow: ellipsis;">
+                                            {{row.description}}</div>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column name="Action" [width]="200" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div (click)="modalOpenVC(modalRating,row)"  class="badge badge-pill  badge-light-success mr-1">
+                                        <div (click)="modalOpenVC(modalRating,row)"
+                                            class="badge badge-pill  badge-light-success mr-1">
                                             Detail
                                         </div>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                
 
-                               
+
+
                             </ngx-datatable>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-end mr-1">
-                <ngb-pagination [collectionSize]="total" [(page)]="pageNo"  aria-label="Custom pagination"
-                (pageChange)="loadPage($event)" >
-                  <ng-template ngbPaginationPrevious
-                    ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
-                  </ng-template>
-                  <ng-template ngbPaginationNext
-                    >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
-                  </ng-template>
+                <ngb-pagination [collectionSize]="total" [(page)]="pageNo" aria-label="Custom pagination"
+                    (pageChange)="loadPage($event)">
+                    <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
+                            [class]="'font-weight-bolder'"></span>Prev
+                    </ng-template>
+                    <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'"
+                            [class]="'font-weight-bolder'"></span>
+                    </ng-template>
                 </ngb-pagination>
-        
-              </div>
+
+            </div>
         </section>
 
-    
+
     </div>
 </div>
 
 <ng-template #modalRating let-modal>
     <div class="modal-header">
-      <h5 class="modal-title" id="myModalLabel160">Rating</h5>
-      <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <h5 class="modal-title" id="myModalLabel160">Rating</h5>
+        <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button> -->
     </div>
@@ -92,51 +103,57 @@
         <div class="form-group">
             <div class="rating text-center">
                 <ngb-rating [(rate)]="ratingCount" [max]="5" [readonly]="readOnlyRating">
-                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
+                            [class.fa-star]="fill===100"></span></ng-template>
                 </ngb-rating>
             </div>
         </div>
-        
+
         <div class="form-group">
             Response
             <div class="rating text-center">
                 <ngb-rating [(rate)]="responsivenessCount" [max]="5" [readonly]="readOnlyRating">
-                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
+                            [class.fa-star]="fill===100"></span></ng-template>
                 </ngb-rating>
             </div>
         </div>
-        
+
         <div class="form-group">
             Reputation
             <div class="rating text-center">
                 <ngb-rating [(rate)]="reputationCount" [max]="5" [readonly]="readOnlyRating">
-                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
+                            [class.fa-star]="fill===100"></span></ng-template>
                 </ngb-rating>
             </div>
         </div>
-        
+
         <div class="form-group">
-           Recency
+            Recency
             <div class="rating text-center">
                 <ngb-rating [(rate)]="recencyCount" [max]="5" [readonly]="readOnlyRating">
-                <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o" [class.fa-star]="fill===100"></span></ng-template>
+                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
+                            [class.fa-star]="fill===100"></span></ng-template>
                 </ngb-rating>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 px-50" *ngFor="let item of reviewImages" >
-                <img height="100" width="100"  src="{{baseURL}}{{item.path}}" alt="" class="img-fluid w-100">
-              </div>
+            <div class="col-lg-3 px-50" *ngFor="let item of reviewImages">
+                <img height="100" width="100" src="{{baseURL}}{{item.path}}" alt="" class="img-fluid w-100">
+            </div>
             <!-- <img height="100" width="100" *ngIf="ratingImagePath" src="{{baseURL}}{{ratingImagePath}}" alt="" > -->
         </div>
         <div class="form-group">
             <label for="basicInput">Description</label>
-            <textarea type="text" [(ngModel)]="description"  [readonly]="readOnlyRating" class="form-control" placeholder="Add some detail about your order and service for other customers" ></textarea>
+            <textarea type="text" [(ngModel)]="description" [readonly]="readOnlyRating" class="form-control"
+                placeholder="Add some detail about your order and service for other customers"></textarea>
         </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="readOnlyRating" type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')" rippleEffect>
-        Close
-      </button>
+        <button *ngIf="readOnlyRating" type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')"
+            rippleEffect>
+            Close
+        </button>
     </div>
-  </ng-template>
+</ng-template>
