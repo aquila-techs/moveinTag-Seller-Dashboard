@@ -524,20 +524,25 @@
                 <ng-template ngbPanelTitle>
                   <span>{{category.title}} </span>
                 </ng-template>
-                <ng-template ngbPanelContent>
+
+
+                <!-- <ng-template ngbPanelContent>
                   <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
                     <ngb-panel *ngFor="let midLevelCate of category.midLevelCategory; let c=index"
-                      id="midLevelCategory{{c}}">
-                      <ng-template ngbPanelTitle>
+                      id="midLevelCategory{{c}}"> -->
+
+
+
+                      <!-- <ng-template ngbPanelTitle>
                         <span>{{midLevelCate.title}} </span>
-                      </ng-template>
+                      </ng-template> -->
                       <ng-template ngbPanelContent>
                         <div class="row">
-                          <div class="col-3" *ngFor="let subCate of midLevelCate.subcategory; let d=index">
+                          <div class="col-3" *ngFor="let subCate of category.midLevelCategory[0].subcategory; let d=index">
                             <div class="custom-control custom-checkbox ">
                               <input type="checkbox" [checked]="findCheckOrNot(subCate._id)"
                                 class="custom-control-input"
-                                (click)="selectCategory(category._id,midLevelCate._id,subCate)"
+                                (click)="selectCategory(category._id,category.midLevelCategory[0]._id,subCate)"
                                 id="customCheck{{i}}{{c}}{{d}}" />
                               <label class="custom-control-label"
                                 for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
@@ -545,9 +550,13 @@
                           </div>
                         </div>
                       </ng-template>
-                    </ngb-panel>
+
+
+                    <!-- </ngb-panel>
                   </ngb-accordion>
-                </ng-template>
+                </ng-template> -->
+
+
               </ngb-panel>
 
             </ngb-accordion>
