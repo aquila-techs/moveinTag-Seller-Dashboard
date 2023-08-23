@@ -4,6 +4,7 @@ import { OrderService } from '@core/services/services/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 import { environment } from 'environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ordermanagement',
@@ -13,7 +14,7 @@ import { environment } from 'environments/environment';
 export class OrdermanagementComponent implements OnInit {
   public userId = '';
   public baseURL = environment.serverURL;
-  constructor(private modalService: NgbModal,
+  constructor(private modalService: NgbModal, private http: HttpClient,
     private _formBuilder: UntypedFormBuilder,
     private orderService: OrderService, private notificationService: NotificationsService) {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
@@ -67,6 +68,31 @@ export class OrdermanagementComponent implements OnInit {
   public cancelledOrderPage = 1;
   public latedOrder = [];
   public completedOrderAmmountForm: UntypedFormGroup;
+  public searchText: string = "";
+
+  onSubmitSearch() {
+    const Text = this.searchText
+
+    this.http.post("https://api.moventag.com/order/searchSellerOrders", {
+      orderNum: Text
+    }).subscribe({
+      next: (res: any) => {
+
+        if (res.length < 1) {
+          this.activeOrderTotal = 0;
+          this.activeOrders = [];
+        } else {
+          this.activeOrders = [res];
+          this.activeOrderTotal = res.length;
+        }
+
+      }
+    })
+  }
+
+  onSubmitClear() {
+    this.getUserActiveOrder();
+  }
 
   getUserCompletedOrders() {
     let queryParams = '?userId=' + this.userId + '&status=COMPLETED' + '&pageSize=' + this.pageSize + '&pageNo=' + this.completedOrderPage + '&sortBy=updatedAt&order=desc';;

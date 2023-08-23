@@ -8,7 +8,7 @@ import { AuthenticationService } from '@core/services/authentication.service';
 import { OrderService } from '@core/services/services/order.service';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-review',
@@ -27,6 +27,7 @@ export class ReviewComponent implements OnInit {
   ColumnMode = ColumnMode;
   user: any;
   userQuote: any;
+  searchText: string = "";
   public iconsCurrentRate = 0;
 
   constructor(
@@ -95,27 +96,48 @@ export class ReviewComponent implements OnInit {
 
   }
 
-  onInput(e: any) {
 
-    const Text = e.target.value
-    console.log(Text)
-    if (Text === "" || Text === undefined) {
-      this.getAllReviews();
-    }
+  onSubmitSearch() {
+    const Text = this.searchText
     this.http.post("https://api.moventag.com/reviews/searchSellerReview", {
       sellerId: this.user._id,
       userReviewed: true,
       orderNum: Text
     }).subscribe({
       next: (res: any) => {
+        if (res.length < 1) {
+          this.getAllReviews();
+          return;
+        }
         this.userQuote = [res];
         this.total = 1;
-      
-        // this.userQuote = res[0];
       }
     })
-
   }
+
+  onSubmitClear() {
+    this.getAllReviews();
+  }
+
+  // onInput(e: any) {
+
+  //   const Text = e.target.value
+  //   console.log(Text)
+  //   if (Text === "" || Text === undefined) {
+  //     this.getAllReviews();
+  //   }
+  //   this.http.post("https://api.moventag.com/reviews/searchSellerReview", {
+  //     sellerId: this.user._id,
+  //     userReviewed: true,
+  //     orderNum: Text
+  //   }).subscribe({
+  //     next: (res: any) => {
+  //       this.userQuote = [res];
+  //       this.total = 1;
+  //     }
+  //   })
+
+  // }
 
   /**
    * On init
