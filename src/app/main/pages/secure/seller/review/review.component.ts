@@ -106,7 +106,8 @@ export class ReviewComponent implements OnInit {
     }).subscribe({
       next: (res: any) => {
         if (res.length < 1) {
-          this.getAllReviews();
+          // this.getAllReviews();
+          this.userQuote = [];
           return;
         }
         this.userQuote = [res];
@@ -118,26 +119,6 @@ export class ReviewComponent implements OnInit {
   onSubmitClear() {
     this.getAllReviews();
   }
-
-  // onInput(e: any) {
-
-  //   const Text = e.target.value
-  //   console.log(Text)
-  //   if (Text === "" || Text === undefined) {
-  //     this.getAllReviews();
-  //   }
-  //   this.http.post("https://api.moventag.com/reviews/searchSellerReview", {
-  //     sellerId: this.user._id,
-  //     userReviewed: true,
-  //     orderNum: Text
-  //   }).subscribe({
-  //     next: (res: any) => {
-  //       this.userQuote = [res];
-  //       this.total = 1;
-  //     }
-  //   })
-
-  // }
 
   /**
    * On init

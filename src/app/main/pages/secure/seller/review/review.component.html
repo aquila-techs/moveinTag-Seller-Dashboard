@@ -28,17 +28,19 @@
                                 [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="false"
                                 [rows]="userQuote" (page)="onPage($event)" [limit]="10">
 
+                                <ngx-datatable-column *ngIf="!userQuote || userQuote.length <=0 " [width]="140"
+                                    [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <strong>No Reviews to show</strong>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
                                 <ngx-datatable-column name="Order Number" [width]="140" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <strong>{{ row.order.orderNum }}</strong>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <!-- <ngx-datatable-column name="Business Name" [width]="200" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <strong>{{ row.orderNum }}</strong>
-                                    </ng-template>
-                                </ngx-datatable-column> -->
+
                                 <ngx-datatable-column name="Rating" [width]="200" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <div class="rating text-center">

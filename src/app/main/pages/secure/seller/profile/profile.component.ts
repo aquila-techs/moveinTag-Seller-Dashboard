@@ -46,6 +46,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   countries: string[] = [];
   public countryStates = [];
   countryCities: string[] = [];
+  searchText0: string = "";
+  searchText1: string = "";
+  searchText2: string = "";
+  searchText3: string = "";
   // country: number;
   // state: any;
   // city: any;
@@ -363,6 +367,32 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  onSubmitSearch() {
+    const Text = this.searchText0;
+    console.log(Text)
+    // this.http.post("https://api.moventag.com/reviews/searchSellerReview", {
+    //   sellerId: this.user._id,
+    //   userReviewed: true,
+    //   orderNum: Text
+    // }).subscribe({
+    //   next: (res: any) => {
+    //     if (res.length < 1) {
+    //       // this.getAllReviews();
+    //       this.userQuote = [];
+    //       return;
+    //     }
+    //     this.userQuote = [res];
+    //     this.total = 1;
+    //   }
+    // })
+  }
+
+  onSubmitClear() {
+    console.log("Clear")
+    // this.getAllReviews();
+  }
+
   modalOpenVC(modalVC) {
     this.myFiles = [];
     this.modalService.open(modalVC, {
