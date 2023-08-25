@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public submitted = false;
   public userId = '';
   public categories: any;
+  public searchSubCategories: any;
   public sellerCategories: any;
   public sellerServicePhotos: any;
   myFiles: string[] = [];
@@ -46,10 +47,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   countries: string[] = [];
   public countryStates = [];
   countryCities: string[] = [];
-  searchText0: string = "";
-  searchText1: string = "";
-  searchText2: string = "";
-  searchText3: string = "";
+  searchText: string = "";
   // country: number;
   // state: any;
   // city: any;
@@ -156,6 +154,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.selectedCategories.push(item)
     }
   }
+
   saveCategories() {
     let data = {};
     data['userId'] = this.userId;
@@ -369,28 +368,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onSubmitSearch() {
-    const Text = this.searchText0;
-    console.log(Text)
-    // this.http.post("https://api.moventag.com/reviews/searchSellerReview", {
-    //   sellerId: this.user._id,
-    //   userReviewed: true,
-    //   orderNum: Text
-    // }).subscribe({
-    //   next: (res: any) => {
-    //     if (res.length < 1) {
-    //       // this.getAllReviews();
-    //       this.userQuote = [];
-    //       return;
-    //     }
-    //     this.userQuote = [res];
-    //     this.total = 1;
-    //   }
-    // })
+
+    const Text = this.searchText;
+    this.http.get(`https://api.moventag.com/category/getAllSubCategory?q=${Text}`).subscribe({
+      next: (res: any) => {
+        console.log(res)
+        this.searchSubCategories = res
+      }
+    })
   }
 
   onSubmitClear() {
-    console.log("Clear")
-    // this.getAllReviews();
+    this.searchText = "";
+    this.searchSubCategories = [];
   }
 
   modalOpenVC(modalVC) {

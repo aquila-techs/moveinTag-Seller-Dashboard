@@ -530,6 +530,33 @@
         <div class="modal-body " tabindex="0" ngbAutofocus>
           <div class="collapse-default collapse-icon">
 
+            <div class="input-group mb-2">
+              <div class="form-outline">
+                <form (submit)="onSubmitSearch()">
+                  <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText"
+                    name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
+                </form>
+              </div>
+              <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
+                <i class="fa fa-search"></i>
+              </button>
+              <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
+                <i class="fa fa-close"></i>
+              </button>
+            </div>
+
+            <div class="row" style="margin:20px 20px 20px 0px">
+              <div class="col-3" *ngFor="let subCate of searchSubCategories; let d=index">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" [checked]="findCheckOrNot(subCate._id)" class="custom-control-input"
+                    (click)="selectCategory(subCate.category[0].categoryId,subCate.midlevelcategoryId,subCate)"
+                    id="customCheck{{i}}{{c}}{{d}}" />
+                  <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
+                </div>
+              </div>
+            </div>
+
+
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
               <ngb-panel *ngFor="let category of categories; let i=index" id="category{{i}}">
                 <ng-template ngbPanelTitle>
@@ -539,25 +566,10 @@
                 <ng-template ngbPanelContent>
                   <div class="row">
 
-                    <div class="input-group mb-2" style="margin-left: 20px;">
-                      <div class="form-outline">
-                        <form (submit)="onSubmitSearch()">
-                          <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText"
-                            name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
-                        </form>
-                      </div>
-                      <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
-                        <i class="fa fa-search"></i>
-                      </button>
-                      <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
-                        <i class="fa fa-close"></i>
-                      </button>
-                    </div>
-
                     <div class="col-3" *ngFor="let subCate of category.midLevelCategory[0].subcategory; let d=index">
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" [checked]="findCheckOrNot(subCate._id)" class="custom-control-input"
-                          (click)="selectCategory(category._id,category.midLevelCategory[0]._id,subCate)"
+                          (click)="selectCategory('640dfae607de5a58ffdd8a25',subCate.midlevelcategoryId,subCate)"
                           id="customCheck{{i}}{{c}}{{d}}" />
                         <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
                       </div>
@@ -566,8 +578,9 @@
                 </ng-template>
 
               </ngb-panel>
-
             </ngb-accordion>
+
+
           </div>
         </div>
 
