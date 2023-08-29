@@ -142,20 +142,20 @@ export class EarningsComponent implements OnInit {
       headerTitle: 'Earnings',
       actionButton: true,
       headerRight: false,
-      // breadcrumb: {
-      //   type: '',
-      //   links: [
-      //     {
-      //       name: 'Home',
-      //       isLink: true,
-      //       link: '/'
-      //     },
-      //     {
-      //       name: 'Sample',
-      //       isLink: false
-      //     }
-      //   ]
-      // }
+      breadcrumb: {
+        type: '',
+        links: [
+          // {
+          //   name: 'Home',
+          //   isLink: true,
+          //   link: '/'
+          // },
+          // {
+          //   name: 'Sample',
+          //   isLink: false
+          // }
+        ]
+      }
     }
 
     this.getUserEatnings();

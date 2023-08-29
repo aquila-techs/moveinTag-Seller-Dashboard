@@ -23,7 +23,8 @@
                 (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
             </div>
             <div class="profile_details">
-              <h1 class="title">{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</h1>
+              <h1 class="title" style="font-family: 'Montserrat', sans-serif;">{{sellerProfile?.companyName ?
+                sellerProfile.companyName: ''}}</h1>
               <ul>
                 <li *ngIf="sellerProfile?.address"><img src="../../../assets/images/site/map-pin-2.png"
                     alt="">{{sellerProfile?.address ? sellerProfile.address: ''}}
@@ -47,13 +48,15 @@
           <div class="col-12">
             <div class="card card-terms">
               <div class="card-header pb-1">
-                <h5 class="mb-0">Description:</h5>
+                <h5 class="mb-0" style="font-family: 'Montserrat', sans-serif;">Description:</h5>
                 <button class="edit absolute" (click)="modalOpenVCAbout(modalVCAbout)"><img
                     src="../../../assets/images/site/edit.png" alt=""></button>
               </div>
               <div class="card-body pt-0">
-                <p [ngClass]="{'limitTextHeight': isReadMore}">{{sellerProfile?.description}}</p>
-                <a style=" color: #38b6ff; float: right; " (click)="showFullDescription()">
+                <p [ngClass]="{'limitTextHeight': isReadMore}" style="font-family: 'Montserrat', sans-serif;">
+                  {{sellerProfile?.description}}</p>
+                <a style=" color: #38b6ff; float: right; font-family: 'Montserrat', sans-serif;"
+                  (click)="showFullDescription()">
                   {{ isReadMore ? 'Read More': 'Read Less' }}
                 </a>
               </div>
@@ -66,34 +69,48 @@
               <div class="card-header">
                 <button class="edit absolute" (click)="modalOpenVCCategories(modalGoogleMap)"><img
                     src="../../../assets/images/site/edit.png" alt=""></button>
-                <h1 class="card-title">ABOUT</h1>
+                <h5 class="mb-0" style="font-family: 'Montserrat', sans-serif;">ABOUT:</h5>
               </div>
               <div class="card-body">
                 <ul class="">
-                  <li><img src="../../../assets/images/site/user.png" alt=""><span>Company Name:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/company/companyname.png" alt=""><span>Company Name:
                     </span>{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</li>
-                  <li><img src="../../../assets/images/site/check.png" alt=""><span>No. of Employees:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/company/employees.png" alt=""><span>No. of Employees:
                     </span>{{sellerProfile?.noOfEmployee ? sellerProfile.noOfEmployee: ''}}</li>
-                  <li><img src="../../../assets/images/site/crown.png" alt=""><span>Return Policy:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/returnpolicy.png" alt=""><span>Return Policy:
                     </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy: ''}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Liability Insurance:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/company/insurance.png" alt=""><span>Liability Insurance:
                     </span>{{sellerProfile?.liabilityInsurance ? "Yes": 'No'}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Workers Compensation:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/compensation.png" alt=""><span>Workers
+                      Compensation:
                     </span>{{sellerProfile?.workerCompensation ? "Yes": 'No'}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Project Minimum:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/company/minimumproject.png" alt=""><span>Project Minimum:
                     </span>{{sellerProfile?.projectMinimum}}</li>
                   <!-- <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li> -->
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Written Contract:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/writtencontract.png" alt=""><span>Written
+                      Contract:
                     </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Country:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/country.png" alt=""><span>Country:
                     </span>{{sellerProfile?.country ? sellerProfile.country : ''}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Province/State:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/state.png" alt=""><span>Province/State:
                     </span>{{sellerProfile?.state ? sellerProfile.state : ''}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>City:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/city.png" alt=""><span>City:
                     </span>{{sellerProfile?.city ? sellerProfile.city : ''}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Payment Method:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/paymentmethod.png" alt=""><span>Payment Method:
                     </span>{{sellerProfile?.paymentMethod ? sellerProfile.paymentMethod : ''}}</li>
-                  <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Warranty Terms:
+                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/warrantyterm.png" alt=""><span>Warranty Terms:
                     </span>{{sellerProfile?.warrantyTerms ? sellerProfile.warrantyTerms : ''}}</li>
                 </ul>
               </div>
@@ -105,7 +122,7 @@
                 <button class="edit absolute" (click)="modalOpenVCCategories(modalVCCategories)"><img
                     src="../../../assets/images/site/edit.png" alt=""></button>
                 <img class="card-img" src="../../../assets/images/site/list-details.png">
-                <h1 class="card-title">Categories</h1>
+                <h1 class="card-title" style="font-family: 'Montserrat', sans-serif;">Categories</h1>
               </div>
               <div class="card-body">
                 <div class="row" style="
@@ -113,9 +130,10 @@
                   overflow: auto;
               ">
                   <div class="col-lg-12" *ngFor="let category of filterCategories">
-                    <h2 class="list-title">{{category?.title}}</h2>
+                    <h2 class="list-title" style="font-family: 'Montserrat', sans-serif;">{{category?.title}}</h2>
                     <ul class="">
-                      <li *ngFor="let sub of category.subcategory">{{sub?.title}}</li>
+                      <li *ngFor="let sub of category.subcategory" style="font-family: 'Montserrat', sans-serif;">
+                        {{sub?.title}}</li>
                     </ul>
                   </div>
                   <!-- 
@@ -143,10 +161,12 @@
                   src="../../../assets/images/site/edit.png" alt=""></button>
               <div class="card-body">
                 <ul class="info_list">
-                  <li><a href=""><img src="../../../assets/images/site/phone-call.png" alt="">{{sellerProfile?.phone ?
+                  <li style="font-family: 'Montserrat', sans-serif;"><a href=""><img
+                        src="../../../assets/images/site/phone-call.png" alt="">{{sellerProfile?.phone ?
                       sellerProfile.phone: ''}}</a></li>
-                  <li><a href=""><img src="../../../assets/images/site/brand-dribbble.png"
-                        alt="">{{sellerProfile?.webURL ? sellerProfile.webURL: ''}}</a></li>
+                  <li style="font-family: 'Montserrat', sans-serif;"><a href=""><img
+                        src="../../../assets/images/site/brand-dribbble.png" alt="">{{sellerProfile?.webURL ?
+                      sellerProfile.webURL: ''}}</a></li>
                 </ul>
                 <ul class="social_list">
                   <li><a href="{{sellerProfile?.facebookURL ? sellerProfile.facebookURL: ''}}"><img
@@ -178,7 +198,7 @@
           <div class="col-lg-12 col-md-12">
             <div class="gallery_wrapper">
               <div class="d-flex align-items-center mb-2">
-                <h1 class="title mb-0">Services photos</h1>
+                <h1 class="title mb-0" style="font-family: 'Montserrat', sans-serif;">Services photos</h1>
                 <button class="edit ml-2" (click)="modalUpdatePhoto(modalVC)"><img
                     src="../../../assets/images/site/edit.png" alt=""></button>
               </div>
@@ -200,7 +220,8 @@
 
     <ng-template #modalVCCover let-modal>
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Cover image</h5>
+        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Change Cover image</h5>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -210,7 +231,7 @@
         <section>
           <label for="file-upload" style="width: 100%;" *ngIf="!coverPhotoCroppedImage"
             class="py-5 mb-3 text-center file-drop-zone">
-            <h6>Drop pictures here or click to upload</h6>
+            <h6 style="font-family: 'Montserrat', sans-serif;">Drop pictures here or click to upload</h6>
           </label>
           <input id="file-upload" type="file" (change)="coverfileChangeEvent($event)" />
           <image-cropper [imageChangedEvent]="coverPhotoChangedEvent" format="png" maintainAspectRatio="true"
@@ -229,7 +250,8 @@
     </ng-template>
     <ng-template #modalVCProfilePic let-modal>
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Profile Picture</h5>
+        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Change Profile Picture</h5>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -239,7 +261,7 @@
         <section>
           <label for="file-upload" style="width: 100%;" *ngIf="!CompanyPhotoCroppedImage"
             class="py-5 mb-3 text-center file-drop-zone">
-            <h6>Drop pictures here or click to upload</h6>
+            <h6 style="font-family: 'Montserrat', sans-serif;">Drop pictures here or click to upload</h6>
           </label>
           <input id="file-upload" type="file" (change)="companyfileChangeEvent($event)" />
           <image-cropper [imageChangedEvent]="companyPhotoChangedEvent" format="png" maintainAspectRatio="true"
@@ -258,7 +280,8 @@
     </ng-template>
     <ng-template #modalVC let-modal>
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Upload Service Images</h5>
+        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Upload Service Images</h5>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -268,7 +291,7 @@
         <section>
           <label for="file-upload" style="width: 100%;" *ngIf="!servicePhotoCroppedImage"
             class="py-5 mb-3 text-center file-drop-zone">
-            <h6>Drop pictures here or click to upload</h6>
+            <h6 style="font-family: 'Montserrat', sans-serif;">Drop pictures here or click to upload</h6>
           </label>
           <input id="file-upload" type="file" (change)="servicefileChangeEvent($event)" />
           <image-cropper [imageChangedEvent]="servicePhotoChangedEvent" format="png" maintainAspectRatio="true"
@@ -288,7 +311,8 @@
 
     <ng-template #modalVCContactDet let-modal>
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Change Contact Details</h5>
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Change Contact Details</h5>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -296,23 +320,23 @@
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <form [formGroup]="sellerWebLinksForm" (ngSubmit)="onUpdateLinks()" class="px-1">
           <div class="form-group">
-            <label for="email">Phone Number</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Phone Number</label>
             <input type="text" class="form-control" formControlName="phone" placeholder="123-456-789" />
           </div>
           <div class="form-group">
-            <label for="email">Website</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Website</label>
             <input type="text" class="form-control" formControlName="webURL" placeholder="www.domain.com" />
           </div>
           <div class="form-group">
-            <label for="email">Facebook</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Facebook</label>
             <input type="text" class="form-control" formControlName="facebookURL" placeholder="facebook.com" />
           </div>
           <div class="form-group">
-            <label for="email">Instagram</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Instagram</label>
             <input type="text" class="form-control" formControlName="instagramURL" placeholder="instagram.com" />
           </div>
           <div class="form-group">
-            <label for="email">Twitter</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Twitter</label>
             <input type="text" class="form-control" formControlName="twitterURL" placeholder="twitter.com" />
           </div>
           <button type="submit" class="btn btn-dark2 btn-md px-3 mb-2" rippleEffect>Update</button>
@@ -329,43 +353,43 @@
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <form [formGroup]="profileUpdateForm" (ngSubmit)="onSubmit()" class="px-1">
           <div class="form-group">
-            <label for="email">Description</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Description</label>
             <textarea formControlName="description" maxlength="1000" class="form-control" id="" cols="30" rows="4"
               placeholder="Please enter description in maximum 1000 characters."></textarea>
           </div>
           <div class="form-group">
-            <label for="email">Company Name</label>
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Company Name</label>
             <input type="text" class="form-control" formControlName="companyName" placeholder="XYZ" />
           </div>
 
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Address</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Address</label>
                 <input type="text" class="form-control" formControlName="address" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Postal Code/Zip Code</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Postal Code/Zip Code</label>
                 <input type="text" class="form-control" formControlName="postalCode" placeholder="77640" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">No. Employees</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">No. Employees</label>
                 <input type="text" class="form-control" formControlName="noOfEmployee" placeholder="30" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Return Policy</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Return Policy</label>
                 <input type="text" class="form-control" formControlName="returnPolicy" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Liability Insurance</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Liability Insurance</label>
                 <select class="form-control" formControlName="liabilityInsurance">
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
@@ -375,7 +399,7 @@
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Workers Compensation</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Workers Compensation</label>
                 <select class="form-control" formControlName="workerCompensation">
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
@@ -385,7 +409,7 @@
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Project Minimum</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Project Minimum</label>
                 <input type="text" class="form-control" formControlName="projectMinimum" />
               </div>
             </div>
@@ -401,7 +425,7 @@
               </div> -->
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Written Contract</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Written Contract</label>
                 <select class="form-control" formControlName="writtenContract">
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
@@ -412,7 +436,7 @@
 
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Country</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Country</label>
                 <ng-select formControlName="country" (change)="onCountryChange($event)" bindLabel="immigration_s_title">
                   <ng-option *ngFor="let country of countriesList" [value]="country">{{country}}</ng-option>
                 </ng-select>
@@ -421,7 +445,7 @@
 
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Province/State</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Province/State</label>
                 <ng-select formControlName="state" (change)="onStateChange($event)">
                   <ng-option *ngFor="let state of countryStates" [value]="state">{{state}}</ng-option>
                 </ng-select>
@@ -430,7 +454,7 @@
 
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">City</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">City</label>
                 <ng-select formControlName="city" required>
                   <ng-option *ngFor="let city of countryCities" [value]="city">{{city}}</ng-option>
                 </ng-select>
@@ -439,19 +463,19 @@
 
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Bonded</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Bonded</label>
                 <input type="text" class="form-control" formControlName="bonded" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Payment Method</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Payment Method</label>
                 <input type="text" class="form-control" formControlName="paymentMethod" />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
-                <label for="email">Warranty Terms</label>
+                <label for="email" style="font-family: 'Montserrat', sans-serif;">Warranty Terms</label>
                 <input type="text" class="form-control" formControlName="warrantyTerms" />
               </div>
             </div>
@@ -470,7 +494,8 @@
     </ng-template>
     <ng-template #modalGoogleMap let-modal>
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Address With Radius</h5>
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Select Address With Radius</h5>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -489,12 +514,12 @@
             <div *ngIf="nearByZipCodes && nearByZipCodes.length > 0" class="card-categories col-sm-12 mt-1">
               <div class="card-body" style="padding: 0px;">
                 <ul style="max-height: 100px; overflow-y: auto;">
-                  <li *ngFor="let item of nearByZipCodes">{{item}}</li>
+                  <li *ngFor="let item of nearByZipCodes" style="font-family: 'Montserrat', sans-serif;">{{item}}</li>
                 </ul>
               </div>
             </div>
           </div>
-          <p>Set Radius On Map</p>
+          <p style="font-family: 'Montserrat', sans-serif;">Set Radius On Map</p>
           <div class="noUi-wrapper">
             <nouislider [min]="1" [connect]="'lower'" [behaviour]="'tap'" [max]="100" [step]="1" [tooltips]="true"
               [(ngModel)]="sliderWithNgModel"></nouislider>
@@ -521,7 +546,8 @@
     </ng-template>
     <ng-template #modalVCCategories let-modal>
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Categories</h5>
+        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Select Categories</h5>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -540,7 +566,8 @@
               <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
                 <i class="fa fa-search"></i>
               </button>
-              <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
+              <button type="button" (click)="onSubmitClear()" class="btn btn-danger"
+                style="margin-left: 5px; background-color: #FF0000 !important;">
                 <i class="fa fa-close"></i>
               </button>
             </div>
@@ -551,7 +578,8 @@
                   <input type="checkbox" [checked]="findCheckOrNot(subCate._id)" class="custom-control-input"
                     (click)="selectCategory(subCate.category[0].categoryId,subCate.midlevelcategoryId,subCate)"
                     id="customCheck{{i}}{{c}}{{d}}" />
-                  <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
+                  <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}"
+                    style="font-family: 'Montserrat', sans-serif;">{{subCate.title}}</label>
                 </div>
               </div>
             </div>
@@ -560,7 +588,7 @@
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
               <ngb-panel *ngFor="let category of categories; let i=index" id="category{{i}}">
                 <ng-template ngbPanelTitle>
-                  <span>{{category.title}}</span>
+                  <span style="font-family: 'Montserrat', sans-serif;">{{category.title}}</span>
                 </ng-template>
 
                 <ng-template ngbPanelContent>
@@ -569,9 +597,10 @@
                     <div class="col-3" *ngFor="let subCate of category.midLevelCategory[0].subcategory; let d=index">
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" [checked]="findCheckOrNot(subCate._id)" class="custom-control-input"
-                          (click)="selectCategory('640dfae607de5a58ffdd8a25',subCate.midlevelcategoryId,subCate)"
+                          (click)="selectCategory(category._id,category.midLevelCategory[0]._id,subCate)"
                           id="customCheck{{i}}{{c}}{{d}}" />
-                        <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}">{{subCate.title}}</label>
+                        <label class="custom-control-label" for="customCheck{{i}}{{c}}{{d}}"
+                          style="font-family: 'Montserrat', sans-serif;">{{subCate.title}}</label>
                       </div>
                     </div>
                   </div>
