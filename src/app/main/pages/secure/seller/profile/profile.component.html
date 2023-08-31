@@ -112,6 +112,9 @@
                   <li style="font-family: 'Montserrat', sans-serif;"><img
                       src="../../../assets/images/site/profileIcons/warrantyterm.png" alt=""><span>Warranty Terms:
                     </span>{{sellerProfile?.warrantyTerms ? sellerProfile.warrantyTerms : ''}}</li>
+                    <li style="font-family: 'Montserrat', sans-serif;"><img
+                      src="../../../assets/images/site/profileIcons/bond.png" alt=""><span>Bonded:
+                    </span>{{sellerProfile?.bonded ? sellerProfile.bonded : ''}}</li>
                 </ul>
               </div>
             </div>
@@ -162,19 +165,19 @@
               <div class="card-body">
                 <ul class="info_list">
                   <li style="font-family: 'Montserrat', sans-serif;"><a href=""><img
-                        src="../../../assets/images/site/phone-call.png" alt="">{{sellerProfile?.phone ?
+                        src="../../../assets/images/site/social/phone-call.png" alt="">{{sellerProfile?.phone ?
                       sellerProfile.phone: ''}}</a></li>
                   <li style="font-family: 'Montserrat', sans-serif;"><a href=""><img
-                        src="../../../assets/images/site/brand-dribbble.png" alt="">{{sellerProfile?.webURL ?
+                        src="../../../assets/images/site/social/web.png" alt="">{{sellerProfile?.webURL ?
                       sellerProfile.webURL: ''}}</a></li>
                 </ul>
                 <ul class="social_list">
                   <li><a href="{{sellerProfile?.facebookURL ? sellerProfile.facebookURL: ''}}"><img
-                        src="../../../assets/images/site/brand-facebook.png" alt=""></a></li>
+                        src="../../../assets/images/site/social/facebook.png" alt=""></a></li>
                   <li><a href="{{sellerProfile?.instagramURL ? sellerProfile.instagramURL: ''}}"><img
-                        src="../../../assets/images/site/brand-instagram.png" alt=""></a></li>
+                        src="../../../assets/images/site/social/instagram.png" alt=""></a></li>
                   <li><a href="{{sellerProfile?.twitterURL ? sellerProfile.twitterURL: ''}}"><img
-                        src="../../../assets/images/site/brand-twitter.png" alt=""></a></li>
+                        src="../../../assets/images/site/social/twitter.png" alt=""></a></li>
                 </ul>
               </div>
             </div>
