@@ -179,7 +179,7 @@ export class HomeComponent implements OnInit {
   }
   public completedOrders: any = [];
   getUserCompletedOrders(){
-    let queryParams = '?userId='+this.user._id+'&status=COMPLETED'+'&pageSize=10'+'&pageNo=1'+'&sortBy=updatedAt&order=desc';;
+    let queryParams = '?userId='+this.user._id+'&status=ACTIVE'+'&pageSize=10'+'&pageNo=1'+'&sortBy=updatedAt&order=desc';;
     this.orderService.getAllCompleteSellerOrders(queryParams)
     .subscribe(res => {
       this.completedOrders =  res[0].results;

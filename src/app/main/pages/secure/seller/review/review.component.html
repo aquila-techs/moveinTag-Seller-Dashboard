@@ -41,6 +41,12 @@
                                     </ng-template>
                                 </ngx-datatable-column>
 
+                                <ngx-datatable-column name="Customer Name" [width]="140" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <strong>{{ row.user.firstName +" "+  row.user.lastName}}</strong>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
                                 <ngx-datatable-column name="Rating" [width]="200" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <div class="rating text-center">
@@ -62,7 +68,7 @@
                                 <ngx-datatable-column name="Action" [width]="200" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <div (click)="modalOpenVC(modalRating,row)"
-                                            class="badge badge-pill  badge-light-success mr-1">
+                                            class="badge badge-pill  badge-light-success mr-1 cursor-pointer">
                                             Detail
                                         </div>
                                     </ng-template>

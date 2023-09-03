@@ -464,7 +464,7 @@
       </div>
     </div>
 
-    <div class="col-lg-12 mb-12 mb-lg-0">
+    <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
       <div class="card h-100">
         <div class="table-responsive">
           <table class="table table-s1">
@@ -479,7 +479,7 @@
             </thead>
             <tbody>
               <tr *ngIf="!completedOrders || completedOrders.length <=0 ">
-                <td colspan="6">No Complete orders to show</td>
+                <td colspan="6">No active orders to show</td>
               </tr>
               <tr *ngFor="let item of completedOrders">
                 <td>{{item?.orderNum}}</td>
@@ -492,7 +492,7 @@
                 <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                 <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                   </select></td> -->
-                <td>Completed</td>
+                <td>ACTIVE</td>
               </tr>
 
             </tbody>

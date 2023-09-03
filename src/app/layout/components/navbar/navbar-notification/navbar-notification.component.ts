@@ -83,7 +83,12 @@ export class NavbarNotificationComponent implements OnInit {
     }else if(message.heading.toLowerCase().indexOf('order rating') > -1){
       this.router.navigate(['pages/seller/reviews']);
     }    else if(message.heading.toLowerCase().indexOf('quote') > -1){
-      this.router.navigate(['/pages/seller/quotation-listing/640dfae607de5a58ffdd8a25']);
+      if(message.categoryId){
+        this.router.navigate(['/pages/seller/quotation-listing/'+message.categoryId]);
+      }else{
+        this.router.navigate(['/pages/seller/quotation-listing/640dfae607de5a58ffdd8a25']);
+
+      }
     }
    }
 }
