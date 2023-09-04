@@ -9,9 +9,10 @@
                 <div class="col-lg-6">
                     <div class="card auto pb-2" style="max-width: 600px; height: 550px;">
                         <div class="card-body">
-                            <form action="">
+                            <form (submit)="onSubmitSendEmail()">
                                 <div class="form-group mb-2">
-                                    <select class="form-control" style="min-width: 165px;">
+                                    <select class="form-control" (change)="onSelected($event)"
+                                        style="min-width: 165px;">
                                         <option>Select Category</option>
                                         <option value="Technical difficulties">Technical difficulties</option>
                                         <option value="Service not working as expected">Service not working as expected
@@ -27,14 +28,11 @@
                                         <option value="Others">Others</option>
                                     </select>
                                 </div>
-                                <!-- <div class="form-group mb-2">
-                                    <label class="font-medium-2 font-weight-bold mb-1" for="basicInput">Title</label>
-                                    <input type="text" class="form-control" id="basicInput" placeholder="Enter email" />
-                                </div> -->
                                 <div class="form-group mb-2">
                                     <label class="font-medium-2 font-weight-bold mb-1"
                                         for="basicInput">Description</label>
-                                    <textarea class="form-control" name="" id="" cols="30" rows="5"
+                                    <textarea class="form-control" [(ngModel)]="description" name="description"
+                                        id="description" cols="30" rows="5"
                                         placeholder="Briefly describe your issue...."></textarea>
                                 </div>
                                 <button class="btn btn-dark2 btn-md d-flex align-items-center"><i class="font-large-1"
