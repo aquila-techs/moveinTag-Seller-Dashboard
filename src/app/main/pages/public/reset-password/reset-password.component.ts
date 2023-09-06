@@ -22,9 +22,11 @@ export class AuthResetPasswordComponent implements OnInit {
   public confPasswordTextType: boolean;
   public resetPasswordForm: UntypedFormGroup;
   public submitted = false;
-  public passwordChanged= false;
+  public passwordChanged = false;
   public error: '';
   public loading = false;
+  passwordType: string = "";
+  confirmPasswordType: string = "";
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -36,14 +38,15 @@ export class AuthResetPasswordComponent implements OnInit {
    * @param {FormBuilder} _formBuilder
    */
   constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder,
-    private adminService: AdminService, private toatrService: ToastrService,private _router: Router, private route: ActivatedRoute) {
+    private adminService: AdminService, private toatrService: ToastrService, private _router: Router, private route: ActivatedRoute) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
+          showNavbarDashboard: false
         },
         menu: {
           hidden: true
@@ -80,32 +83,61 @@ export class AuthResetPasswordComponent implements OnInit {
    * On Submit
    */
   onSubmit() {
-    this.submitted = true;
 
-    if(!this.resetPasswordForm.invalid &&  this.resetPasswordForm['controls'].newPassword.value !== this.resetPasswordForm['controls'].confirmPassword.value){
+    // this.submitted = true;
+
+    if (this.passwordType === "") {
+      this.toatrService.error('Please enter your password');
+      return;
+    }
+
+    if (this.passwordType !== this.confirmPasswordType) {
       this.toatrService.error('Your passwrod or confirm password did not match.');
       return;
     }
 
-    // Not stop here if form is valid
-    if (!this.resetPasswordForm.invalid) {
-      this.loading = true;
-      let body = {};
-      body['token'] = this.token;
-      body['password'] = this.resetPasswordForm['controls'].newPassword.value;
-      this.adminService.resetPassword(body).pipe(takeUntil(this._unsubscribeAll)).subscribe({
-        next: (res)=>{
-          this.loading = false;
-          if(res && res.message){
-            this.toatrService.error('Please check your email again. Token is expired.', 'Something Wrong!')
-            return;
-          }
-          this.passwordChanged = true;
-          this.toatrService.success('You have successfully reset your password.','Sucessfully Reset!');
-          // this._router.navigate(['/login']);
+    this.loading = true;
+    let body = {};
+    body['token'] = this.token;
+    body['password'] = this.passwordType;
+    this.adminService.resetPassword(body).pipe(takeUntil(this._unsubscribeAll)).subscribe({
+      next: (res) => {
+        this.loading = false;
+        if (res && res.message) {
+          this.toatrService.error('Please check your email again. Token is expired.', 'Something Wrong!')
+          return;
         }
-      })
-    }
+        this.passwordChanged = true;
+        this.toatrService.success('You have successfully reset your password.', 'Sucessfully Reset!');
+        this._router.navigate(['/login']);
+      }
+    })
+
+    // if (!this.resetPasswordForm.invalid && this.resetPasswordForm['controls'].newPassword.value !== this.resetPasswordForm['controls'].confirmPassword.value) {
+    //   this.toatrService.error('Your passwrod or confirm password did not match.');
+    //   return;
+    // }
+
+    // if (!this.resetPasswordForm.invalid) {
+    //   this.loading = true;
+    //   let body = {};
+    //   body['token'] = this.token;
+    //   body['password'] = this.resetPasswordForm['controls'].newPassword.value;
+    //   this.adminService.resetPassword(body).pipe(takeUntil(this._unsubscribeAll)).subscribe({
+    //     next: (res) => {
+    //       this.loading = false;
+    //       if (res && res.message) {
+    //         this.toatrService.error('Please check your email again. Token is expired.', 'Something Wrong!')
+    //         return;
+    //       }
+    //       this.passwordChanged = true;
+    //       this.toatrService.success('You have successfully reset your password.', 'Sucessfully Reset!');
+    //       // this._router.navigate(['/login']);
+    //     }
+    //   })
+    // } else {
+    //   alert("CHECK")
+    // }
   }
 
   // Lifecycle Hooks
@@ -120,7 +152,7 @@ export class AuthResetPasswordComponent implements OnInit {
       confirmPassword: ['', [Validators.required]]
     });
     this.route.params.subscribe((params: Params) => {
-      if(!params['token']){
+      if (!params['token']) {
         this._router.navigate(['/login']);
       }
       this.token = params['token'];
