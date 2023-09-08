@@ -30,11 +30,12 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-8">
-                  <h2>Welcome {{user?.companyName}}</h2>
-                  <p class="card-text font-small-5">You have
+                  <h2 style="font-family: 'Montserrat', sans-serif;">Welcome {{user?.companyName}}</h2>
+                  <p class="card-text font-small-5" style="font-family: 'Montserrat', sans-serif;">You have
                     {{analytics['total-pending-orders']}}/{{analytics['total']}} pending tasks</p>
                   <button routerLink="/pages/seller/order-management" type="button"
-                    class="btn btn-primary waves-effect waves-float waves-light mt-2" rippleEffect>View</button>
+                    class="btn btn-primary waves-effect waves-float waves-light mt-2"
+                    style="font-family: 'Montserrat', sans-serif;" rippleEffect>View</button>
                 </div>
                 <div class="col-4">
                   <!-- <img width="147px" height="147px" style="margin-left: -20px;"
@@ -63,7 +64,7 @@
         <div class="col-xl-3 col-md-4 col-6">
           <div class="card">
             <div class="card-body text-center mb-1 mt-2">
-              <h2 class="mt-2">Star Score</h2>
+              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif;">Star Score</h2>
               <div class="row text-center mt-2 mb-0" style="justify-content: center">
                 <img src="assets/images/site/star-big.png" style="width: 30px; height:30px; margin-right: 5px;" />
                 <h1 style="font-size: 30px;">{{sellerProfile.totalRating}}%</h1>
@@ -76,8 +77,8 @@
         <div class="col-xl-4 col-md-4 col-6">
           <div class="card">
             <div class="card-body text-center mb-2 mt-2">
-              <h2 class="mt-2">${{allEarningAnalytics.totalAmmount}}</h2>
-              <h2 class="mt-2">Total Revenue</h2>
+              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif;">${{allEarningAnalytics.totalAmmount}}</h2>
+              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif;">Total Revenue</h2>
             </div>
           </div>
         </div>
@@ -161,8 +162,8 @@
           <div class="card h-100">
             <div class="card-header pb-0 d-flex justify-content-between mb-lg-n4">
               <div class="card-title mb-0">
-                <h2 class="mb-0">Earning Report</h2>
-                <small class="text-muted">Today's Earning</small>
+                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif;">Earning Report</h2>
+                <small class="text-muted" style="font-family: 'Montserrat', sans-serif;">Today's Earning</small>
               </div>
               <!-- </div> -->
             </div>
@@ -192,7 +193,8 @@
                           <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Daily</h5>
+                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c;font-family: 'Montserrat', sans-serif;">
+                        Daily</h5>
                     </div>
                     <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountDaily}}</h3>
                     <div class="progress w-75" style="height: 4px">
@@ -207,7 +209,8 @@
                           <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Monthly</h5>
+                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c;font-family: 'Montserrat', sans-serif;">
+                        Monthly</h5>
                     </div>
                     <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountMonthly}}</h3>
                     <div class="progress w-75" style="height: 4px">
@@ -222,7 +225,8 @@
                           <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c">Yearly</h5>
+                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c;font-family: 'Montserrat', sans-serif;">
+                        Yearly</h5>
                     </div>
                     <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountYealy}}</h3>
                     <div class="progress w-75" style="height: 4px">
@@ -242,7 +246,7 @@
           <div class="card h-100">
             <div class="card-header d-flex justify-content-between">
               <div class="card-title mb-0">
-                <h2 class="mb-0">Clicks Statistics</h2>
+                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif;">Clicks Statistics</h2>
 
               </div>
             </div>
@@ -256,7 +260,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Profile View</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Profile View</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.viewedCount}}</b>
@@ -286,7 +290,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Email</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Email</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.emailCount}}</b>
@@ -302,7 +306,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Phone Number</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Phone Number</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.phoneCount}}</b>
@@ -318,7 +322,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Website Clicks</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Website Clicks</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.webCount}}</b>
@@ -334,7 +338,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Facebook</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Facebook</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.fbCount}}</b>
@@ -350,7 +354,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Instagram</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Instagram</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.instCount}}</b>
@@ -366,7 +370,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center">Twitter</h5>
+                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Twitter</h5>
                     <div class="d-flex align-items-center">
                       <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
                         <b>{{sellerProfile.twitterCount}}</b>
@@ -392,13 +396,13 @@
             margin-bottom: 0px;
         ">
               <div class="card-header">
-                <h4 class="card-title" style="font-size: 20px; font-weight: bold;">Ticket Tracker</h4>
+                <h4 class="card-title" style="font-size: 24px; font-weight: 600; font-family: 'Montserrat', sans-serif;">Ticket Tracker</h4>
               </div>
               <div class="card-body mt-1">
                 <div class="row">
                   <div class="col-8">
-                    <h2>{{analytics['total']}}</h2>
-                    <p class="card-text font-small-5">Total Tickets</p>
+                    <h2 style="font-family: 'Montserrat', sans-serif;">{{analytics['total']}}</h2>
+                    <p class="card-text font-small-5" style="font-family: 'Montserrat', sans-serif;">Total Tickets</p>
                   </div>
                 </div>
               </div>
@@ -412,7 +416,7 @@
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title">Active</h6>
+                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Active</h6>
                       <small>{{analytics['total-approved-orders']}}</small>
                     </div>
                   </div>
@@ -425,7 +429,7 @@
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title">Completed</h6>
+                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Completed</h6>
                       <small>{{analytics['total-completed-orders']}}</small>
                     </div>
                   </div>
@@ -438,7 +442,7 @@
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title">Pending</h6>
+                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Pending</h6>
                       <small>{{analytics['total-pending-orders']}}</small>
                     </div>
                   </div>
@@ -451,7 +455,7 @@
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title">Cancelled</h6>
+                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Cancelled</h6>
                       <small>{{analytics['total-cancelled-orders']}}</small>
                     </div>
                   </div>

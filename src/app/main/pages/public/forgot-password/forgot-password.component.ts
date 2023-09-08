@@ -80,7 +80,7 @@ export class ForgotPasswordComponent implements OnInit {
             return;
           }
 
-          this.toatrService.success('Please check your email we have send you reset password link.','Sucessfully Send!');
+          this.toatrService.success('Please check your email we have sent you reset password link.','Sucessfully Sent!');
           this._router.navigate(['/login']);
         }
       })

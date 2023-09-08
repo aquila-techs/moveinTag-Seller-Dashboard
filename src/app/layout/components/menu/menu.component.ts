@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -15,7 +16,7 @@ export class MenuComponent {
    * @param {ElementRef} _elementRef
    * @param {Renderer2} _renderer
    */
-  constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
+  constructor(private _elementRef: ElementRef, private _renderer: Renderer2, private router: Router) {
     // Set the default menu
     this._menuType = 'vertical-menu';
   }
@@ -42,6 +43,10 @@ export class MenuComponent {
   }
 
   someUrl() {
-    window.open('https://moventag.com/','_self');
+    window.open('https://moventag.com/', '_self');
+  }
+
+  goBack() {
+    window.open('https://moventag.com/', '_self');
   }
 }

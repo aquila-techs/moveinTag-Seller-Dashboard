@@ -73,48 +73,56 @@
               </div>
               <div class="card-body">
                 <ul class="">
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                  <li *ngIf="sellerProfile?.companyName; else sellerProfile?.companyName"><img
                       src="../../../assets/images/site/company/companyname.png" alt=""><span>Company Name:
-                    </span>{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
-                      src="../../../assets/images/site/company/employees.png" alt=""><span>No. of Employees:
-                    </span>{{sellerProfile?.noOfEmployee ? sellerProfile.noOfEmployee: ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
-                      src="../../../assets/images/site/profileIcons/returnpolicy.png" alt=""><span>Return Policy:
-                    </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy: ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                    </span>{{sellerProfile?.companyName ?
+                    sellerProfile.companyName: ''}}</li>
+                  <li *ngIf="sellerProfile?.noOfEmployee; else sellerProfile?.noOfEmployee"><img
+                      src="../../../assets/images/site/company/employees.png" alt=""><span>No. of
+                      Employees: </span>{{sellerProfile?.noOfEmployee ?
+                    sellerProfile.noOfEmployee: ''}}</li>
+                  <li *ngIf="sellerProfile?.returnPolicy; else sellerProfile?.returnPolicy"><img
+                      src="../../../assets/images/site/profileIcons/returnpolicy.png" alt=""><span>Return
+                      Policy: </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy:
+                    ''}}</li>
+                  <li *ngIf="sellerProfile?.liabilityInsurance; else sellerProfile?.liabilityInsurance"><img
                       src="../../../assets/images/site/company/insurance.png" alt=""><span>Liability Insurance:
-                    </span>{{sellerProfile?.liabilityInsurance ? "Yes": 'No'}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
-                      src="../../../assets/images/site/profileIcons/compensation.png" alt=""><span>Workers
-                      Compensation:
+                    </span>{{sellerProfile?.liabilityInsurance
+                    ? "Yes": 'No'}}</li>
+                  <li *ngIf="sellerProfile?.workerCompensation; else sellerProfile?.workerCompensation"><img
+                      src="../../../assets/images/site/profileIcons/compensation.png" alt=""><span>Workers Compensation:
                     </span>{{sellerProfile?.workerCompensation ? "Yes": 'No'}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                  <li *ngIf="sellerProfile?.projectMinimum; else sellerProfile?.projectMinimum"><img
                       src="../../../assets/images/site/company/minimumproject.png" alt=""><span>Project Minimum:
                     </span>{{sellerProfile?.projectMinimum}}</li>
                   <!-- <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li> -->
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                  <li *ngIf="sellerProfile?.writtenContract; else sellerProfile?.writtenContract"><img
                       src="../../../assets/images/site/profileIcons/writtencontract.png" alt=""><span>Written
-                      Contract:
-                    </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                      Contract: </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
+                  <li *ngIf="sellerProfile?.country; else sellerProfile?.country"><img
                       src="../../../assets/images/site/profileIcons/country.png" alt=""><span>Country:
-                    </span>{{sellerProfile?.country ? sellerProfile.country : ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                    </span>{{sellerProfile?.country ?
+                    sellerProfile.country: ''}}</li>
+                  <li *ngIf="sellerProfile?.state; else sellerProfile?.state"><img
                       src="../../../assets/images/site/profileIcons/state.png" alt=""><span>Province/State:
-                    </span>{{sellerProfile?.state ? sellerProfile.state : ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
+                    </span>{{sellerProfile?.state ?
+                    sellerProfile.state: ''}}</li>
+                  <li *ngIf="sellerProfile?.city; else sellerProfile?.city"><img
                       src="../../../assets/images/site/profileIcons/city.png" alt=""><span>City:
-                    </span>{{sellerProfile?.city ? sellerProfile.city : ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
-                      src="../../../assets/images/site/profileIcons/paymentmethod.png" alt=""><span>Payment Method:
-                    </span>{{sellerProfile?.paymentMethod ? sellerProfile.paymentMethod : ''}}</li>
-                  <li style="font-family: 'Montserrat', sans-serif;"><img
-                      src="../../../assets/images/site/profileIcons/warrantyterm.png" alt=""><span>Warranty Terms:
-                    </span>{{sellerProfile?.warrantyTerms ? sellerProfile.warrantyTerms : ''}}</li>
-                    <li style="font-family: 'Montserrat', sans-serif;"><img
+                    </span>{{sellerProfile?.city ?
+                    sellerProfile.city: ''}}</li>
+                  <li *ngIf="sellerProfile?.paymentMethod; else sellerProfile?.paymentMethod"><img
+                      src="../../../assets/images/site/profileIcons/paymentmethod.png" alt=""><span>Payment
+                      Method: </span>{{sellerProfile?.paymentMethod ?
+                    sellerProfile.paymentMethod: ''}}</li>
+                  <li *ngIf="sellerProfile?.warrantyTerms; else sellerProfile?.warrantyTerms"><img
+                      src="../../../assets/images/site/profileIcons/warrantyterm.png" alt=""><span>Warranty
+                      Terms: </span>{{sellerProfile?.warrantyTerms ?
+                    sellerProfile.warrantyTerms: ''}}</li>
+                  <li *ngIf="sellerProfile?.bonded; else sellerProfile?.bonded"><img
                       src="../../../assets/images/site/profileIcons/bond.png" alt=""><span>Bonded:
-                    </span>{{sellerProfile?.bonded ? sellerProfile.bonded : ''}}</li>
+                    </span>{{sellerProfile?.bonded ?
+                    sellerProfile.bonded: ''}}</li>
                 </ul>
               </div>
             </div>

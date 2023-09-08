@@ -87,7 +87,7 @@ export class ContactComponent implements OnInit {
         description: this.description
       }).subscribe({
         next: (res: any) => {
-          this.toatrService.success('We received your email. We will get back to you ASAP!');
+          this.toatrService.success('We have recieved your email. We will get back to you ASAP!');
         }
       })
 
