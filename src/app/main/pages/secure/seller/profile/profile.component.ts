@@ -562,10 +562,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // return;
     }
     let data = this.profileUpdateForm.value;
+
     data['id'] = this.userId;
 
     this.authenticationSerive.updateProfile(data).subscribe({
       next: (res) => {
+        console.log(res)
         this.modalService.dismissAll();
         this.sellerProfile = res;
       },

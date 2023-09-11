@@ -66,7 +66,7 @@ export const menu: CoreMenu[] = [
     title: 'Reviews',
     translate: 'MENU.HOME',
     type: 'item',
-    icon: 'pocket',
+    icon: 'star',
     url: 'pages/seller/reviews'
   },
   {
@@ -74,7 +74,7 @@ export const menu: CoreMenu[] = [
     title: 'Earnings',
     translate: 'MENU.HOME',
     type: 'item',
-    icon: 'pocket',
+    icon: 'dollar-sign',
     url: 'pages/seller/earnings'
   },
   {
