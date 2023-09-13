@@ -190,7 +190,7 @@
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.orderNum}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.category?.title}}</td>
-                            <td style="font-family: 'Montserrat', sans-serif;">{{item.updatedAt}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item.updatedAt | date}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;"><select class="form-control"
                                 (change)="changeOrderStatus(item, $event,'cancelled')" style="min-width: 165px;">
                                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active

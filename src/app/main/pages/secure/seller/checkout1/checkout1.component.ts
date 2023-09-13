@@ -21,6 +21,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   country: number;
   lastName = "";
   firstName = "";
+  countryName = "";
+  phoneCode = "";
   phone = "";
   cvc = "";
   cardNumber = "";
@@ -1350,13 +1352,11 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   onCountryChange(country: any) {
+    this.countryName = country
+  }
 
-    console.log(country)
-    // let state = this.countriesData.filter(state => state.country === country);
-    // state = [...new Set(state.map(item => item.subcountry))];
-    // state.sort();
-
-
+  onCountryPhoneCode(code: any) {
+    this.phoneCode = code.dial_code
   }
 
   ngAfterViewInit(): void {
@@ -1374,7 +1374,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
 
 
   goToNextStep() {
-    if (this.phone && this.lastName && this.firstName && this.country) {
+ 
+    if (this.phoneCode && this.phone && this.lastName && this.firstName && this.countryName) {
       this.getSellerProfile = false;
       this.subscriptionPacakge = true;
     } else {

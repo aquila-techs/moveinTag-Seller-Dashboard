@@ -297,7 +297,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.profileUpdateFormBuilder();
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
-
+     
         this.sellerProfile = res;
         if (this.sellerProfile.postalCode) {
           this.postalCode = this.sellerProfile.postalCode;
@@ -450,9 +450,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.sellerWebLinksForm = this._formBuilder.group({
       webURL: [this.sellerProfile?.webURL ? this.sellerProfile.webURL : ''],
-      facebookURL: [this.sellerProfile?.facebookURL ? this.sellerProfile.facebookURL : '', Validators.required],
-      instagramURL: [this.sellerProfile?.instagramURL ? this.sellerProfile.instagramURL : '', Validators.required],
-      twitterURL: [this.sellerProfile?.twitterURL ? this.sellerProfile.twitterURL : '', Validators.required],
+      facebookURL: [this.sellerProfile?.facebookURL ? this.sellerProfile.facebookURL : ''],
+      instagramURL: [this.sellerProfile?.instagramURL ? this.sellerProfile.instagramURL : ''],
+      twitterURL: [this.sellerProfile?.twitterURL ? this.sellerProfile.twitterURL : ''],
       phone: [this.sellerProfile?.phone ? this.sellerProfile.phone : '', Validators.required],
     });
   }

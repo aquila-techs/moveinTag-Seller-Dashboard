@@ -88,17 +88,17 @@
                   <li *ngIf="sellerProfile?.liabilityInsurance; else sellerProfile?.liabilityInsurance"><img
                       src="../../../assets/images/site/company/insurance.png" alt=""><span>Liability Insurance:
                     </span>{{sellerProfile?.liabilityInsurance
-                    ? "Yes": 'No'}}</li>
+                    ? sellerProfile?.liabilityInsurance: ''}}</li>
                   <li *ngIf="sellerProfile?.workerCompensation; else sellerProfile?.workerCompensation"><img
                       src="../../../assets/images/site/profileIcons/compensation.png" alt=""><span>Workers Compensation:
-                    </span>{{sellerProfile?.workerCompensation ? "Yes": 'No'}}</li>
+                    </span>{{sellerProfile?.workerCompensation ? sellerProfile?.workerCompensation: ''}}</li>
                   <li *ngIf="sellerProfile?.projectMinimum; else sellerProfile?.projectMinimum"><img
                       src="../../../assets/images/site/company/minimumproject.png" alt=""><span>Project Minimum:
                     </span>{{sellerProfile?.projectMinimum}}</li>
                   <!-- <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li> -->
                   <li *ngIf="sellerProfile?.writtenContract; else sellerProfile?.writtenContract"><img
                       src="../../../assets/images/site/profileIcons/writtencontract.png" alt=""><span>Written
-                      Contract: </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
+                      Contract: </span>{{sellerProfile?.writtenContract ? sellerProfile?.writtenContract: ''}}</li>
                   <li *ngIf="sellerProfile?.country; else sellerProfile?.country"><img
                       src="../../../assets/images/site/profileIcons/country.png" alt=""><span>Country:
                     </span>{{sellerProfile?.country ?
@@ -405,9 +405,9 @@
               <div class="form-group">
                 <label for="email" style="font-family: 'Montserrat', sans-serif;">Liability Insurance</label>
                 <select class="form-control" formControlName="liabilityInsurance">
-                  <option>Select a choice</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
+                  <option value="">Select a choice</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
             </div>
@@ -415,9 +415,9 @@
               <div class="form-group">
                 <label for="email" style="font-family: 'Montserrat', sans-serif;">Workers Compensation</label>
                 <select class="form-control" formControlName="workerCompensation">
-                  <option>Select a choice</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
+                  <option value="">Select a choice</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
             </div>
@@ -442,9 +442,9 @@
               <div class="form-group">
                 <label for="email" style="font-family: 'Montserrat', sans-serif;">Written Contract</label>
                 <select class="form-control" formControlName="writtenContract">
-                  <option>Select a choice</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
+                  <option value="">Select a choice</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               </div>
             </div>
