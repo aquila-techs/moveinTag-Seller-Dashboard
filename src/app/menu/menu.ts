@@ -78,6 +78,14 @@ export const menu: CoreMenu[] = [
     url: 'pages/seller/earnings'
   },
   {
+    id: 'verifications',
+    title: 'Verifications',
+    translate: 'MENU.HOME',
+    type: 'item',
+    icon: 'activity',
+    url: 'pages/seller/verifications'
+  },
+  {
     id: 'settings',
     title: 'Setting',
     icon: 'settings',

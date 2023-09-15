@@ -1,0 +1,69 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <!-- content-header component -->
+        <div style="padding-left: 20px;">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12 d-flex">
+                        <h2 class="content-header-title float-left mb-0" style="font-family: 'Montserrat', sans-serif;">
+                            Verifications
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="profile_banner">
+                        <div class="banner_wrapper" style="border-radius: 0px;">
+                            <img (click)="openLicense()"
+                                src="{{get_url_extension(LisenceURL) === 'pdf' ? 'assets/images/site/gray-img-pdf.jpg' : baseURL+LisenceURL}}"
+                                alt="" class="banner_img" style="cursor: pointer;">
+
+                            <input type="file" id="upload" (change)="licensefileChangeEvent($event)"
+                                accept=".pdf,.jpg,.png" hidden />
+                            <label for="upload" class="btn btn-dark2" style="width:100%; margin-top: -10px;"><img
+                                    src="../../../assets/images/site/highlight.png" alt="">Update License</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="profile_banner">
+                        <div class="banner_wrapper" style="border-radius: 0px;">
+                            <img (click)="openLibilityInsurance()"
+                                src="{{get_url_extension(LibilityInsuranceURL) === 'pdf' ? 'assets/images/site/gray-img-pdf.jpg' : baseURL+LibilityInsuranceURL}}"
+                                alt="" class="banner_img" style="cursor: pointer;">
+
+                            <input type="file" id="upload2" (change)="libilityInsurancefileChangeEvent($event)"
+                                accept=".pdf,.jpg,.png" hidden />
+                            <label for="upload2" class="btn btn-dark2" style="width:100%; margin-top: -10px;"><img
+                                    src="../../../assets/images/site/highlight.png" alt="">Update Libility
+                                Insurance</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="profile_banner">
+                        <div class="banner_wrapper" style="border-radius: 0px;">
+                            <img (click)="openIdentityCard()"
+                                src="{{get_url_extension(IdentityCardURL) === 'pdf' ? 'assets/images/site/gray-img-pdf.jpg' : baseURL+IdentityCardURL}}"
+                                alt="" class="banner_img" style="cursor: pointer;">
+
+                                <input type="file" id="upload3" (change)="IdentityCardfileChangeEvent($event)"
+                                accept=".pdf,.jpg,.png" hidden />
+                            <label for="upload3" class="btn btn-dark2" style="width:100%; margin-top: -10px;"><img
+                                    src="../../../assets/images/site/highlight.png" alt="">Update Identity Card</label>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

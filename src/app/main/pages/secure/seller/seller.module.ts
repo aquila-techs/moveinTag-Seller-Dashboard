@@ -27,6 +27,7 @@ import { HomeComponent } from './home/home.component';
 import { OrdermanagementComponent } from './order-management/ordermanagement.component';
 import { CustomerlistingsComponent } from './customer-listing/customerlistings.component';
 import { EarningsComponent } from './earnings/earnings.component';
+import { VerificationsComponent } from './verifications/verifications.component';
 import { RefferalsComponent } from './refferals/refferals.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -72,6 +73,12 @@ const routes: Routes = [
     component: EarningsComponent,
     canActivate: [AuthGuard],
     data: { animation: 'earnings' }
+  },
+  {
+    path: 'verifications',
+    component: VerificationsComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'verifications' }
   },
   {
     path: 'refferals',

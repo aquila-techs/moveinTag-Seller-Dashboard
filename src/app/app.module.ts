@@ -31,7 +31,6 @@ import { VerifyEmailComponent } from './main/pages/public/verify-email/verify-em
 import { Checkout1Component } from './main/pages/secure/seller/checkout1/checkout1.component';
 import { PaymentGuard } from '@core/guards/payment.guards';
 
-
 const appRoutes: Routes = [
   {
     path: '',
