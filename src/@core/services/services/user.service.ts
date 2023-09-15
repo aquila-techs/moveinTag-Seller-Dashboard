@@ -56,6 +56,15 @@ export class UserService {
   updateCoverPhoto(body){
     return this._http.put('user/update-cover-photo', body)
   }
+  updateSellerLicense(body){
+    return this._http.put('user/update-seller-license', body)
+  }
+  updateSellerLibilityInsurance(body){
+    return this._http.put('user/update-seller-libilityInsurance', body)
+  }
+  updateSellerIdentityCard(body){
+    return this._http.put('user/update-seller-IdentityCard', body)
+  }
   getSellerProfile(id){
     return this._http.get('user/seller/'+id)
   }

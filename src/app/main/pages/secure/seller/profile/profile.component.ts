@@ -297,7 +297,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.profileUpdateFormBuilder();
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
-     
+
         this.sellerProfile = res;
         if (this.sellerProfile.postalCode) {
           this.postalCode = this.sellerProfile.postalCode;

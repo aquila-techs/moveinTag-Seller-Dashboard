@@ -1293,6 +1293,13 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     right: false
   };
 
+  licensePhotoChangedEvent: any = '';
+  licensePhotoChangedEventTYPE: any = '';
+  libilityInsurancePhotoChangedEvent: any = '';
+  libilityInsurancePhotoChangedEventTYPE: any = '';
+  IdentityCardPhotoChangedEvent: any = '';
+  IdentityCardPhotoChangedEventTYPE: any = '';
+
 
   constructor(private _coreConfigService: CoreConfigService,
     private http: HttpClient,
@@ -1323,10 +1330,49 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     };
   }
 
+
+  licensefileChangeEvent(event: any): void {
+
+    if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png") {
+
+      this.licensePhotoChangedEvent = event.target.files[0];
+      this.licensePhotoChangedEventTYPE = event.target.files[0].type;
+      return;
+    } else {
+      this.toastrService.error('Please select correct format of file (PDF, PNG, JPG)')
+    }
+
+  }
+
+  libilityInsurancefileChangeEvent(event: any): void {
+
+    if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png") {
+      this.libilityInsurancePhotoChangedEvent = event.target.files[0];
+      this.libilityInsurancePhotoChangedEventTYPE = event.target.files[0].type;
+      return;
+    } else {
+      this.toastrService.error('Please select correct format of file (PDF, PNG, JPG)')
+    }
+
+  }
+
+  IdentityCardfileChangeEvent(event: any): void {
+
+    if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png") {
+      this.IdentityCardPhotoChangedEvent = event.target.files[0];
+      this.IdentityCardPhotoChangedEventTYPE = event.target.files[0].type;
+
+      return;
+    } else {
+      this.toastrService.error('Please select correct format of file (PDF, PNG, JPG)')
+    }
+
+  }
   /**
    * On init
    */
   ngOnInit() {
+    console.log(this.user)
     this.contentHeader = {
       headerTitle: 'Dashboard',
       actionButton: false,
@@ -1374,13 +1420,76 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
 
 
   goToNextStep() {
- 
-    if (this.phoneCode && this.phone && this.lastName && this.firstName && this.countryName) {
+
+
+    if (this.phoneCode && this.phone && this.countryName) {
+
+
+      if (this.licensePhotoChangedEvent.length < 1) {
+        this.toastrService.error('Please select License', '');
+        return;
+      }
+      if (this.libilityInsurancePhotoChangedEvent.length < 1) {
+        this.toastrService.error('Please select Libility Insurance', '');
+        return;
+      }
+      if (this.IdentityCardPhotoChangedEvent.length < 1) {
+        this.toastrService.error('Please select Identity Card', '');
+        return;
+      }
+
+      if (this.licensePhotoChangedEvent) {
+        let data: FormData = new FormData();
+        data.append('license', this.licensePhotoChangedEvent)
+        data.append('id', this.user._id)
+        this.userService.updateSellerLicense(data).subscribe({
+          next: (res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
+      }
+
+      if (this.libilityInsurancePhotoChangedEvent) {
+        let data: FormData = new FormData();
+        data.append('libilityInsurance', this.libilityInsurancePhotoChangedEvent)
+        data.append('id', this.user._id)
+        this.userService.updateSellerLibilityInsurance(data).subscribe({
+          next: (res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
+      }
+
+      if (this.IdentityCardPhotoChangedEvent) {
+        let data: FormData = new FormData();
+        data.append('IdentityCard', this.IdentityCardPhotoChangedEvent)
+        data.append('id', this.user._id)
+        this.userService.updateSellerIdentityCard(data).subscribe({
+          next: (res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
+      }
+
+      this.licensePhotoChangedEvent = null;
+      this.libilityInsurancePhotoChangedEvent = null;
+      this.IdentityCardPhotoChangedEvent = null;
       this.getSellerProfile = false;
       this.subscriptionPacakge = true;
     } else {
       this.toastrService.error('Please enter all fields.', '');
     }
+
+
   }
   goToFinalStep() {
     this.subscriptionPacakge = false;

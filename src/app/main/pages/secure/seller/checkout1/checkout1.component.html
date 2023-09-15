@@ -63,24 +63,28 @@
                       <ng-option *ngFor="let country of countriesList" [value]="country">{{country}}</ng-option>
                     </ng-select>
                   </div>
+
+                  <label for="basicInput" style="margin-bottom: 20px;">Document upload</label>
+
                   <div class="form-group">
-                    <label for="basicInput">Contact name</label>
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <input type="text" [(ngModel)]="firstName" required class="form-control" id="firstName"
-                            placeholder="First name" />
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <input type="text" [(ngModel)]="lastName" required class="form-control" id="lastName"
-                            placeholder="Last name" />
-                        </div>
-                      </div>
-                    </div>
+                    <label class="form-label" for="login-License">License</label>
+                    <input type="file" (change)="licensefileChangeEvent($event)" accept=".pdf,.jpg,.png" class="form-control file-upload" />
                   </div>
+
                   <div class="form-group">
+                    <label class="form-label" for="login-License">Libility Insurance </label>
+                    <input type="file" (change)="libilityInsurancefileChangeEvent($event)"
+                      class="form-control file-upload" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="login-License">Identity Card</label>
+                    <input type="file" (change)="IdentityCardfileChangeEvent($event)"
+                      class="form-control file-upload" />
+                  </div>
+
+
+                  <div class="form-group" style="margin-top: 20px;">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="customCheck1" />
                       <label class="custom-control-label" for="customCheck1">
