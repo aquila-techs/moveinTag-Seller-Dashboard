@@ -174,6 +174,24 @@ export class UserService {
   getSubscriptionCustomerInfo(body){
     return this._http.post('payment/subscription-info',body);
   }
+  getCustomerCardDetailInfo(body){
+    return this._http.post('payment/get-all-card-list',body);
+  }
+  getCustomerPaymentMethodDetailInfo(body){
+    return this._http.post('payment/get-all-payment-method-list',body);
+  }
+  setPaymentMethodAsDefault(body){
+    return this._http.post('payment/set-default-payment-method',body);
+  }
+  getSubsciptionList(body){
+    return this._http.post('payment/subscription-info',body);
+  }
+  addNewCard(body){
+    return this._http.post('payment/add-new-card',body);
+  }
+  deleteCard(body){
+    return this._http.post('payment/delete-card',body);
+  }
   cancelSubscriptionCustomer(body){
     return this._http.post('payment/cancel-subscription',body);
   }
@@ -188,4 +206,10 @@ export class UserService {
     return this._http.get('user/get-seller-analytics?'+queryParam);
 
   }
+
+  getSellerActiveSubacription(body){
+    return this._http.post('payment/check-user-active-subscription',body);
+
+  }
+
 }

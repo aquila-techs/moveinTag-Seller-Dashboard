@@ -5,6 +5,7 @@ import { UserService } from '@core/services/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-payment',
@@ -18,7 +19,8 @@ export class PaymentComponent implements OnInit {
   constructor(private modalService: NgbModal,
      private orderService: OrderService,
      private userService: UserService,  private activateRoute: ActivatedRoute,
-     private router:Router) {
+     private router:Router,
+     private toster: ToastrService) {
       this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
       this.userId = this.currentUser._id;
      }
@@ -26,8 +28,7 @@ export class PaymentComponent implements OnInit {
   public contentHeader: object;
   public progressbarHeight = '.857rem';
     public selectedOrder: any;
-  modalOpenVC(modalVC, selectedOrders) {
-    this.selectedOrder = selectedOrders;
+  modalOpenVC(modalVC) {
     this.modalService.open(modalVC, {
       centered: true
     });
@@ -42,6 +43,7 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
     
     this.getPaymentStatus();
+    this.getActiveSubscripton();
     this.contentHeader = {
       headerTitle: '',
       actionButton: true,
@@ -63,6 +65,9 @@ export class PaymentComponent implements OnInit {
     }
   }
   public subscription:any;
+  public cardList:any;
+  public transactions:any;
+
   getPaymentStatus(){
     let data = {
       "_id": this.userId
@@ -70,8 +75,42 @@ export class PaymentComponent implements OnInit {
     this.userService.getSubscriptionCustomerInfo(data)
     .subscribe(res => {
       this.subscription =  res;
+      this.transactions =  res['subscriptions'].data;
     })
   }
+  public customer;
+  public paymentMethod;
+  getCardListAndDetails(){
+    let data = {
+      "_id": this.userId
+    }
+    this.userService.getCustomerCardDetailInfo(data)
+    .subscribe(res => {
+      this.cardList =  res.cards.data;
+      this.customer = res.customer;
+    })
+  }
+  getCustomerPaymentMethodDetailInfo(){
+    let data = {
+      "_id": this.userId
+    }
+    this.userService.getCustomerPaymentMethodDetailInfo(data)
+    .subscribe(res => {
+      this.paymentMethod =  res.data;
+    })
+  }
+  
+
+  getAllTransacrtions(){
+    let data = {
+      "_id": this.userId
+    }
+    this.userService.getSubsciptionList(data)
+    .subscribe(res => {
+      this.transactions =  res;
+    })
+  }
+
   cancelPayment(){
     let data = {
       "_id": this.userId
@@ -108,5 +147,94 @@ export class PaymentComponent implements OnInit {
   getDateFormat(miliseconds){
     return moment(miliseconds*1000).format("DD/MMM/YYYY")
   }
-  
+  country: number;
+  lastName = "";
+  firstName = "";
+  phone = "";
+  cvc = "";
+  cardNumber = "";
+  cardname = "";
+  selectedMonth: number;
+  selectedYear: number;
+  months = [
+    { id: 1, name: '1' },
+    { id: 2, name: '2' },
+    { id: 3, name: '3' },
+    { id: 4, name: '4' },
+    { id: 5, name: '5' },
+    { id: 6, name: '6' },
+    { id: 7, name: '7' },
+    { id: 8, name: '8' },
+    { id: 9, name: '9' },
+    { id: 10, name: '10' },
+    { id: 11, name: '11' },
+    { id: 12, name: '12' },
+  ];
+  years = [
+    { id: 2023, name: '2023' },
+    { id: 2024, name: '2024' },
+    { id: 2025, name: '2025' },
+    { id: 2026, name: '2026' },
+    { id: 2027, name: '2027' },
+    { id: 2028, name: '2028' },
+    { id: 2029, name: '2029' },
+    { id: 2030, name: '2030' },
+    { id: 2031, name: '2031' },
+    { id: 2032, name: '2032' },
+    { id: 2033, name: '2033' },
+    { id: 2034, name: '2034' },
+  ];
+  addNewCard() {
+    if (this.cvc && this.cardNumber && this.cardname && this.selectedMonth && this.selectedMonth) {
+      let data = {
+        'cvc': this.cvc,
+        'number': this.cardNumber,
+        'exp_month': this.selectedMonth,
+        'exp_year': this.selectedYear,
+        "_id": this.userId
+      }
+      this.userService.addNewCard(data).subscribe({
+        next: (value) => {
+          this.getCardListAndDetails();
+          this.modalService.dismissAll();
+        }
+      })
+    }else{
+      this.toster.error('Please fill all required fields.');
+    }
+  }
+
+  deleteCard(id) {
+      let data = {
+        'cardId': id,
+        "_id": this.userId
+      }
+      this.userService.deleteCard(data).subscribe({
+        next: (value) => {
+          this.getCardListAndDetails();
+        }
+      })
+    }
+    getActiveSubscripton(){
+      let data = {
+        "_id": this.userId
+      }
+      this.userService.getSellerActiveSubacription(data).subscribe({
+        next: (value) => {
+          console.log(value);
+        }
+      })
+    }
+
+    setPaymentMethodAsDefault(id){
+      let data = {
+        "_id": this.userId,
+        "paymentMethodId": id
+      }
+      this.userService.setPaymentMethodAsDefault(data).subscribe({
+        next: (value) => {
+          this.getCardListAndDetails();
+        }
+      })
+    }
 }
