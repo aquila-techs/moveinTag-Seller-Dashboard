@@ -190,6 +190,7 @@
               </div>
             </div>
           </div>
+
           <!-- <div class="col-xl-4 col-lg-12 order-xl-2 order-md-3 order-2" *ngIf="sellerProfile?.referralCode">
               <div class="card">
                 <div class="card-body d-flex align-items-center">
@@ -201,9 +202,29 @@
                 </div>
               </div>
             </div> -->
-          <div class="col-xl-5 col-md-6 order-xl-3 order-md-2 order-3">
+          <div class="col-xl-9 col-md-9 order-xl-3 order-md-2 order-3" *ngIf="sellerProfile?.termsConditions; else sellerProfile?.termsConditions">
+            <div class="row">
+              <div class="col-12" style="padding:0px">
+                <div class="card card-terms">
+                  <div class="card-header pb-1">
+                    <h5 class="mb-0" style="font-family: 'Montserrat', sans-serif;">Terms & Conditions:</h5>
+                    <button class="edit absolute" (click)="modalOpenVCAbout(modalVCAbout)"><img
+                        src="../../../assets/images/site/edit.png" alt=""></button>
+                  </div>
+                  <div class="card-body pt-0">
+                    <p [ngClass]="{'limitTextHeight': isReadMoreTerms}" style="font-family: 'Montserrat', sans-serif;">
+                      {{sellerProfile?.termsConditions}}</p>
+                    <a style=" color: #38b6ff; float: right; font-family: 'Montserrat', sans-serif;"
+                      (click)="showFullisTerms()">
+                      {{ isReadMoreTerms ? 'Read More': 'Read Less' }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
 
         <div class="row">
           <div class="col-lg-12 col-md-12">
@@ -370,6 +391,11 @@
             <label for="email" style="font-family: 'Montserrat', sans-serif;">Description</label>
             <textarea formControlName="description" maxlength="1000" class="form-control" id="" cols="30" rows="4"
               placeholder="Please enter description in maximum 1000 characters."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="email" style="font-family: 'Montserrat', sans-serif;">Terms & Conditions</label>
+            <textarea formControlName="termsConditions" maxlength="1000" class="form-control" id="" cols="30" rows="4"
+              placeholder="Please enter Terms & Conditions in maximum 1000 characters."></textarea>
           </div>
           <div class="form-group">
             <label for="email" style="font-family: 'Montserrat', sans-serif;">Company Name</label>

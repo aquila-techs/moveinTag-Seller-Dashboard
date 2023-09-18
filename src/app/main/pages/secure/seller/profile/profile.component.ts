@@ -431,6 +431,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.profileUpdateForm = this._formBuilder.group({
       companyName: [this.sellerProfile?.companyName ? this.sellerProfile.companyName : '', [Validators.required]],
       description: [this.sellerProfile?.description ? this.sellerProfile.description : '', [Validators.required]],
+      termsConditions: [this.sellerProfile?.termsConditions ? this.sellerProfile.termsConditions : '', [Validators.required]],
       companyType: [this.sellerProfile?.companyType ? this.sellerProfile.companyType : '', Validators.required],
       noOfEmployee: [this.sellerProfile?.noOfEmployee ? this.sellerProfile.noOfEmployee : '', Validators.required],
       returnPolicy: [this.sellerProfile?.returnPolicy ? this.sellerProfile.returnPolicy : '', Validators.required],
@@ -768,5 +769,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public isReadMore = true;
   showFullDescription() {
     this.isReadMore = !this.isReadMore
+  }
+  public isReadMoreTerms = true;
+  showFullisTerms() {
+    this.isReadMoreTerms = !this.isReadMoreTerms
   }
 }
