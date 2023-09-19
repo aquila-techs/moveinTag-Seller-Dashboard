@@ -133,10 +133,10 @@
                                 {{item.exp_month}}/{{item.exp_year}}
                               </td>
                               <td>
-                                <button class="btn btn-danger" style="margin-left: 5px; background-color: #FF0000 !important;" 
-                                (click)="deleteCard(item.id)">Delete</button>
-                                <button *ngIf="customer.invoice_settings.default_payment_method != item.id" class="btn btn-primary" style="margin-left: 5px; " 
-                                (click)="setPaymentMethodAsDefault(item.id)" >Set Default</button>
+                                <a *ngIf="customer.invoice_settings.default_payment_method != item.id" style="margin-left: 5px; color: #FF0000 !important;" 
+                                (click)="deleteCard(item.id)">Delete</a>
+                                <a *ngIf="customer.invoice_settings.default_payment_method != item.id" style="margin-left: 5px;color:#38b6ff;margin-left:10px" 
+                                (click)="setPaymentMethodAsDefault(item.id)" >Set Default</a>
                               </td>
                             </tr>
                           </tbody>

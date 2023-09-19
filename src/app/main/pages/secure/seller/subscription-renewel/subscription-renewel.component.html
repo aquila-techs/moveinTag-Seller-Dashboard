@@ -1,0 +1,372 @@
+
+<div *ngIf="cardDetail">
+  <div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+
+      <section class="checkout-wrapper">
+        <div>
+          <div class="step-header" style="background-color: #ffffff;">
+            <img src="../assets/images/logo/logo.png" alt="" class="logo"
+              style="width: 200px; height:50px; margin-left:10px">
+            <ul class="list">
+              <li ngbDropdown class="nav-item dropdown-user">
+                <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" ngbDropdownToggle
+                  id="navbarUserDropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="user-nav d-sm-flex d-none">
+                  </div>
+                  <span class="avatar"><img class="round" src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+                      alt="avatar" height="40" width="40" /><span class="avatar-status-online"></span></span>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
+                  <a ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span>
+                    Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="step">
+            <div class="row align-items-center">
+              <div class="col-lg-1"></div>
+              <div class="col-lg-7">
+                <div class="">
+                  
+
+
+                  <div class="">
+                    <div class="">
+                      <!-- content-header component -->
+                  
+                  
+                     <section>
+                        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                          <li [ngbNavItem]="1">
+                            <a ngbNavLink  (click)="getPaymentStatus()" style="font-family: 'Montserrat', sans-serif;">Subscription Detail</a>
+                            <ng-template ngbNavContent>
+                              <section class="mb-1" >
+                                <div class="table-wrapper">
+                                  <div class="row" id="basic-table">
+                                    <div class="col-12">
+                                      <div class="card auto">
+                                        <div *ngIf="!subscription" class="table-responsive" style="
+                                        font-size: 20px;
+                                        text-align: center;
+                                        margin: 30px;
+                                    ">
+                                          
+                                          <span >No subscription found</span>
+                                        </div>
+                                        <div *ngIf="subscription" class="row" style="padding: 20px;">
+                                          <h6 class="mb-2 col-sm-12" style="margin-left: 20px;">Payment Details:</h6>
+                                          <div class="col-xl-6 ">
+                                            <table>
+                                              <tbody>
+                                                <tr>
+                                                  <td class="pr-1"><svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 141.732 141.732"><g fill="#2566af"><path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z"/></g><path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="#e6a540"/><path fill="none" d="M0 0h141.732v141.732H0z"/></svg>
+                                                  </td>
+                                                  <td>
+                                                    
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="col-xl-6">
+                                            <h6 class="mb-2"></h6>
+                                            <table>
+                                              <tbody>
+                                                <tr>
+                                                  <td class="pr-1">Card#</td>
+                                                  <td>...........{{subscription.card.last4}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="pr-1">Charge Type:</td>
+                                                  <td class="text-capitalize">{{subscription.subscription.collection_method.replace('_', ' ')}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="pr-1">Amount:</td>
+                                                  <td>${{subscription.subscription.items.data[0].plan.amount/100}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="pr-1">Interval:</td>
+                                                  <td class="text-capitalize" >{{subscription.subscription.items.data[0].plan.interval}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="pr-1">Trial Start:</td>
+                                                  <td>{{getDateFormat(subscription.subscription.trial_start)}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="pr-1">Trial End:</td>
+                                                  <td>{{getDateFormat(subscription.subscription.trial_end)}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td class="pr-1">Status:</td>
+                                                  <td class="text-capitalize">{{subscription.subscription.status}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="col-sm-12" *ngIf="subscription.subscription.status === 'trialing'">
+                                            *<b>NOTE: </b>Currently your subscription status is 'trialing' that why you didn't pause or cancel your subscription. 
+                                          </div>
+                                          <div class="col-sm-12 float-right" style=" text-align: end; ">
+                                            <!-- <button *ngIf="subscription.subscription.status !== 'active' && subscription.subscription.status !== 'trialing'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="activePayment()" rippleEffect>Activate Subscription</button> -->
+                                            <!-- <button *ngIf="subscription.subscription.status === 'active'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="pausePayment()" rippleEffect>Pause Subscription</button> -->
+                                            <!-- <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="cancelPayment()" rippleEffect>Cancel Subscription</button> -->
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                            </ng-template>
+                          </li>
+                          <li [ngbNavItem]="2">
+                            <a ngbNavLink  (click)="getCardListAndDetails(); getCustomerPaymentMethodDetailInfo();"  style="font-family: 'Montserrat', sans-serif;">Card Details</a>
+                            <ng-template ngbNavContent>
+                              <section class="mb-1" >
+                                <div class="table-wrapper">
+                                  <div class="row" id="basic-table">
+                                    <div class="col-12">
+                                      <div class="card auto" style="padding: 10px;">
+                                        <div *ngIf="!subscription" class="table-responsive" style="
+                                        font-size: 20px;
+                                        text-align: center;
+                                        margin: 30px;
+                                    ">
+                                          
+                                          <span >No payment method found</span>
+                                        </div>
+                                          <table>
+                                            <thead>
+                                              <tr>
+                                                <th>
+                                                  Method
+                                                </th>
+                                                <th>
+                                                  Expires
+                                                </th>
+                                                <th>
+                                                  
+                                                </th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let item of cardList">
+                                                <td>
+                                                  {{item.brand}} ending in {{item.last4}} <span style="
+                                                  background: #38b6ff;
+                                                  padding: 4px 10px 4px 10px;
+                                                  border-radius: 5px;
+                                                  color: white;
+                                                  font-size: 12px;margin-left: 10px;
+                                              " *ngIf="customer.invoice_settings.default_payment_method === item.id">Default</span>
+                                                </td>
+                                                <td>
+                                                  {{item.exp_month}}/{{item.exp_year}}
+                                                </td>
+                                                <td>
+                                                  <a *ngIf="customer.invoice_settings.default_payment_method != item.id" style="margin-left: 5px; color: #FF0000 !important;" 
+                                                  (click)="deleteCard(item.id)">Delete</a>
+                                                  <a *ngIf="customer.invoice_settings.default_payment_method != item.id" style="margin-left: 5px;color:#38b6ff;margin-left:10px" 
+                                                  (click)="setPaymentMethodAsDefault(item.id)" >Set Default</a>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                            
+                                      </div>
+                                    </div>
+                                    <div class="col-12">
+                                      <button class="btn btn-primary" (click)="modalOpenVC(modalAddPayment)">Add Payment Method</button>
+                                      
+                                    </div>
+                                   
+                                  </div>
+                                </div>
+                              </section>
+                            </ng-template>
+                          </li>
+                          <li [ngbNavItem]="3">
+                            <a ngbNavLink   style="font-family: 'Montserrat', sans-serif;">Transaction Detail</a>
+                            <ng-template ngbNavContent>
+                              <section class="mb-1" >
+                                <div class="table-wrapper">
+                                  <div class="row" id="basic-table">
+                                    <div class="col-12">
+                                      <div class="card auto" style="padding: 10px;">
+                                        <div *ngIf="!transactions" class="table-responsive" style="
+                                        font-size: 20px;
+                                        text-align: center;
+                                        margin: 30px;
+                                    ">
+                                          <span >No transaction history found</span>
+                                        </div>
+                                          <table *ngIf="transactions">
+                                            <thead>
+                                              <tr>
+                                                <th>
+                                                  Start Subscription Time
+                                                </th>
+                                                <th>
+                                                  End Subscription Time
+                                                </th>
+                                                <th>
+                                                  Status
+                                                </th>
+                                                <th>
+                                                  Ammount
+                                                </th>
+                                                <th>
+                                                  Invoice
+                                                </th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let item of transactions">
+                                                <td>
+                                                  {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                  {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                  {{item.status}}
+                                                </td>
+                                                <td>
+                                                  ${{item.subtotal/100}}
+                                                </td>
+                                                <td>
+                                                 <a target="_blank" href="{{item.hosted_invoice_url}}">View</a>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                            
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                            </ng-template>
+                          </li>
+                        </ul>
+                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                  
+                      </section>
+                  
+                     
+                   
+                    </div>
+                  </div>
+                  <ng-template #modalAddPayment let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel160">Add Payment Method</h5>
+                        <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button> -->
+                    </div>
+                    <div class="modal-body" tabindex="0" ngbAutofocus>
+                      <div class="form-group">
+                        <label for="basicInput">Name on Card *</label>
+                        <input type="text" [(ngModel)]="cardname" name="name" class="form-control" id="basicInput"
+                          placeholder="" />
+                      </div>
+                      <div class="form-group">
+                        <label for="basicInput2">Card Number *</label>
+                        <input type="text" [(ngModel)]="cardNumber" name="cardNumber" class="form-control" id="basicInput2"
+                          placeholder="" />
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-8">
+                          <label for="basicInput">Expiration Date *</label>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <ng-select [(ngModel)]="selectedMonth" name="month">
+                                  <ng-option *ngFor="let month of months" [value]="month.id">{{month.name}}</ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <ng-select [(ngModel)]="selectedYear" name="year">
+                                  <ng-option *ngFor="let year of years" [value]="year.id">{{year.name}}</ng-option>
+                                </ng-select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label for="basicInput3">Security Code *</label>
+                            <input type="text" class="form-control" [(ngModel)]="cvc" name="cvc" id="basicInput3"
+                              placeholder="CVV" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="addNewCard()"
+                          rippleEffect>
+                          Add
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')"
+                            rippleEffect>
+                            Close
+                        </button>
+                    </div>
+                  </ng-template>
+
+
+
+
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="sidebar">
+                  <h3 class="title">Subscription Plans</h3>
+                  <div class="btn-group-toggle d-block" ngbRadioGroup name="radioBasic" (change)="selectPackage()"
+                    [(ngModel)]="radioModel">
+                    <label ngbButtonLabel class="btn-outline-primary d-block text-left py-2 npr" rippleEffect>
+                      <input ngbButton type="radio" [value]="1" />
+                      <span class="font-medium-3 d-block mb-1 text-black font-weight-bolder">Monthly <span
+                          class="font-small-2 font-weight-light">(annual commitment)</span></span>
+                      <span class="font-medium-3 d-block mb-2 text-black font-weight-bolder">$9.99 <span
+                          class="font-small-2 font-weight-light">/month</span></span>
+                      <!-- <span class="text-dark d-block mb-1"><del>$129/month</del> <span class="text-primary"> 50% off first 3 months</span></span> -->
+                      <span class="text-dark d-block">Billed monthly</span>
+                    </label>
+
+                    <label ngbButtonLabel class="btn-outline-primary d-block text-left py-2 npr" rippleEffect>
+                      <input ngbButton type="radio" [value]="2" />
+                      <span class="font-medium-3 d-block mb-1 text-black font-weight-bolder">Annual <span
+                          class="font-small-2 font-weight-light">(pay upfront)</span></span>
+                      <span class="font-medium-3 d-block mb-2 text-black font-weight-bolder">$8.25 <span
+                          class="font-small-2 font-weight-light">/month</span></span>
+                      <span class="text-dark d-block mb-1"><span class="text-primary"> Save $20.88</span></span>
+                      <span class="text-dark d-block">Billed annually $99</span>
+                    </label>
+                  </div>
+                  <ul class="list">
+                    <li><span>Essential Plan - 1 User Included</span> <span>${{charges}}</span></li>
+                    <li class="text-primary"><span>Discount</span> <span>-${{discount}}</span>
+                    </li>
+                    <!-- <li><span>Total</span> <span>$65.00</span></li> -->
+                    <li class="font-medium-1 font-weight-bolder text-black"><span>Total</span> <span>${{total}}</span>
+                    </li>
+                  </ul>
+                  <button class="btn btn-primary w-100 btn-lg" (click)="reactiveSubacription()">Submit Subscription</button>
+                </div>
+              </div>
+              <div class="col-lg-1"></div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+  </div>
+</div>

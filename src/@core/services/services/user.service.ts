@@ -212,4 +212,12 @@ export class UserService {
 
   }
 
+  
+  reactiveSubacription(body){
+    return this._http.post('payment/reactive-subscription',body);
+
+  }
+
+  
+
 }

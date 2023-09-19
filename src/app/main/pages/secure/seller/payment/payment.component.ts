@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@core/services/authentication.service';
 import { OrderService } from '@core/services/services/order.service';
 import { UserService } from '@core/services/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +21,8 @@ export class PaymentComponent implements OnInit {
      private orderService: OrderService,
      private userService: UserService,  private activateRoute: ActivatedRoute,
      private router:Router,
-     private toster: ToastrService) {
+     private toster: ToastrService,
+     private authenticateService: AuthenticationService) {
       this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
       this.userId = this.currentUser._id;
      }
@@ -221,7 +223,15 @@ export class PaymentComponent implements OnInit {
       }
       this.userService.getSellerActiveSubacription(data).subscribe({
         next: (value) => {
-          console.log(value);
+          if(!value){
+            let user = this.currentUser;
+            this.currentUser.subscriptionStatus = 'cancel';
+            this.authenticateService.updateUserData(this.currentUser);
+          }else{
+            let user = this.currentUser;
+            this.currentUser.subscriptionStatus = 'active';
+            this.authenticateService.updateUserData(this.currentUser);
+          }
         }
       })
     }

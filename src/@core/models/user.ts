@@ -14,4 +14,5 @@ export class User {
   };
   payment?: boolean;
   accessToken?: string;
+  subscriptionStatus?: string;
 }

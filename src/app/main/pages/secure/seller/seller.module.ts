@@ -38,6 +38,7 @@ import { Checkout1Component } from './checkout1/checkout1.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReviewComponent } from './review/review.component';
 import { ContactComponent } from './contact/contact.component';
+import { SubscriptionRenewelComponent } from './subscription-renewel/subscription-renewel.component';
 
 const routes: Routes = [
   {
@@ -116,7 +117,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { animation: 'about-your-business' }
   },
-
+  {
+    path: 'subscription-renewel',
+    component: SubscriptionRenewelComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'about-your-business' }
+  },
   {
     path: 'chats',
     loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
@@ -133,7 +139,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ProfileComponent,
     HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component,ContactComponent,
     ReviewComponent,
-    PaymentComponent
+    PaymentComponent,
+    SubscriptionRenewelComponent
   ],
   imports: [
     CommonModule,

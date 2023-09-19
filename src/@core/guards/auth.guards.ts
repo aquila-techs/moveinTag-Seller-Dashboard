@@ -29,6 +29,10 @@ export class AuthGuard implements CanActivate {
         this._router.navigate(['/pages/seller/subscription-plan']);
         return false;
       }
+      if(currentUser.subscriptionStatus === 'cancel' && route.routeConfig.path !== 'subscription-renewel'){
+        this._router.navigate(['/pages/seller/subscription-renewel']);
+        return false;
+      }
       // authorised so return true
       return true;
     }
