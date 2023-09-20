@@ -7,6 +7,7 @@ import { UserService } from '@core/services/services/user.service';
 import { AuthenticationService } from '@core/services/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import moment from 'moment';
+import { environment } from 'environments/environment';
 // declare var Stripe: any;
 
 @Component({
@@ -31,6 +32,8 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
   cardNumber = "";
   cardname = "";
   public isAfterSingup = false;
+  public baseURL = environment.serverURL;
+
   countryId = [
     { id: 1, name: 'United States' },
     { id: 2, name: 'Canada' },
@@ -1735,7 +1738,7 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
       })
     }
     getDateFormat(miliseconds){
-      return moment(miliseconds*1000).format("DD/MMM/YYYY")
+      return moment(miliseconds*1000).format("DD/MMM/YYYY hh:mm:ss a")
     }
 
     reactiveSubacription(){

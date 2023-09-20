@@ -57,13 +57,21 @@
                                 <td class="pr-1">Interval:</td>
                                 <td class="text-capitalize" >{{subscription.subscription.items.data[0].plan.interval}}</td>
                               </tr>
-                              <tr>
+                              <tr *ngIf="subscription.subscription.status === 'trialing'">
                                 <td class="pr-1">Trial Start:</td>
                                 <td>{{getDateFormat(subscription.subscription.trial_start)}}</td>
                               </tr>
-                              <tr>
+                              <tr *ngIf="subscription.subscription.status === 'trialing'">
                                 <td class="pr-1">Trial End:</td>
                                 <td>{{getDateFormat(subscription.subscription.trial_end)}}</td>
+                              </tr>
+                              <tr *ngIf="subscription.subscription.status !== 'trialing'">
+                                <td class="pr-1">Subscription Start:</td>
+                                <td>{{getDateFormat(subscription.subscription.current_period_start)}}</td>
+                              </tr>
+                              <tr *ngIf="subscription.subscription.status !== 'trialing'">
+                                <td class="pr-1">Subscription End:</td>
+                                <td>{{getDateFormat(subscription.subscription.current_period_end)}}</td>
                               </tr>
                               <tr>
                                 <td class="pr-1">Status:</td>
@@ -192,10 +200,10 @@
                           <tbody>
                             <tr *ngFor="let item of transactions">
                               <td>
-                                {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss'}}
+                                {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                               </td>
                               <td>
-                                {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss'}}
+                                {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                               </td>
                               <td>
                                 {{item.status}}

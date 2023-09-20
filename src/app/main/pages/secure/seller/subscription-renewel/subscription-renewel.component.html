@@ -14,8 +14,29 @@
                   id="navbarUserDropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="user-nav d-sm-flex d-none">
                   </div>
-                  <span class="avatar"><img class="round" src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
-                      alt="avatar" height="40" width="40" /><span class="avatar-status-online"></span></span>
+                  <span class="">
+                    <div *ngIf="currentUser.profileImage; else customAvatar">
+                      <img
+                        class="rounded-circle mr-1"
+                        src="{{baseURL}}{{currentUser.profileImage}}" 
+                        height="42"
+                        width="42"
+                      />
+                    </div>
+                    <ng-template #customAvatar>
+                      <div
+                        class="avatar mr-1 ml-0" style="background-color: #38b6ff;"
+                        [ngClass]="{
+                          'avatar-status-offline': currentUser.status == 'offline',
+                          'avatar-status-online': currentUser.status == 'online',
+                          'avatar-status-busy': currentUser.status == 'busy',
+                          'avatar-status-away': currentUser.status == 'away'
+                        }"
+                      >
+                        <div class="avatar-content">{{ currentUser.companyName| initials }}</div>
+                      </div>
+                    </ng-template>
+                  </span>
                 </a>
                 <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
                   <a ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span>
@@ -90,13 +111,21 @@
                                                   <td class="pr-1">Interval:</td>
                                                   <td class="text-capitalize" >{{subscription.subscription.items.data[0].plan.interval}}</td>
                                                 </tr>
-                                                <tr>
+                                                <tr *ngIf="subscription.subscription.status === 'trialing'">
                                                   <td class="pr-1">Trial Start:</td>
                                                   <td>{{getDateFormat(subscription.subscription.trial_start)}}</td>
                                                 </tr>
-                                                <tr>
+                                                <tr *ngIf="subscription.subscription.status === 'trialing'">
                                                   <td class="pr-1">Trial End:</td>
                                                   <td>{{getDateFormat(subscription.subscription.trial_end)}}</td>
+                                                </tr>
+                                                <tr *ngIf="subscription.subscription.status !== 'trialing'">
+                                                  <td class="pr-1">Subscription Start:</td>
+                                                  <td>{{getDateFormat(subscription.subscription.current_period_start)}}</td>
+                                                </tr>
+                                                <tr *ngIf="subscription.subscription.status !== 'trialing'">
+                                                  <td class="pr-1">Subscription End:</td>
+                                                  <td>{{getDateFormat(subscription.subscription.current_period_end)}}</td>
                                                 </tr>
                                                 <tr>
                                                   <td class="pr-1">Status:</td>
@@ -225,10 +254,10 @@
                                             <tbody>
                                               <tr *ngFor="let item of transactions">
                                                 <td>
-                                                  {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss'}}
+                                                  {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                                                 </td>
                                                 <td>
-                                                  {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss'}}
+                                                  {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                                                 </td>
                                                 <td>
                                                   {{item.status}}

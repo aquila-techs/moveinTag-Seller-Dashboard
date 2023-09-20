@@ -147,7 +147,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getDateFormat(miliseconds){
-    return moment(miliseconds*1000).format("DD/MMM/YYYY")
+    return moment(miliseconds*1000).format("DD/MMM/YYYY hh:mm:ss a")
   }
   country: number;
   lastName = "";
