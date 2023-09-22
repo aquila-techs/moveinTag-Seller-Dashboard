@@ -203,10 +203,11 @@ export class OrdermanagementComponent implements OnInit {
     if (this.completedOrderAmmountForm.invalid) {
       return;
     }
+
     let data = {
       "orderId": this.selectedOrderForComplete._id,
       "status": 'COMPLETED',
-      "ammount": this.completedOrderAmmountForm.value.ammount
+      "ammount": this.completedOrderAmmountForm.value.ammount === "" ? 0 : this.completedOrderAmmountForm.value.ammount
     }
 
     this.orderService.changeOrderStatus(data)
@@ -250,7 +251,7 @@ export class OrdermanagementComponent implements OnInit {
 
   completedOrderAmmountFormBuilder() {
     this.completedOrderAmmountForm = this._formBuilder.group({
-      ammount: ['', Validators.required],
+      ammount: [''],
     });
   }
 }

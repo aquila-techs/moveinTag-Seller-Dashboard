@@ -6,14 +6,15 @@
     <div class="input-group mb-2">
       <div class="form-outline">
         <form (submit)="onSubmitSearch()">
-          <input type="text" class="form-control" placeholder="Search by order number" [(ngModel)]="searchText" name="searchText"
-            style="border: 1px solid #38B6FF; width: 500px;" />
+          <input type="text" class="form-control" placeholder="Search by order number" [(ngModel)]="searchText"
+            name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
         </form>
       </div>
       <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
         <i class="fa fa-search"></i>
       </button>
-      <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px; background-color: #FF0000 !important;">
+      <button type="button" (click)="onSubmitClear()" class="btn btn-danger"
+        style="margin-left: 5px; background-color: #FF0000 !important;">
         <i class="fa fa-close"></i>
       </button>
     </div>
@@ -241,7 +242,8 @@
 </div>
 <ng-template #modalCompleteOderGetAmmount let-modal>
   <div class="modal-header">
-    <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle" style="font-family: 'Montserrat', sans-serif;">Please enter total charges you have taken
+    <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
+      style="font-family: 'Montserrat', sans-serif;">Please enter total charges you have taken
       from the customer</h5>
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -257,10 +259,10 @@
     </form>
 
     <div class="d-flex justify-content-center my-2">
-      <button type="button" (click)="changeOrderStatusComplete()" [disabled]="completedOrderAmmountForm.invalid"
+      <button type="button" (click)="changeOrderStatusComplete()"
         class="btn btn-dark2 mx-1 btn-md px-3" rippleEffect><i data-feather="check"></i> Save</button>
-      <button type="button" class="btn btn-dark mx-1 btn-md px-3" style="font-family: 'Montserrat', sans-serif;" (click)="modal.dismiss('Cross click')" rippleEffect><i
-          data-feather="x"></i> Discard</button>
+      <button type="button" class="btn btn-dark mx-1 btn-md px-3" style="font-family: 'Montserrat', sans-serif;"
+        (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
     </div>
   </div>
 </ng-template>
@@ -285,12 +287,14 @@
           placeholder="Townhall" />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.startTime">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif;">When do you want to start this project?</label>
+        <label for="basicInput" style="font-family: 'Montserrat', sans-serif;">When do you want to start this
+          project?</label>
         <input readonly type="text" class="form-control" [value]="selectedOrder?.startTime" id="basicInput"
           placeholder="Within a week" />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.notes">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif;">Please provide some details about project? </label>
+        <label for="basicInput" style="font-family: 'Montserrat', sans-serif;">Please provide some details about
+          project? </label>
         <textarea readonly style="height: 150px;" [value]="selectedOrder?.notes" class="form-control"></textarea>
       </div>
       <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
