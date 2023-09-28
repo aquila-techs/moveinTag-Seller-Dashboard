@@ -1704,13 +1704,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userService.updateProfile(data).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-        this.sellerProfile = res;
+        // this.sellerProfile = res;
       },
       error: (err) => {
         console.log(err);
       },
     })
   }
+
   modalEditDetail(modalEditDetail) {
     this.modalService.open(modalEditDetail, {
       centered: true,
