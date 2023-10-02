@@ -1516,6 +1516,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       }
     }
     this.profileUpdateFormBuilder();
+    this.getUserAllProfile();
+  }
+
+  getUserAllProfile() {
+
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
 
@@ -1586,6 +1591,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.categories = res[0]['results'];
       }
     })
+
   }
 
   onSubmitSearch() {
@@ -1691,12 +1697,34 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.toastrService.error('Please select phone code');
       return;
     }
+
+    console.log(this.sellerProfile)
     const OBJ = {
+
       facebookURL: this.sellerWebLinksForm.value.facebookURL,
       instagramURL: this.sellerWebLinksForm.value.instagramURL,
       phone: this.phoneCode + this.sellerWebLinksForm.value.phone,
       twitterURL: this.sellerWebLinksForm.value.twitterURL,
-      webURL: this.sellerWebLinksForm.value.webURL
+      webURL: this.sellerWebLinksForm.value.webURL,
+
+      companyName: this.sellerProfile?.companyName,
+      description: this.sellerProfile?.description,
+      termsConditions: this.sellerProfile?.termsConditions,
+      companyType: this.sellerProfile?.companyType,
+      noOfEmployee: this.sellerProfile?.noOfEmployee,
+      returnPolicy: this.sellerProfile?.returnPolicy,
+      liabilityInsurance: this.sellerProfile?.liabilityInsurance,
+      workerCompensation: this.sellerProfile?.workerCompensation,
+      projectMinimum: this.sellerProfile?.projectMinimum,
+      bonded: this.sellerProfile?.bonded,
+      writtenContract: this.sellerProfile?.writtenContract,
+      address: this.sellerProfile?.address,
+      postalCode: this.sellerProfile?.postalCode,
+      paymentMethod: this.sellerProfile?.paymentMethod,
+      warrantyTerms: this.sellerProfile?.warrantyTerms,
+      country: this.sellerProfile?.country,
+      state: this.sellerProfile?.state,
+      city: this.sellerProfile?.city,
     }
 
     let data = OBJ;
@@ -1704,6 +1732,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userService.updateProfile(data).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
+        this.getUserAllProfile();
         // this.sellerProfile = res;
       },
       error: (err) => {
@@ -1797,14 +1826,39 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // return;
     }
     let data = this.profileUpdateForm.value;
-
     data['id'] = this.userId;
 
-    this.authenticationSerive.updateProfile(data).subscribe({
+    const OBJ = {
+      address: data.address,
+      bonded: data.bonded,
+      city: data.city,
+      companyName: data.companyName,
+      companyType: data.companyType,
+      country: data.country,
+      description: data.description,
+      id: data.id,
+      liabilityInsurance: data.liabilityInsurance,
+      noOfEmployee: data.noOfEmployee,
+      paymentMethod: data.paymentMethod,
+      postalCode: data.postalCode,
+      projectMinimum: data.projectMinimum,
+      returnPolicy: data.returnPolicy,
+      state: data.state,
+      termsConditions: data.termsConditions,
+      warrantyTerms: data.warrantyTerms,
+      workerCompensation: data.workerCompensation,
+      writtenContract: data.writtenContract,
+
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+    }
+
+    this.authenticationSerive.updateProfile(OBJ).subscribe({
       next: (res) => {
         console.log(res)
         this.modalService.dismissAll();
-        this.sellerProfile = res;
+        this.getUserAllProfile();
       },
       error: (err) => {
         console.log(err);
@@ -1814,20 +1868,53 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 
   onSaveNearByZipCode() {
+
     this.submitted = true;
     // stop here if form is invalid
     if (this.postalCode === '' || this.nearByZipCodes.length <= 0) {
       return;
     }
+    
     let data = {};
+
     data['postalCode'] = this.postalCode;
     data['radius'] = this.sliderWithNgModel;
     data['nearByPostalCodes'] = this.nearByZipCodes.toString();
     data['id'] = this.userId;
-    this.userService.updateProfile(data).subscribe({
+
+    const OBJ = {
+      address: this.sellerProfile.address,
+      bonded: this.sellerProfile.bonded,
+      city: this.sellerProfile.city,
+      companyName: this.sellerProfile.companyName,
+      companyType: this.sellerProfile.companyType,
+      country: this.sellerProfile.country,
+      description: this.sellerProfile.description,
+      liabilityInsurance: this.sellerProfile.liabilityInsurance,
+      noOfEmployee: this.sellerProfile.noOfEmployee,
+      paymentMethod: this.sellerProfile.paymentMethod,
+      projectMinimum: this.sellerProfile.projectMinimum,
+      returnPolicy: this.sellerProfile.returnPolicy,
+      state: this.sellerProfile.state,
+      termsConditions: this.sellerProfile.termsConditions,
+      warrantyTerms: this.sellerProfile.warrantyTerms,
+      workerCompensation: this.sellerProfile.workerCompensation,
+      writtenContract: this.sellerProfile.writtenContract,
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+
+      postalCode: this.postalCode,
+      radius: this.sliderWithNgModel,
+      nearByPostalCodes: this.nearByZipCodes.toString(),
+      id: this.userId,
+
+    }
+
+    this.userService.updateProfile(OBJ).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-        this.sellerProfile = res;
+        this.getUserAllProfile();
       },
       error: (err) => {
         console.log(err);
@@ -1843,7 +1930,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.userService.updateCoverPhoto(data).subscribe({
         next: (res) => {
           this.modalService.dismissAll();
-          this.sellerProfile = res;
+          this.getUserAllProfile();
         },
         error: (err) => {
           console.log(err);
@@ -1860,7 +1947,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.authenticationSerive.updateProfile(data).subscribe({
         next: (res) => {
           this.modalService.dismissAll();
-          this.sellerProfile = res;
+          this.getUserAllProfile();
         },
         error: (err) => {
           console.log(err);
