@@ -8,8 +8,8 @@
     <div class="input-group mb-2" style="margin-left: 20px;">
       <div class="form-outline">
         <form (submit)="onSubmitSearch()">
-          <input type="text" class="form-control" placeholder="Search by order number..." [(ngModel)]="searchText" name="searchText"
-            style="border: 1px solid #38B6FF; width: 500px;" />
+          <input type="text" class="form-control" placeholder="Search by order number..." [(ngModel)]="searchText"
+            name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
         </form>
       </div>
       <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
@@ -27,7 +27,8 @@
             <thead>
               <tr>
                 <th>Order Number</th>
-                <th>Consumer</th>
+                <th>Customer Name</th>
+                <th>Company Name</th>
                 <th>Earning</th>
               </tr>
             </thead>
@@ -39,6 +40,9 @@
                 </td>
                 <td>
                   <p class="pt-1">{{item.buyer.firstName}} {{item.buyer.lastName}}</p>
+                </td>
+                <td>
+                  <p class="pt-1">{{item.seller.companyName}}</p>
                 </td>
                 <!-- <td>
                   <p class="pt-1">View</p>

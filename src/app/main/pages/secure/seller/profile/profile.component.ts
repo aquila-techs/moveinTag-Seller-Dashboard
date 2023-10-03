@@ -1523,7 +1523,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
-
+console.log(res)
         this.sellerProfile = res;
         if (this.sellerProfile.postalCode) {
           this.postalCode = this.sellerProfile.postalCode;
@@ -1682,6 +1682,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       instagramURL: [this.sellerProfile?.instagramURL ? this.sellerProfile.instagramURL : ''],
       twitterURL: [this.sellerProfile?.twitterURL ? this.sellerProfile.twitterURL : ''],
       phone: [this.sellerProfile?.phone ? this.sellerProfile.phone : '', Validators.required],
+      userEmail: [this.sellerProfile?.email ? this.sellerProfile.email : ''],
     });
   }
   copyText() {
@@ -1698,7 +1699,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    console.log(this.sellerProfile)
     const OBJ = {
 
       facebookURL: this.sellerWebLinksForm.value.facebookURL,

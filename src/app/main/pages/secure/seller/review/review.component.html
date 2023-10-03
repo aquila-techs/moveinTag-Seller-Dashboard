@@ -6,8 +6,8 @@
         <div class="input-group mb-2">
             <div class="form-outline">
                 <form (submit)="onSubmitSearch()">
-                    <input type="text" class="form-control" placeholder="Search by order number..." [(ngModel)]="searchText"
-                        name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
+                    <input type="text" class="form-control" placeholder="Search by order number..."
+                        [(ngModel)]="searchText" name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
                 </form>
             </div>
             <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
@@ -43,7 +43,13 @@
 
                                 <ngx-datatable-column name="Customer Name" [width]="140" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <strong>{{ row.user.firstName +" "+  row.user.lastName}}</strong>
+                                        <strong>{{ row.user.firstName +" "+ row.user.lastName}}</strong>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column name="Company Name" [width]="140" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <strong>{{ row.seller.companyName}}</strong>
                                     </ng-template>
                                 </ngx-datatable-column>
 
