@@ -119,6 +119,8 @@ export class PaymentComponent implements OnInit {
     }
     this.userService.cancelSubscriptionCustomer(data)
     .subscribe(res => {
+
+      this.toster.success('You have cancelled your subcription. You can still use it till end of subscription date and time.', 'Success!');
       this.modalService.dismissAll();
       this.getPaymentStatus();
     })
