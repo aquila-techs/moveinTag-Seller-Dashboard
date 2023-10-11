@@ -1522,6 +1522,14 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           this.userService.createSubscriptionCustomer(subscriptionData).subscribe({
             next: (res) => {
               console.log(res);
+              let data = {
+                "_id": this.user._id,
+                "paymentMethodId": value.card.id
+              }
+              this.userService.setPaymentMethodAsDefault(data).subscribe({
+                next: (value) => {
+                }
+              })
               if (this.isAfterSingup) {
                 this.toastrService.success('You have successfully subscribed.')
                 this._router.navigate(['/login']);

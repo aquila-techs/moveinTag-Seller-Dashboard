@@ -200,10 +200,10 @@
                           <tbody>
                             <tr *ngFor="let item of transactions">
                               <td>
-                                {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
+                                {{item.lines.data[0].period.start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                               </td>
                               <td>
-                                {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
+                                {{item.lines.data[0].period.end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                               </td>
                               <td>
                                 {{item.status}}
