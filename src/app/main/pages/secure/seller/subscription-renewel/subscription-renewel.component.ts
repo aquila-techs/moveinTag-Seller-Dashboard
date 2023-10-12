@@ -1755,4 +1755,15 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
         }
       });
     }
+
+    modalOpenVC(modalVC) {
+      this.cardname="";
+      this.cardNumber="";
+      this.selectedMonth=null;
+      this.selectedYear=null;
+       this.cvc="";
+      this.modalService.open(modalVC, {
+        centered: true
+      });
+    }
 }

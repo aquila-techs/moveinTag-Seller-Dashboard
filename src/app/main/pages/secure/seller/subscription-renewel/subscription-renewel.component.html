@@ -244,7 +244,7 @@
                                                   Status
                                                 </th>
                                                 <th>
-                                                  Ammount
+                                                  Amount
                                                 </th>
                                                 <th>
                                                   Invoice
@@ -254,10 +254,10 @@
                                             <tbody>
                                               <tr *ngFor="let item of transactions">
                                                 <td>
-                                                  {{item.period_start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
+                                                  {{item.lines.data[0].period.start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                                                 </td>
                                                 <td>
-                                                  {{item.period_end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
+                                                  {{item.lines.data[0].period.end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
                                                 </td>
                                                 <td>
                                                   {{item.status}}
@@ -399,3 +399,62 @@
     </div>
   </div>
 </div>
+
+<ng-template #modalAddPayment let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">Add Payment Method</h5>
+      <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <div class="form-group">
+      <label for="basicInput">Name on Card *</label>
+      <input type="text" [(ngModel)]="cardname" name="name" class="form-control" id="basicInput"
+        placeholder="" />
+    </div>
+    <div class="form-group">
+      <label for="basicInput2">Card Number *</label>
+      <input type="text" [(ngModel)]="cardNumber" name="cardNumber" class="form-control" id="basicInput2"
+        placeholder="" />
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <label for="basicInput">Expiration Date *</label>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <ng-select [(ngModel)]="selectedMonth" name="month">
+                <ng-option *ngFor="let month of months" [value]="month.id">{{month.name}}</ng-option>
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <ng-select [(ngModel)]="selectedYear" name="year">
+                <ng-option *ngFor="let year of years" [value]="year.id">{{year.name}}</ng-option>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label for="basicInput3">Security Code *</label>
+          <input type="text" class="form-control" [(ngModel)]="cvc" name="cvc" id="basicInput3"
+            placeholder="CVV" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="addNewCard()"
+        rippleEffect>
+        Add
+      </button>
+      <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')"
+          rippleEffect>
+          Close
+      </button>
+  </div>
+</ng-template>
