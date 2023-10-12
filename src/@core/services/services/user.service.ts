@@ -195,6 +195,9 @@ export class UserService {
   cancelSubscriptionCustomer(body){
     return this._http.post('payment/cancel-subscription',body);
   }
+  reactivateSubscriptionCustomer(body){
+    return this._http.post('payment/reactivate-subscription',body);
+  }
   pauseSubscriptionCustomer(body){
     return this._http.post('payment/pause-subscription',body);
   }

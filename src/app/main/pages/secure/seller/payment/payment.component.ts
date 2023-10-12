@@ -113,19 +113,34 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  cancelPayment(){
+  cancelPayment(id){
     let data = {
-      "_id": this.userId
+      "_id": this.userId,
+      "subscriptionId": id
     }
     this.userService.cancelSubscriptionCustomer(data)
     .subscribe(res => {
 
-      this.toster.success('You have cancelled your subcription. You can still use it till end of subscription date and time.', 'Success!');
+      this.toster.success('You have cancelled your subscription. You can still use it till end of subscription date and time.', 'Success!');
       this.modalService.dismissAll();
       this.getPaymentStatus();
     })
   }
 
+
+  reactivatePayment(id){
+    let data = {
+      "_id": this.userId,
+      "subscriptionId": id
+    }
+    this.userService.reactivateSubscriptionCustomer(data)
+    .subscribe(res => {
+
+      this.toster.success('You have reactivate your subcription.', 'Success!');
+      this.modalService.dismissAll();
+      this.getPaymentStatus();
+    })
+  }
   activePayment(){
     let data = {
       "_id": this.userId

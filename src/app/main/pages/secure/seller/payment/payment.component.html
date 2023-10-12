@@ -83,10 +83,15 @@
                         <div class="col-sm-12" *ngIf="subscription.subscription.status === 'trialing'">
                           *<b>NOTE: </b>Currently your subscription status is 'trialing' that why you didn't pause or cancel your subscription. 
                         </div>
+                        <div class="col-sm-12" *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled' && subscription.subscription.cancel_at_period_end">
+                          *<b>NOTE: </b>Currently your subscription is cancelled. You can still use it till end of subscription date and time. 
+                        </div>
                         <div class="col-sm-12 float-right" style=" text-align: end; ">
                           <button *ngIf="subscription.subscription.status !== 'active' && subscription.subscription.status !== 'trialing'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="activePayment()" rippleEffect>Activate Subscription</button>
                           <!-- <button *ngIf="subscription.subscription.status === 'active'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="pausePayment()" rippleEffect>Pause Subscription</button> -->
-                          <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="cancelPayment()" rippleEffect>Cancel Subscription</button>
+                          <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled' && !subscription.subscription.cancel_at_period_end" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="cancelPayment(subscription.subscription.id)" rippleEffect>Cancel Subscription</button>
+                          <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled' && subscription.subscription.cancel_at_period_end" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="reactivatePayment(subscription.subscription.id)" rippleEffect>Reactivate Subscription</button>
+
                         </div>
                       </div>
                     </div>
