@@ -1523,7 +1523,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
-console.log(res)
+        console.log(res)
         this.sellerProfile = res;
         if (this.sellerProfile.postalCode) {
           this.postalCode = this.sellerProfile.postalCode;
@@ -1588,7 +1588,9 @@ console.log(res)
 
     this.userService.getAllCategoriesWithSubCategories().subscribe({
       next: (res: any) => {
-        this.categories = res[0]['results'];
+        const CATEGORIES = res[0]['results'];
+        const FILTER_CATEGORIES = CATEGORIES.filter((item) => item.title != "Hotels and Travel");
+        this.categories = FILTER_CATEGORIES;
       }
     })
 
@@ -1600,6 +1602,7 @@ console.log(res)
     this.http.get(`https://api.moventag.com/category/getAllSubCategory?q=${Text}`).subscribe({
       next: (res: any) => {
         this.searchSubCategories = res
+        console.log(this.searchSubCategories)
       }
     })
   }
@@ -1874,7 +1877,7 @@ console.log(res)
     if (this.postalCode === '' || this.nearByZipCodes.length <= 0) {
       return;
     }
-    
+
     let data = {};
 
     data['postalCode'] = this.postalCode;
