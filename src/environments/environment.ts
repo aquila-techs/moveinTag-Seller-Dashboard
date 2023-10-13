@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'http://localhost:3000/',
+  apiUrl: 'https://api.moventag.com/',
   socketURL:'https://api.moventag.com/',
   serverURL: 'https://api.moventag.com/',
   // socketURL:'https://api.moventag.com/',

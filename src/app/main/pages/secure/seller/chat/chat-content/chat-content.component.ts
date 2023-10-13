@@ -35,10 +35,10 @@ export class ChatContentComponent implements OnInit {
    * @param {ChatService} _chatService
    * @param {CoreSidebarService} _coreSidebarService
    */
-  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService,private modalService: NgbModal,
+  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService, private modalService: NgbModal,
     private orderService: OrderService,
     private userService: UserService, private activateRoute: ActivatedRoute,
-    private router: Router, private notificationService: NotificationsService) {}
+    private router: Router, private notificationService: NotificationsService) { }
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ export class ChatContentComponent implements OnInit {
    * Update Chat
    */
   sendMessage() {
-    if(this.chatMessage != ""){
+    if (this.chatMessage != "") {
       this._chatService.sendMessage(this.chatMessage, this.chatRoom);
       let data = {
         'uId': this.userProfile._id,
@@ -55,7 +55,7 @@ export class ChatContentComponent implements OnInit {
         'chatroomId': this.chats._id
       }
       this._chatService.sendMessageToDB(data).subscribe({
-        next:(res)=>{
+        next: (res) => {
         }
       })
       this.newChat = {
@@ -68,7 +68,7 @@ export class ChatContentComponent implements OnInit {
       }, 0);
       this.chatMessage = '';
     }
-  
+
   }
   updateChat() {
     this.newChat = {
@@ -123,7 +123,7 @@ export class ChatContentComponent implements OnInit {
     // Subscribe to Selected Chat Change
     this._chatService.onSelectedChatChange.subscribe(res => {
       this.chats = res;
-      if(this.chatRoom){
+      if (this.chatRoom) {
         this._chatService.LeaveChatRoom(this.chatRoom);
       }
       this.chatRoom = this.chats.chatroom;
@@ -139,19 +139,19 @@ export class ChatContentComponent implements OnInit {
     });
     this.userProfile = this._chatService.userProfile;
     this._chatService.getNewMessage().subscribe((message: string) => {
-      if(message != ""){
+      if (message != "") {
         this.newChat = {
           message: message,
           uId: this.chatUser?._id
         };
-        if(this.chats['chat']){
+        if (this.chats['chat']) {
           this.chats.chat.push(this.newChat);
         }
         setTimeout(() => {
           this.scrolltop = this.scrollMe?.nativeElement.scrollHeight;
         }, 0);
       }
-      
+
     })
   }
 
@@ -178,7 +178,7 @@ export class ChatContentComponent implements OnInit {
       }
       this.notificationService.sendMessage(data, this.chats.userId)
     }
-    this.orderService.changeOrderStatus(data)
+    this.orderService.changeOrderStatusFromChat(data)
       .subscribe(res => {
         this.chats.order.status = "ACTIVE";
         this.modalService.dismissAll();

@@ -55,6 +55,10 @@ export class OrderService {
     return this._http.put('order/update-status-order',data)
   }
 
+  changeOrderStatusFromChat(data){
+    return this._http.put('order/update-status-order-from-chat',data)
+  }
+
   exportOrders(){
     return this._http.get('order/export-orders')
   }
