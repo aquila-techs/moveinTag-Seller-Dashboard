@@ -39,7 +39,7 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'customer-listing',
-    title: 'Active Listing',
+    title: 'Active Leads',
     translate: 'MENU.HOME',
     icon: 'trello',
     type: 'collapsible',
@@ -48,7 +48,7 @@ export const menu: CoreMenu[] = [
   },
   {
     id: 'order-management',
-    title: 'Order Management',
+    title: 'Lead Management',
     translate: 'MENU.HOME',
     type: 'item',
     icon: 'folder',
@@ -69,14 +69,14 @@ export const menu: CoreMenu[] = [
     icon: 'star',
     url: 'pages/seller/reviews'
   },
-  {
-    id: 'earnings',
-    title: 'Earnings',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'dollar-sign',
-    url: 'pages/seller/earnings'
-  },
+  // {
+  //   id: 'earnings',
+  //   title: 'Earnings',
+  //   translate: 'MENU.HOME',
+  //   type: 'item',
+  //   icon: 'dollar-sign',
+  //   url: 'pages/seller/earnings'
+  // },
   {
     id: 'verifications',
     title: 'Verifications',

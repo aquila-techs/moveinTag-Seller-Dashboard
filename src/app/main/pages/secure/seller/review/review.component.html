@@ -6,7 +6,7 @@
         <div class="input-group mb-2">
             <div class="form-outline">
                 <form (submit)="onSubmitSearch()">
-                    <input type="text" class="form-control" placeholder="Search by order number..."
+                    <input type="text" class="form-control" placeholder="Search by order number, customer name..."
                         [(ngModel)]="searchText" name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
                 </form>
             </div>
@@ -47,11 +47,17 @@
                                     </ng-template>
                                 </ngx-datatable-column>
 
-                                <ngx-datatable-column name="Company Name" [width]="140" [sortable]="false">
+                                <ngx-datatable-column name="Earning" [width]="140" [sortable]="false">
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <strong>{{ row.order.ammount}}</strong>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <!-- <ngx-datatable-column name="Company Name" [width]="140" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <strong>{{ row.seller.companyName}}</strong>
                                     </ng-template>
-                                </ngx-datatable-column>
+                                </ngx-datatable-column> -->
 
                                 <ngx-datatable-column name="Rating" [width]="200" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
@@ -71,7 +77,7 @@
                                             {{row.description}}</div>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <ngx-datatable-column name="Action" [width]="200" [sortable]="false">
+                                <ngx-datatable-column name="Review Details" [width]="200" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <div (click)="modalOpenVC(modalRating,row)"
                                             class="badge badge-pill  badge-light-success mr-1 cursor-pointer">

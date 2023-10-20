@@ -31,7 +31,7 @@ export class OrdermanagementComponent implements OnInit {
   ngOnInit() {
 
     this.contentHeader = {
-      headerTitle: 'Manage Orders',
+      headerTitle: 'Lead Management',
       actionButton: true,
       headerRight: false,
       breadcrumb: {
@@ -70,20 +70,34 @@ export class OrdermanagementComponent implements OnInit {
   public completedOrderAmmountForm: UntypedFormGroup;
   public searchText: string = "";
 
+  onSubmitExportOrders() {
+
+    this.http.get(`https://api.moventag.com/order/export-orders?userId=${this.userId}`).subscribe({
+      next: (res: any) => {
+
+        window.open(`https://api.moventag.com/${res.path}`, '_blank');
+
+      }
+    })
+  }
+
   onSubmitSearch() {
     const Text = this.searchText
 
-    this.http.post("https://api.moventag.com/order/searchSellerOrders", {
-      orderNum: Text
-    }).subscribe({
+    this.http.get(`https://api.moventag.com/order/searchSellerOrders?userId=${this.userId}&pageSize=10&pageNo=1&sortBy=createdAt&order=desc&text=${Text}`).subscribe({
       next: (res: any) => {
 
         if (res.length < 1) {
           this.activeOrderTotal = 0;
           this.activeOrders = [];
+          this.completedOrderTotal = 0;
+          this.completedOrders = [];
+          this.cancelledOrderTotal = 0;
+          this.cancelledOrder = [];
         } else {
-          this.activeOrders = [res];
-          this.activeOrderTotal = res.length;
+          this.activeOrders = res[0].results;
+          this.completedOrders = res[0].results;
+          this.cancelledOrder = res[0].results;
         }
 
       }
@@ -91,7 +105,10 @@ export class OrdermanagementComponent implements OnInit {
   }
 
   onSubmitClear() {
+    this.searchText = "";
     this.getUserActiveOrder();
+    this.getUserCompletedOrders();
+    this.getUSerCanceledOrder();
   }
 
   getUserCompletedOrders() {

@@ -5,6 +5,7 @@ import { UserService } from '@core/services/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
 import { environment } from 'environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-customerlistings',
@@ -17,7 +18,7 @@ export class CustomerlistingsComponent implements OnInit {
   public currentUser: any;
   public category: any = {};
   public categoryId = '';
-  constructor(private modalService: NgbModal,
+  constructor(private modalService: NgbModal,private http: HttpClient,
     private orderService: OrderService,
     private userService: UserService, private activateRoute: ActivatedRoute,
     private router: Router, private notificationService: NotificationsService) {
@@ -39,6 +40,8 @@ export class CustomerlistingsComponent implements OnInit {
   public contentHeader: object;
   public progressbarHeight = '.857rem';
   public selectedOrder: any;
+  public searchText: string = "";
+
   modalOpenVC(modalVC, selectedOrders) {
     this.selectedOrder = selectedOrders;
     this.modalService.open(modalVC, {
@@ -104,6 +107,28 @@ export class CustomerlistingsComponent implements OnInit {
         this.getAllQuotesOrders();
       })
   }
+
+  onSubmitSearch() {
+    const Text = this.searchText
+
+    this.http.get(`https://api.moventag.com/order/searchSellerOrdersActiveLeads?status=QUOTE&searchByQuote=true&categoryId=${this.categoryId}&userId=${this.userId}&sortBy=createdAt&order=desc&text=${Text}`).subscribe({
+      next: (res: any) => {
+
+        if (res.length < 1) {
+          this.userQuote = [];
+        } else {
+          this.userQuote = res[0].results;
+        }
+
+      }
+    })
+  }
+
+  onSubmitClear() {
+    this.searchText = "";
+    this.getAllQuotesOrders();
+  }
+
 
   startChat(selectedOrder) {
     let body: any = {

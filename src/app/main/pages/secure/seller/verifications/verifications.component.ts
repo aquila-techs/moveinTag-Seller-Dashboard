@@ -66,6 +66,7 @@ export class VerificationsComponent implements OnInit {
       data.append('id', this.userId)
       this.userService.updateSellerLicense(data).subscribe({
         next: (res) => {
+          this.toastrService.success('File has been updated!')
           this.getUserProfile()
         },
         error: (err) => {
@@ -87,6 +88,7 @@ export class VerificationsComponent implements OnInit {
       data.append('id', this.userId)
       this.userService.updateSellerLibilityInsurance(data).subscribe({
         next: (res) => {
+          this.toastrService.success('File has been updated!')
           this.getUserProfile()
         },
         error: (err) => {
@@ -108,6 +110,7 @@ export class VerificationsComponent implements OnInit {
       data.append('id', this.userId)
       this.userService.updateSellerIdentityCard(data).subscribe({
         next: (res) => {
+          this.toastrService.success('File has been updated!')
           this.getUserProfile()
         },
         error: (err) => {
