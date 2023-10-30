@@ -69,11 +69,9 @@ export class ForgotPasswordComponent implements OnInit {
 
     // Not stop here if form is valid
     if (!this.forgotPasswordForm.invalid) {
-      this.loading = true;
+    
       this.adminService.forgotPassword(this.forgotPasswordForm.value).pipe(takeUntil(this._unsubscribeAll)).subscribe({
         next: (res)=>{
-
-          this.loading = false;
 
           if(res && res.message){
             this.toatrService.success('Please check your email.', 'Something Wrong!')

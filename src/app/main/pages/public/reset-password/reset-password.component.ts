@@ -91,6 +91,11 @@ export class AuthResetPasswordComponent implements OnInit {
       return;
     }
 
+    if (this.passwordType.length < 6) {
+      this.toatrService.error('Please enter atleast 6 characters password.');
+      return;
+    }
+
     if (this.passwordType !== this.confirmPasswordType) {
       this.toatrService.error('Your passwrod or confirm password did not match.');
       return;
