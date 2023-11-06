@@ -80,7 +80,7 @@ export class NavbarNotificationComponent implements OnInit {
         window.localStorage.setItem('chatRoomId',message.chatRoomId);
       }
       this.router.navigate(['/pages/seller/chats']);
-    }else if(message.heading.toLowerCase().indexOf('order rating') > -1){
+    }else if(message.heading.toLowerCase().indexOf('lead rating') > -1){
       this.router.navigate(['pages/seller/reviews']);
     }    else if(message.heading.toLowerCase().indexOf('quote') > -1){
       if(message.categoryId){

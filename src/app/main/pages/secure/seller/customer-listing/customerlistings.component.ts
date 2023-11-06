@@ -94,8 +94,8 @@ export class CustomerlistingsComponent implements OnInit {
     }
     if (order.buyer._id) {
       let data = {
-        'heading': order.orderNum + ' Order Approved',
-        'message': 'Please check orders page for detail.',
+        'heading': order.orderNum + ' Lead Approved',
+        'message': 'Please check leads page for detail.',
         'receiverId': order.buyer._id,
         'senderId': this.userId
       }
@@ -147,7 +147,7 @@ export class CustomerlistingsComponent implements OnInit {
       next: (res) => {
         if (selectedOrder.buyer._id) {
           let data = {
-            'heading': selectedOrder.orderNum + ' Order New Chat Received',
+            'heading': selectedOrder.orderNum + ' Lead New Chat Received',
             'message': 'Please check chats page for detail.',
             'receiverId': selectedOrder.buyer._id,
             'senderId': this.currentUser._id,

@@ -171,8 +171,8 @@ export class ChatContentComponent implements OnInit {
     }
     if (this.chats.userId) {
       let data = {
-        'heading': this.chats.order.orderNum + ' Order Approved',
-        'message': 'Please check orders page for detail.',
+        'heading': this.chats.order.orderNum + ' Lead Approved',
+        'message': 'Please check leads page for detail.',
         'receiverId': this.chats.userId,
         'senderId': userId
       }

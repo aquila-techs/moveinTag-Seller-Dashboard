@@ -145,8 +145,8 @@ export class ChatSidebarComponent implements OnInit {
     }
     if (order.buyer._id) {
       let data = {
-        'heading': order.orderNum + ' Order Approved',
-        'message': 'Please check orders page for detail.',
+        'heading': order.orderNum + ' Lead Approved',
+        'message': 'Please check leads page for detail.',
         'receiverId': order.buyer._id,
         'senderId': userId
       }

@@ -147,7 +147,7 @@
                             <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
                             <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
                               </select></td> -->
-                              <td style="font-family: 'Montserrat', sans-serif;"><select class="form-control"
+                            <td style="font-family: 'Montserrat', sans-serif;"><select class="form-control"
                                 (change)="changeOrderStatus(item, $event,'cancelled')" style="min-width: 165px;">
                                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active
                                 </option>
