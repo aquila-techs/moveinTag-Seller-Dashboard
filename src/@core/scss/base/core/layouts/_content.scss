@@ -390,7 +390,7 @@ html {
   body {
     // Normal sidebar
     .content-right {
-      width: calc(100vw - (100vw - 100%) - #{$sidebar-width});
+      width: calc(75vw - (100vw - 100%) - #{$sidebar-width});
       float: right;
     }
     .content-left {

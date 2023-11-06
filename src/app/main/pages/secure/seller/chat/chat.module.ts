@@ -13,6 +13,7 @@ import { ChatSidebarComponent } from './chat-sidebars/chat-sidebar/chat-sidebar.
 import { ChatUserSidebarComponent } from './chat-sidebars/chat-user-sidebar/chat-user-sidebar.component';
 import { ChatActiveSidebarComponent } from './chat-sidebars/chat-active-sidebar/chat-active-sidebar.component';
 import { ChatService } from './chat.service';
+import { ChatUserSidebarDetailComponent } from './chat-sidebars/chat-user-sidebar-detail/chat-user-sidebar-detail.component';
 
 
 // routing
@@ -33,7 +34,8 @@ const routes: Routes = [
     ChatContentComponent,
     ChatSidebarComponent,
     ChatUserSidebarComponent,
-    ChatActiveSidebarComponent
+    ChatActiveSidebarComponent,
+    ChatUserSidebarDetailComponent
   ],
   imports: [
     CommonModule,
