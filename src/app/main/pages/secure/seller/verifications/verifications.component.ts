@@ -126,12 +126,21 @@ export class VerificationsComponent implements OnInit {
 
 
   openLicense() {
+    if (this.LisenceURL == undefined || this.LisenceURL == "") {
+      return;
+    }
     window.open(this.baseURL + this.LisenceURL, '_blank');
   }
   openLibilityInsurance() {
+    if (this.LibilityInsuranceURL == undefined || this.LibilityInsuranceURL == "") {
+      return;
+    }
     window.open(this.baseURL + this.LibilityInsuranceURL, '_blank');
   }
   openIdentityCard() {
+    if (this.IdentityCardURL == undefined || this.IdentityCardURL == "") {
+      return;
+    }
     window.open(this.baseURL + this.IdentityCardURL, '_blank');
   }
 }

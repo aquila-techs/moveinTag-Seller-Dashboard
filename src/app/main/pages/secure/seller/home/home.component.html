@@ -474,7 +474,7 @@
           <table class="table table-s1">
             <thead>
               <tr>
-                <th>Order#</th>
+                <th>Lead#</th>
                 <th>Consumers</th>
                 <th>Services</th>
                 <th>Due On</th>
@@ -483,7 +483,7 @@
             </thead>
             <tbody>
               <tr *ngIf="!completedOrders || completedOrders.length <=0 ">
-                <td colspan="6">No active orders to show</td>
+                <td colspan="6">No active leads to show</td>
               </tr>
               <tr *ngFor="let item of completedOrders">
                 <td>{{item?.orderNum}}</td>

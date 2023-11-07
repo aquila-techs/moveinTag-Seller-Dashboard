@@ -82,7 +82,7 @@ export class EmailFakeData {
           email: 'hello@pixinvent.net'
         }
       ],
-      subject: 'Order Delivered',
+      subject: 'Lead Delivered',
       cc: [],
       bcc: [],
       message:

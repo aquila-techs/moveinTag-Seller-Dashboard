@@ -48,7 +48,7 @@ export class FAQFakeData {
       subtitle: 'Which license do I need?',
       qandA: [
         {
-          question: 'Where has my order reached?',
+          question: 'Where has my Lead reached?',
           ans:
             'Pastry pudding cookie toffee bonbon jujubes jujubes powder topping. Jelly beans gummi bears sweet roll bonbon muffin liquorice. Wafer lollipop sesame snaps. Brownie macaroon cookie muffin cupcake candy caramels tiramisu. Oat cake chocolate cake sweet jelly-o brownie biscuit marzipan. Jujubes donut marzipan chocolate bar. Jujubes sugar plum jelly beans tiramisu icing cheesecake.'
         },
@@ -119,7 +119,7 @@ export class FAQFakeData {
     },
     myOrders: {
       icon: 'package',
-      title: 'My Orders',
+      title: 'My Leads',
       subtitle: 'Which license do I need?',
       qandA: [
         {

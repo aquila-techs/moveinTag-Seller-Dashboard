@@ -13,8 +13,8 @@ export class NotificationsFakeData {
       },
       {
         image: 'assets/images/portrait/small/avatar-s-12.jpg',
-        heading: '<span class="font-weight-bolder">Revised Order 👋</span>  checkout',
-        text: 'MD Inc. order updated'
+        heading: '<span class="font-weight-bolder">Revised Lead 👋</span>  checkout',
+        text: 'MD Inc. Lead updated'
       }
     ],
     systemMessages: [

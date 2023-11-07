@@ -31,14 +31,17 @@
                             <tbody>
                                 <tr>
                                     <td class="text-center">License</td>
-                                    <td class="text-center"><a class="text-success px-2 py-1 box-shadow-0"
-                                            (click)="openLicense()" rippleEffect>Preview</a></td>
+                                    <td class="text-center">
+                                        <a class="text-success px-2 py-1 box-shadow-0"
+                                            (click)="openLicense()" rippleEffect>Preview</a>
+                                        </td>
                                     <td class="text-center" style="font-family: 'Montserrat', sans-serif;">
                                         <input type="file" id="upload" (change)="licensefileChangeEvent($event)"
                                             accept=".pdf,.jpg,.png" hidden />
                                         <label for="upload" class="btn btn-dark2" style="width:200px;"><img
                                                 style="width: 20px; height: 20px;"
-                                                src="../../../assets/images/site/highlight.png" alt="">Update
+                                                src="../../../assets/images/site/highlight.png" alt="">{{LisenceURL ==
+                                            undefined || LisenceURL == "" ? "Upload" : "Update"}}
                                             License</label>
                                     </td>
                                 </tr>
@@ -53,7 +56,10 @@
                                             hidden />
                                         <label for="upload2" class="btn btn-dark2" style="width:200px;"><img
                                                 style="width: 20px; height: 20px;"
-                                                src="../../../assets/images/site/highlight.png" alt="">Update Libility
+                                                src="../../../assets/images/site/highlight.png"
+                                                alt="">{{LibilityInsuranceURL == undefined || LibilityInsuranceURL == ""
+                                            ? "Upload" : "Update"}}
+                                            Libility
                                             Insurance</label>
                                     </td>
                                 </tr>
@@ -67,7 +73,8 @@
                                             accept=".pdf,.jpg,.png" hidden />
                                         <label for="upload3" class="btn btn-dark2" style="width:200px"><img
                                                 style="width: 20px; height: 20px;"
-                                                src="../../../assets/images/site/highlight.png" alt="">Update Identity
+                                                src="../../../assets/images/site/highlight.png" alt="">{{IdentityCardURL
+                                            == undefined || IdentityCardURL == "" ? "Upload" : "Update"}} Identity
                                             Card</label>
                                     </td>
                                 </tr>

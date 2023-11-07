@@ -1425,66 +1425,67 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     if (this.phoneCode && this.phone && this.countryName) {
 
 
-      if (this.licensePhotoChangedEvent.length < 1) {
-        this.toastrService.error('Please select License', '');
-        return;
-      }
-      if (this.libilityInsurancePhotoChangedEvent.length < 1) {
-        this.toastrService.error('Please select Libility Insurance', '');
-        return;
-      }
-      if (this.IdentityCardPhotoChangedEvent.length < 1) {
-        this.toastrService.error('Please select Identity Card', '');
-        return;
-      }
+      // if (this.licensePhotoChangedEvent.length < 1) {
+      //   this.toastrService.error('Please select License', '');
+      //   return;
+      // }
+      // if (this.libilityInsurancePhotoChangedEvent.length < 1) {
+      //   this.toastrService.error('Please select Libility Insurance', '');
+      //   return;
+      // }
+      // if (this.IdentityCardPhotoChangedEvent.length < 1) {
+      //   this.toastrService.error('Please select Identity Card', '');
+      //   return;
+      // }
 
-      if (this.licensePhotoChangedEvent) {
-        let data: FormData = new FormData();
-        data.append('license', this.licensePhotoChangedEvent)
-        data.append('id', this.user._id)
-        this.userService.updateSellerLicense(data).subscribe({
-          next: (res) => {
-            console.log(res)
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        })
-      }
+      // if (this.licensePhotoChangedEvent) {
+      //   let data: FormData = new FormData();
+      //   data.append('license', this.licensePhotoChangedEvent)
+      //   data.append('id', this.user._id)
+      //   this.userService.updateSellerLicense(data).subscribe({
+      //     next: (res) => {
+      //       console.log(res)
+      //     },
+      //     error: (err) => {
+      //       console.log(err);
+      //     },
+      //   })
+      // }
 
-      if (this.libilityInsurancePhotoChangedEvent) {
-        let data: FormData = new FormData();
-        data.append('libilityInsurance', this.libilityInsurancePhotoChangedEvent)
-        data.append('id', this.user._id)
-        this.userService.updateSellerLibilityInsurance(data).subscribe({
-          next: (res) => {
-            console.log(res)
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        })
-      }
+      // if (this.libilityInsurancePhotoChangedEvent) {
+      //   let data: FormData = new FormData();
+      //   data.append('libilityInsurance', this.libilityInsurancePhotoChangedEvent)
+      //   data.append('id', this.user._id)
+      //   this.userService.updateSellerLibilityInsurance(data).subscribe({
+      //     next: (res) => {
+      //       console.log(res)
+      //     },
+      //     error: (err) => {
+      //       console.log(err);
+      //     },
+      //   })
+      // }
 
-      if (this.IdentityCardPhotoChangedEvent) {
-        let data: FormData = new FormData();
-        data.append('IdentityCard', this.IdentityCardPhotoChangedEvent)
-        data.append('id', this.user._id)
-        this.userService.updateSellerIdentityCard(data).subscribe({
-          next: (res) => {
-            console.log(res)
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        })
-      }
+      // if (this.IdentityCardPhotoChangedEvent) {
+      //   let data: FormData = new FormData();
+      //   data.append('IdentityCard', this.IdentityCardPhotoChangedEvent)
+      //   data.append('id', this.user._id)
+      //   this.userService.updateSellerIdentityCard(data).subscribe({
+      //     next: (res) => {
+      //       console.log(res)
+      //     },
+      //     error: (err) => {
+      //       console.log(err);
+      //     },
+      //   })
+      // }
 
       this.licensePhotoChangedEvent = null;
       this.libilityInsurancePhotoChangedEvent = null;
       this.IdentityCardPhotoChangedEvent = null;
       this.getSellerProfile = false;
-      this.subscriptionPacakge = true;
+      this.subscriptionPacakge = false;
+      this.cardDetail = true;
     } else {
       this.toastrService.error('Please enter all fields.', '');
     }

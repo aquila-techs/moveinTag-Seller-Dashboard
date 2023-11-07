@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
     ordersRecevied: {
       series: [
         {
-          name: 'Orders',
+          name: 'Leads',
           data: [10, 15, 8, 15, 7, 12, 8]
         }
       ],

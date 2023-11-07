@@ -18,7 +18,7 @@
       <div class="form-outline">
         <form (submit)="onSubmitSearch()">
           <input type="text" class="form-control"
-            placeholder="Search by order number, customer name, postal code, services.." [(ngModel)]="searchText"
+            placeholder="Search by lead number, customer name, postal code, services.." [(ngModel)]="searchText"
             name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
         </form>
       </div>
@@ -60,7 +60,7 @@
             <table class="table table-s1">
               <thead>
                 <tr>
-                  <th>Order Number</th>
+                  <th>Lead Number</th>
                   <th>Customer Number</th>
                   <th>Services</th>
                   <th>Status</th>
