@@ -1533,7 +1533,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
               })
               if (this.isAfterSingup) {
                 this.toastrService.success('You have successfully subscribed.')
-                this._router.navigate(['/login']);
+                this._router.navigate(['/pages/seller/home']);
+                // this._router.navigate(['/login']);
               } else {
                 this.user['payment'] = true;
                 this._authenticationService.updateUserData(this.user);

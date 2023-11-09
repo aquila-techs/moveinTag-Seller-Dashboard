@@ -11,10 +11,10 @@ import { environment } from 'environments/environment';
 })
 export class HomeComponent implements OnInit {
   public currentDayIndex: number = 0;
-  constructor(private userService: UserService, private orderService: OrderService) { 
+  constructor(private userService: UserService, private orderService: OrderService) {
     const currentDate = new Date();
-    this.currentDayIndex = currentDate.getDay()+1;
-    if(this.currentDayIndex >= 7){
+    this.currentDayIndex = currentDate.getDay() + 1;
+    if (this.currentDayIndex >= 7) {
       this.currentDayIndex = 0;
     }
   }
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
         hoverBorderColor: this.successColorShade
       }
     ],
-    labels: [ 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr'],
+    labels: ['Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr'],
     options: {
       elements: {
         rectangle: {
@@ -152,23 +152,25 @@ export class HomeComponent implements OnInit {
       }
     });
     this.userService.getSellerProfile(this.user._id).subscribe({
-      next: (res: any)=>{
+      next: (res: any) => {
         this.sellerProfile = res;
         this.sellerProfile.totalReview = 0;
         this.sellerProfile.totlaStarts = 0;
         this.sellerProfile.totalRating = 0;
-        if(this.sellerProfile['reviews']&& this.sellerProfile['reviews'].length > 0 ){
+        if (this.sellerProfile['reviews'] && this.sellerProfile['reviews'].length > 0) {
           let totalReview = 0;
           let totlaStarts = 0;
-          this.sellerProfile['reviews'].forEach((item)=>{
-            totlaStarts += item.ratingCount;
-            totalReview++;
+          this.sellerProfile['reviews'].forEach((item) => {
+            if (item.status == 0) {
+              totlaStarts += item.ratingCount;
+              totalReview++;
+            }
           })
-          if(totalReview > 0 && totlaStarts > 0){
-            this.sellerProfile.totalRating = ((totlaStarts/(totalReview*5))*100).toFixed(0);
-          }else if(totalReview > 0 && totlaStarts <= 0){
+          if (totalReview > 0 && totlaStarts > 0) {
+            this.sellerProfile.totalRating = ((totlaStarts / (totalReview * 5)) * 100).toFixed(0);
+          } else if (totalReview > 0 && totlaStarts <= 0) {
             this.sellerProfile.totalRating = 0;
-          }else{
+          } else {
             this.sellerProfile.totalRating = 0;
           }
         }
@@ -178,23 +180,23 @@ export class HomeComponent implements OnInit {
     this.getEarningAnalytics();
   }
   public completedOrders: any = [];
-  getUserCompletedOrders(){
-    let queryParams = '?userId='+this.user._id+'&status=ACTIVE'+'&pageSize=10'+'&pageNo=1'+'&sortBy=updatedAt&order=desc';;
+  getUserCompletedOrders() {
+    let queryParams = '?userId=' + this.user._id + '&status=ACTIVE' + '&pageSize=10' + '&pageNo=1' + '&sortBy=updatedAt&order=desc';;
     this.orderService.getAllCompleteSellerOrders(queryParams)
-    .subscribe(res => {
-      this.completedOrders =  res[0].results;
-    })
+      .subscribe(res => {
+        this.completedOrders = res[0].results;
+      })
   }
 
-  public allEarningAnalytics :any = [];
-  getEarningAnalytics(){
-    let queryParams = '?userId='+this.user._id;
+  public allEarningAnalytics: any = [];
+  getEarningAnalytics() {
+    let queryParams = '?userId=' + this.user._id;
     this.orderService.getEarningAnalytics(queryParams)
-    .subscribe(res => {
-      this.allEarningAnalytics = res;
-      this.barChart['datasets'][0]['data'] = res.totalAmountWeekly
-      console.log(res);
-    })
+      .subscribe(res => {
+        this.allEarningAnalytics = res;
+        this.barChart['datasets'][0]['data'] = res.totalAmountWeekly
+        console.log(res);
+      })
   }
 
 

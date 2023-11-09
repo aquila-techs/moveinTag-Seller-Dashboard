@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, 
+  constructor(private _coreConfigService: CoreConfigService,
     private _formBuilder: UntypedFormBuilder,
     private _adminService: AdminService,
     private _toastrService: ToastrService,
@@ -81,14 +81,14 @@ export class SignupComponent implements OnInit {
       return;
     }
     this._adminService.createSeller(this.registerForm.value).subscribe({
-      next: (res)=>{
+      next: (res) => {
         console.log(res)
         window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
-        this._toastrService.success('','Seller register please wait for admin approval');
+        // this._toastrService.success('','Seller register please wait for admin approval');
         this._rotuer.navigate(['/subscription-detail'])
       },
-      error: (err)=> {
-        
+      error: (err) => {
+
       },
     })
   }
@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
       password: ['', Validators.required],
       companyName: ['', Validators.required]
     });
-    
+
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;

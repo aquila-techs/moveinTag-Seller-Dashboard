@@ -58,7 +58,7 @@
                         </thead>
                         <tbody>
                           <tr *ngIf="!activeOrders || activeOrders.length <=0">
-                            <td colspan="6" style="font-family: 'Montserrat', sans-serif;">No Acive orders to show</td>
+                            <td colspan="6" style="font-family: 'Montserrat', sans-serif;">No Acive leads to show</td>
                           </tr>
                           <tr *ngFor="let item of activeOrders">
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.orderNum}}</td>

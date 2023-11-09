@@ -23,18 +23,20 @@
                         <table class="table table-s1">
                             <thead>
                                 <tr>
-                                    <th class="text-center">File name</th>
+                                    <th></th>
+                                    <th>File name</th>
                                     <th class="text-center">File</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">License</td>
+                                    <td style="width: 175px;"></td>
+                                    <td style="width: 200px;">License</td>
                                     <td class="text-center">
-                                        <a class="text-success px-2 py-1 box-shadow-0"
-                                            (click)="openLicense()" rippleEffect>Preview</a>
-                                        </td>
+                                        <a class="text-success px-2 py-1 box-shadow-0" (click)="openLicense()"
+                                            rippleEffect>Preview</a>
+                                    </td>
                                     <td class="text-center" style="font-family: 'Montserrat', sans-serif;">
                                         <input type="file" id="upload" (change)="licensefileChangeEvent($event)"
                                             accept=".pdf,.jpg,.png" hidden />
@@ -47,7 +49,8 @@
                                 </tr>
 
                                 <tr>
-                                    <td class="text-center">Libility Insurance</td>
+                                    <td style="width: 175px;"></td>
+                                    <td style="width: 200px;">Liability  Insurance</td>
                                     <td class="text-center"><a class="text-success px-2 py-1 box-shadow-0"
                                             (click)="openLibilityInsurance()" rippleEffect>Preview</a></td>
                                     <td class="text-center" style="font-family: 'Montserrat', sans-serif;">
@@ -59,13 +62,14 @@
                                                 src="../../../assets/images/site/highlight.png"
                                                 alt="">{{LibilityInsuranceURL == undefined || LibilityInsuranceURL == ""
                                             ? "Upload" : "Update"}}
-                                            Libility
+                                            Liability 
                                             Insurance</label>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td class="text-center">Identity Card</td>
+                                    <td style="width: 175px;"></td>
+                                    <td style="width: 200px;">Identity Card</td>
                                     <td class="text-center"><a class="text-success px-2 py-1 box-shadow-0"
                                             (click)="openIdentityCard()" rippleEffect>Preview</a></td>
                                     <td class="text-center" style="font-family: 'Montserrat', sans-serif;">

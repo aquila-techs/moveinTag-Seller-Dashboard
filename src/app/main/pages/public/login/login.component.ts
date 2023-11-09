@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   }
 
- 
+
 
   // convenience getter for easy access to form fields
   get f() {
@@ -83,18 +83,18 @@ export class LoginComponent implements OnInit {
     // Login
     this.loading = true;
     this._authenticationService.loginAdmin(this.loginForm.value).subscribe({
-      next: (res)=> {
+      next: (res) => {
         this.loading = false;
         // if(res?.user && res.user?.role && res.user.role.title === Role.Admin ){
-          // Register the menu to the menu service
-          this._coreMenuService.register('main', this.menu);
-          // Set the main menu as our current menu
-          // this._toastrService.success('','Login Successfully');
-          this._coreMenuService.setCurrentMenu('main');
-          this._router.navigate(['/pages/seller/home']);
+        // Register the menu to the menu service
+        this._coreMenuService.register('main', this.menu);
+        // Set the main menu as our current menu
+        // this._toastrService.success('','Login Successfully');
+        this._coreMenuService.setCurrentMenu('main');
+        this._router.navigate(['/pages/seller/home']);
         // }
       },
-      error: (err)=>  {
+      error: (err) => {
         this.loading = false;
         // this._toastrService.error('','Email or password is wrong!');
         console.log(err);
