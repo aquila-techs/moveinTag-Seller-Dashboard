@@ -50,10 +50,12 @@
                           <tr>
                             <th style="font-family: 'Montserrat', sans-serif;">Lead#</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Consumers</th>
+                            <th style="font-family: 'Montserrat', sans-serif;">Email</th>
+                            <th style="font-family: 'Montserrat', sans-serif;">Postal Code</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Services</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Due On</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Status</th>
-                            <th style="font-family: 'Montserrat', sans-serif;" class="text-center">Quote Detail</th>
+                            <th style="font-family: 'Montserrat', sans-serif;" class="text-center">Lead Detail</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -62,16 +64,22 @@
                           </tr>
                           <tr *ngFor="let item of activeOrders">
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.orderNum}}</td>
-                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}
+                              {{item?.buyer?.lastName}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.email}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.postal_code}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.subCategory?.title}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item.updatedAt | date}}</td>
-                            <td style="font-family: 'Montserrat', sans-serif;">
+                            <td *ngIf="item.status == 'COMPLETED'" style="font-family: 'Montserrat', sans-serif;">
+                              {{item.status}}</td>
+                            <td *ngIf="item.status == 'CANCELLED'" style="font-family: 'Montserrat', sans-serif;">
+                              {{item.status}}</td>
+                            <td *ngIf="item.status == 'ACTIVE'" style="font-family: 'Montserrat', sans-serif;">
                               <select class="form-control"
                                 (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)"
                                 style="min-width: 165px;">
                                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active
                                 </option>
-                                <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                                 <option value="COMPLETED" style="font-family: 'Montserrat', sans-serif;"
                                   [selected]="item.status === 'COMPLETED'? 'selected':''">
                                   Completed </option>
@@ -79,7 +87,6 @@
                                   [selected]="item.status === 'CANCELLED'? 'selected':''">
                                   Cancelled </option>
                               </select>
-
                             </td>
                             <td style="font-family: 'Montserrat', sans-serif;" class="text-center">
                               <a class="text-success px-2 py-1 box-shadow-0"
@@ -125,10 +132,12 @@
                           <tr>
                             <th style="font-family: 'Montserrat', sans-serif;">Lead#</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Consumers</th>
+                            <th style="font-family: 'Montserrat', sans-serif;">Email</th>
+                            <th style="font-family: 'Montserrat', sans-serif;">Postal Code</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Services</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Due On</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Status</th>
-                            <th style="font-family: 'Montserrat', sans-serif;" class="text-center">Quote Detail</th>
+                            <th style="font-family: 'Montserrat', sans-serif;" class="text-center">Lead Detail</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -138,28 +147,30 @@
                           </tr>
                           <tr *ngFor="let item of completedOrders">
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.orderNum}}</td>
-                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}
+                              {{item?.buyer?.lastName}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.email}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.postal_code}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.subCategory?.title}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item.updatedAt | date}}</td>
-                            <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
-                            <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                            <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
-                            <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
-                            <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
-                              </select></td> -->
-                            <td style="font-family: 'Montserrat', sans-serif;"><select class="form-control"
-                                (change)="changeOrderStatus(item, $event,'cancelled')" style="min-width: 165px;">
+                            <td *ngIf="item.status == 'COMPLETED'" style="font-family: 'Montserrat', sans-serif;">
+                              {{item.status}}</td>
+                            <td *ngIf="item.status == 'CANCELLED'" style="font-family: 'Montserrat', sans-serif;">
+                              {{item.status}}</td>
+                            <td *ngIf="item.status == 'ACTIVE'" style="font-family: 'Montserrat', sans-serif;">
+                              <select class="form-control"
+                                (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)"
+                                style="min-width: 165px;">
                                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active
                                 </option>
-                                <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                                 <option value="COMPLETED" style="font-family: 'Montserrat', sans-serif;"
                                   [selected]="item.status === 'COMPLETED'? 'selected':''">
                                   Completed </option>
                                 <option value="CANCELLED" style="font-family: 'Montserrat', sans-serif;"
                                   [selected]="item.status === 'CANCELLED'? 'selected':''">
                                   Cancelled </option>
-                              </select></td>
-                            <!-- <td style="font-family: 'Montserrat', sans-serif;">Completed</td> -->
+                              </select>
+                            </td>
                             <td class="text-center">
                               <a class="text-success px-2 py-1 box-shadow-0"
                                 (click)="openOrderDetailPopup(modalVC, item)"
@@ -203,10 +214,12 @@
                           <tr>
                             <th style="font-family: 'Montserrat', sans-serif;">Lead#</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Consumers</th>
+                            <th style="font-family: 'Montserrat', sans-serif;">Email</th>
+                            <th style="font-family: 'Montserrat', sans-serif;">Post Code</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Services</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Due On</th>
                             <th style="font-family: 'Montserrat', sans-serif;">Status</th>
-                            <th style="font-family: 'Montserrat', sans-serif;" class="text-center">Quote Detail</th>
+                            <th style="font-family: 'Montserrat', sans-serif;" class="text-center">Lead Detail</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -216,21 +229,30 @@
                           </tr>
                           <tr *ngFor="let item of cancelledOrder">
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.orderNum}}</td>
-                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.firstName}}
+                              {{item?.buyer?.lastName}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.buyer?.email}}</td>
+                            <td style="font-family: 'Montserrat', sans-serif;">{{item?.postal_code}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item?.subCategory?.title}}</td>
                             <td style="font-family: 'Montserrat', sans-serif;">{{item.updatedAt | date}}</td>
-                            <td style="font-family: 'Montserrat', sans-serif;"><select class="form-control"
-                                (change)="changeOrderStatus(item, $event,'cancelled')" style="min-width: 165px;">
+                            <td *ngIf="item.status == 'COMPLETED'" style="font-family: 'Montserrat', sans-serif;">
+                              {{item.status}}</td>
+                            <td *ngIf="item.status == 'CANCELLED'" style="font-family: 'Montserrat', sans-serif;">
+                              {{item.status}}</td>
+                            <td *ngIf="item.status == 'ACTIVE'" style="font-family: 'Montserrat', sans-serif;">
+                              <select class="form-control"
+                                (change)="changeOrderStatus(item, $event,'active', modalCompleteOderGetAmmount)"
+                                style="min-width: 165px;">
                                 <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active
                                 </option>
-                                <!-- <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option> -->
                                 <option value="COMPLETED" style="font-family: 'Montserrat', sans-serif;"
                                   [selected]="item.status === 'COMPLETED'? 'selected':''">
                                   Completed </option>
                                 <option value="CANCELLED" style="font-family: 'Montserrat', sans-serif;"
                                   [selected]="item.status === 'CANCELLED'? 'selected':''">
                                   Cancelled </option>
-                              </select></td>
+                              </select>
+                            </td>
                             <td class="text-center">
                               <a class="text-success px-2 py-1 box-shadow-0"
                                 (click)="openOrderDetailPopup(modalVC, item)"
@@ -261,8 +283,6 @@
         </li>
       </ul>
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-
     </section>
 
   </div>

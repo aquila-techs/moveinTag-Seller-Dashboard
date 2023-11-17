@@ -21,6 +21,8 @@ declare var google: any;
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  public searchTypeFind = "";
+  public customPostalCodeFromPofile = "";
   public baseURL: any = environment.serverURL;
   public contentHeader: object;
   public progressbarHeight = '.857rem';
@@ -49,6 +51,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public countryStates = [];
   countryCities: string[] = [];
   searchText: string = "";
+  selectedOption = 1;
   phoneCode = "";
   phone = "";
   code = "";
@@ -1288,7 +1291,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   //   center: { lat: 37.421995, lng: -122.084092 }
   // };
   public postalCode = "";
+  public postalCodeCustom = "";
   public nearByZipCodes = [];
+  public nearByZipCodesCount = 0;
   zipCode: string = '';
   radius: number = 0;
   zipCodes: string[] = [];
@@ -1477,6 +1482,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    * On init
    */
   center: google.maps.LatLngLiteral;
+
+  public PostalCodeCustomArray = [];
+  public postalCodePattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
+
   ngOnInit() {
     this.getCountries();
     // const mapProperties = {
@@ -1521,18 +1530,34 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getUserAllProfile() {
 
+    this.nearByZipCodesCount = 0
+    this.nearByZipCodes = [];
+
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
-        console.log(res)
+
         this.sellerProfile = res;
+        this.searchTypeFind = this.sellerProfile.postalCodeSearchType;
+        this.customPostalCodeFromPofile = this.sellerProfile.customPostalCodes;
+
+        if (this.sellerProfile.customPostalCodes !== " ") {
+          this.PostalCodeCustomArray = this.sellerProfile.customPostalCodes.split(',')
+        }
         if (this.sellerProfile.postalCode) {
-          this.postalCode = this.sellerProfile.postalCode;
+
+          this.postalCode = this.sellerProfile.postalCode.trim();
         }
         if (this.sellerProfile.nearByPostalCodes) {
+          let arr = this.sellerProfile.nearByPostalCodes.split(',');
+          this.nearByZipCodesCount = arr.length
           this.nearByZipCodes = this.sellerProfile.nearByPostalCodes.split(',');
         }
         if (this.sellerProfile.radius) {
-          this.sliderWithNgModel = parseInt(this.sellerProfile.radius);
+          if (this.sellerProfile.customPostalCodes !== " ") {
+            this.sliderWithNgModel = parseInt("1");
+          } else {
+            this.sliderWithNgModel = parseInt(this.sellerProfile.radius);
+          }
         }
         this.profileUpdateFormBuilder();
       }
@@ -1651,6 +1676,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   modalOpenVCCategories(modalVCCategories) {
+    this.selectedOption = 1
     this.modalService.open(modalVCCategories, {
       centered: true,
       size: 'xl' // size: 'xs' | 'sm' | 'lg' | 'xl'
@@ -1874,6 +1900,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.submitted = true;
     // stop here if form is invalid
+
     if (this.postalCode === '' || this.nearByZipCodes.length <= 0) {
       return;
     }
@@ -1907,8 +1934,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
 
+      postalCodeSearchType: "NearBy",
       postalCode: this.postalCode,
       radius: this.sliderWithNgModel,
+      customPostalCodes: " ",
       nearByPostalCodes: this.nearByZipCodes.toString(),
       id: this.userId,
 
@@ -1918,6 +1947,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       next: (res) => {
         this.modalService.dismissAll();
         this.getUserAllProfile();
+        this.PostalCodeCustomArray = [];
+        this.toastrService.success('Added Successfully!')
       },
       error: (err) => {
         console.log(err);
@@ -2058,6 +2089,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   //   service.nearbySearch(request, this.callback.bind(this));
   // }
 
+  selectOption(event) {
+    this.selectedOption = event;
+  }
+
 
   callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -2071,11 +2106,175 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
+  validatePostalCode(postalCode: string): boolean {
+    return this.postalCodePattern.test(postalCode);
+  }
+
+  public clicOnItem(item) {
+
+    const index = this.PostalCodeCustomArray.indexOf(item);
+    if (index > -1) {
+      this.PostalCodeCustomArray.splice(index, 1);
+    }
+
+    this.submitted = true;
+    // stop here if form is invalid
+
+    let data = {};
+
+    data['postalCode'] = "";
+    data['radius'] = 0;
+    data['nearByPostalCodes'] = this.PostalCodeCustomArray.toString();
+    data['id'] = this.userId;
+
+    const OBJ = {
+      address: this.sellerProfile.address,
+      bonded: this.sellerProfile.bonded,
+      city: this.sellerProfile.city,
+      companyName: this.sellerProfile.companyName,
+      companyType: this.sellerProfile.companyType,
+      country: this.sellerProfile.country,
+      description: this.sellerProfile.description,
+      liabilityInsurance: this.sellerProfile.liabilityInsurance,
+      noOfEmployee: this.sellerProfile.noOfEmployee,
+      paymentMethod: this.sellerProfile.paymentMethod,
+      projectMinimum: this.sellerProfile.projectMinimum,
+      returnPolicy: this.sellerProfile.returnPolicy,
+      state: this.sellerProfile.state,
+      termsConditions: this.sellerProfile.termsConditions,
+      warrantyTerms: this.sellerProfile.warrantyTerms,
+      workerCompensation: this.sellerProfile.workerCompensation,
+      writtenContract: this.sellerProfile.writtenContract,
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+
+      postalCodeSearchType: "Custom",
+      postalCode: " ",
+      radius: 0,
+      customPostalCodes: this.PostalCodeCustomArray.toString(),
+      nearByPostalCodes: this.PostalCodeCustomArray.toString(),
+      id: this.userId,
+
+    }
+
+    this.userService.updateProfile(OBJ).subscribe({
+      next: (res) => {
+        this.getUserAllProfile();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+
+  }
+
+  public addCustomPostaCodeToArray() {
+
+    if (!this.postalCodeCustom) {
+      this.toastrService.error('Please enter valid postal code.')
+      return;
+    }
+    if (!this.validatePostalCode(this.postalCodeCustom)) {
+      this.toastrService.error('Please enter valid postal code. \n e.g A1A 1A1')
+      return;
+    }
+
+    var searchArray = (this.PostalCodeCustomArray.indexOf(this.postalCodeCustom) > -1);
+
+    if (searchArray == true) {
+      this.toastrService.error('Already Added');
+      return;
+    }
+
+    const ARRAY = [];
+    ARRAY.push(...this.PostalCodeCustomArray, this.postalCodeCustom.toLocaleUpperCase())
+    this.PostalCodeCustomArray = ARRAY
+
+  }
+
+  onSaveCustomPostalCode() {
+
+    if (this.PostalCodeCustomArray.length < 1) {
+      this.toastrService.error('Please enter postal code.')
+      return;
+    }
+
+    if (!this.postalCodeCustom) {
+      this.toastrService.error('Please enter postal code.')
+      return;
+    }
+
+    this.submitted = true;
+    // stop here if form is invalid
+
+    let data = {};
+
+    data['postalCode'] = "";
+    data['radius'] = 0;
+    data['nearByPostalCodes'] = this.PostalCodeCustomArray.toString();
+    data['id'] = this.userId;
+
+    const OBJ = {
+      address: this.sellerProfile.address,
+      bonded: this.sellerProfile.bonded,
+      city: this.sellerProfile.city,
+      companyName: this.sellerProfile.companyName,
+      companyType: this.sellerProfile.companyType,
+      country: this.sellerProfile.country,
+      description: this.sellerProfile.description,
+      liabilityInsurance: this.sellerProfile.liabilityInsurance,
+      noOfEmployee: this.sellerProfile.noOfEmployee,
+      paymentMethod: this.sellerProfile.paymentMethod,
+      projectMinimum: this.sellerProfile.projectMinimum,
+      returnPolicy: this.sellerProfile.returnPolicy,
+      state: this.sellerProfile.state,
+      termsConditions: this.sellerProfile.termsConditions,
+      warrantyTerms: this.sellerProfile.warrantyTerms,
+      workerCompensation: this.sellerProfile.workerCompensation,
+      writtenContract: this.sellerProfile.writtenContract,
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+
+      postalCodeSearchType: "Custom",
+      postalCode: " ",
+      radius: 0,
+      customPostalCodes: this.PostalCodeCustomArray.toString(),
+      nearByPostalCodes: this.PostalCodeCustomArray.toString(),
+      id: this.userId,
+
+    }
+
+    this.userService.updateProfile(OBJ).subscribe({
+      next: (res) => {
+        this.modalService.dismissAll();
+        this.getUserAllProfile();
+        this.toastrService.success('Added Successfully!')
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+  }
+
   public findNearByPostalCode() {
+
+    if (!this.postalCode) {
+      this.toastrService.error('Please enter postal code.')
+      return;
+    }
+
+    this.searchTypeFind = "NearBy";
+    this.nearByZipCodesCount = 0;
+    this.nearByZipCodes = [];
+
     let queryParam = '?zipcode=' + this.postalCode + '&miles=' + this.sliderWithNgModel * 1609.344;
     this.userService.getNearByPostalCode(queryParam)
       .subscribe(res => {
-        this.nearByZipCodes = res;
+        this.nearByZipCodesCount = res.count;
+        this.nearByZipCodes = res.result;
+
       })
     //  Call the getZipCodesInRadius method of the GoogleMapsService
     //  this.googleMapsService.findNearbyZipcodes(this.mapCircleCenter.lat, this.mapCircleCenter.lng, this.sliderWithNgModel)

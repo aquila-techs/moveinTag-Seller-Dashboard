@@ -176,7 +176,7 @@
                         src="../../../assets/images/site/social/phone-call.png" alt="">{{sellerProfile?.phone ?
                       sellerProfile.phone: ''}}</a></li>
 
-                      <li style="font-family: 'Montserrat', sans-serif;"><a href=""><img
+                  <li style="font-family: 'Montserrat', sans-serif;"><a href=""><img
                         src="../../../assets/images/site/social/email.png" alt="email">{{sellerProfile?.email ?
                       sellerProfile.email: ''}}</a></li>
 
@@ -555,57 +555,124 @@
       </div>
     </ng-template>
     <ng-template #modalGoogleMap let-modal>
+
+
+
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
-          style="font-family: 'Montserrat', sans-serif;">Select Address With Radius</h5>
+
+        <div style="padding:30px; margin-bottom: -60px;">
+          <div class="form-check">
+            <input class="form-check-input" style="margin-top: 8px;" type="radio" name="flexRadioDefault"
+              id="flexRadioDefault1" (change)="selectOption(1)" [checked]="true" />
+            <label style="margin-left: 5px;"
+              class="form-check-label font-medium-5 d-block mb-1 text-black font-weight-bolder" for="flexRadioDefault1">
+              Find Nearby Postal Codes </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" (change)="selectOption(2)" style="margin-top: 8px;" type="radio"
+              name="flexRadioDefault" id="flexRadioDefault2" />
+            <label style="margin-left: 5px;"
+              class="form-check-label font-medium-5 d-block mb-1 text-black font-weight-bolder" for="flexRadioDefault2">
+              Add Postal Codes </label>
+          </div>
+        </div>
+
+        <!-- <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
+          style="font-family: 'Montserrat', sans-serif;">Select Address With Radius</h5> -->
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="card-body">
-          <div class="row form-group">
-            <div class="col-sm-8 ">
-              <input type="text" class="form-control" placeholder="Please enter you postal code e.g. A1A 1A1"
-                [(ngModel)]="postalCode">
+
+          <div *ngIf="selectedOption == 1">
+            <div class="row form-group">
+              <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Please enter your postal code e.g. A1A 1A1"
+                  [(ngModel)]="postalCode">
+              </div>
+              <div class="col-sm-3">
+                <button type="button" (click)="findNearByPostalCode()" class="btn btn-dark2" rippleEffect><i
+                    data-feather="check"></i> Find Nearby Postal Code</button>
+              </div>
+              <div class="col-sm-2 d-flex align-items-center">
+                <h3 style="margin-top: 5px;"><i data-feather="check"></i> {{searchTypeFind == "NearBy" ?
+                  nearByZipCodesCount : 0}} Added</h3>
+              </div>
+              <!-- <div *ngIf="nearByZipCodes && nearByZipCodes.length > 0" class="card-categories col-sm-12 mt-1">
+                <div class="card-body" style="padding: 0px;">
+                  <ul style="max-height: 100px; overflow-y: auto;">
+                    <li *ngFor="let item of nearByZipCodes" style="font-family: 'Montserrat', sans-serif;">{{item}}</li>
+                  </ul>
+                </div>
+              </div> -->
             </div>
-            <div class="col-sm-4">
-              <button type="button" (click)="findNearByPostalCode()" class="btn btn-dark2 mx-1 btn-md px-3"
-                rippleEffect><i data-feather="check"></i> Find Nearby Postal Code</button>
-            </div>
-            <div *ngIf="nearByZipCodes && nearByZipCodes.length > 0" class="card-categories col-sm-12 mt-1">
-              <div class="card-body" style="padding: 0px;">
-                <ul style="max-height: 100px; overflow-y: auto;">
-                  <li *ngFor="let item of nearByZipCodes" style="font-family: 'Montserrat', sans-serif;">{{item}}</li>
-                </ul>
+            <p style="font-family: 'Montserrat', sans-serif;">Set Radius On Map</p>
+            <div class="noUi-wrapper">
+              <nouislider [min]="1" [connect]="'lower'" [behaviour]="'tap'" [max]="100" [step]="1" [tooltips]="true"
+                [(ngModel)]="sliderWithNgModel"></nouislider>
+              <div class="bottom">
+                <p class="font-weight-bold">1m</p>
+                <p class="font-weight-bold">100m</p>
               </div>
             </div>
-          </div>
-          <p style="font-family: 'Montserrat', sans-serif;">Set Radius On Map</p>
-          <div class="noUi-wrapper">
-            <nouislider [min]="1" [connect]="'lower'" [behaviour]="'tap'" [max]="100" [step]="1" [tooltips]="true"
-              [(ngModel)]="sliderWithNgModel"></nouislider>
-            <div class="bottom">
-              <p class="font-weight-bold">1m</p>
-              <p class="font-weight-bold">100m</p>
+            <google-map height="400px" width="'100%'" [(zoom)]="markerCirclePolygonZoom"
+              [center]="markerCirclePolygonCenter">
+              <map-circle circleDrag="false" #mapCircle [(options)]="mapCircleOptions"
+                [radius]="sliderWithNgModel*1609.34" (radiusChanged)="radiusChanged()"
+                [(center)]="mapCircleCenter"></map-circle>
+            </google-map>
+            <div class="d-flex justify-content-center my-2">
+              <button type="button" (click)="onSaveNearByZipCode()" class="btn btn-dark2 mx-1 btn-md px-3"
+                rippleEffect><i data-feather="check"></i> Save</button>
+              <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+                rippleEffect><i data-feather="x"></i> Discard</button>
             </div>
           </div>
-          <google-map height="400px" width="'100%'" [(zoom)]="markerCirclePolygonZoom"
-            [center]="markerCirclePolygonCenter">
-            <map-circle circleDrag="false" #mapCircle [(options)]="mapCircleOptions"
-              [radius]="sliderWithNgModel*1609.34" (radiusChanged)="radiusChanged()"
-              [(center)]="mapCircleCenter"></map-circle>
-          </google-map>
-          <div class="d-flex justify-content-center my-2">
-            <button type="button" (click)="onSaveNearByZipCode()" class="btn btn-dark2 mx-1 btn-md px-3" rippleEffect><i
-                data-feather="check"></i> Save</button>
-            <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
-              rippleEffect><i data-feather="x"></i> Discard</button>
+
+          <div *ngIf="selectedOption == 2">
+            <div>
+              <div class="row form-group">
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" style="text-transform: uppercase;"
+                    placeholder="Please enter you postal code e.g. A1A 1A1" [(ngModel)]="postalCodeCustom">
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" (click)="addCustomPostaCodeToArray()" class="btn btn-dark2" rippleEffect><i
+                      data-feather="check"></i> Add Postal Code</button>
+                </div>
+                <div class="col-sm-2 d-flex align-items-center">
+                  <h3 style="margin-top: 5px;"><i data-feather="check"></i> {{PostalCodeCustomArray.length}} Added</h3>
+                </div>
+                <div *ngIf="PostalCodeCustomArray && PostalCodeCustomArray.length > 0"
+                  class="card-categories col-sm-12 mt-1">
+                  <div class="card-body" style="padding: 0px;">
+                    <ul style="max-height: 100px; overflow-y: auto;">
+                      <li *ngFor="let item of PostalCodeCustomArray" style="font-family: 'Montserrat', sans-serif;">
+                        {{item}} <i class="fa fa-close" style="cursor: pointer;" (click)="clicOnItem(item)"></i></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center my-2">
+              <button type="button" (click)="onSaveCustomPostalCode()" class="btn btn-dark2 mx-1 btn-md px-3"
+                rippleEffect><i data-feather="check"></i> Save</button>
+              <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+                rippleEffect><i data-feather="x"></i> Discard</button>
+            </div>
           </div>
+
         </div>
       </div>
 
     </ng-template>
+
+
+
     <ng-template #modalVCCategories let-modal>
       <div class="modal-header">
         <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
