@@ -32,6 +32,14 @@ export class UserService {
     return this._http.put('user/update', body)
   }
 
+  createUserZipCodes(data){
+    return this._http.post('user/save-seller-zipcodes',data)
+  }
+
+  getUserZipCodes(data){
+    return this._http.post('user/get-seller-zipcodes',data)
+  }
+
   addUserSerivesPhotos(data){
     return this._http.post('user/add-seller-service-photo',data)
   }

@@ -1313,7 +1313,7 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
     private _router: Router,
     private toastrService: ToastrService, private userService: UserService,
     private modalService: NgbModal,
-     private toster: ToastrService) {
+    private toster: ToastrService) {
     // this.stripe = Stripe('pk_test_krO93K0IJTYIZQI4Kji8oDtK'); // Replace with your Stripe public key
     this.user = window.localStorage.getItem('currentUser') && JSON.parse(window.localStorage.getItem('currentUser')) || window.sessionStorage.getItem('currentUser') && JSON.parse(window.sessionStorage.getItem('currentUser'));
     if (window.sessionStorage.getItem('currentUser')) {
@@ -1382,7 +1382,7 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
    * On init
    */
   ngOnInit() {
-    
+
     this.getPaymentStatus();
     this.getActiveSubscripton();
     console.log(this.user)
@@ -1603,87 +1603,87 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
     }
   }
 
-  public subscription:any;
-  public cardList:any;
-  public transactions:any;
+  public subscription: any;
+  public cardList: any;
+  public transactions: any;
 
-  getPaymentStatus(){
+  getPaymentStatus() {
     let data = {
       "_id": this.userId
     }
     this.userService.getSubscriptionCustomerInfo(data)
-    .subscribe(res => {
-      this.subscription =  res;
-      this.transactions =  res['subscriptions'].data;
-    })
+      .subscribe(res => {
+        this.subscription = res;
+        this.transactions = res['subscriptions'].data;
+      })
   }
   public customer;
   public paymentMethod;
-  getCardListAndDetails(){
+  getCardListAndDetails() {
     let data = {
       "_id": this.userId
     }
     this.userService.getCustomerCardDetailInfo(data)
-    .subscribe(res => {
-      this.cardList =  res.cards.data;
-      this.customer = res.customer;
-    })
+      .subscribe(res => {
+        this.cardList = res.cards.data;
+        this.customer = res.customer;
+      })
   }
-  getCustomerPaymentMethodDetailInfo(){
+  getCustomerPaymentMethodDetailInfo() {
     let data = {
       "_id": this.userId
     }
     this.userService.getCustomerPaymentMethodDetailInfo(data)
-    .subscribe(res => {
-      this.paymentMethod =  res.data;
-    })
+      .subscribe(res => {
+        this.paymentMethod = res.data;
+      })
   }
-  
 
-  getAllTransacrtions(){
+
+  getAllTransacrtions() {
     let data = {
       "_id": this.userId
     }
     this.userService.getSubsciptionList(data)
-    .subscribe(res => {
-      this.transactions =  res;
-    })
+      .subscribe(res => {
+        this.transactions = res;
+      })
   }
 
-  cancelPayment(){
+  cancelPayment() {
     let data = {
       "_id": this.userId
     }
     this.userService.cancelSubscriptionCustomer(data)
-    .subscribe(res => {
-      this.modalService.dismissAll();
-      this.getPaymentStatus();
-    })
+      .subscribe(res => {
+        this.modalService.dismissAll();
+        this.getPaymentStatus();
+      })
   }
 
-  activePayment(){
+  activePayment() {
     let data = {
       "_id": this.userId
     }
     this.userService.activeSubscriptionCustomer(data)
-    .subscribe(res => {
-      this.modalService.dismissAll();
-      this.getPaymentStatus();
-    })
+      .subscribe(res => {
+        this.modalService.dismissAll();
+        this.getPaymentStatus();
+      })
   }
 
-  pausePayment(){
+  pausePayment() {
     let data = {
       "_id": this.userId
     }
     this.userService.pauseSubscriptionCustomer(data)
-    .subscribe(res => {
-      this.modalService.dismissAll();
-      this.getPaymentStatus();
-    })
+      .subscribe(res => {
+        this.modalService.dismissAll();
+        this.getPaymentStatus();
+      })
   }
 
-  
+
   addNewCard() {
     if (this.cvc && this.cardNumber && this.cardname && this.selectedMonth && this.selectedMonth) {
       let data = {
@@ -1699,71 +1699,71 @@ export class SubscriptionRenewelComponent implements OnInit, AfterContentChecked
           this.modalService.dismissAll();
         }
       })
-    }else{
+    } else {
       this.toster.error('Please fill all required fields.');
     }
   }
 
   deleteCard(id) {
-      let data = {
-        'cardId': id,
-        "_id": this.userId
-      }
-      this.userService.deleteCard(data).subscribe({
-        next: (value) => {
-          this.getCardListAndDetails();
-        }
-      })
+    let data = {
+      'cardId': id,
+      "_id": this.userId
     }
-    getActiveSubscripton(){
-      let data = {
-        "_id": this.userId
+    this.userService.deleteCard(data).subscribe({
+      next: (value) => {
+        this.getCardListAndDetails();
       }
-      this.userService.getSellerActiveSubacription(data).subscribe({
-        next: (value) => {
-          console.log(value);
-        }
-      })
+    })
+  }
+  getActiveSubscripton() {
+    let data = {
+      "_id": this.userId
     }
+    this.userService.getSellerActiveSubacription(data).subscribe({
+      next: (value) => {
+        console.log(value);
+      }
+    })
+  }
 
-    setPaymentMethodAsDefault(id){
-      let data = {
-        "_id": this.userId,
-        "paymentMethodId": id
+  setPaymentMethodAsDefault(id) {
+    let data = {
+      "_id": this.userId,
+      "paymentMethodId": id
+    }
+    this.userService.setPaymentMethodAsDefault(data).subscribe({
+      next: (value) => {
+        this.getCardListAndDetails();
       }
-      this.userService.setPaymentMethodAsDefault(data).subscribe({
-        next: (value) => {
-          this.getCardListAndDetails();
-        }
-      })
-    }
-    getDateFormat(miliseconds){
-      return moment(miliseconds*1000).format("DD/MMM/YYYY hh:mm:ss a")
-    }
+    })
+  }
+  getDateFormat(miliseconds) {
+    return moment(miliseconds * 1000).format("DD/MMM/YYYY hh:mm:ss a")
+  }
 
-    reactiveSubacription(){
-      let subscriptionData = {
-        '_id': this.user._id,
-        'priceId': this.priceId,
+  reactiveSubacription() {
+    let subscriptionData = {
+      '_id': this.user._id,
+      'priceId': this.priceId,
+    }
+    this.userService.reactiveSubacription(subscriptionData).subscribe({
+      next: (value) => {
+        let user = this.currentUser;
+        this.currentUser.subscriptionStatus = 'active';
+        this._authenticationService.updateUserData(this.currentUser);
+        this._router.navigate(['/pages/seller/home']);
       }
-      this.userService.reactiveSubacription(subscriptionData).subscribe({
-        next: (value) => {
-          let user = this.currentUser;
-          this.currentUser.subscriptionStatus = 'active';
-          this._authenticationService.updateUserData(this.currentUser);
-          this._router.navigate(['/pages/seller/home']);
-        }
-      });
-    }
+    });
+  }
 
-    modalOpenVC(modalVC) {
-      this.cardname="";
-      this.cardNumber="";
-      this.selectedMonth=null;
-      this.selectedYear=null;
-       this.cvc="";
-      this.modalService.open(modalVC, {
-        centered: true
-      });
-    }
+  modalOpenVC(modalVC) {
+    this.cardname = "";
+    this.cardNumber = "";
+    this.selectedMonth = null;
+    this.selectedYear = null;
+    this.cvc = "";
+    this.modalService.open(modalVC, {
+      centered: true
+    });
+  }
 }

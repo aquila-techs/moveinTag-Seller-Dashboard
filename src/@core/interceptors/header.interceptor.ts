@@ -7,19 +7,26 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService,
-      private spinner: NgxSpinnerService) {}
+  constructor(private authenticationService: AuthenticationService,
+    private spinner: NgxSpinnerService) { }
 
-  
+
   /**
    * Add auth header with jwt if user is logged in and request is to api url
    * @param request
    * @param next
    */
-   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if(!request.url.includes('/chat/sendMessage')){
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (!request.url.includes('/chat/sendMessage')) {
       this.spinner.show('main');
     }
+
+    if (request.url.includes('/seller-category/get-nearby-zipcode')) {
+      // this.spinner.show('main');
+      // alert("hi")
+      this.spinner.hide("main");
+    }
+
     const currentUser = this.authenticationService.currentUserValue || window.localStorage.getItem('currentUser') && JSON.parse(window.localStorage.getItem('currentUser'));
     const isLoggedIn = currentUser && currentUser.accessToken;
     const isApiUrl = request.url.startsWith(environment.apiUrl);

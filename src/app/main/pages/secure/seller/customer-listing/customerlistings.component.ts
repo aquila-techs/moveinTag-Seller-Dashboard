@@ -18,7 +18,7 @@ export class CustomerlistingsComponent implements OnInit {
   public currentUser: any;
   public category: any = {};
   public categoryId = '';
-  constructor(private modalService: NgbModal,private http: HttpClient,
+  constructor(private modalService: NgbModal, private http: HttpClient,
     private orderService: OrderService,
     private userService: UserService, private activateRoute: ActivatedRoute,
     private router: Router, private notificationService: NotificationsService) {

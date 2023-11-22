@@ -10,8 +10,10 @@ import { MapCircle } from '@angular/google-maps';
 import { GoogleMapsService } from '@core/services/services/googlemap.service';
 import { AuthenticationService } from '@core/services/authentication.service';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { map, catchError, tap, take, takeWhile, takeUntil } from 'rxjs/operators';
+import { Observable, throwError, interval, Subject } from 'rxjs';
 
 declare var google: any;
 
@@ -21,6 +23,7 @@ declare var google: any;
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  public userSavedZipCodes = "";
   public searchTypeFind = "";
   public customPostalCodeFromPofile = "";
   public baseURL: any = environment.serverURL;
@@ -49,6 +52,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public countriesList = [];
   countries: string[] = [];
   public countryStates = [];
+  public countryCitiesZipCode = [];
   countryCities: string[] = [];
   searchText: string = "";
   selectedOption = 1;
@@ -1297,6 +1301,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   zipCode: string = '';
   radius: number = 0;
   zipCodes: string[] = [];
+
+  progress: number;
+  progressStart: boolean;
+  modelSize: "xl";
+
   constructor(
     private _coreConfigService: CoreConfigService,
     private modalService: NgbModal,
@@ -1319,9 +1328,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onCountryPhoneCode(code: any) {
-    this.phoneCode = code.dial_code
-  }
+  private apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 
   public selectedCategories: any = [];
   selectCategory(categryId, midLevelId, subcategry) {
@@ -1436,6 +1443,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     })
   }
 
+  onCountryChangeZipCodes(country: any) {
+    this.countryZipCodes = country
+    let city = this.countriesData.filter(state => state.country === country);
+    city = [...new Set(city.map(item => item.name))];
+    city.sort();
+    this.countryCitiesZipCode = city;
+
+  }
+
+  onCityChangeZipCodes(city: any) {
+    this.cityZipCodes = city
+  }
+
   onCountryChange(country: any) {
 
     let state = this.countriesData.filter(state => state.country === country);
@@ -1446,7 +1466,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onStateChange(state: any) {
-    console.log(state)
+
     let city = this.countriesData.filter(city => city.subcountry === state);
     city = [...new Set(city.map(item => item.name))];
     city.sort();
@@ -1482,6 +1502,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    * On init
    */
   center: google.maps.LatLngLiteral;
+
+  public countryZipCodes = "";
+  public cityZipCodes = "";
 
   public PostalCodeCustomArray = [];
   public postalCodePattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
@@ -1525,13 +1548,81 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       }
     }
     this.profileUpdateFormBuilder();
-    this.getUserAllProfile();
+    this.getUserAllZipCodes();
+  }
+
+  zipCodesGet(city: string, country: string, radius: string) {
+
+    const address = `${city}, ${country}`;
+    const apiKey = "AIzaSyC1PD_A1j--Aw4F0iRkC5KZsoxexw6mpnI"
+
+    this.http.get("https://maps.googleapis.com/maps/api/geocode/json", {
+      params: {
+        address: address,
+        key: apiKey,
+      }
+    }).subscribe({
+      next: (response: any) => {
+        const location = response.results[0].geometry.location;
+        return this.getZipCodesByLocation(location, radius, apiKey);
+      }
+    })
+  }
+
+  private getZipCodesByLocation(location: any, radius: string, apiKey: string) {
+
+    this.http.get("https://maps.googleapis.com/maps/api/geocode/json", {
+      params: {
+        latlng: `${location.lat},${location.lng}`,
+        result_type: 'postal_code',
+        location_type: 'ROOFTOP',
+        radius: radius,
+        key: apiKey,
+      }
+    }).subscribe({
+      next: (response: any) => {
+
+        const zipCodes = response.results.map(result =>
+          result.address_components.find(component => component.types.includes('postal_code')).long_name
+        );
+
+      }
+    })
+
+  }
+
+
+  getUserAllZipCodes() {
+
+    const OBJ = {
+      userId: this.userId,
+    }
+
+    this.userService.getUserZipCodes(OBJ).subscribe({
+      next: (res) => {
+        if (res.data == null || res.data == "null" || res.data == "") {
+          this.userSavedZipCodes = ""
+        } else {
+          this.userSavedZipCodes = res.data.nearByPostalCodes;
+        }
+        console.log(res)
+        this.getUserAllProfile();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+
+  }
+
+  onCountryPhoneCode(code: any) {
+    this.phoneCode = code.dial_code
   }
 
   getUserAllProfile() {
 
-    this.nearByZipCodesCount = 0
-    this.nearByZipCodes = [];
+    // this.nearByZipCodesCount = 0
+    // this.nearByZipCodes = [];
 
     this.userService.getProfile(this.userId).subscribe({
       next: (res: any) => {
@@ -1547,10 +1638,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           this.postalCode = this.sellerProfile.postalCode.trim();
         }
-        if (this.sellerProfile.nearByPostalCodes) {
-          let arr = this.sellerProfile.nearByPostalCodes.split(',');
+        if (this.userSavedZipCodes) {
+          let arr = this.userSavedZipCodes.split(',');
           this.nearByZipCodesCount = arr.length
-          this.nearByZipCodes = this.sellerProfile.nearByPostalCodes.split(',');
+
+          this.nearByZipCodes = this.userSavedZipCodes.split(',');
         }
         if (this.sellerProfile.radius) {
           if (this.sellerProfile.customPostalCodes !== " ") {
@@ -1761,7 +1853,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userService.updateProfile(data).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-        this.getUserAllProfile();
+        // this.getUserAllProfile();
+
+        this.getUserAllZipCodes();
+
         // this.sellerProfile = res;
       },
       error: (err) => {
@@ -1887,7 +1982,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       next: (res) => {
         console.log(res)
         this.modalService.dismissAll();
-        this.getUserAllProfile();
+        // this.getUserAllProfile();
+        this.getUserAllZipCodes();
       },
       error: (err) => {
         console.log(err);
@@ -1904,6 +2000,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if (this.postalCode === '' || this.nearByZipCodes.length <= 0) {
       return;
     }
+
+    // if (!this.countryZipCodes) {
+    //   this.toastrService.error('Please select country')
+    //   return;
+    // }
+
+    // if (!this.cityZipCodes) {
+    //   this.toastrService.error('Please select city')
+    //   return;
+    // }
+
 
     let data = {};
 
@@ -1938,15 +2045,37 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       postalCode: this.postalCode,
       radius: this.sliderWithNgModel,
       customPostalCodes: " ",
-      nearByPostalCodes: this.nearByZipCodes.toString(),
+      nearByPostalCodes: "",
+
+      countryZipCodes: this.countryZipCodes,
+      cityZipCodes: this.cityZipCodes,
+
       id: this.userId,
 
     }
 
     this.userService.updateProfile(OBJ).subscribe({
       next: (res) => {
+        this.saveUserZipCodes();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+  }
+
+  saveUserZipCodes() {
+
+    const OBJ = {
+      userId: this.userId,
+      nearByPostalCodes: this.nearByZipCodes.toString(),
+    }
+
+    this.userService.createUserZipCodes(OBJ).subscribe({
+      next: (res) => {
         this.modalService.dismissAll();
-        this.getUserAllProfile();
+        // this.getUserAllProfile();
+        this.getUserAllZipCodes();
         this.PostalCodeCustomArray = [];
         this.toastrService.success('Added Successfully!')
       },
@@ -1954,6 +2083,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log(err);
       },
     })
+
   }
 
   uploadCoverPhoto() {
@@ -1964,7 +2094,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.userService.updateCoverPhoto(data).subscribe({
         next: (res) => {
           this.modalService.dismissAll();
-          this.getUserAllProfile();
+          // this.getUserAllProfile();
+          this.getUserAllZipCodes();
         },
         error: (err) => {
           console.log(err);
@@ -1981,7 +2112,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.authenticationSerive.updateProfile(data).subscribe({
         next: (res) => {
           this.modalService.dismissAll();
-          this.getUserAllProfile();
+          // this.getUserAllProfile();
+          this.getUserAllZipCodes();
         },
         error: (err) => {
           console.log(err);
@@ -2020,6 +2152,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   showPosition(position) {
+    console.log(position)
     const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: latLng,
@@ -2160,7 +2293,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.userService.updateProfile(OBJ).subscribe({
       next: (res) => {
-        this.getUserAllProfile();
+        // this.getUserAllProfile();
+        this.getUserAllZipCodes();
       },
       error: (err) => {
         console.log(err);
@@ -2241,16 +2375,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       postalCode: " ",
       radius: 0,
       customPostalCodes: this.PostalCodeCustomArray.toString(),
-      nearByPostalCodes: this.PostalCodeCustomArray.toString(),
+      nearByPostalCodes: "",
+
       id: this.userId,
 
     }
 
     this.userService.updateProfile(OBJ).subscribe({
       next: (res) => {
-        this.modalService.dismissAll();
-        this.getUserAllProfile();
-        this.toastrService.success('Added Successfully!')
+        this.saveUserZipCodesCustom();
       },
       error: (err) => {
         console.log(err);
@@ -2258,24 +2391,127 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     })
   }
 
+  saveUserZipCodesCustom() {
+
+    const OBJ = {
+      userId: this.userId,
+      nearByPostalCodes: this.PostalCodeCustomArray.toString(),
+    }
+
+    this.userService.createUserZipCodes(OBJ).subscribe({
+      next: (res) => {
+        this.modalService.dismissAll();
+        // this.getUserAllProfile();
+        this.getUserAllZipCodes();
+        this.toastrService.success('Added Successfully!')
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+
+  }
+
+
+
   public findNearByPostalCode() {
+
+    // if (!this.countryZipCodes) {
+    //   this.toastrService.error('Please select country')
+    //   return;
+    // }
+
+    // if (!this.cityZipCodes) {
+    //   this.toastrService.error('Please select city')
+    //   return;
+    // }
 
     if (!this.postalCode) {
       this.toastrService.error('Please enter postal code.')
       return;
     }
 
+    // this.zipCodesGet(this.cityZipCodes, this.countryZipCodes, `${this.sliderWithNgModel * 1000}`);
+    // return;
+
     this.searchTypeFind = "NearBy";
     this.nearByZipCodesCount = 0;
     this.nearByZipCodes = [];
 
-    let queryParam = '?zipcode=' + this.postalCode + '&miles=' + this.sliderWithNgModel * 1609.344;
-    this.userService.getNearByPostalCode(queryParam)
-      .subscribe(res => {
-        this.nearByZipCodesCount = res.count;
-        this.nearByZipCodes = res.result;
+    this.progressStart = true
+    this.progress = 1;
 
-      })
+    let queryParam = '?zipcode=' + this.postalCode.toUpperCase() + '&miles=' + this.sliderWithNgModel * 1609.344;
+
+    // Create a subject to signal when the API call is complete
+    const apiResponse$ = new Subject<void>();
+
+    // Simulate progress until API response is received
+    const progressSimulator$ = interval(1000).pipe(
+      takeUntil(apiResponse$)
+    );
+
+    progressSimulator$.subscribe((value) => {
+      // Increment progress until 100
+      this.progress = Math.min(value + 1, 100); // Ensure progress doesn't exceed 100
+    });
+
+    this.http.get(`${environment.apiUrl}seller-category/get-nearby-zipcode${queryParam}`, {
+      reportProgress: true,
+      observe: 'events',
+    }).pipe(
+      takeUntil(apiResponse$),
+    )
+      .subscribe(
+        (event) => {
+          if (event.type === HttpEventType.DownloadProgress) {
+            const total = event.total || 1;
+            const progress = Math.round((100 * event.loaded) / total);
+            // Set progress only if it's less than 100
+            if (progress < 100) {
+              this.progress = progress;
+            }
+            // Optionally, you can set the progress to 100 once the API response is complete
+            // this.progress = progress;
+          } else if (event.type === HttpEventType.Response) {
+            console.log(event.body);
+            const DATA = event.body;
+            this.nearByZipCodesCount = DATA['count'];
+            this.nearByZipCodes = DATA['result'];
+            // Signal that the API response is complete
+            apiResponse$.next();
+            apiResponse$.complete();
+            // Optionally, set progress to 100 once the response is complete
+            this.progress = 100;
+            setTimeout(() => {
+              this.progressStart = false;
+              this.progress = 0;
+            }, 500);
+          }
+        },
+        (error) => {
+          // Handle the error here
+          console.error('Error:', error);
+          this.progress = 100;
+          setTimeout(() => {
+            this.progressStart = false;
+            this.progress = 0;
+          }, 500);
+          apiResponse$.error(error); // Notify observers about the error
+        }
+      );
+
+
+    // let queryParam = '?zipcode=' + this.postalCode.toUpperCase() + '&miles=' + this.sliderWithNgModel * 1609.344;
+    // this.userService.getNearByPostalCode(queryParam)
+    //   .subscribe(res => {
+    //     this.nearByZipCodesCount = res.count;
+    //     this.nearByZipCodes = res.result;
+
+    //   })
+
+
+
     //  Call the getZipCodesInRadius method of the GoogleMapsService
     //  this.googleMapsService.findNearbyZipcodes(this.mapCircleCenter.lat, this.mapCircleCenter.lng, this.sliderWithNgModel)
     //  .then((zipCodes) => {
