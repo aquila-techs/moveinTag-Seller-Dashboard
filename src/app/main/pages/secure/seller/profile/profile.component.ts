@@ -2071,13 +2071,44 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       nearByPostalCodes: this.nearByZipCodes.toString(),
     }
 
-    this.userService.createUserZipCodes(OBJ).subscribe({
+
+    this.progressStart = true
+    this.progress = 1;
+
+    let queryParam = '?zipcode=' + this.postalCode.toUpperCase() + '&miles=' + this.sliderWithNgModel * 1609.344;
+
+    // Create a subject to signal when the API call is complete
+    const apiResponse$ = new Subject<void>();
+
+    // Simulate progress until API response is received
+    const progressSimulator$ = interval(1000).pipe(
+      takeUntil(apiResponse$)
+    );
+
+    progressSimulator$.subscribe((value) => {
+      // Increment progress until 100
+      this.progress = Math.min(value + 1, 100); // Ensure progress doesn't exceed 100
+    });
+
+
+    this.userService.createUserZipCodes(OBJ).pipe(
+      takeUntil(apiResponse$),
+    ).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
         // this.getUserAllProfile();
         this.getUserAllZipCodes();
         this.PostalCodeCustomArray = [];
         this.toastrService.success('Added Successfully!')
+
+        apiResponse$.next();
+        apiResponse$.complete();
+        // Optionally, set progress to 100 once the response is complete
+        this.progress = 100;
+        setTimeout(() => {
+          this.progressStart = false;
+          this.progress = 0;
+        }, 500);
       },
       error: (err) => {
         console.log(err);
@@ -2474,7 +2505,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             // Optionally, you can set the progress to 100 once the API response is complete
             // this.progress = progress;
           } else if (event.type === HttpEventType.Response) {
-            console.log(event.body);
             const DATA = event.body;
             this.nearByZipCodesCount = DATA['count'];
             this.nearByZipCodes = DATA['result'];

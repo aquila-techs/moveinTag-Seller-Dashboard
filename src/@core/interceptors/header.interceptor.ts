@@ -20,10 +20,10 @@ export class HeaderInterceptor implements HttpInterceptor {
     if (!request.url.includes('/chat/sendMessage')) {
       this.spinner.show('main');
     }
-
     if (request.url.includes('/seller-category/get-nearby-zipcode')) {
-      // this.spinner.show('main');
-      // alert("hi")
+      this.spinner.hide("main");
+    }
+    if (request.url.includes('/user/save-seller-zipcodes')) {
       this.spinner.hide("main");
     }
 
