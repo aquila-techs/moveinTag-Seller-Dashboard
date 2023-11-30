@@ -1,4 +1,4 @@
-<div class="content-wrapper container-xxl p-0">
+<div *ngIf="!progressProfileStart" class="content-wrapper container-xxl p-0">
   <div class="content-body">
 
     <section>
@@ -795,6 +795,30 @@
       </div>
     </ng-template>
 
+  </div>
+</div>
+
+<div *ngIf="progressProfileStart" class="container" style="height: 100vh;
+margin: 0;
+display: flex;
+align-items: center;
+justify-content: center;">
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="your-centered-div">
+
+
+        <div *ngIf="progressProfileStart">
+          <div>
+            <h3 style="color: #000000">Profile Loading {{progressProfile}}% Done</h3>
+            <div class="progress" *ngIf="progressProfile">
+              <div class="progress-bar" [style.width]="progressProfile + '%'"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
 <div id="map"></div>

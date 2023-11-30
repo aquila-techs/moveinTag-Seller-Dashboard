@@ -1298,12 +1298,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public postalCodeCustom = "";
   public nearByZipCodes = [];
   public nearByZipCodesCount = 0;
+
+  public searchedLat = 0;
+  public searchedLon = 0;
+
   zipCode: string = '';
   radius: number = 0;
   zipCodes: string[] = [];
 
   progress: number;
+  progressProfile: number;
   progressStart: boolean;
+  progressProfileStart: boolean;
   modelSize: "xl";
 
   constructor(
@@ -1510,6 +1516,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public postalCodePattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
 
   ngOnInit() {
+    this.getUserAllZipCodes();
     this.getCountries();
     // const mapProperties = {
     //   center: new google.maps.LatLng(36.2271, -80.8431),
@@ -1548,7 +1555,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       }
     }
     this.profileUpdateFormBuilder();
-    this.getUserAllZipCodes();
   }
 
   zipCodesGet(city: string, country: string, radius: string) {
@@ -1598,15 +1604,43 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       userId: this.userId,
     }
 
-    this.userService.getUserZipCodes(OBJ).subscribe({
+
+    this.progressProfileStart = true
+    this.progressProfile = 1;
+
+    // Create a subject to signal when the API call is complete
+    const apiResponse$ = new Subject<void>();
+
+    // Simulate progress until API response is received
+    const progressSimulator$ = interval(1000).pipe(
+      takeUntil(apiResponse$)
+    );
+
+    progressSimulator$.subscribe((value) => {
+      // Increment progress until 100
+      this.progressProfile = Math.min(value + 1, 100); // Ensure progress doesn't exceed 100
+    });
+
+    this.userService.getUserZipCodes(OBJ).pipe(
+      takeUntil(apiResponse$),
+    ).subscribe({
       next: (res) => {
         if (res.data == null || res.data == "null" || res.data == "") {
           this.userSavedZipCodes = ""
         } else {
           this.userSavedZipCodes = res.data.nearByPostalCodes;
         }
-        console.log(res)
+
         this.getUserAllProfile();
+
+        apiResponse$.next();
+        apiResponse$.complete();
+        // Optionally, set progress to 100 once the response is complete
+        this.progressProfile = 100;
+        setTimeout(() => {
+          this.progressProfileStart = false;
+          this.progressProfile = 0;
+        }, 500);
       },
       error: (err) => {
         console.log(err);
@@ -1650,6 +1684,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           } else {
             this.sliderWithNgModel = parseInt(this.sellerProfile.radius);
           }
+        }
+        if (this.sellerProfile.savedLat) {
+
+          this.mapCircleCenter = { lat: this.sellerProfile.savedLat, lng: this.sellerProfile.savedLon };
+          this.mapCircleOptions = {
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            radius: this.sliderWithNgModel * 1609.34,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            draggable: true,
+            center: { lat: this.sellerProfile.savedLat, lng: this.sellerProfile.savedLon }
+          };
+          this.markerCirclePolygonCenter = { lat: this.sellerProfile.savedLat, lng: this.sellerProfile.savedLon };
         }
         this.profileUpdateFormBuilder();
       }
@@ -2052,6 +2101,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
       id: this.userId,
 
+      savedLat: this.searchedLat,
+      savedLon: this.searchedLon,
+
     }
 
     this.userService.updateProfile(OBJ).subscribe({
@@ -2175,6 +2227,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 
   getLocation() {
+    return;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition.bind(this));
     } else {
@@ -2183,6 +2236,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   showPosition(position) {
+    return;
     console.log(position)
     const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map = new google.maps.Map(document.getElementById('map'), {
@@ -2505,9 +2559,31 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             // Optionally, you can set the progress to 100 once the API response is complete
             // this.progress = progress;
           } else if (event.type === HttpEventType.Response) {
+
             const DATA = event.body;
+
             this.nearByZipCodesCount = DATA['count'];
             this.nearByZipCodes = DATA['result'];
+
+            const LAT = DATA['latitude'];
+            const LON = DATA['longitude'];
+
+            this.searchedLat = LAT;
+            this.searchedLon = LON;
+
+            this.mapCircleCenter = { lat: LAT, lng: LON };
+            this.mapCircleOptions = {
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              radius: this.sliderWithNgModel * 1609.34,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              draggable: true,
+              center: { lat: LAT, lng: LON }
+            };
+            this.markerCirclePolygonCenter = { lat: LAT, lng: LON };
+
             // Signal that the API response is complete
             apiResponse$.next();
             apiResponse$.complete();
