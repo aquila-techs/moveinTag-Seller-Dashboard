@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="input-group mb-2 ml-2">
+    <div class="mb-2" style="position: relative; display: flex; flex-wrap: wrap; margin-left:15px">
       <div class="form-outline">
         <form (submit)="onSubmitSearch()">
           <input type="text" class="form-control"
@@ -25,12 +25,10 @@
       <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
         <i class="fa fa-search"></i>
       </button>
-      <button type="button" (click)="onSubmitClear()" class="btn btn-danger"
-        style="margin-left: 5px; background-color: #FF0000 !important;">
+      <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
         <i class="fa fa-close"></i>
       </button>
     </div>
-
 
     <section class="mb-1" *ngIf="userQuote && userQuote.length <= 0">
       <div class="table-wrapper">

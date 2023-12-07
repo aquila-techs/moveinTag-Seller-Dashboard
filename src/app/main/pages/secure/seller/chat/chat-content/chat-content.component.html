@@ -3,7 +3,8 @@
 <div *ngFor="let item of messageList">
   {{item}}
 </div>
-<section class="chat-app-window">
+
+<section *ngIf="chatUser.firstName" class="chat-app-window">
   <!-- To load Conversation -->
   <div class="start-chat-area" [ngClass]="{ 'd-none': activeChat === true }">
     <!-- <div class="mb-1 start-chat-icon">
@@ -150,6 +151,12 @@
   <!--/ Active Chat -->
 </section>
 <!--/ Main chat area -->
+
+<section *ngIf="!chatUser.firstName" class="chat-app-window" style="text-align: center; background-color: #ffffff;">
+  <div class="active-chat" style="display: flex; align-items: center; justify-content: center;">
+    <h3>No Chats Found</h3>
+  </div>
+</section>
 
 
 <ng-template #modalDecline let-modal>

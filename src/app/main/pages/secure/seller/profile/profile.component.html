@@ -85,20 +85,27 @@
                       src="../../../assets/images/site/profileIcons/returnpolicy.png" alt=""><span>Return
                       Policy: </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy:
                     ''}}</li>
-                  <li *ngIf="sellerProfile?.liabilityInsurance; else sellerProfile?.liabilityInsurance"><img
-                      src="../../../assets/images/site/company/insurance.png" alt=""><span>Liability Insurance:
+                  <li
+                    *ngIf="sellerProfile?.liabilityInsurance !== 'false' && sellerProfile?.liabilityInsurance !== ''; else noLiabilityInsurance">
+                    <img src="../../../assets/images/site/company/insurance.png" alt=""><span>Liability Insurance:
                     </span>{{sellerProfile?.liabilityInsurance
-                    ? sellerProfile?.liabilityInsurance: ''}}</li>
-                  <li *ngIf="sellerProfile?.workerCompensation; else sellerProfile?.workerCompensation"><img
-                      src="../../../assets/images/site/profileIcons/compensation.png" alt=""><span>Workers Compensation:
-                    </span>{{sellerProfile?.workerCompensation ? sellerProfile?.workerCompensation: ''}}</li>
+                    ? sellerProfile?.liabilityInsurance: ''}}
+                  </li>
+                  <li
+                    *ngIf="sellerProfile?.workerCompensation !== 'false' && sellerProfile?.workerCompensation !== ''; else noWorkersCompensation">
+                    <img src="../../../assets/images/site/profileIcons/compensation.png" alt=""><span>Workers
+                      Compensation:
+                    </span>{{sellerProfile?.workerCompensation ? sellerProfile?.workerCompensation: ''}}
+                  </li>
                   <li *ngIf="sellerProfile?.projectMinimum; else sellerProfile?.projectMinimum"><img
                       src="../../../assets/images/site/company/minimumproject.png" alt=""><span>Project Minimum:
                     </span>{{sellerProfile?.projectMinimum}}</li>
                   <!-- <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li> -->
-                  <li *ngIf="sellerProfile?.writtenContract; else sellerProfile?.writtenContract"><img
-                      src="../../../assets/images/site/profileIcons/writtencontract.png" alt=""><span>Written
-                      Contract: </span>{{sellerProfile?.writtenContract ? sellerProfile?.writtenContract: ''}}</li>
+                  <li
+                    *ngIf="sellerProfile?.writtenContract !== 'false' && sellerProfile?.writtenContract !== ''; else noWrittenContract">
+                    <img src="../../../assets/images/site/profileIcons/writtencontract.png" alt=""><span>Written
+                      Contract: </span>{{sellerProfile?.writtenContract ? sellerProfile?.writtenContract: ''}}
+                  </li>
                   <li *ngIf="sellerProfile?.country; else sellerProfile?.country"><img
                       src="../../../assets/images/site/profileIcons/country.png" alt=""><span>Country:
                     </span>{{sellerProfile?.country ?
@@ -119,7 +126,7 @@
                       src="../../../assets/images/site/profileIcons/warrantyterm.png" alt=""><span>Warranty
                       Terms: </span>{{sellerProfile?.warrantyTerms ?
                     sellerProfile.warrantyTerms: ''}}</li>
-                  <li *ngIf="sellerProfile?.bonded; else sellerProfile?.bonded"><img
+                  <li *ngIf="sellerProfile?.bonded !== 'false' && sellerProfile?.bonded !== ''; else noBonded"><img
                       src="../../../assets/images/site/profileIcons/bond.png" alt=""><span>Bonded:
                     </span>{{sellerProfile?.bonded ?
                     sellerProfile.bonded: ''}}</li>
@@ -561,6 +568,7 @@
         <div class="modal-header">
 
           <div style="padding:30px; margin-bottom: -60px;">
+
             <div class="form-check">
               <input class="form-check-input" style="margin-top: 8px;" type="radio" name="flexRadioDefault"
                 id="flexRadioDefault1" (change)="selectOption(1)" [checked]="true" />
@@ -578,6 +586,16 @@
                 for="flexRadioDefault2">
                 Add Postal Codes </label>
             </div>
+
+            <div class="form-check">
+              <input class="form-check-input" style="margin-top: 8px;" type="radio" name="flexRadioDefault"
+                id="flexRadioDefault3" (change)="selectOption(3)" />
+              <label style="margin-left: 5px;"
+                class="form-check-label font-medium-5 d-block mb-1 text-black font-weight-bolder"
+                for="flexRadioDefault3">
+                Select Country & City </label>
+            </div>
+
           </div>
 
           <!-- <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle"
@@ -700,6 +718,76 @@
               </div>
             </div>
 
+            <div *ngIf="selectedOption == 3">
+              <div>
+                <div class="row form-group">
+
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label for="email" style="font-family: 'Montserrat', sans-serif;">Country</label>
+                      <ng-select [(ngModel)]="countryCustom" (change)="onCountryChangeCustom($event)"
+                        bindLabel="immigration_s_title">
+                        <ng-option *ngFor="let countryZipCodes of countriesList"
+                          [value]="countryZipCodes">{{countryZipCodes}}</ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label for="email" style="font-family: 'Montserrat', sans-serif;">City</label>
+                      <ng-select [(ngModel)]="cityCustom" (change)="onCityChangeCustom($event)" required>
+                        <ng-option *ngFor="let cityZipCodes of countryCitiesCustom"
+                          [value]="cityZipCodes">{{cityZipCodes}}</ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <button type="button" (click)="addCustomCountryCityToArray()" class="btn btn-dark2 mt-2"
+                      rippleEffect><i data-feather="check"></i> Add</button>
+                  </div>
+
+                  <!-- <div class="col-sm-2 d-flex align-items-center">
+                    <h3 style="margin-top: 5px;"><i data-feather="check"></i> {{CountriesAddCustomArray.length}} Added
+                    </h3>
+                  </div> -->
+
+                  <div *ngIf="CountriesAddCustomArray && CountriesAddCustomArray.length > 0"
+                    class="card-categories col-sm-12 mt-1">
+                    <h3 style="padding:10px">Country</h3>
+                    <div class="card-body" style="padding: 0px;">
+                      <ul style="max-height: 100px; overflow-y: auto;">
+                        <li *ngFor="let item of CountriesAddCustomArray" style="font-family: 'Montserrat', sans-serif;">
+                          {{item}} <i class="fa fa-close" style="cursor: pointer;"
+                            (click)="removeCustomCountry(item)"></i></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div *ngIf="CitiesAddCustomArray && CitiesAddCustomArray.length > 0"
+                    class="card-categories col-sm-12 mt-1">
+                    <h3 style="padding:10px">City</h3>
+                    <div class="card-body" style="padding: 0px;">
+                      <ul style="max-height: 100px; overflow-y: auto;">
+                        <li *ngFor="let item of CitiesAddCustomArray" style="font-family: 'Montserrat', sans-serif;">
+                          {{item.city}} <i class="fa fa-close" style="cursor: pointer;"
+                            (click)="removeCustomCity(item)"></i></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center my-2">
+                <button type="button" (click)="onSaveCustomCountriescities()" class="btn btn-dark2 mx-1 btn-md px-3"
+                  rippleEffect><i data-feather="check"></i> Save</button>
+                <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')"
+                  rippleEffect><i data-feather="x"></i> Discard</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -729,7 +817,23 @@
         <div class="modal-body " tabindex="0" ngbAutofocus>
           <div class="collapse-default collapse-icon">
 
-            <div class="input-group mb-2">
+            <div class="mb-2" style="position: relative; display: flex; flex-wrap: wrap;">
+              <div class="form-outline">
+                <form (submit)="onSubmitSearch()">
+                  <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText"
+                    name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
+                </form>
+              </div>
+              <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
+                <i class="fa fa-search"></i>
+              </button>
+              <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
+                <i class="fa fa-close"></i>
+              </button>
+            </div>
+
+
+            <!-- <div class="input-group mb-2">
               <div class="form-outline">
                 <form (submit)="onSubmitSearch()">
                   <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText"
@@ -743,7 +847,7 @@
                 style="margin-left: 5px; background-color: #FF0000 !important;">
                 <i class="fa fa-close"></i>
               </button>
-            </div>
+            </div> -->
 
             <div class="row" style="margin:20px 20px 20px 0px">
               <div class="col-3" *ngFor="let subCate of searchSubCategories; let d=index">

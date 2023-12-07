@@ -48,11 +48,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public mapCircleCenter: google.maps.LatLngLiteral;
   public mapCircleOptions;
   public countriesData: any;
+  public countriesDataCustom: any;
 
   public countriesList = [];
   countries: string[] = [];
   public countryStates = [];
   public countryCitiesZipCode = [];
+  public countryCitiesCustom = [];
   countryCities: string[] = [];
   searchText: string = "";
   selectedOption = 1;
@@ -1326,7 +1328,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
   }
   ngAfterViewInit(): void {
-    this.getLocation();
+    // this.getLocation();
   }
   radiusChanged() {
     if (this.circle) {
@@ -1512,10 +1514,51 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public countryZipCodes = "";
   public cityZipCodes = "";
 
+  public countryCustom: any;
+  public cityCustom: any;
+
   public PostalCodeCustomArray = [];
-  public postalCodePattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
+  public postalCodePattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/
+    ;
+  public CountriesAddCustomArray = [];
+  public CitiesAddCustomArray = [];
+
+  getAllCategories() {
+    this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
+      next: (res: any) => {
+
+        this.sellerCategories = res[0]['results'];
+
+        this.sellerCategories.forEach(element => {
+
+          if (this.filterCategories.length <= 0) {
+            let item = element.category;
+            item['subcategory'] = [];
+            item['subcategory'].push(element.subcategory);
+            this.filterCategories.push(item);
+          } else {
+            let matchAdded = false;
+            this.filterCategories.forEach(item => {
+              if (item._id === element.category._id) {
+                matchAdded = true;
+                item['subcategory'].push(element.subcategory);
+              }
+            })
+            if (!matchAdded) {
+              let item = element.category;
+              item['subcategory'] = [];
+              item['subcategory'].push(element.subcategory);
+              this.filterCategories.push(item);
+            }
+          }
+        });
+
+      }
+    })
+  }
 
   ngOnInit() {
+    this.getAllCategories();
     this.getUserAllZipCodes();
     this.getCountries();
     // const mapProperties = {
@@ -1665,6 +1708,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.searchTypeFind = this.sellerProfile.postalCodeSearchType;
         this.customPostalCodeFromPofile = this.sellerProfile.customPostalCodes;
 
+
+        if (this.sellerProfile.customCountry.length !== 0) {
+          this.CountriesAddCustomArray = this.sellerProfile.customCountry
+        }
+
+        if (this.sellerProfile.customCity.length !== 0) {
+          this.CitiesAddCustomArray = this.sellerProfile.customCity
+        }
+
         if (this.sellerProfile.customPostalCodes !== " ") {
           this.PostalCodeCustomArray = this.sellerProfile.customPostalCodes.split(',')
         }
@@ -1685,7 +1737,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             this.sliderWithNgModel = parseInt(this.sellerProfile.radius);
           }
         }
-        if (this.sellerProfile.savedLat) {
+
+        if (this.sellerProfile.savedLat == 1 || this.sellerProfile.savedLat < 1) {
+
+          this.getLocation();
+
+        } else {
+
+          this.searchedLat = this.sellerProfile.savedLat;
+          this.searchedLon = this.sellerProfile.savedLon;
 
           this.mapCircleCenter = { lat: this.sellerProfile.savedLat, lng: this.sellerProfile.savedLon };
           this.mapCircleOptions = {
@@ -1699,7 +1759,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             center: { lat: this.sellerProfile.savedLat, lng: this.sellerProfile.savedLon }
           };
           this.markerCirclePolygonCenter = { lat: this.sellerProfile.savedLat, lng: this.sellerProfile.savedLon };
+
         }
+
+        this.searchedLat = 0;
+        this.searchedLon = 0;
+
         this.profileUpdateFormBuilder();
       }
     })
@@ -1710,34 +1775,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     //   }
     // })
 
-    this.userService.getSellerCategoriesWithSubCategories(this.userId).subscribe({
-      next: (res: any) => {
-        this.sellerCategories = res[0]['results'];
-        this.sellerCategories.forEach(element => {
-          if (this.filterCategories.length <= 0) {
-            let item = element.category;
-            item['subcategory'] = [];
-            item['subcategory'].push(element.subcategory);
-            this.filterCategories.push(item);
-          } else {
-            let matchAdded = false;
-            this.filterCategories.forEach(item => {
-              if (item._id === element.category._id) {
-                matchAdded = true;
-                item['subcategory'].push(element.subcategory);
-              }
-            })
-            if (!matchAdded) {
-              let item = element.category;
-              item['subcategory'] = [];
-              item['subcategory'].push(element.subcategory);
-              this.filterCategories.push(item);
-            }
-          }
-        });
-
-      }
-    })
     this.getAllSellerServiceImages();
     this.contentHeader = {
       headerTitle: 'Dashboard',
@@ -1822,7 +1859,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       centered: true,
       size: 'xl' // size: 'xs' | 'sm' | 'lg' | 'xl'
     });
-    this.getLocation();
+    // this.getLocation();
   }
   profileUpdateFormBuilder() {
     this.profileUpdateForm = this._formBuilder.group({
@@ -1835,7 +1872,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       liabilityInsurance: [this.sellerProfile?.liabilityInsurance ? this.sellerProfile.liabilityInsurance : false, Validators.required],
       workerCompensation: [this.sellerProfile?.workerCompensation ? this.sellerProfile.workerCompensation : false, Validators.required],
       projectMinimum: [this.sellerProfile?.projectMinimum ? this.sellerProfile.projectMinimum : '', Validators.required],
-      bonded: [this.sellerProfile?.bonded ? this.sellerProfile.bonded : false, Validators.required],
+      bonded: [this.sellerProfile?.bonded ? this.sellerProfile.bonded == 'false' ? "" : this.sellerProfile.bonded : "", Validators.required],
       writtenContract: [this.sellerProfile?.writtenContract ? this.sellerProfile.writtenContract : false, Validators.required],
       address: [this.sellerProfile?.address ? this.sellerProfile.address : '', Validators.required],
       postalCode: [this.sellerProfile?.postalCode ? this.sellerProfile.postalCode : '', Validators.required],
@@ -1902,7 +1939,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userService.updateProfile(data).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-        // this.getUserAllProfile();
 
         this.getUserAllZipCodes();
 
@@ -2031,7 +2067,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       next: (res) => {
         console.log(res)
         this.modalService.dismissAll();
-        // this.getUserAllProfile();
+
         this.getUserAllZipCodes();
       },
       error: (err) => {
@@ -2044,22 +2080,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   onSaveNearByZipCode() {
 
     this.submitted = true;
-    // stop here if form is invalid
 
     if (this.postalCode === '' || this.nearByZipCodes.length <= 0) {
       return;
     }
-
-    // if (!this.countryZipCodes) {
-    //   this.toastrService.error('Please select country')
-    //   return;
-    // }
-
-    // if (!this.cityZipCodes) {
-    //   this.toastrService.error('Please select city')
-    //   return;
-    // }
-
 
     let data = {};
 
@@ -2098,6 +2122,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
       countryZipCodes: this.countryZipCodes,
       cityZipCodes: this.cityZipCodes,
+
+      customCountry: [],
+      customCity: [],
 
       id: this.userId,
 
@@ -2148,9 +2175,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     ).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-        // this.getUserAllProfile();
+
         this.getUserAllZipCodes();
+
+        this.postalCodeCustom = "";
         this.PostalCodeCustomArray = [];
+        this.countryCustom = null;
+        this.cityCustom = null;
+        this.CountriesAddCustomArray = [];
+        this.CitiesAddCustomArray = [];
+
         this.toastrService.success('Added Successfully!')
 
         apiResponse$.next();
@@ -2177,7 +2211,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.userService.updateCoverPhoto(data).subscribe({
         next: (res) => {
           this.modalService.dismissAll();
-          // this.getUserAllProfile();
+
           this.getUserAllZipCodes();
         },
         error: (err) => {
@@ -2195,7 +2229,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.authenticationSerive.updateProfile(data).subscribe({
         next: (res) => {
           this.modalService.dismissAll();
-          // this.getUserAllProfile();
+
           this.getUserAllZipCodes();
         },
         error: (err) => {
@@ -2227,7 +2261,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 
   getLocation() {
-    return;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition.bind(this));
     } else {
@@ -2236,8 +2269,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   showPosition(position) {
-    return;
-    console.log(position)
     const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: latLng,
@@ -2372,13 +2403,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       radius: 0,
       customPostalCodes: this.PostalCodeCustomArray.toString(),
       nearByPostalCodes: this.PostalCodeCustomArray.toString(),
+
+      customCountry: [],
+      customCity: [],
+
+      savedLat: 1,
+      savedLon: 1,
+
       id: this.userId,
 
     }
 
     this.userService.updateProfile(OBJ).subscribe({
       next: (res) => {
-        // this.getUserAllProfile();
+
         this.getUserAllZipCodes();
       },
       error: (err) => {
@@ -2399,7 +2437,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    var searchArray = (this.PostalCodeCustomArray.indexOf(this.postalCodeCustom) > -1);
+    var searchArray = (this.PostalCodeCustomArray.indexOf(this.postalCodeCustom.toLocaleUpperCase()) > -1);
 
     if (searchArray == true) {
       this.toastrService.error('Already Added');
@@ -2411,6 +2449,350 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.PostalCodeCustomArray = ARRAY
 
   }
+
+  onCountryChangeCustom(country: any) {
+
+    this.cityCustom = null;
+
+    this.countryCustom = country
+    let city = this.countriesData.filter(state => state.country === country);
+    city = [...new Set(city.map(item => item.name))];
+    city.sort();
+    this.countryCitiesCustom = city;
+
+  }
+
+  onCityChangeCustom(city: any) {
+    this.cityCustom = city
+  }
+
+  public addCustomCountryCityToArray() {
+
+    if (!this.countryCustom) {
+      this.toastrService.error('Please select country first.')
+      return;
+    }
+
+    if (!this.cityCustom) {
+
+      var searchArray = (this.CountriesAddCustomArray.indexOf(this.countryCustom.toLocaleUpperCase()) > -1);
+
+      if (searchArray == true) {
+        this.toastrService.error('Country Already Added');
+        return;
+      }
+
+      const ARRAY = [];
+      ARRAY.push(...this.CountriesAddCustomArray, this.countryCustom.toLocaleUpperCase())
+      this.CountriesAddCustomArray = ARRAY
+
+    } else {
+
+      var searchArray = (this.CountriesAddCustomArray.indexOf(this.countryCustom.toLocaleUpperCase()) > -1);
+      // var searchArrayCity = (this.CitiesAddCustomArray.indexOf(this.cityCustom.toLocaleUpperCase()) > -1);
+      var searchArrayCity = this.CitiesAddCustomArray.filter((item) => item.city == this.cityCustom.toLocaleUpperCase());
+
+      if (searchArray == true) {
+
+        if (searchArrayCity.length > 0) {
+          this.toastrService.error('City Already Added');
+          return;
+        }
+
+        const ARRAY_CITY = [];
+        const OBJ = {
+          country: this.countryCustom.toLocaleUpperCase(),
+          city: this.cityCustom.toLocaleUpperCase()
+        }
+        ARRAY_CITY.push(...this.CitiesAddCustomArray, OBJ);
+
+        const compareObjects = (obj1: any, obj2: any) => {
+          return obj1.country === obj2.country && obj1.city === obj2.city;
+        };
+
+        let uniqueArrayOfObjects = ARRAY_CITY.filter(
+          (value, index, self) => self.findIndex(obj => compareObjects(obj, value)) === index
+        );
+
+        this.CitiesAddCustomArray = uniqueArrayOfObjects;
+
+      }
+
+      if (searchArrayCity.length > 0) {
+        this.toastrService.error('City Already Added');
+        return;
+      }
+
+      const ARRAY_COUNTRY = [];
+      ARRAY_COUNTRY.push(...this.CountriesAddCustomArray, this.countryCustom.toLocaleUpperCase());
+      let uniqueArrayCountry = [...new Set(ARRAY_COUNTRY)];
+      this.CountriesAddCustomArray = uniqueArrayCountry;
+
+      const ARRAY_CITY = [];
+      const OBJ = {
+        country: this.countryCustom.toLocaleUpperCase(),
+        city: this.cityCustom.toLocaleUpperCase()
+      }
+      ARRAY_CITY.push(...this.CitiesAddCustomArray, OBJ);
+      const compareObjects = (obj1: any, obj2: any) => {
+        return obj1.country === obj2.country && obj1.city === obj2.city;
+      };
+
+      let uniqueArrayOfObjects = ARRAY_CITY.filter(
+        (value, index, self) => self.findIndex(obj => compareObjects(obj, value)) === index
+      );
+
+      this.CitiesAddCustomArray = uniqueArrayOfObjects;
+
+
+    }
+
+  }
+
+  public removeCustomCountry(item) {
+
+    const index = this.CountriesAddCustomArray.indexOf(item);
+    if (index > -1) {
+      this.CountriesAddCustomArray.splice(index, 1);
+    }
+
+    for (let i = this.CitiesAddCustomArray.length - 1; i >= 0; i--) {
+      if (this.CitiesAddCustomArray[i].country === item) {
+        this.CitiesAddCustomArray.splice(i, 1);
+      }
+    }
+
+    this.submitted = true;
+
+    let data = {};
+
+    data['postalCode'] = "";
+    data['radius'] = 0;
+    data['nearByPostalCodes'] = this.PostalCodeCustomArray.toString();
+    data['id'] = this.userId;
+
+    const OBJ = {
+      address: this.sellerProfile.address,
+      bonded: this.sellerProfile.bonded,
+      city: this.sellerProfile.city,
+      companyName: this.sellerProfile.companyName,
+      companyType: this.sellerProfile.companyType,
+      country: this.sellerProfile.country,
+      description: this.sellerProfile.description,
+      liabilityInsurance: this.sellerProfile.liabilityInsurance,
+      noOfEmployee: this.sellerProfile.noOfEmployee,
+      paymentMethod: this.sellerProfile.paymentMethod,
+      projectMinimum: this.sellerProfile.projectMinimum,
+      returnPolicy: this.sellerProfile.returnPolicy,
+      state: this.sellerProfile.state,
+      termsConditions: this.sellerProfile.termsConditions,
+      warrantyTerms: this.sellerProfile.warrantyTerms,
+      workerCompensation: this.sellerProfile.workerCompensation,
+      writtenContract: this.sellerProfile.writtenContract,
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+
+      postalCodeSearchType: "CountryCity",
+      postalCode: " ",
+      radius: 0,
+      customPostalCodes: " ",
+      nearByPostalCodes: "",
+
+      customCountry: this.CountriesAddCustomArray,
+      customCity: this.CitiesAddCustomArray,
+
+      savedLat: 1,
+      savedLon: 1,
+
+      id: this.userId,
+
+    }
+
+    this.userService.updateProfile(OBJ).subscribe({
+      next: (res) => {
+
+        this.postalCode = "";
+        this.postalCodeCustom = "";
+        this.PostalCodeCustomArray = [];
+        this.nearByZipCodesCount = 0;
+        this.sliderWithNgModel = 1;
+        this.nearByZipCodes = [];
+
+        this.getUserAllZipCodes();
+
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+
+  }
+
+  public removeCustomCity(item) {
+
+    const index = this.CitiesAddCustomArray.indexOf(item);
+    if (index > -1) {
+      this.CitiesAddCustomArray.splice(index, 1);
+    }
+    this.submitted = true;
+
+    let data = {};
+
+    data['postalCode'] = "";
+    data['radius'] = 0;
+    data['nearByPostalCodes'] = this.PostalCodeCustomArray.toString();
+    data['id'] = this.userId;
+
+    const OBJ = {
+      address: this.sellerProfile.address,
+      bonded: this.sellerProfile.bonded,
+      city: this.sellerProfile.city,
+      companyName: this.sellerProfile.companyName,
+      companyType: this.sellerProfile.companyType,
+      country: this.sellerProfile.country,
+      description: this.sellerProfile.description,
+      liabilityInsurance: this.sellerProfile.liabilityInsurance,
+      noOfEmployee: this.sellerProfile.noOfEmployee,
+      paymentMethod: this.sellerProfile.paymentMethod,
+      projectMinimum: this.sellerProfile.projectMinimum,
+      returnPolicy: this.sellerProfile.returnPolicy,
+      state: this.sellerProfile.state,
+      termsConditions: this.sellerProfile.termsConditions,
+      warrantyTerms: this.sellerProfile.warrantyTerms,
+      workerCompensation: this.sellerProfile.workerCompensation,
+      writtenContract: this.sellerProfile.writtenContract,
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+
+      postalCodeSearchType: "CountryCity",
+      postalCode: " ",
+      radius: 0,
+      customPostalCodes: " ",
+      nearByPostalCodes: "",
+
+      customCountry: this.CountriesAddCustomArray,
+      customCity: this.CitiesAddCustomArray,
+
+      savedLat: 1,
+      savedLon: 1,
+
+      id: this.userId,
+
+    }
+
+    this.userService.updateProfile(OBJ).subscribe({
+      next: (res) => {
+
+        this.postalCode = "";
+        this.postalCodeCustom = "";
+        this.PostalCodeCustomArray = [];
+        this.nearByZipCodesCount = 0;
+        this.sliderWithNgModel = 1;
+        this.nearByZipCodes = [];
+
+        this.getUserAllZipCodes();
+
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+
+  }
+
+  onSaveCustomCountriescities() {
+
+    if (this.CountriesAddCustomArray.length < 1) {
+      this.toastrService.error('Please select country first.')
+      return;
+    }
+
+    const CITIES = [];
+    this.CitiesAddCustomArray.map((item) => {
+      CITIES.push(item.city)
+    })
+
+    setTimeout(() => {
+      this.saveCustomCitiesCountries()
+    }, 1000);
+
+  }
+
+  saveCustomCitiesCountries() {
+
+    this.submitted = true;
+
+    let data = {};
+
+    data['postalCode'] = "";
+    data['radius'] = 0;
+    data['nearByPostalCodes'] = this.PostalCodeCustomArray.toString();
+    data['id'] = this.userId;
+
+    const OBJ = {
+      address: this.sellerProfile.address,
+      bonded: this.sellerProfile.bonded,
+      city: this.sellerProfile.city,
+      companyName: this.sellerProfile.companyName,
+      companyType: this.sellerProfile.companyType,
+      country: this.sellerProfile.country,
+      description: this.sellerProfile.description,
+      liabilityInsurance: this.sellerProfile.liabilityInsurance,
+      noOfEmployee: this.sellerProfile.noOfEmployee,
+      paymentMethod: this.sellerProfile.paymentMethod,
+      projectMinimum: this.sellerProfile.projectMinimum,
+      returnPolicy: this.sellerProfile.returnPolicy,
+      state: this.sellerProfile.state,
+      termsConditions: this.sellerProfile.termsConditions,
+      warrantyTerms: this.sellerProfile.warrantyTerms,
+      workerCompensation: this.sellerProfile.workerCompensation,
+      writtenContract: this.sellerProfile.writtenContract,
+      facebookURL: this.sellerProfile.facebookURL,
+      instagramURL: this.sellerProfile.instagramURL,
+      twitterURL: this.sellerProfile.twitterURL,
+
+      savedLat: 1,
+      savedLon: 1,
+
+      postalCodeSearchType: "CountryCity",
+      postalCode: " ",
+      radius: 0,
+      customPostalCodes: " ",
+      nearByPostalCodes: "",
+
+      customCountry: this.CountriesAddCustomArray,
+      customCity: this.CitiesAddCustomArray,
+
+      id: this.userId,
+
+    }
+
+    this.userService.updateProfile(OBJ).subscribe({
+      next: (res) => {
+
+        this.modalService.dismissAll();
+
+        this.postalCode = "";
+        this.postalCodeCustom = "";
+        this.PostalCodeCustomArray = [];
+        this.nearByZipCodesCount = 0;
+        this.sliderWithNgModel = 1;
+        this.nearByZipCodes = [];
+
+        this.searchedLat = 0;
+        this.searchedLon = 0;
+
+        this.getUserAllZipCodes();
+
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
+  }
+
 
   onSaveCustomPostalCode() {
 
@@ -2462,6 +2844,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       customPostalCodes: this.PostalCodeCustomArray.toString(),
       nearByPostalCodes: "",
 
+      customCountry: [],
+      customCity: [],
+
+      savedLat: 1,
+      savedLon: 1,
+
       id: this.userId,
 
     }
@@ -2486,7 +2874,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userService.createUserZipCodes(OBJ).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-        // this.getUserAllProfile();
+
+        this.countryCustom = null;
+        this.cityCustom = null;
+        this.CountriesAddCustomArray = [];
+        this.CitiesAddCustomArray = [];
+
         this.getUserAllZipCodes();
         this.toastrService.success('Added Successfully!')
       },

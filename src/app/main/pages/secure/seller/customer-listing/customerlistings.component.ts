@@ -29,7 +29,7 @@ export class CustomerlistingsComponent implements OnInit {
         this.categoryId = this.activateRoute.snapshot.paramMap.get('id');
         this.userService.getACategory(this.categoryId).subscribe({
           next: (value) => {
-            this.category = value;
+            // this.category = value;
             this.getAllQuotesOrders();
           },
         })
@@ -58,23 +58,12 @@ export class CustomerlistingsComponent implements OnInit {
   ngOnInit() {
 
     this.getAllQuotesOrders();
-    this.contentHeader = {
+    this.contentHeader = { 
       headerTitle: '',
       actionButton: true,
       headerRight: false,
       breadcrumb: {
-        // type: '',
-        // links: [
-        //   {
-        //     name: 'Home',
-        //     isLink: true,
-        //     link: '/'
-        //   },
-        //   {
-        //     name: 'Sample',
-        //     isLink: false
-        //   }
-        // ]
+
       }
     }
   }
