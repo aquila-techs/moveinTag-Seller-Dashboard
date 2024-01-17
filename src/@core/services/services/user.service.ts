@@ -229,6 +229,10 @@ export class UserService {
 
   }
 
+  affMakePurchase(body) {
+    return this._http.post('user/force-purchase', body);
+  }
+
   
 
 }

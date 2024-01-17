@@ -1531,11 +1531,35 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
                 next: (value) => {
                 }
               })
+
               if (this.isAfterSingup) {
+
+                const OBJ = {
+                  userId: this.user._id,
+                  purchaseAmount: this.total
+                }
+
+                this.userService.affMakePurchase(OBJ).subscribe({
+                  next: (value) => {
+                  }
+                })
+
                 this.toastrService.success('You have successfully subscribed.')
                 this._router.navigate(['/pages/seller/home']);
                 // this._router.navigate(['/login']);
               } else {
+
+                const OBJ = {
+                  userId: this.user._id,
+                  purchaseAmount: this.total
+                }
+
+
+                this.userService.affMakePurchase(OBJ).subscribe({
+                  next: (value) => {
+                  }
+                })
+                
                 this.user['payment'] = true;
                 this._authenticationService.updateUserData(this.user);
                 this._router.navigate(['/pages/seller/home']);

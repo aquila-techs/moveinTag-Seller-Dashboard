@@ -79,9 +79,19 @@
                   <div *ngIf="f.password.errors.required">Password is required</div>
                 </div>
               </div>
+              <div *ngIf="affcode" class="form-group">
+                <label class="form-label" for="login-email">Referral Code</label>
+                <input type="text" formControlName="referralCode" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.referralCode.errors }" placeholder="Referral Code"
+                  aria-describedby="login-email" autofocus="" tabindex="1" readonly />
+                <div *ngIf="submitted && f.referralCode.errors" class="invalid-feedback">
+                  <div *ngIf="f.referralCode.errors.required">Referral Code is required</div>
+                </div>
+              </div>
               <div class="form-group" style="margin-top: 20px;">
                 <div class="custom-control custom-checkbox">
-                  <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
+                  <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3"
+                    formControlName="agreeToTerms" />
                   <label class="custom-control-label" for="remember-me"> I agree to privacy policy & terms</label>
                 </div>
               </div>

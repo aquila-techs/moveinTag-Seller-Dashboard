@@ -1400,6 +1400,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let data = {};
     data['userId'] = this.userId;
     data['addCategories'] = this.selectedCategories;
+
     this.userService.saveSellerCategories(data)
       .subscribe(res => {
         this.selectedCategories = [];
@@ -1709,16 +1710,31 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.customPostalCodeFromPofile = this.sellerProfile.customPostalCodes;
 
 
+
         if (this.sellerProfile.customCountry.length !== 0) {
           this.CountriesAddCustomArray = this.sellerProfile.customCountry
+
+          if (this.sellerProfile.customCountry[0] == "") {
+            this.CountriesAddCustomArray = []
+          }
+
         }
 
         if (this.sellerProfile.customCity.length !== 0) {
           this.CitiesAddCustomArray = this.sellerProfile.customCity
+
+          if (this.sellerProfile.customCountry[0] == "") {
+            this.CitiesAddCustomArray = []
+          }
         }
 
         if (this.sellerProfile.customPostalCodes !== " ") {
           this.PostalCodeCustomArray = this.sellerProfile.customPostalCodes.split(',')
+
+          if (this.sellerProfile.customCountry[0] == "") {
+            this.PostalCodeCustomArray = []
+          }
+
         }
         if (this.sellerProfile.postalCode) {
 
@@ -2049,7 +2065,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       liabilityInsurance: data.liabilityInsurance,
       noOfEmployee: data.noOfEmployee,
       paymentMethod: data.paymentMethod,
-      postalCode: data.postalCode,
+      postalCode: data.postalCode.toUpperCase(),
       projectMinimum: data.projectMinimum,
       returnPolicy: data.returnPolicy,
       state: data.state,
@@ -2205,8 +2221,35 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   uploadCoverPhoto() {
     if (this.coverPhotoCroppedImageFile) {
+
       let data: FormData = new FormData();
       data.append('coverImage', this.coverPhotoCroppedImageFile, 'image/png')
+
+      data.append('facebookURL', this.sellerProfile?.facebookURL)
+      data.append('instagramURL', this.sellerProfile?.instagramURL)
+      data.append('phone', this.sellerProfile?.phone)
+      data.append('twitterURL', this.sellerProfile?.twitterURL)
+      data.append('webURL', this.sellerProfile?.webURL)
+
+      data.append('companyName', this.sellerProfile?.companyName)
+      data.append('description', this.sellerProfile?.description)
+      data.append('termsConditions', this.sellerProfile?.termsConditions)
+      data.append('companyType', this.sellerProfile?.companyType)
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee)
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy)
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance)
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation)
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum)
+      data.append('bonded', this.sellerProfile?.bonded)
+      data.append('writtenContract', this.sellerProfile?.writtenContract)
+      data.append('address', this.sellerProfile?.address)
+      data.append('postalCode', this.sellerProfile?.postalCode)
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod)
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms)
+      data.append('country', this.sellerProfile?.country)
+      data.append('state', this.sellerProfile?.state)
+      data.append('city', this.sellerProfile?.city)
+
       data.append('id', this.userId)
       this.userService.updateCoverPhoto(data).subscribe({
         next: (res) => {
@@ -2225,6 +2268,32 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if (this.CompanyPhotoCroppedImageFile) {
       let data: FormData = new FormData();
       data.append('profileImage', this.CompanyPhotoCroppedImageFile, 'image/png')
+
+      data.append('facebookURL', this.sellerProfile?.facebookURL)
+      data.append('instagramURL', this.sellerProfile?.instagramURL)
+      data.append('phone', this.sellerProfile?.phone)
+      data.append('twitterURL', this.sellerProfile?.twitterURL)
+      data.append('webURL', this.sellerProfile?.webURL)
+
+      data.append('companyName', this.sellerProfile?.companyName)
+      data.append('description', this.sellerProfile?.description)
+      data.append('termsConditions', this.sellerProfile?.termsConditions)
+      data.append('companyType', this.sellerProfile?.companyType)
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee)
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy)
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance)
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation)
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum)
+      data.append('bonded', this.sellerProfile?.bonded)
+      data.append('writtenContract', this.sellerProfile?.writtenContract)
+      data.append('address', this.sellerProfile?.address)
+      data.append('postalCode', this.sellerProfile?.postalCode)
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod)
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms)
+      data.append('country', this.sellerProfile?.country)
+      data.append('state', this.sellerProfile?.state)
+      data.append('city', this.sellerProfile?.city)
+      
       data.append('id', this.userId)
       this.authenticationSerive.updateProfile(data).subscribe({
         next: (res) => {

@@ -198,8 +198,8 @@ export class OrdermanagementComponent implements OnInit {
         this.completedOrderAmmountFormBuilder();
         if (order.buyer._id) {
           let data = {
-            'heading': order.orderNum + ' Lead Status Changed To ' + event.target.value,
-            'message': 'Please check leads page for detail.',
+            'heading': order.orderNum + ' Task Status Changed To ' + event.target.value,
+            'message': 'Please check tasks page for detail.',
             'receiverId': order.buyer._id,
             'senderId': order.seller._id
           }
@@ -234,8 +234,8 @@ export class OrdermanagementComponent implements OnInit {
 
         if (this.selectedOrderForComplete.buyer._id) {
           let data = {
-            'heading': this.selectedOrderForComplete.orderNum + ' Lead Status Changed To ' + 'COMPLETED',
-            'message': 'Please check leads page for detail.',
+            'heading': this.selectedOrderForComplete.orderNum + ' Task Status Changed To ' + 'COMPLETED',
+            'message': 'Please check tasks page for detail.',
             'receiverId': this.selectedOrderForComplete.buyer._id,
             'senderId': this.selectedOrderForComplete.seller._id
           }

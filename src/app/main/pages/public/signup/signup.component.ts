@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { CoreConfigService } from '@core/services/config.service';
 import { AdminService } from '@core/services/services/admin.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -23,6 +23,7 @@ export class SignupComponent implements OnInit {
   public submitted = false;
   public error = '';
   public loading = false;
+  public affcode: string;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -37,6 +38,7 @@ export class SignupComponent implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private _adminService: AdminService,
     private _toastrService: ToastrService,
+    private activeRoute: ActivatedRoute,
     private _rotuer: Router) {
     this._unsubscribeAll = new Subject();
 
@@ -80,17 +82,54 @@ export class SignupComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this._adminService.createSeller(this.registerForm.value).subscribe({
-      next: (res) => {
-        console.log(res)
-        window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
-        // this._toastrService.success('','Seller register please wait for admin approval');
-        this._rotuer.navigate(['/subscription-detail'])
-      },
-      error: (err) => {
+    if (!this.registerForm.value.agreeToTerms) {
+      this._toastrService.error('Please accept Terms & Conditions', 'Terms & Conditions');
+      return;
+    }
 
-      },
-    })
+    if (this.affcode) {
+
+      const OBJ = {
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+        companyName: this.registerForm.value.companyName,
+        referrerCode: this.affcode
+      }
+
+      this._adminService.createSeller(OBJ).subscribe({
+        next: (res) => {
+          console.log(res)
+          window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
+          // this._toastrService.success('','Seller register please wait for admin approval');
+          this._rotuer.navigate(['/subscription-detail'])
+        },
+        error: (err) => {
+
+        },
+      })
+
+    } else {
+
+      const OBJ = {
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+        companyName: this.registerForm.value.companyName
+      }
+
+      this._adminService.createSeller(OBJ).subscribe({
+        next: (res) => {
+          console.log(res)
+          window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
+          // this._toastrService.success('','Seller register please wait for admin approval');
+          this._rotuer.navigate(['/subscription-detail'])
+        },
+        error: (err) => {
+
+        },
+      })
+
+    }
+
   }
 
   // Lifecycle Hooks
@@ -100,11 +139,27 @@ export class SignupComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.registerForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      companyName: ['', Validators.required]
+
+    this.activeRoute.queryParams.subscribe(params => {
+      this.affcode = params['affcode'];
     });
+
+    if (this.affcode) {
+      this.registerForm = this._formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        companyName: ['', Validators.required],
+        referralCode: [this.affcode, Validators.required],
+        agreeToTerms: ['', Validators.required]
+      });
+    } else {
+      this.registerForm = this._formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        companyName: ['', Validators.required],
+        agreeToTerms: ['', Validators.required]
+      });
+    }
 
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
