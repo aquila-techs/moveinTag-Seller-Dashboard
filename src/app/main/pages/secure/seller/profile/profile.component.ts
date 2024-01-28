@@ -2225,30 +2225,30 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       let data: FormData = new FormData();
       data.append('coverImage', this.coverPhotoCroppedImageFile, 'image/png')
 
-      data.append('facebookURL', this.sellerProfile?.facebookURL)
-      data.append('instagramURL', this.sellerProfile?.instagramURL)
-      data.append('phone', this.sellerProfile?.phone)
-      data.append('twitterURL', this.sellerProfile?.twitterURL)
-      data.append('webURL', this.sellerProfile?.webURL)
+      data.append('facebookURL', this.sellerProfile?.facebookURL === undefined ? "" : this.sellerProfile.facebookURL)
+      data.append('instagramURL', this.sellerProfile?.instagramURL === undefined ? "" : this.sellerProfile.instagramURL)
+      data.append('phone', this.sellerProfile?.phone === undefined ? "" : this.sellerProfile.phone)
+      data.append('twitterURL', this.sellerProfile?.twitterURL === undefined ? "" : this.sellerProfile.twitterURL)
+      data.append('webURL', this.sellerProfile?.webURL === undefined ? "" : this.sellerProfile.webURL)
 
-      data.append('companyName', this.sellerProfile?.companyName)
-      data.append('description', this.sellerProfile?.description)
-      data.append('termsConditions', this.sellerProfile?.termsConditions)
-      data.append('companyType', this.sellerProfile?.companyType)
-      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee)
-      data.append('returnPolicy', this.sellerProfile?.returnPolicy)
-      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance)
-      data.append('workerCompensation', this.sellerProfile?.workerCompensation)
-      data.append('projectMinimum', this.sellerProfile?.projectMinimum)
-      data.append('bonded', this.sellerProfile?.bonded)
-      data.append('writtenContract', this.sellerProfile?.writtenContract)
-      data.append('address', this.sellerProfile?.address)
-      data.append('postalCode', this.sellerProfile?.postalCode)
-      data.append('paymentMethod', this.sellerProfile?.paymentMethod)
-      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms)
-      data.append('country', this.sellerProfile?.country)
-      data.append('state', this.sellerProfile?.state)
-      data.append('city', this.sellerProfile?.city)
+      data.append('companyName', this.sellerProfile?.companyName === undefined ? "" : this.sellerProfile.companyName)
+      data.append('description', this.sellerProfile?.description === undefined ? "" : this.sellerProfile.description)
+      data.append('termsConditions', this.sellerProfile?.termsConditions === undefined ? "" : this.sellerProfile.termsConditions)
+      data.append('companyType', this.sellerProfile?.companyType === undefined ? "" : this.sellerProfile.companyType)
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee === undefined ? "" : this.sellerProfile.noOfEmployee)
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy === undefined ? "" : this.sellerProfile.returnPolicy)
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance === undefined ? "" : this.sellerProfile.liabilityInsurance)
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation === undefined ? "" : this.sellerProfile.workerCompensation)
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum === undefined ? "" : this.sellerProfile.projectMinimum)
+      data.append('bonded', this.sellerProfile?.bonded === undefined ? "" : this.sellerProfile.bonded)
+      data.append('writtenContract', this.sellerProfile?.writtenContract === undefined ? "" : this.sellerProfile.writtenContract)
+      data.append('address', this.sellerProfile?.address === undefined ? "" : this.sellerProfile.address)
+      data.append('postalCode', this.sellerProfile?.postalCode === undefined ? "" : this.sellerProfile.postalCode)
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod === undefined ? "" : this.sellerProfile.paymentMethod)
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms === undefined ? "" : this.sellerProfile.warrantyTerms)
+      data.append('country', this.sellerProfile?.country === undefined ? "" : this.sellerProfile.country)
+      data.append('state', this.sellerProfile?.state === undefined ? "" : this.sellerProfile.state)
+      data.append('city', this.sellerProfile?.city === undefined ? "" : this.sellerProfile.city)
 
       data.append('id', this.userId)
       this.userService.updateCoverPhoto(data).subscribe({
@@ -2266,34 +2266,35 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   uploadProfilePhoto() {
     if (this.CompanyPhotoCroppedImageFile) {
+
       let data: FormData = new FormData();
       data.append('profileImage', this.CompanyPhotoCroppedImageFile, 'image/png')
 
-      data.append('facebookURL', this.sellerProfile?.facebookURL)
-      data.append('instagramURL', this.sellerProfile?.instagramURL)
-      data.append('phone', this.sellerProfile?.phone)
-      data.append('twitterURL', this.sellerProfile?.twitterURL)
-      data.append('webURL', this.sellerProfile?.webURL)
+      data.append('facebookURL', this.sellerProfile?.facebookURL === undefined ? "" : this.sellerProfile?.facebookURL)
+      data.append('instagramURL', this.sellerProfile?.instagramURL === undefined ? "" : this.sellerProfile?.instagramURL)
+      data.append('phone', this.sellerProfile?.phone === undefined ? "" : this.sellerProfile?.phone)
+      data.append('twitterURL', this.sellerProfile?.twitterURL === undefined ? "" : this.sellerProfile?.twitterURL)
+      data.append('webURL', this.sellerProfile?.webURL === undefined ? "" : this.sellerProfile?.webURL)
 
-      data.append('companyName', this.sellerProfile?.companyName)
-      data.append('description', this.sellerProfile?.description)
-      data.append('termsConditions', this.sellerProfile?.termsConditions)
-      data.append('companyType', this.sellerProfile?.companyType)
-      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee)
-      data.append('returnPolicy', this.sellerProfile?.returnPolicy)
-      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance)
-      data.append('workerCompensation', this.sellerProfile?.workerCompensation)
-      data.append('projectMinimum', this.sellerProfile?.projectMinimum)
-      data.append('bonded', this.sellerProfile?.bonded)
-      data.append('writtenContract', this.sellerProfile?.writtenContract)
-      data.append('address', this.sellerProfile?.address)
-      data.append('postalCode', this.sellerProfile?.postalCode)
-      data.append('paymentMethod', this.sellerProfile?.paymentMethod)
-      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms)
-      data.append('country', this.sellerProfile?.country)
-      data.append('state', this.sellerProfile?.state)
-      data.append('city', this.sellerProfile?.city)
-      
+      data.append('companyName', this.sellerProfile?.companyName === undefined ? "" : this.sellerProfile?.companyName)
+      data.append('description', this.sellerProfile?.description === undefined ? "" : this.sellerProfile?.description)
+      data.append('termsConditions', this.sellerProfile?.termsConditions === undefined ? "" : this.sellerProfile?.termsConditions)
+      data.append('companyType', this.sellerProfile?.companyType === undefined ? "" : this.sellerProfile?.companyType)
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee === undefined ? "" : this.sellerProfile?.noOfEmployee)
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy === undefined ? "" : this.sellerProfile?.returnPolicy)
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance === undefined ? "" : this.sellerProfile?.liabilityInsurance)
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation === undefined ? "" : this.sellerProfile?.workerCompensation)
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum === undefined ? "" : this.sellerProfile?.projectMinimum)
+      data.append('bonded', this.sellerProfile?.bonded === undefined ? "" : this.sellerProfile?.bonded)
+      data.append('writtenContract', this.sellerProfile?.writtenContract === undefined ? "" : this.sellerProfile?.writtenContract)
+      data.append('address', this.sellerProfile?.address === undefined ? "" : this.sellerProfile?.address)
+      data.append('postalCode', this.sellerProfile?.postalCode === undefined ? "" : this.sellerProfile?.postalCode)
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod === undefined ? "" : this.sellerProfile?.paymentMethod)
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms === undefined ? "" : this.sellerProfile?.warrantyTerms)
+      data.append('country', this.sellerProfile?.country === undefined ? "" : this.sellerProfile?.country)
+      data.append('state', this.sellerProfile?.state === undefined ? "" : this.sellerProfile?.state)
+      data.append('city', this.sellerProfile?.city === undefined ? "" : this.sellerProfile?.city)
+
       data.append('id', this.userId)
       this.authenticationSerive.updateProfile(data).subscribe({
         next: (res) => {
@@ -2538,7 +2539,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public addCustomCountryCityToArray() {
 
     if (!this.countryCustom) {
-      this.toastrService.error('Please select country first.')
+      this.toastrService.error('Please add country first.')
       return;
     }
 
@@ -2774,7 +2775,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   onSaveCustomCountriescities() {
 
     if (this.CountriesAddCustomArray.length < 1) {
-      this.toastrService.error('Please select country first.')
+      this.toastrService.error('Please add country first.')
       return;
     }
 
