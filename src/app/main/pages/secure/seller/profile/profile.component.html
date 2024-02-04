@@ -244,7 +244,7 @@
             <div class="gallery_wrapper">
               <div class="d-flex align-items-center mb-2">
                 <h1 class="title mb-0" style="font-family: 'Montserrat', sans-serif;">Services photos</h1>
-                <button class="edit ml-2" (click)="modalUpdatePhoto(modalVC)"><img
+                <button *ngIf="sellerServicePhotos.length < 10" class="edit ml-2" (click)="modalUpdatePhoto(modalVC)"><img
                     src="../../../assets/images/site/edit.png" alt=""></button>
               </div>
               <div class="gallery row">
@@ -634,7 +634,8 @@
 
                 <div class="col-sm-7">
                   <input type="text" class="form-control" style="text-transform: uppercase;"
-                    placeholder="Please enter your postal code e.g. A1A 1A1" [(ngModel)]="postalCode">
+                    placeholder="Please enter your postal code e.g. A1A 1A1" [(ngModel)]="postalCode"
+                    (ngModelChange)="formatPostalCode()">
                 </div>
 
                 <div class="col-sm-3">
@@ -689,7 +690,8 @@
 
                   <div class="col-sm-7">
                     <input type="text" class="form-control" style="text-transform: uppercase;"
-                      placeholder="Please enter your postal code e.g. A1A 1A1" [(ngModel)]="postalCodeCustom">
+                      placeholder="Please enter your postal code e.g. A1A 1A1" [(ngModel)]="postalCodeCustom"
+                      (ngModelChange)="formatPostalCodeCustom()">
                   </div>
                   <div class="col-sm-3">
                     <button type="button" (click)="addCustomPostaCodeToArray()" class="btn btn-dark2" rippleEffect><i

@@ -56,9 +56,9 @@ export class CustomerlistingsComponent implements OnInit {
    * On init
    */
   ngOnInit() {
-
+    this.getUserAllProfile();
     this.getAllQuotesOrders();
-    this.contentHeader = { 
+    this.contentHeader = {
       headerTitle: '',
       actionButton: true,
       headerRight: false,
@@ -67,6 +67,25 @@ export class CustomerlistingsComponent implements OnInit {
       }
     }
   }
+
+  public requiredDocument: boolean = false;
+
+  getUserAllProfile() {
+
+
+    this.userService.getProfile(this.userId).subscribe({
+      next: (res: any) => {
+
+        if (!res.ispendingApproval) {
+          this.requiredDocument = true
+        } else {
+          this.requiredDocument = false
+        }
+      }
+    })
+
+  }
+
   public userQuote: any;
   getAllQuotesOrders() {
     let queryParams = '?&status=QUOTE&searchByQuote=true&categoryId=' + this.categoryId + '&userId=' + this.userId + "&sortBy=createdAt&order=desc";

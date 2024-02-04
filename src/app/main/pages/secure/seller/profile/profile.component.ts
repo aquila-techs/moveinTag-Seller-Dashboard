@@ -1497,6 +1497,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.sellerServicePhotos = res;
       })
   }
+  
   deleteImage(item) {
     this.userService.deleteUserSerivesPhoto(item._id)
       .subscribe(res => {
@@ -1599,6 +1600,36 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       }
     }
     this.profileUpdateFormBuilder();
+  }
+
+  formatPostalCode(): void {
+    // Remove spaces from the current postal code value
+    let cleanedPostalCode = this.postalCode.replace(/\s/g, '');
+
+    // Add a space after every 3 characters
+    let formattedPostalCode = '';
+    for (let i = 0; i < cleanedPostalCode.length; i += 3) {
+      formattedPostalCode += cleanedPostalCode.substr(i, 3) + ' ';
+    }
+
+    // Trim any extra spaces at the end
+    this.postalCode = formattedPostalCode.trim();
+  }
+
+  
+
+  formatPostalCodeCustom(): void {
+    // Remove spaces from the current postal code value
+    let cleanedPostalCode = this.postalCodeCustom.replace(/\s/g, '');
+
+    // Add a space after every 3 characters
+    let formattedPostalCode = '';
+    for (let i = 0; i < cleanedPostalCode.length; i += 3) {
+      formattedPostalCode += cleanedPostalCode.substr(i, 3) + ' ';
+    }
+
+    // Trim any extra spaces at the end
+    this.postalCodeCustom = formattedPostalCode.trim();
   }
 
   zipCodesGet(city: string, country: string, radius: string) {
@@ -1792,6 +1823,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // })
 
     this.getAllSellerServiceImages();
+
     this.contentHeader = {
       headerTitle: 'Dashboard',
       actionButton: true,
@@ -1899,6 +1931,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       city: [this.sellerProfile?.city ? this.sellerProfile.city : '', Validators.required],
     });
 
+    this.profileUpdateForm.get('postalCode').valueChanges.subscribe(value => {
+      this.formatPostalCodeProfile(value);
+    });
+
     this.sellerWebLinksForm = this._formBuilder.group({
       webURL: [this.sellerProfile?.webURL ? this.sellerProfile.webURL : ''],
       facebookURL: [this.sellerProfile?.facebookURL ? this.sellerProfile.facebookURL : ''],
@@ -1907,7 +1943,23 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       phone: [this.sellerProfile?.phone ? this.sellerProfile.phone : '', Validators.required],
       userEmail: [this.sellerProfile?.email ? this.sellerProfile.email : ''],
     });
+    
   }
+
+  formatPostalCodeProfile(value: string): void {
+    // Remove spaces from the current postal code value
+    let cleanedPostalCode = value.replace(/\s/g, '');
+
+    // Add a space after every 3 characters
+    let formattedPostalCode = '';
+    for (let i = 0; i < cleanedPostalCode.length; i += 3) {
+      formattedPostalCode += cleanedPostalCode.substr(i, 3) + ' ';
+    }
+
+    // Trim any extra spaces at the end
+    this.profileUpdateForm.get('postalCode').setValue(formattedPostalCode.trim(), { emitEvent: false });
+  }
+
   copyText() {
     this.clipboardService.copyFromContent(this.sellerProfile?.referralCode);
   }

@@ -14,122 +14,102 @@
       </div>
     </div>
 
-    <div class="mb-2" style="position: relative; display: flex; flex-wrap: wrap; margin-left:15px">
-      <div class="form-outline">
-        <form (submit)="onSubmitSearch()">
-          <input type="text" class="form-control"
-            placeholder="Search by lead number, customer name, postal code, services.." [(ngModel)]="searchText"
-            name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
-        </form>
+    <div *ngIf="requiredDocument == false">
+      <div class="mb-2" style="position: relative; display: flex; flex-wrap: wrap; margin-left:15px">
+        <div class="form-outline">
+          <form (submit)="onSubmitSearch()">
+            <input type="text" class="form-control"
+              placeholder="Search by lead number, customer name, postal code, services.." [(ngModel)]="searchText"
+              name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
+          </form>
+        </div>
+        <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
+          <i class="fa fa-search"></i>
+        </button>
+        <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
+          <i class="fa fa-close"></i>
+        </button>
       </div>
-      <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
-        <i class="fa fa-search"></i>
-      </button>
-      <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
-        <i class="fa fa-close"></i>
-      </button>
-    </div>
 
-    <section class="mb-1" *ngIf="userQuote && userQuote.length <= 0">
+      <section class="mb-1" *ngIf="userQuote && userQuote.length <= 0">
+        <div class="table-wrapper">
+          <div class="row" id="basic-table">
+            <div class="col-12">
+              <div class="card auto">
+                <h4 class="table-title"></h4>
+                <div class="table-responsive" style="
+              font-size: 20px;
+              text-align: center;
+              margin: 30px;
+              margin-top: -15px;
+              margin-bottom: 20px;
+          ">
+                  No Quotation Found
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section *ngIf="userQuote && userQuote.length > 0">
+        <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
+          <div class="card h-100">
+            <div class="table-responsive">
+              <table class="table table-s1">
+                <thead>
+                  <tr>
+                    <th>Lead Number</th>
+                    <th>Customer Name</th>
+                    <th>Services</th>
+                    <th>Status</th>
+                    <th>Postal Code</th>
+                    <th>Quote Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="mb-1" *ngFor="let item of userQuote">
+                    <td>{{item.orderNum}}</td>
+                    <td>{{item?.buyer?.firstName}}</td>
+                    <td>{{item?.subCategory?.title}}</td>
+                    <td><span class="badge badge-pill badge-light-success mr-1">
+                        <span *ngIf="item?.status === 'QUOTE'"> Pending </span>
+                        <span *ngIf="item?.status === 'ACTIVE'"> Approved </span>
+                      </span></td>
+                    <td>{{item?.postal_code}}</td>
+                    <td><a class="text-success px-2 py-1 box-shadow-0" (click)="modalOpenVC(modalVC, item)"
+                        rippleEffect>View</a></td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div *ngIf="requiredDocument == true">
       <div class="table-wrapper">
         <div class="row" id="basic-table">
-          <div class="col-12">
+          <div class="col-11 mx-auto"> <!-- Added mx-auto class -->
             <div class="card auto">
               <h4 class="table-title"></h4>
               <div class="table-responsive" style="
-            font-size: 20px;
-            text-align: center;
-            margin: 30px;
-            margin-top: -15px;
-            margin-bottom: 20px;
-        ">
-                No Quotation Found
+                font-size: 20px;
+                text-align: center;
+                margin: 30px;
+                margin-top: -15px;
+                margin-bottom: 20px;
+              ">
+                Please upload documents first in verification tab
+                <p style="font-size: 15px; margin-top: 20px;"><b>Note:</b> if you have submitted, please wait for admin
+                  approval.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section *ngIf="userQuote && userQuote.length > 0">
-      <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
-        <div class="card h-100">
-          <div class="table-responsive">
-            <table class="table table-s1">
-              <thead>
-                <tr>
-                  <th>Lead Number</th>
-                  <th>Customer Name</th>
-                  <th>Services</th>
-                  <th>Status</th>
-                  <th>Postal Code</th>
-                  <th>Quote Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="mb-1" *ngFor="let item of userQuote">
-                  <td>{{item.orderNum}}</td>
-                  <td>{{item?.buyer?.firstName}}</td>
-                  <td>{{item?.subCategory?.title}}</td>
-                  <td><span class="badge badge-pill badge-light-success mr-1">
-                      <span *ngIf="item?.status === 'QUOTE'"> Pending </span>
-                      <span *ngIf="item?.status === 'ACTIVE'"> Approved </span>
-                    </span></td>
-                  <td>{{item?.postal_code}}</td>
-                  <td><a class="text-success px-2 py-1 box-shadow-0" (click)="modalOpenVC(modalVC, item)"
-                      rippleEffect>View</a></td>
-
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- <section class="mb-1" *ngFor="let item of userQuote">
-      <div class="table-wrapper">
-        <div class="row" id="basic-table">
-          <div class="col-12">
-            <div class="card auto">
-              <h4 class="table-title"></h4>
-              <div class="table-responsive">
-                <table class="table table-s1">
-                  <thead>
-                    <tr>
-                      <th>{{item?.category?.title}} - {{item?.subCategory?.title}}</th>
-                      <th>Order Number - {{item.orderNum}}</th>
-                      <th><span *ngIf="item.postal_code">Postal Code - {{item?.postal_code}}</span></th>
-                      <th><span *ngIf="item.seller" class="blink" style="color:red">Direct Quote</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="name-wrapper">
-                          <span class="name">JK</span>
-                          <span class="font-weight-bold">{{item?.buyer?.firstName}}</span>
-                        </div>
-                      </td>
-
-                      <td><span class="badge badge-pill badge-light-success mr-1">
-                          <span *ngIf="item?.status === 'QUOTE'"> Pending </span>
-                          <span *ngIf="item?.status === 'ACTIVE'"> Approved </span>
-                        </span></td>
-                      <td></td>
-                      <td>
-                        <a class="text-success px-2 py-1 box-shadow-0" (click)="modalOpenVC(modalVC, item)"
-                          rippleEffect>View</a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
+    </div>
 
 
 
