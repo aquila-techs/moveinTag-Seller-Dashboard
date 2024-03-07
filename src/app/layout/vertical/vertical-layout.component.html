@@ -9,7 +9,10 @@
 <!-- APP-CONTENT -->
 <div class="app-content content">
   <div class="content-overlay"></div>
-  <div class="header-navbar-shadow" *ngIf="!coreConfig.layout.navbar.hidden"></div>
+  <div
+    class="header-navbar-shadow"
+    *ngIf="!coreConfig.layout.navbar.hidden"
+  ></div>
   <!-- CONTENT -->
   <content></content>
   <!--/ CONTENT -->
@@ -33,7 +36,9 @@
           coreConfig.layout.navbar.type +
           ' ' +
           coreConfig.layout.navbar.backgroundColor
-        : coreConfig.layout.navbar.background + ' ' + coreConfig.layout.navbar.type,
+        : coreConfig.layout.navbar.background +
+          ' ' +
+          coreConfig.layout.navbar.type,
       coreConfig.layout.navbar.type === 'floating-nav' ? 'container-xxl' : ''
     ]"
     class="header-navbar navbar navbar-expand-lg align-items-center navbar-shadow"
@@ -52,7 +57,10 @@
     class="main-menu menu-fixed menu-accordio menu-shadow"
     overlayClass="sidenav-overlay"
     [ngClass]="[
-      coreConfig.layout.skin === 'semi-dark' || coreConfig.layout.skin === 'dark' ? 'menu-dark' : 'menu-light',
+      coreConfig.layout.skin === 'semi-dark' ||
+      coreConfig.layout.skin === 'dark'
+        ? 'menu-dark'
+        : 'menu-light',
       coreConfig.layout.menu.collapsed ? '' : 'expanded'
     ]"
   >
@@ -73,7 +81,9 @@
           coreConfig.layout.footer.type +
           ' ' +
           coreConfig.layout.footer.backgroundColor
-        : coreConfig.layout.footer.background + ' ' + coreConfig.layout.footer.type
+        : coreConfig.layout.footer.background +
+          ' ' +
+          coreConfig.layout.footer.type
     "
   ></footer>
 </ng-template>

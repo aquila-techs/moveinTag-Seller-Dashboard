@@ -1,23 +1,31 @@
-import { Component, OnInit } from '@angular/core'
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { OrderService } from '@core/services/services/order.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NotificationsService } from 'app/layout/components/navbar/navbar-notification/notifications.service';
-import { environment } from 'environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from "@angular/core";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
+import { OrderService } from "@core/services/services/order.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NotificationsService } from "app/layout/components/navbar/navbar-notification/notifications.service";
+import { environment } from "environments/environment";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
-  selector: 'app-ordermanagement',
-  templateUrl: './ordermanagement.component.html',
-  styleUrls: ['./ordermanagement.component.scss']
+  selector: "app-ordermanagement",
+  templateUrl: "./ordermanagement.component.html",
+  styleUrls: ["./ordermanagement.component.scss"],
 })
 export class OrdermanagementComponent implements OnInit {
-  public userId = '';
+  public userId = "";
   public baseURL = environment.serverURL;
-  constructor(private modalService: NgbModal, private http: HttpClient,
+  constructor(
+    private modalService: NgbModal,
+    private http: HttpClient,
     private _formBuilder: UntypedFormBuilder,
-    private orderService: OrderService, private notificationService: NotificationsService) {
-    this.userId = JSON.parse(window.localStorage.getItem('currentUser'))._id;
+    private orderService: OrderService,
+    private notificationService: NotificationsService
+  ) {
+    this.userId = JSON.parse(window.localStorage.getItem("currentUser"))._id;
   }
 
   public contentHeader: object;
@@ -29,13 +37,12 @@ export class OrdermanagementComponent implements OnInit {
    * On init
    */
   ngOnInit() {
-
     this.contentHeader = {
-      headerTitle: 'Lead Management',
+      headerTitle: "Lead Management",
       actionButton: true,
       headerRight: false,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           // {
           //   name: 'Home',
@@ -46,14 +53,13 @@ export class OrdermanagementComponent implements OnInit {
           //   name: 'Sample',
           //   isLink: false
           // }
-        ]
-      }
-    }
+        ],
+      },
+    };
     this.completedOrderAmmountFormBuilder();
     this.getUserActiveOrder();
     this.getUSerCanceledOrder();
     this.getUserCompletedOrders();
-
   }
 
   public completedOrders = [];
@@ -71,37 +77,38 @@ export class OrdermanagementComponent implements OnInit {
   public searchText: string = "";
 
   onSubmitExportOrders() {
-
-    this.http.get(`https://api.moventag.com/order/export-orders?userId=${this.userId}`).subscribe({
-      next: (res: any) => {
-
-        window.open(`https://api.moventag.com/${res.path}`, '_blank');
-
-      }
-    })
+    this.http
+      .get(`https://api.moventag.com/order/export-orders?userId=${this.userId}`)
+      .subscribe({
+        next: (res: any) => {
+          window.open(`https://api.moventag.com/${res.path}`, "_blank");
+        },
+      });
   }
 
   onSubmitSearch() {
-    const Text = this.searchText
+    const Text = this.searchText;
 
-    this.http.get(`https://api.moventag.com/order/searchSellerOrders?userId=${this.userId}&pageSize=10&pageNo=1&sortBy=createdAt&order=desc&text=${Text}`).subscribe({
-      next: (res: any) => {
-
-        if (res.length < 1) {
-          this.activeOrderTotal = 0;
-          this.activeOrders = [];
-          this.completedOrderTotal = 0;
-          this.completedOrders = [];
-          this.cancelledOrderTotal = 0;
-          this.cancelledOrder = [];
-        } else {
-          this.activeOrders = res[0].results;
-          this.completedOrders = res[0].results;
-          this.cancelledOrder = res[0].results;
-        }
-
-      }
-    })
+    this.http
+      .get(
+        `https://api.moventag.com/order/searchSellerOrders?userId=${this.userId}&pageSize=10&pageNo=1&sortBy=createdAt&order=desc&text=${Text}`
+      )
+      .subscribe({
+        next: (res: any) => {
+          if (res.length < 1) {
+            this.activeOrderTotal = 0;
+            this.activeOrders = [];
+            this.completedOrderTotal = 0;
+            this.completedOrders = [];
+            this.cancelledOrderTotal = 0;
+            this.cancelledOrder = [];
+          } else {
+            this.activeOrders = res[0].results;
+            this.completedOrders = res[0].results;
+            this.cancelledOrder = res[0].results;
+          }
+        },
+      });
   }
 
   onSubmitClear() {
@@ -112,62 +119,85 @@ export class OrdermanagementComponent implements OnInit {
   }
 
   getUserCompletedOrders() {
-    let queryParams = '?userId=' + this.userId + '&status=COMPLETED' + '&pageSize=' + this.pageSize + '&pageNo=' + this.completedOrderPage + '&sortBy=updatedAt&order=desc';;
-    this.orderService.getAllCompleteSellerOrders(queryParams)
-      .subscribe(res => {
-
+    let queryParams =
+      "?userId=" +
+      this.userId +
+      "&status=COMPLETED" +
+      "&pageSize=" +
+      this.pageSize +
+      "&pageNo=" +
+      this.completedOrderPage +
+      "&sortBy=updatedAt&order=desc";
+    this.orderService
+      .getAllCompleteSellerOrders(queryParams)
+      .subscribe((res) => {
         if (res[0].results.length > 0) {
-          this.completedOrderTotal = res[0]['count'][0].totalCount;
+          this.completedOrderTotal = res[0]["count"][0].totalCount;
           this.completedOrders = res[0].results;
         } else {
           this.completedOrderTotal = 0;
           this.completedOrders = [];
         }
-      })
+      });
   }
 
   getUserlatedOrders() {
-    let queryParams = '?userId=' + this.userId + '&status=LATE';
-    this.orderService.getAllCompleteSellerOrders(queryParams)
-      .subscribe(res => {
+    let queryParams = "?userId=" + this.userId + "&status=LATE";
+    this.orderService
+      .getAllCompleteSellerOrders(queryParams)
+      .subscribe((res) => {
         this.latedOrder = res[0].results;
-      })
+      });
   }
 
   getUserActiveOrder() {
-    let queryParams = '?userId=' + this.userId + '&status=ACTIVE' + '&pageSize=' + this.pageSize + '&pageNo=' + this.activeOrderPage + '&sortBy=updatedAt&order=desc';
-    this.orderService.getAllActiveSellerOrders(queryParams)
-      .subscribe(res => {
-        if (res[0].results.length > 0) {
-          this.activeOrderTotal = res[0]['count'][0].totalCount;
-          this.activeOrders = res[0].results;
-        } else {
-          this.activeOrderTotal = 0;
-          this.activeOrders = [];
-        }
-
-      })
+    let queryParams =
+      "?userId=" +
+      this.userId +
+      "&status=ACTIVE" +
+      "&pageSize=" +
+      this.pageSize +
+      "&pageNo=" +
+      this.activeOrderPage +
+      "&sortBy=updatedAt&order=desc";
+    this.orderService.getAllActiveSellerOrders(queryParams).subscribe((res) => {
+      if (res[0].results.length > 0) {
+        this.activeOrderTotal = res[0]["count"][0].totalCount;
+        this.activeOrders = res[0].results;
+      } else {
+        this.activeOrderTotal = 0;
+        this.activeOrders = [];
+      }
+    });
   }
 
   getUSerCanceledOrder() {
-    let queryParams = '?userId=' + this.userId + '&status=CANCELLED' + '&pageSize=' + this.pageSize + '&pageNo=' + this.cancelledOrderPage + '&sortBy=updatedAt&order=desc';
-    this.orderService.getAllCancelledSellerOrders(queryParams)
-      .subscribe(res => {
+    let queryParams =
+      "?userId=" +
+      this.userId +
+      "&status=CANCELLED" +
+      "&pageSize=" +
+      this.pageSize +
+      "&pageNo=" +
+      this.cancelledOrderPage +
+      "&sortBy=updatedAt&order=desc";
+    this.orderService
+      .getAllCancelledSellerOrders(queryParams)
+      .subscribe((res) => {
         if (res[0].results.length > 0) {
-          this.cancelledOrderTotal = res[0]['count'][0].totalCount;
+          this.cancelledOrderTotal = res[0]["count"][0].totalCount;
           this.cancelledOrder = res[0].results;
         } else {
           this.cancelledOrderTotal = 0;
           this.cancelledOrder = [];
         }
-
-      })
+      });
   }
   selectedOrder: any = [];
   modalOpenVC(modalVC) {
     this.modalService.open(modalVC, {
       centered: true,
-      size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+      size: "lg", // size: 'xs' | 'sm' | 'lg' | 'xl'
     });
   }
   openOrderDetailPopup(modalVC, selectedOrders) {
@@ -175,46 +205,44 @@ export class OrdermanagementComponent implements OnInit {
 
     this.modalService.open(modalVC, {
       centered: true,
-      size: 'lg' // size: 'xs' | 'sm' | 'lg' | 'xl'
+      size: "lg", // size: 'xs' | 'sm' | 'lg' | 'xl'
     });
   }
   public selectedOrderForComplete: any;
   public selectedType: any;
   changeOrderStatus(order, event, type, modalComplete) {
-    if (event.target.value === 'COMPLETED') {
+    if (event.target.value === "COMPLETED") {
       this.selectedOrderForComplete = order;
       this.selectedType = type;
-      event.target.value = 'ACTIVE';
+      event.target.value = "ACTIVE";
       this.modalOpenVC(modalComplete);
       return;
     }
     let data = {
-      "orderId": order._id,
-      "status": event.target.value
-    }
+      orderId: order._id,
+      status: event.target.value,
+    };
 
-    this.orderService.changeOrderStatus(data)
-      .subscribe(res => {
-        this.completedOrderAmmountFormBuilder();
-        if (order.buyer._id) {
-          let data = {
-            'heading': order.orderNum + ' Task Status Changed To ' + event.target.value,
-            'message': 'Please check tasks page for detail.',
-            'receiverId': order.buyer._id,
-            'senderId': order.seller._id
-          }
-          this.notificationService.sendMessage(data, order.buyer._id)
-        }
-        // this.getUserActiveOrder();
-        if (type === 'active') {
-          this.getUserActiveOrder();
-        }
-        if (type === 'cancelled') {
-          this.getUSerCanceledOrder();
-        }
-      })
+    this.orderService.changeOrderStatus(data).subscribe((res) => {
+      this.completedOrderAmmountFormBuilder();
+      if (order.buyer._id) {
+        let data = {
+          heading: "Your task request is " + event.target.value.toLowerCase(),
+          message: "Please check tasks page for detail.",
+          receiverId: order.buyer._id,
+          senderId: order.seller._id,
+        };
+        this.notificationService.sendMessage(data, order.buyer._id);
+      }
+      // this.getUserActiveOrder();
+      if (type === "active") {
+        this.getUserActiveOrder();
+      }
+      if (type === "cancelled") {
+        this.getUSerCanceledOrder();
+      }
+    });
   }
-
 
   changeOrderStatusComplete() {
     if (this.completedOrderAmmountForm.invalid) {
@@ -222,35 +250,40 @@ export class OrdermanagementComponent implements OnInit {
     }
 
     let data = {
-      "orderId": this.selectedOrderForComplete._id,
-      "status": 'COMPLETED',
-      "ammount": this.completedOrderAmmountForm.value.ammount === "" ? 0 : this.completedOrderAmmountForm.value.ammount
-    }
+      orderId: this.selectedOrderForComplete._id,
+      status: "COMPLETED",
+      ammount:
+        this.completedOrderAmmountForm.value.ammount === ""
+          ? 0
+          : this.completedOrderAmmountForm.value.ammount,
+    };
 
-    this.orderService.changeOrderStatus(data)
-      .subscribe(res => {
-        this.completedOrderAmmountFormBuilder();
-        this.modalService.dismissAll();
+    this.orderService.changeOrderStatus(data).subscribe((res) => {
+      this.completedOrderAmmountFormBuilder();
+      this.modalService.dismissAll();
 
-        if (this.selectedOrderForComplete.buyer._id) {
-          let data = {
-            'heading': this.selectedOrderForComplete.orderNum + ' Task Status Changed To ' + 'COMPLETED',
-            'message': 'Please check tasks page for detail.',
-            'receiverId': this.selectedOrderForComplete.buyer._id,
-            'senderId': this.selectedOrderForComplete.seller._id
-          }
-          this.notificationService.sendMessage(data, this.selectedOrderForComplete.buyer._id)
-        }
-        // this.getUserActiveOrder();
-        if (this.selectedType === 'active') {
-          this.getUserActiveOrder();
-        }
-        if (this.selectedType === 'cancelled') {
-          this.getUSerCanceledOrder();
-        }
-        this.selectedOrderForComplete = null;
-        this.selectedType = null;
-      })
+      if (this.selectedOrderForComplete.buyer._id) {
+        let data = {
+          heading: "Your task request is" + " completed",
+          message: "Please check tasks page for detail.",
+          receiverId: this.selectedOrderForComplete.buyer._id,
+          senderId: this.selectedOrderForComplete.seller._id,
+        };
+        this.notificationService.sendMessage(
+          data,
+          this.selectedOrderForComplete.buyer._id
+        );
+      }
+      // this.getUserActiveOrder();
+      if (this.selectedType === "active") {
+        this.getUserActiveOrder();
+      }
+      if (this.selectedType === "cancelled") {
+        this.getUSerCanceledOrder();
+      }
+      this.selectedOrderForComplete = null;
+      this.selectedType = null;
+    });
   }
 
   loadCompletedPage(event) {
@@ -268,7 +301,7 @@ export class OrdermanagementComponent implements OnInit {
 
   completedOrderAmmountFormBuilder() {
     this.completedOrderAmmountForm = this._formBuilder.group({
-      ammount: [''],
+      ammount: [""],
     });
   }
 }

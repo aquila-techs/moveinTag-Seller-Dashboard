@@ -2,116 +2,262 @@
   <div class="auth-inner row m-0">
     <!-- Brand logo-->
     <a class="brand-logo d-none" href="javascript:void(0);">
-      <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="28" />
+      <img
+        src="{{ coreConfig.app.appLogoImage }}"
+        alt="brand-logo"
+        height="28"
+      />
       <h2 class="brand-text text-primary ml-1">MOVENTAG</h2>
     </a>
     <!-- /Brand logo-->
 
     <div class="container-fluid">
       <div class="row">
-
         <div class="col-sm-8 px-0 d-none d-sm-block">
-          <img [src]="
-          coreConfig.layout.skin === 'dark'
-            ? 'assets/images/pages/login-v2-dark.svg'
-            : 'assets/images/site/pro_login_bg.jpg'
-        " alt="login image" class="login-img">
+          <img
+            [src]="
+              coreConfig.layout.skin === 'dark'
+                ? 'assets/images/pages/login-v2-dark.svg'
+                : 'assets/images/site/pro_login_bg.jpg'
+            "
+            alt="login image"
+            class="login-img"
+            style="max-width: 100%; height: auto"
+          />
         </div>
 
         <div class="col-sm-4 login-section-wrapper justify-content-center">
-
           <div class="brand-wrapper">
-            <a class="brand-logo position-static d-block mb-4" href="javascript:void(0);" style="padding-left: 0px;">
-              <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="54" />
+            <a
+              class="brand-logo position-static d-block mb-4"
+              href="javascript:void(0);"
+              style="padding-left: 0px"
+            >
+              <img
+                src="{{ coreConfig.app.appLogoImage }}"
+                alt="brand-logo"
+                height="54"
+              />
             </a>
-            <p class="card-text mb-2" style="margin-top: -40px; margin-bottom: 50px; color: #000000">Please <b>sign
-                in</b>
+            <p
+              class="card-text mb-2"
+              style="
+                margin-top: -40px;
+                margin-bottom: 50px;
+                color: #000000;
+                font-family: 'Montserrat', sans-serif;
+              "
+            >
+              Please <b>sign in</b>
               to your account
             </p>
           </div>
 
           <div>
-
             <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
               <div class="alert-body">
                 <p>{{ error }}</p>
               </div>
             </ngb-alert>
 
-            <form class="auth-login-form mt-2" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <form
+              class="auth-login-form mt-2"
+              [formGroup]="registerForm"
+              (ngSubmit)="onSubmit()"
+            >
               <div class="form-group">
-                <label class="form-label" for="login-email">Professional/Company Name</label>
-                <input type="text" formControlName="companyName" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" placeholder="Your Business Name"
-                  aria-describedby="login-email" autofocus="" tabindex="1" />
-                <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
-                  <div *ngIf="f.companyName.errors.required">Company Name is required</div>
+                <label
+                  class="form-label"
+                  style="font-family: 'Montserrat', sans-serif"
+                  for="login-email"
+                  >Your Company Name</label
+                >
+                <input
+                  type="text"
+                  formControlName="companyName"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.companyName.errors
+                  }"
+                  placeholder="Home Renovator"
+                  aria-describedby="login-email"
+                  autofocus=""
+                  tabindex="1"
+                />
+                <div
+                  *ngIf="submitted && f.companyName.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.companyName.errors.required">
+                    Company Name is required
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label" for="login-email">Email</label>
-                <input type="text" formControlName="email" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="admin@demo.com"
-                  aria-describedby="login-email" autofocus="" tabindex="1" />
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <label
+                  class="form-label"
+                  style="font-family: 'Montserrat', sans-serif"
+                  for="login-email"
+                  >Email</label
+                >
+                <input
+                  type="text"
+                  formControlName="email"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                  placeholder="admin@demo.com"
+                  aria-describedby="login-email"
+                  autofocus=""
+                  tabindex="1"
+                />
+                <div
+                  *ngIf="submitted && f.email.errors"
+                  class="invalid-feedback"
+                >
                   <div *ngIf="f.email.errors.required">Email is required</div>
-                  <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  <div *ngIf="f.email.errors.email">
+                    Email must be a valid email address
+                  </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between">
-                  <label for="login-password">Password</label>
+                  <label
+                    for="login-password"
+                    style="font-family: 'Montserrat', sans-serif"
+                    >Password</label
+                  >
                 </div>
                 <div class="input-group input-group-merge form-password-toggle">
-                  <input [type]="passwordTextType ? 'text' : 'password'" formControlName="password"
+                  <input
+                    [type]="passwordTextType ? 'text' : 'password'"
+                    formControlName="password"
                     class="form-control form-control-merge"
-                    [ngClass]="{ 'is-invalid error': submitted && f.password.errors }" placeholder="············"
-                    aria-describedby="login-password" tabindex="2" />
+                    [ngClass]="{
+                      'is-invalid error': submitted && f.password.errors
+                    }"
+                    placeholder="············"
+                    aria-describedby="login-password"
+                    tabindex="2"
+                  />
                   <div class="input-group-append">
-                    <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
+                    <span class="input-group-text cursor-pointer"
+                      ><i
+                        class="feather font-small-4"
+                        [ngClass]="{
                           'icon-eye-off': passwordTextType,
                           'icon-eye': !passwordTextType
-                        }" (click)="togglePasswordTextType()"></i></span>
+                        }"
+                        (click)="togglePasswordTextType()"
+                      ></i
+                    ></span>
                   </div>
                 </div>
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback"
-                  [ngClass]="{ 'd-block': submitted && f.password.errors }">
-                  <div *ngIf="f.password.errors.required">Password is required</div>
+                <div
+                  *ngIf="submitted && f.password.errors"
+                  class="invalid-feedback"
+                  [ngClass]="{ 'd-block': submitted && f.password.errors }"
+                >
+                  <div *ngIf="f.password.errors.required">
+                    Password is required
+                  </div>
                 </div>
               </div>
               <div *ngIf="affcode" class="form-group">
-                <label class="form-label" for="login-email">Referral Code</label>
-                <input type="text" formControlName="referralCode" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.referralCode.errors }" placeholder="Referral Code"
-                  aria-describedby="login-email" autofocus="" tabindex="1" readonly />
-                <div *ngIf="submitted && f.referralCode.errors" class="invalid-feedback">
-                  <div *ngIf="f.referralCode.errors.required">Referral Code is required</div>
+                <label class="form-label" for="login-email"
+                  >Referral Code</label
+                >
+                <input
+                  type="text"
+                  formControlName="referralCode"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.referralCode.errors
+                  }"
+                  placeholder="Referral Code"
+                  aria-describedby="login-email"
+                  autofocus=""
+                  tabindex="1"
+                  readonly
+                />
+                <div
+                  *ngIf="submitted && f.referralCode.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.referralCode.errors.required">
+                    Referral Code is required
+                  </div>
                 </div>
               </div>
-              <div class="form-group" style="margin-top: 20px;">
+              <div class="form-group" style="margin-top: 20px">
                 <div class="custom-control custom-checkbox">
-                  <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3"
-                    formControlName="agreeToTerms" />
-                  <label class="custom-control-label" for="remember-me"> I agree to privacy policy & terms</label>
+                  <input
+                    class="custom-control-input"
+                    id="remember-me"
+                    type="checkbox"
+                    tabindex="3"
+                    formControlName="agreeToTerms"
+                  />
+                  <label
+                    class="custom-control-label"
+                    style="font-family: 'Montserrat', sans-serif"
+                    for="remember-me"
+                  >
+                    By creating an account, you agree to the
+                    <a
+                      href="https://home.moventag.com/#/terms-of-use"
+                      target="_blank"
+                      >Terms of use</a
+                    >
+                    and
+                    <a
+                      href="https://home.moventag.com/#/privacy-policy"
+                      target="_blank"
+                      >Privacy Policy.</a
+                    ></label
+                  >
                 </div>
               </div>
-              <button [disabled]="loading" type="submit" class="btn btn-dark btn-block" tabindex="4" rippleEffect>
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Sign up
+              <button
+                [disabled]="loading"
+                type="submit"
+                class="btn btn-dark btn-block"
+                tabindex="4"
+                rippleEffect
+                style="font-family: 'Montserrat', sans-serif"
+              >
+                <span
+                  *ngIf="loading"
+                  class="spinner-border spinner-border-sm mr-1"
+                ></span
+                >Sign up
               </button>
             </form>
 
-            <p class="text-center mt-2">
-              <span>Already have an account?</span><a class="text-dark text-decoration-underline"
-                routerLink="/login"><span>&nbsp;<b style="color: #0F4C5C;">Sign in</b></span></a>
+            <p
+              class="text-center mt-2"
+              style="font-family: 'Montserrat', sans-serif"
+            >
+              <span>Already have an account?</span
+              ><a
+                class="text-dark text-decoration-underline"
+                routerLink="/login"
+                ><span>&nbsp;<b style="color: #0f4c5c">Sign in</b></span></a
+              >
               <span> instead</span>
             </p>
 
             <a href="https://home.moventag.com/#/home" class="ml-5 text-center">
               <div>
                 <span
-                  style="font-family: 'Montserrat', sans-serif; color:#000000; font-size: 16px; font-weight: 600;">Back
-                  to
-                  website</span>
+                  style="
+                    font-family: 'Montserrat', sans-serif;
+                    color: #000000;
+                    font-size: 16px;
+                    font-weight: 600;
+                  "
+                  >Back to website</span
+                >
               </div>
             </a>
             <!-- <div class="divider my-2">
@@ -129,11 +275,9 @@
                 <img src="./../../../../../assets/images/site/google-icon-white.png" alt="" class="hover-icon">
               </a>
             </div> -->
-
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>

@@ -1,19 +1,23 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 
-import { CoreConfigService } from '@core/services/config.service';
-import { AdminService } from '@core/services/services/admin.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
+import { CoreConfigService } from "@core/services/config.service";
+import { AdminService } from "@core/services/services/admin.service";
+import { ToastrService } from "ngx-toastr";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-signup",
+  templateUrl: "./signup.component.html",
+  styleUrls: ["./signup.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SignupComponent implements OnInit {
   // Public
@@ -21,7 +25,7 @@ export class SignupComponent implements OnInit {
   public passwordTextType: boolean;
   public registerForm: UntypedFormGroup;
   public submitted = false;
-  public error = '';
+  public error = "";
   public loading = false;
   public affcode: string;
 
@@ -34,29 +38,31 @@ export class SignupComponent implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService,
+  constructor(
+    private _coreConfigService: CoreConfigService,
     private _formBuilder: UntypedFormBuilder,
     private _adminService: AdminService,
     private _toastrService: ToastrService,
     private activeRoute: ActivatedRoute,
-    private _rotuer: Router) {
+    private _rotuer: Router
+  ) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
+        enableLocalStorage: false,
+      },
     };
   }
 
@@ -78,58 +84,60 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
+    console.log(this.registerForm.value.agreeToTerms);
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
+
     if (!this.registerForm.value.agreeToTerms) {
-      this._toastrService.error('Please accept Terms & Conditions', 'Terms & Conditions');
+      this._toastrService.error(
+        "Please accept Terms & Conditions",
+        "Terms & Conditions"
+      );
       return;
     }
 
     if (this.affcode) {
-
       const OBJ = {
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
         companyName: this.registerForm.value.companyName,
-        referrerCode: this.affcode
-      }
+        referrerCode: this.affcode,
+      };
 
       this._adminService.createSeller(OBJ).subscribe({
         next: (res) => {
-          console.log(res)
-          window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
+          console.log(res);
+          window.sessionStorage.setItem(
+            "currentUser",
+            JSON.stringify(res.user)
+          );
           // this._toastrService.success('','Seller register please wait for admin approval');
-          this._rotuer.navigate(['/subscription-detail'])
+          this._rotuer.navigate(["/subscription-detail"]);
         },
-        error: (err) => {
-
-        },
-      })
-
+        error: (err) => {},
+      });
     } else {
-
       const OBJ = {
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
-        companyName: this.registerForm.value.companyName
-      }
+        companyName: this.registerForm.value.companyName,
+      };
 
       this._adminService.createSeller(OBJ).subscribe({
         next: (res) => {
-          console.log(res)
-          window.sessionStorage.setItem('currentUser', JSON.stringify(res.user));
+          console.log(res);
+          window.sessionStorage.setItem(
+            "currentUser",
+            JSON.stringify(res.user)
+          );
           // this._toastrService.success('','Seller register please wait for admin approval');
-          this._rotuer.navigate(['/subscription-detail'])
+          this._rotuer.navigate(["/subscription-detail"]);
         },
-        error: (err) => {
-
-        },
-      })
-
+        error: (err) => {},
+      });
     }
-
   }
 
   // Lifecycle Hooks
@@ -139,32 +147,33 @@ export class SignupComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-
-    this.activeRoute.queryParams.subscribe(params => {
-      this.affcode = params['affcode'];
+    this.activeRoute.queryParams.subscribe((params) => {
+      this.affcode = params["affcode"];
     });
 
     if (this.affcode) {
       this.registerForm = this._formBuilder.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-        companyName: ['', Validators.required],
+        email: ["", [Validators.required, Validators.email]],
+        password: ["", Validators.required],
+        companyName: ["", Validators.required],
         referralCode: [this.affcode, Validators.required],
-        agreeToTerms: ['', Validators.required]
+        agreeToTerms: [false, Validators.required],
       });
     } else {
       this.registerForm = this._formBuilder.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-        companyName: ['', Validators.required],
-        agreeToTerms: ['', Validators.required]
+        email: ["", [Validators.required, Validators.email]],
+        password: ["", Validators.required],
+        companyName: ["", Validators.required],
+        agreeToTerms: [false, Validators.required],
       });
     }
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config;
+      });
   }
 
   /**

@@ -1,0 +1,35 @@
+@import "@core/scss/angular/libs/file-uploader.component.scss";
+
+.professional-page {
+  .ng-autocomplete {
+    width: 260px !important;
+    text-align: left;
+  }
+  .autocomplete-container {
+    box-shadow: 0 0px 0px #0003, 0 0px 0px #00000024, 0 0px 0px -1px #0000001f !important;
+  }
+
+  .autocomplete-container .input-container input {
+    height: 40px !important;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .autocomplete-container .input-container .x i {
+    margin-top: 10px !important;
+  }
+}
+
+.professional .caption {
+  color: #fff !important;
+  position: relative;
+  z-index: 2;
+  padding: 80px 0px 80px !important;
+}
+
+.title {
+  font-weight: 400;
+}
+
+.title:hover {
+  font-weight: 600;
+}
