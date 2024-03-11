@@ -1527,7 +1527,6 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
       );
       return;
     }
-
     if (
       this.cvc &&
       this.cardNumber &&
@@ -1541,6 +1540,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         exp_month: this.selectedMonth,
         exp_year: this.selectedYear,
       };
+
       this.userService.createStripeToken(data).subscribe({
         next: (value) => {
           let subscriptionData = {
@@ -1635,30 +1635,37 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   //     }
   //   });
   // }
-  priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
-  charges = "9.99";
-  discount = "0.00";
-  total = "9.99";
-  free_trial = "1";
+  priceId = "price_1Ot4C0L7MEQHcjwNDArk5F8p";
+  signupCost = "price_1Ot4CxL7MEQHcjwNBbliGj8u";
+  charges = "398.00";
+  discount = "199.00";
+  total = "199.00";
+  free_trial = "0";
   selectPackage() {
-    if (this.radioModel === 1) {
-      this.priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
-      this.charges = "9.99";
-      this.discount = "0.00";
-      this.total = "9.99";
-      this.free_trial = "1";
-    } else if (this.radioModel === 2) {
-      this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
-      this.charges = "8.25";
-      this.discount = "20.88";
-      this.total = "99.00";
-      this.free_trial = "7";
-    } else {
-      this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
-      this.charges = "200.00";
-      this.discount = "00.00";
-      this.total = "200.00";
-      this.free_trial = "7";
-    }
+    this.priceId = "price_1Ot4C0L7MEQHcjwNDArk5F8p";
+    this.signupCost = "price_1Ot4CxL7MEQHcjwNBbliGj8u";
+    this.charges = "398.00";
+    this.discount = "199.00";
+    this.total = "199.00";
+    this.free_trial = "0";
+    // if (this.radioModel === 1) {
+    //   this.priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
+    //   this.charges = "9.99";
+    //   this.discount = "0.00";
+    //   this.total = "9.99";
+    //   this.free_trial = "1";
+    // } else if (this.radioModel === 2) {
+    //   this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
+    //   this.charges = "8.25";
+    //   this.discount = "20.88";
+    //   this.total = "99.00";
+    //   this.free_trial = "7";
+    // } else {
+    //   this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
+    //   this.charges = "200.00";
+    //   this.discount = "00.00";
+    //   this.total = "200.00";
+    //   this.free_trial = "7";
+    // }
   }
 }
