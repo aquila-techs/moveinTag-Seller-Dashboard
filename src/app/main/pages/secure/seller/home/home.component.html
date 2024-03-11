@@ -21,38 +21,64 @@
       </div>
     </section> -->
 
-
     <div class="col-lg-12">
       <div class="row">
-
         <div class="col-xl-5 col-md-6 col-12">
-          <div class="card card-congratulation-medal" style="height: 190px;">
+          <div class="card card-congratulation-medal" style="height: 190px">
             <div class="card-body">
               <div class="row">
                 <div class="col-8">
-                  <h2 style="font-family: 'Montserrat', sans-serif;">Welcome {{user?.companyName}}</h2>
-                  <p class="card-text font-small-5" style="font-family: 'Montserrat', sans-serif;">You have
-                    {{analytics['total-pending-orders']}}/{{analytics['total']}} pending tasks</p>
-                  <button routerLink="/pages/seller/order-management" type="button"
+                  <h2 style="font-family: 'Montserrat', sans-serif">
+                    Welcome {{ user?.companyName }}
+                  </h2>
+                  <p
+                    class="card-text font-small-5"
+                    style="font-family: 'Montserrat', sans-serif"
+                  >
+                    You have {{ analytics["total-approved-orders"] }}/{{
+                      analytics["total"]
+                    }}
+                    active leads
+                  </p>
+                  <button
+                    routerLink="/pages/seller/order-management"
+                    type="button"
                     class="btn btn-primary waves-effect waves-float waves-light mt-2"
-                    style="font-family: 'Montserrat', sans-serif;" rippleEffect>View</button>
+                    style="font-family: 'Montserrat', sans-serif"
+                    rippleEffect
+                  >
+                    View Leads
+                  </button>
                 </div>
                 <div class="col-4">
                   <!-- <img width="147px" height="147px" style="margin-left: -20px;"
                     src="assets/images/site/dashboard_icon.png" class="v-img__img v-img__img--contain"
                     alt="Medal Pic" /> -->
                   <div *ngIf="user?.profileImage; else customAvatar">
-                    <img style="background: white;box-shadow: 1px 5px 8px gray;"
-                      class="rounded-circle mr-1 v-img__img v-img__img--contain" src="{{baseURL}}{{user?.profileImage}}"
-                      height="100" width="100" />
+                    <img
+                      style="background: white; box-shadow: 1px 5px 8px gray"
+                      class="rounded-circle mr-1 v-img__img v-img__img--contain"
+                      src="{{ baseURL }}{{ user?.profileImage }}"
+                      height="100"
+                      width="100"
+                    />
                   </div>
                   <ng-template #customAvatar>
-                    <div class="avatar mr-1 ml-0" style="background-color: #38b6ff;">
-                      <div style="
-                        height: 100px;
-                        width: 100px;
-                        font-size: 30px;;box-shadow: 1px 5px 8px gray;
-                    " class="avatar-content">{{ user?.companyName| initials }}</div>
+                    <div
+                      class="avatar mr-1 ml-0"
+                      style="background-color: #38b6ff"
+                    >
+                      <div
+                        style="
+                          height: 100px;
+                          width: 100px;
+                          font-size: 30px;
+                          box-shadow: 1px 5px 8px gray;
+                        "
+                        class="avatar-content"
+                      >
+                        {{ user?.companyName | initials }}
+                      </div>
                     </div>
                   </ng-template>
                 </div>
@@ -64,10 +90,20 @@
         <div class="col-xl-3 col-md-4 col-6">
           <div class="card">
             <div class="card-body text-center mb-1 mt-2">
-              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif;">Your Score</h2>
-              <div class="row text-center mt-2 mb-0" style="justify-content: center">
-                <img src="assets/images/site/star-big.png" style="width: 30px; height:30px; margin-right: 5px;" />
-                <h1 style="font-size: 30px;">{{sellerProfile.totalRating}}%</h1>
+              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif">
+                Your Score
+              </h2>
+              <div
+                class="row text-center mt-2 mb-0"
+                style="justify-content: center"
+              >
+                <img
+                  src="assets/images/site/star-big.png"
+                  style="width: 30px; height: 30px; margin-right: 5px"
+                />
+                <h1 style="font-size: 30px">
+                  {{ sellerProfile.totalRating }}%
+                </h1>
               </div>
               <!-- <small class="text-muted">Past 12 Months</small> -->
             </div>
@@ -77,12 +113,15 @@
         <div class="col-xl-4 col-md-4 col-6">
           <div class="card">
             <div class="card-body text-center mb-2 mt-2">
-              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif;">${{allEarningAnalytics.totalAmmount}}</h2>
-              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif;">Total Revenue</h2>
+              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif">
+                ${{ allEarningAnalytics.totalAmmount }}
+              </h2>
+              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif">
+                Total Revenue
+              </h2>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -156,30 +195,51 @@
     <!--/ Statistics Card -->
     <div class="col-lg-12">
       <div class="row">
-
         <!-- Earning Reports -->
         <div class="col-lg-5 mb-4">
           <div class="card h-100">
-            <div class="card-header pb-0 d-flex justify-content-between mb-lg-n4">
+            <div
+              class="card-header pb-0 d-flex justify-content-between mb-lg-n4"
+            >
               <div class="card-title mb-0">
-                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif;">Earning Report</h2>
-                <small class="text-muted" style="font-family: 'Montserrat', sans-serif;">Today's Earning</small>
+                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif">
+                  Earning Report
+                </h2>
+                <small
+                  class="text-muted"
+                  style="font-family: 'Montserrat', sans-serif"
+                  >Today's Earning</small
+                >
               </div>
               <!-- </div> -->
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-12 col-md-4 d-flex flex-column align-self-center">
-                  <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-                    <h1 class="mb-0" style="margin-right: 5px; font-size: 35px;">
-                      ${{allEarningAnalytics.totalAmountWeekly[currentDayIndex]}}</h1>
+                <div
+                  class="col-12 col-md-4 d-flex flex-column align-self-center"
+                >
+                  <div
+                    class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap"
+                  >
+                    <h1 class="mb-0" style="margin-right: 5px; font-size: 35px">
+                      ${{
+                        allEarningAnalytics.totalAmountWeekly[currentDayIndex]
+                      }}
+                    </h1>
                   </div>
                 </div>
                 <div class="col-12 col-md-8">
                   <div id="chartjs-bar-chart">
-                    <canvas baseChart #barChartRef height="250" [datasets]="barChart.datasets"
-                      [labels]="barChart.labels" [options]="barChart.options" [legend]="barChart.legend"
-                      [chartType]="barChart.chartType">
+                    <canvas
+                      baseChart
+                      #barChartRef
+                      height="250"
+                      [datasets]="barChart.datasets"
+                      [labels]="barChart.labels"
+                      [options]="barChart.options"
+                      [legend]="barChart.legend"
+                      [chartType]="barChart.chartType"
+                    >
                     </canvas>
                   </div>
                 </div>
@@ -190,48 +250,105 @@
                     <div class="d-flex gap-2 align-items-center">
                       <div class="avatar bg-light-primary rounded">
                         <div class="avatar-content">
-                          <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
+                          <i
+                            data-feather="dollar-sign"
+                            class="avatar-icon font-medium-3"
+                          ></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c;font-family: 'Montserrat', sans-serif;">
-                        Daily</h5>
+                      <h5
+                        class="mb-0"
+                        style="
+                          margin-left: 5px;
+                          color: #5d596c;
+                          font-family: 'Montserrat', sans-serif;
+                        "
+                      >
+                        Daily
+                      </h5>
                     </div>
-                    <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountDaily}}</h3>
+                    <h3 class="my-2 pt-1">
+                      ${{ allEarningAnalytics.totalAmountDaily }}
+                    </h3>
                     <div class="progress w-75" style="height: 4px">
-                      <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 65%"
+                        aria-valuenow="65"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
                     </div>
                   </div>
                   <div class="col-12 col-sm-4">
                     <div class="d-flex gap-2 align-items-center">
                       <div class="avatar bg-light-info rounded">
                         <div class="avatar-content">
-                          <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
+                          <i
+                            data-feather="dollar-sign"
+                            class="avatar-icon font-medium-3"
+                          ></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c;font-family: 'Montserrat', sans-serif;">
-                        Monthly</h5>
+                      <h5
+                        class="mb-0"
+                        style="
+                          margin-left: 5px;
+                          color: #5d596c;
+                          font-family: 'Montserrat', sans-serif;
+                        "
+                      >
+                        Monthly
+                      </h5>
                     </div>
-                    <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountMonthly}}</h3>
+                    <h3 class="my-2 pt-1">
+                      ${{ allEarningAnalytics.totalAmountMonthly }}
+                    </h3>
                     <div class="progress w-75" style="height: 4px">
-                      <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                      <div
+                        class="progress-bar bg-info"
+                        role="progressbar"
+                        style="width: 50%"
+                        aria-valuenow="50"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
                     </div>
                   </div>
                   <div class="col-12 col-sm-4">
                     <div class="d-flex gap-2 align-items-center">
                       <div class="avatar bg-light-danger rounded">
                         <div class="avatar-content">
-                          <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
+                          <i
+                            data-feather="dollar-sign"
+                            class="avatar-icon font-medium-3"
+                          ></i>
                         </div>
                       </div>
-                      <h5 class="mb-0" style="margin-left: 5px; color: #5d596c;font-family: 'Montserrat', sans-serif;">
-                        Yearly</h5>
+                      <h5
+                        class="mb-0"
+                        style="
+                          margin-left: 5px;
+                          color: #5d596c;
+                          font-family: 'Montserrat', sans-serif;
+                        "
+                      >
+                        Yearly
+                      </h5>
                     </div>
-                    <h3 class="my-2 pt-1">${{allEarningAnalytics.totalAmountYealy}}</h3>
+                    <h3 class="my-2 pt-1">
+                      ${{ allEarningAnalytics.totalAmountYealy }}
+                    </h3>
                     <div class="progress w-75" style="height: 4px">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 65%" aria-valuenow="65"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                      <div
+                        class="progress-bar bg-danger"
+                        role="progressbar"
+                        style="width: 65%"
+                        aria-valuenow="65"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -246,25 +363,37 @@
           <div class="card h-100">
             <div class="card-header d-flex justify-content-between">
               <div class="card-title mb-0">
-                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif;">Clicks Statistics</h2>
-
+                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif">
+                  Clicks Statistics
+                </h2>
               </div>
             </div>
             <div class="card-body">
               <ul class="p-0 m-0">
-
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
                     <div class="avatar-content">
-                      <img src="assets/images/icons/new/profile.png" style="width: 20px; height: 20px;" />
+                      <img
+                        src="assets/images/icons/new/profile.png"
+                        style="width: 20px; height: 20px"
+                      />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Profile
-                      View</h5>
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Profile View
+                    </h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.viewedCount}}</b>
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.viewedCount }}</b>
                       </p>
                     </div>
                   </div>
@@ -284,133 +413,215 @@
                   </div>
                 </li> -->
 
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
                     <div class="avatar-content">
-                      <img src="assets/images/icons/new/email.png" style="width: 20px; height: 20px;" />
+                      <img
+                        src="assets/images/icons/new/email.png"
+                        style="width: 20px; height: 20px"
+                      />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Email
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Email
                     </h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.emailCount}}</b>
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.emailCount }}</b>
                       </p>
                     </div>
                   </div>
                 </li>
 
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
                     <div class="avatar-content">
-                      <img src="assets/images/icons/new/phone.png" style="width: 20px; height: 20px;" />
+                      <img
+                        src="assets/images/icons/new/phone.png"
+                        style="width: 20px; height: 20px"
+                      />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Phone
-                      Number</h5>
-                    <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.phoneCount}}</b>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
-                    <div class="avatar-content">
-                      <img src="assets/images/icons/new/website.png" style="width: 20px; height: 20px;" />
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Website
-                      Clicks</h5>
-                    <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.webCount}}</b>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
-                    <div class="avatar-content">
-                      <img src="assets/images/icons/new/facebook.png" style="width: 20px; height: 20px;" />
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Facebook
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Phone Number
                     </h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.fbCount}}</b>
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.phoneCount }}</b>
                       </p>
                     </div>
                   </div>
                 </li>
 
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
                     <div class="avatar-content">
-                      <img src="assets/images/icons/new/instagram.png" style="width: 20px; height: 20px;" />
+                      <img
+                        src="assets/images/icons/new/website.png"
+                        style="width: 20px; height: 20px"
+                      />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Instagram
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Website Clicks
                     </h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.instCount}}</b>
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.webCount }}</b>
                       </p>
                     </div>
                   </div>
                 </li>
 
-                <li class="pb-0 d-flex justify-content-between align-items-center">
-                  <div class="avatar bg-light-primary rounded">
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
                     <div class="avatar-content">
-                      <img src="assets/images/icons/new/twitter.png" style="width: 20px; height: 20px;" />
+                      <img
+                        src="assets/images/icons/new/facebook.png"
+                        style="width: 20px; height: 20px"
+                      />
                     </div>
                   </div>
                   <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5 class="mb-0 ms-3 p-1 align-self-center" style="font-family: 'Montserrat', sans-serif;">Twitter
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Facebook
                     </h5>
                     <div class="d-flex align-items-center">
-                      <p class="mb-0 fw-semibold" style="font-size: 17px; margin-right: 10px;">
-                        <b>{{sellerProfile.twitterCount}}</b>
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.fbCount }}</b>
                       </p>
                     </div>
                   </div>
                 </li>
 
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
+                    <div class="avatar-content">
+                      <img
+                        src="assets/images/icons/new/instagram.png"
+                        style="width: 20px; height: 20px"
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between w-100 flex-wrap">
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Instagram
+                    </h5>
+                    <div class="d-flex align-items-center">
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.instCount }}</b>
+                      </p>
+                    </div>
+                  </div>
+                </li>
 
-
+                <li
+                  class="pb-0 d-flex justify-content-between align-items-center"
+                >
+                  <div class="avatar rounded" style="background-color: #e2e2e2">
+                    <div class="avatar-content">
+                      <img
+                        src="assets/images/icons/new/twitter.png"
+                        style="width: 20px; height: 20px"
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between w-100 flex-wrap">
+                    <h5
+                      class="mb-0 ms-3 p-1 align-self-center"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Twitter
+                    </h5>
+                    <div class="d-flex align-items-center">
+                      <p
+                        class="mb-0 fw-semibold"
+                        style="font-size: 17px; margin-right: 10px"
+                      >
+                        <b>{{ sellerProfile.twitterCount }}</b>
+                      </p>
+                    </div>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
         </div>
         <!--/ Monthly Campaign State -->
 
-        <div class="col-lg-3 mb-4" style="
-        padding-right: 0px;
-        padding-left: 0px;
-    ">
+        <div
+          class="col-lg-3 mb-4"
+          style="padding-right: 0px; padding-left: 0px"
+        >
           <div class="col-lg-12 col-md-6 col-12">
-            <div class="card card-transaction" style="
-            margin-bottom: 0px;
-        ">
+            <div class="card card-transaction" style="margin-bottom: 0px">
               <div class="card-header">
-                <h4 class="card-title"
-                  style="font-size: 24px; font-weight: 600; font-family: 'Montserrat', sans-serif;">Leads Tracker</h4>
+                <h4
+                  class="card-title"
+                  style="
+                    font-size: 24px;
+                    font-weight: 600;
+                    font-family: 'Montserrat', sans-serif;
+                  "
+                >
+                  Leads Tracker
+                </h4>
               </div>
               <div class="card-body mt-1">
                 <div class="row">
                   <div class="col-8">
-                    <h2 style="font-family: 'Montserrat', sans-serif;">{{analytics['total']}}</h2>
-                    <p class="card-text font-small-5" style="font-family: 'Montserrat', sans-serif;">Total Leads</p>
+                    <h2 style="font-family: 'Montserrat', sans-serif">
+                      {{ analytics["total"] }}
+                    </h2>
+                    <p
+                      class="card-text font-small-5"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Total Leads
+                    </p>
                   </div>
                 </div>
               </div>
@@ -418,53 +629,97 @@
               <div class="card-body">
                 <div class="transaction-item mb-2">
                   <div class="media">
-                    <div class="avatar bg-light-primary rounded">
+                    <div
+                      class="avatar rounded"
+                      style="background-color: #e2e2e2"
+                    >
                       <div class="avatar-content">
-                        <img src="assets/images/icons/new/active.png" style="width: 25px; height: 25px;" />
+                        <img
+                          src="assets/images/icons/new/active.png"
+                          style="width: 25px; height: 25px"
+                        />
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Active</h6>
-                      <small>{{analytics['total-approved-orders']}}</small>
+                      <h6
+                        class="transaction-title"
+                        style="font-family: 'Montserrat', sans-serif"
+                      >
+                        Active
+                      </h6>
+                      <small>{{ analytics["total-approved-orders"] }}</small>
                     </div>
                   </div>
                 </div>
                 <div class="transaction-item mb-2">
                   <div class="media">
-                    <div class="avatar bg-light-primary rounded">
+                    <div
+                      class="avatar rounded"
+                      style="background-color: #e2e2e2"
+                    >
                       <div class="avatar-content">
-                        <img src="assets/images/icons/new/complete.png" style="width: 25px; height: 25px;" />
+                        <img
+                          src="assets/images/icons/new/complete.png"
+                          style="width: 25px; height: 25px"
+                        />
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Completed</h6>
-                      <small>{{analytics['total-completed-orders']}}</small>
+                      <h6
+                        class="transaction-title"
+                        style="font-family: 'Montserrat', sans-serif"
+                      >
+                        Completed
+                      </h6>
+                      <small>{{ analytics["total-completed-orders"] }}</small>
                     </div>
                   </div>
                 </div>
                 <div class="transaction-item mb-2">
                   <div class="media">
-                    <div class="avatar bg-light-primary rounded">
+                    <div
+                      class="avatar rounded"
+                      style="background-color: #e2e2e2"
+                    >
                       <div class="avatar-content">
-                        <img src="assets/images/icons/new/pending.png" style="width: 25px; height: 25px;" />
+                        <img
+                          src="assets/images/icons/new/pending.png"
+                          style="width: 25px; height: 25px"
+                        />
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Pending</h6>
-                      <small>{{analytics['total-pending-orders']}}</small>
+                      <h6
+                        class="transaction-title"
+                        style="font-family: 'Montserrat', sans-serif"
+                      >
+                        Pending
+                      </h6>
+                      <small>{{ analytics["total-pending-orders"] }}</small>
                     </div>
                   </div>
                 </div>
                 <div class="transaction-item mb-5">
                   <div class="media">
-                    <div class="avatar bg-light-primary rounded">
+                    <div
+                      class="avatar rounded"
+                      style="background-color: #e2e2e2"
+                    >
                       <div class="avatar-content">
-                        <img src="assets/images/icons/new/cancel.png" style="width: 25px; height: 25px;" />
+                        <img
+                          src="assets/images/icons/new/cancel.png"
+                          style="width: 25px; height: 25px"
+                        />
                       </div>
                     </div>
                     <div class="media-body">
-                      <h6 class="transaction-title" style="font-family: 'Montserrat', sans-serif;">Cancelled</h6>
-                      <small>{{analytics['total-cancelled-orders']}}</small>
+                      <h6
+                        class="transaction-title"
+                        style="font-family: 'Montserrat', sans-serif"
+                      >
+                        Cancelled
+                      </h6>
+                      <small>{{ analytics["total-cancelled-orders"] }}</small>
                     </div>
                   </div>
                 </div>
@@ -472,11 +727,10 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
+    <!-- <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
       <div class="card h-100">
         <div class="table-responsive">
           <table class="table table-s1">
@@ -490,30 +744,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngIf="!completedOrders || completedOrders.length <=0 ">
+              <tr *ngIf="!completedOrders || completedOrders.length <= 0">
                 <td colspan="6">No active leads to show</td>
               </tr>
               <tr *ngFor="let item of completedOrders">
-                <td>{{item?.orderNum}}</td>
-                <td>{{item?.buyer?.firstName}}</td>
-                <td>{{item?.category?.title}}</td>
-                <td>{{item.updatedAt | date}}</td>
-                <!-- <td><select class="form-control" (change)="changeOrderStatus(item, $event)" style="min-width: 165px;">
-                <option value="ACTIVE" [selected]="item.status === 'ACTIVE'? 'selected':''"> Active </option>
-                <option value="LATE" [selected]="item.status === 'LATE'? 'selected':''"> Late </option>
-                <option value="COMPLETED" [selected]="item.status === 'COMPLETED'? 'selected':''"> Completed </option>
-                <option value="CANCELLED" [selected]="item.status === 'CANCELLED'? 'selected':''"> Cancelled </option>
-                  </select></td> -->
+                <td>{{ item?.orderNum }}</td>
+                <td>{{ item?.buyer?.firstName }}</td>
+                <td>{{ item?.category?.title }}</td>
+                <td>{{ item.updatedAt | date }}</td>
                 <td>ACTIVE</td>
               </tr>
-
             </tbody>
           </table>
         </div>
       </div>
-    </div>
-
-
+    </div> -->
 
     <!-- 
     <section class="mt-3">
@@ -579,6 +824,5 @@
       </div>
    
     </section> -->
-
   </div>
 </div>
