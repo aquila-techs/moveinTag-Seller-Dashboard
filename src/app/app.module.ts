@@ -16,6 +16,7 @@ import { CoreSidebarModule, CoreThemeCustomizerModule } from "@core/components";
 import { coreConfig } from "app/app-config";
 
 import { AppComponent } from "app/app.component";
+import { NgxStripeModule } from "ngx-stripe";
 import { LayoutModule } from "app/layout/layout.module";
 import { ErrorComponent } from "./main/pages/public/error/error.component";
 import { HeaderInterceptor } from "@core/interceptors/header.interceptor";
@@ -145,6 +146,9 @@ const appRoutes: Routes = [
     LayoutModule,
     SecureModule,
     NgxSpinnerModule.forRoot({ type: "ball-scale-multiple" }),
+    NgxStripeModule.forRoot(
+      "pk_live_51OpInML7MEQHcjwNtcHMqFdDQd2xhImkDL8W0eMUAcCi0KPMBsNOfnQD4li1LLkWDYOM9q9ihfGsDHwysz2x5Pwf00OBmIS7mJ"
+    ),
   ],
   providers: [
     {

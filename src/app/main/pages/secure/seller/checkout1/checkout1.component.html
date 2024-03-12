@@ -450,7 +450,16 @@
             >
               <div class="col-lg-1"></div>
               <div class="col-lg-5">
-                <div class="py-4 py-lg-5 pr-xl-5">
+                <h2>Create Token Example</h2>
+                <ngx-stripe-card
+                  [options]="cardOptions"
+                  [elementsOptions]="elementsOptions"
+                ></ngx-stripe-card>
+                <button type="submit" (click)="createToken()">
+                  CREATE TOKEN
+                </button>
+
+                <!-- <div class="py-4 py-lg-5 pr-xl-5">
                   <div class="title-area mb-2">
                     <h2 class="mb-2" style="font-size: 40px">
                       Add Payment Method
@@ -461,8 +470,7 @@
                     <div
                       class="d-flex align-items-center justify-content-between"
                     >
-                      <!-- <h4>Moventag Pro Essential Plan</h4> -->
-                      <!-- <a href="">Change Plan</a> -->
+                   
                     </div>
                   </div>
                   <div class="form-group">
@@ -583,7 +591,7 @@
                       Payments are secure and encrypted
                     </p>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="col-lg-5">
                 <div class="sidebar">

@@ -5,7 +5,13 @@ import {
   ViewEncapsulation,
   AfterViewInit,
   AfterContentChecked,
+  ViewChild,
 } from "@angular/core";
+import { StripeService, StripeCardComponent } from "ngx-stripe";
+import {
+  StripeCardElementOptions,
+  StripeElementsOptions,
+} from "@stripe/stripe-js";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CoreConfigService } from "@core/services/config.service";
 import { Router } from "@angular/router";
@@ -22,6 +28,27 @@ import { FormControl, Validators } from "@angular/forms";
   styleUrls: ["./checkout1.component.scss"],
 })
 export class Checkout1Component implements OnInit, AfterContentChecked {
+  @ViewChild(StripeCardComponent) card: StripeCardComponent;
+
+  cardOptions: StripeCardElementOptions = {
+    style: {
+      base: {
+        iconColor: "#666EE8",
+        color: "#31325F",
+        fontWeight: "300",
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: "18px",
+        "::placeholder": {
+          color: "#CFD7E0",
+        },
+      },
+    },
+  };
+
+  elementsOptions: StripeElementsOptions = {
+    locale: "en",
+  };
+
   // public
   agreeToTerms = new FormControl(false, Validators.requiredTrue);
   public contentHeader: object;
@@ -1310,6 +1337,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   IdentityCardPhotoChangedEventTYPE: any = "";
 
   constructor(
+    private stripeService: StripeService,
     private _coreConfigService: CoreConfigService,
     private http: HttpClient,
     private _authenticationService: AuthenticationService,
@@ -1343,6 +1371,21 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         enableLocalStorage: false,
       },
     };
+  }
+
+  createToken(): void {
+    const name = "Moventag";
+    this.stripeService
+      .createToken(this.card.element, { name })
+      .subscribe((result) => {
+        if (result.token) {
+          // Use the token
+          console.log(result.token.id);
+        } else if (result.error) {
+          // Error creating the token
+          console.log(result.error.message);
+        }
+      });
   }
 
   licensefileChangeEvent(event: any): void {
@@ -1397,7 +1440,6 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
    * On init
    */
   ngOnInit() {
-    console.log(this.user);
     this.contentHeader = {
       headerTitle: "Dashboard",
       actionButton: false,
@@ -1449,61 +1491,6 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
 
   goToNextStep() {
     if (this.phoneCode && this.phone && this.countryName) {
-      // if (this.licensePhotoChangedEvent.length < 1) {
-      //   this.toastrService.error('Please select License', '');
-      //   return;
-      // }
-      // if (this.libilityInsurancePhotoChangedEvent.length < 1) {
-      //   this.toastrService.error('Please select Libility Insurance', '');
-      //   return;
-      // }
-      // if (this.IdentityCardPhotoChangedEvent.length < 1) {
-      //   this.toastrService.error('Please select Identity Card', '');
-      //   return;
-      // }
-
-      // if (this.licensePhotoChangedEvent) {
-      //   let data: FormData = new FormData();
-      //   data.append('license', this.licensePhotoChangedEvent)
-      //   data.append('id', this.user._id)
-      //   this.userService.updateSellerLicense(data).subscribe({
-      //     next: (res) => {
-      //       console.log(res)
-      //     },
-      //     error: (err) => {
-      //       console.log(err);
-      //     },
-      //   })
-      // }
-
-      // if (this.libilityInsurancePhotoChangedEvent) {
-      //   let data: FormData = new FormData();
-      //   data.append('libilityInsurance', this.libilityInsurancePhotoChangedEvent)
-      //   data.append('id', this.user._id)
-      //   this.userService.updateSellerLibilityInsurance(data).subscribe({
-      //     next: (res) => {
-      //       console.log(res)
-      //     },
-      //     error: (err) => {
-      //       console.log(err);
-      //     },
-      //   })
-      // }
-
-      // if (this.IdentityCardPhotoChangedEvent) {
-      //   let data: FormData = new FormData();
-      //   data.append('IdentityCard', this.IdentityCardPhotoChangedEvent)
-      //   data.append('id', this.user._id)
-      //   this.userService.updateSellerIdentityCard(data).subscribe({
-      //     next: (res) => {
-      //       console.log(res)
-      //     },
-      //     error: (err) => {
-      //       console.log(err);
-      //     },
-      //   })
-      // }
-
       this.licensePhotoChangedEvent = null;
       this.libilityInsurancePhotoChangedEvent = null;
       this.IdentityCardPhotoChangedEvent = null;
@@ -1602,39 +1589,9 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             });
         },
       });
-      // this.createToken();
-      //   const stripe = require('stripe')('sk_test_HzHrz8pdKuKRvc7ZCfkNySw3');
-
-      //   const token = this.stripe.tokens.create({
-      //     card: {
-      //       number: '4242424242424242',
-      //       exp_month: 4,
-      //       exp_year: 2024,
-      //       cvc: '314',
-      //     },
-      //   });
-      // }else{
-      //   this.toastrService.error('Please enter all fields.','');
     }
   }
 
-  // createToken() {
-
-  //   this.stripe.tokens.create('card', {
-  //     name: this.cardname,
-  //     number: this.cardNumber,
-  //     exp_month: this.selectedMonth,
-  //     exp_year: this.selectedYear,
-  //     cvc: this.cvc,
-  //   }).then(result => {
-  //     if (result.error) {
-  //       // Handle error
-  //     } else {
-  //       const token = result.token;
-  //       // Send token to your server to complete the charge
-  //     }
-  //   });
-  // }
   priceId = "price_1Ot4C0L7MEQHcjwNDArk5F8p";
   signupCost = "price_1Ot4CxL7MEQHcjwNBbliGj8u";
   charges = "398.00";
@@ -1648,24 +1605,5 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     this.discount = "199.00";
     this.total = "199.00";
     this.free_trial = "0";
-    // if (this.radioModel === 1) {
-    //   this.priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
-    //   this.charges = "9.99";
-    //   this.discount = "0.00";
-    //   this.total = "9.99";
-    //   this.free_trial = "1";
-    // } else if (this.radioModel === 2) {
-    //   this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
-    //   this.charges = "8.25";
-    //   this.discount = "20.88";
-    //   this.total = "99.00";
-    //   this.free_trial = "7";
-    // } else {
-    //   this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
-    //   this.charges = "200.00";
-    //   this.discount = "00.00";
-    //   this.total = "200.00";
-    //   this.free_trial = "7";
-    // }
   }
 }

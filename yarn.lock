@@ -1603,6 +1603,11 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
+"@stripe/stripe-js@^3.0.8":
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-3.0.8.tgz#7328688356e22dc2f9e5e13b769b446cf1b2e922"
+  integrity sha512-nEDZjCSrGI5GICqr2DsV7gPnEjmt5Y61Uj/z/UuWu3WR/ZyyskbEW/3ziVZdnnvFcoNCfpV2wA2ar1C1W//+Vg==
+
 "@sweetalert2/ngx-sweetalert2@8.1.1":
   version "8.1.1"
   resolved "https://registry.npmjs.org/@sweetalert2/ngx-sweetalert2/-/ngx-sweetalert2-8.1.1.tgz"
@@ -4088,15 +4093,15 @@ inquirer@8.2.4:
 
 intl-tel-input-ng@^0.9.0:
   version "0.9.0"
-  resolved "https://registry.yarnpkg.com/intl-tel-input-ng/-/intl-tel-input-ng-0.9.0.tgz#0f0287c37d0cbff852bf65d281b240423066637d"
+  resolved "https://registry.npmjs.org/intl-tel-input-ng/-/intl-tel-input-ng-0.9.0.tgz"
   integrity sha512-TfcwjoBNP5Cp10DWTCnnA+X3RKzOizmL4Zm2SxvAAnizbFjN9gF3tgEGUoHdHbzT9tV4rPjsEC/n5LnJ/qNwmw==
   dependencies:
     tslib "^2.3.0"
 
 intl-tel-input@^18.2.1:
-  version "18.2.1"
-  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-18.2.1.tgz#17de678f5ccfd156e4d125750cab4da8bd57fcbd"
-  integrity sha512-wOm0/61kTtpYjOOW1bhHzC4G8Om+atTxHmg31FS0KD0LQ8k8BpgO925npyi4jlT/EK4+joABABZzz0/XeSgupQ==
+  version "18.5.3"
+  resolved "https://registry.npmjs.org/intl-tel-input/-/intl-tel-input-18.5.3.tgz"
+  integrity sha512-ncFqSpkdGf2YC/FvAiwBH44KAeRG8L7aqDODEpOvMAT3ZpBtvc/WtwaQ/6X4+HKDTlGkobdBjr6P3nAMwO8jtA==
 
 ip@^2.0.0:
   version "2.0.0"
@@ -4973,6 +4978,13 @@ ngx-spinner@^14.0.0:
   dependencies:
     tslib "^2.3.0"
 
+ngx-stripe@^14.6.0:
+  version "14.6.0"
+  resolved "https://registry.yarnpkg.com/ngx-stripe/-/ngx-stripe-14.6.0.tgz#7c82c84704c21d4e82041f01583b8488f974ac99"
+  integrity sha512-ql9Q8OdmqNqoKNNCI/lTzqPjAR+RI+xWBdXPKGtpFIg1jfZAtGQ0eIpF9OllVvlxHs+OOGzVav7+R9RD+oDhNw==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-swiper-wrapper@10.0.0:
   version "10.0.0"
   resolved "https://registry.npmjs.org/ngx-swiper-wrapper/-/ngx-swiper-wrapper-10.0.0.tgz"
@@ -5013,9 +5025,9 @@ node-forge@^1:
   integrity sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==
 
 node-gyp-build@^4.2.2:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.6.1.tgz#24b6d075e5e391b8d5539d98c7fc5c210cac8a3e"
-  integrity sha512-24vnklJmyRS8ViBNI8KbtK/r/DmXQMRiOMXTNz2nrTnAYUwjmEEbnnpB/+kt+yWRv73bPsSPRFddrcIbAxSiMQ==
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.0.tgz#3fee9c1731df4581a3f9ead74664369ff00d26dd"
+  integrity sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==
 
 node-gyp@^9.0.0:
   version "9.3.1"
