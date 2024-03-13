@@ -16,7 +16,6 @@ import { CoreSidebarModule, CoreThemeCustomizerModule } from "@core/components";
 import { coreConfig } from "app/app-config";
 
 import { AppComponent } from "app/app.component";
-import { NgxStripeModule } from "ngx-stripe";
 import { LayoutModule } from "app/layout/layout.module";
 import { ErrorComponent } from "./main/pages/public/error/error.component";
 import { HeaderInterceptor } from "@core/interceptors/header.interceptor";
@@ -30,6 +29,7 @@ import { LoginGuard } from "@core/guards/login.guards";
 import { AuthResetPasswordComponent } from "./main/pages/public/reset-password/reset-password.component";
 import { VerifyEmailComponent } from "./main/pages/public/verify-email/verify-email.component";
 import { Checkout1Component } from "./main/pages/secure/seller/checkout1/checkout1.component";
+import { ActiveSubscription } from "./main/pages/secure/seller/active-subscription/active-subscription.component";
 
 import { PrivacyPolicyComponent } from "./main/pages/public/privac-policy/privacyPolicy.component";
 import { termsOfUseComponent } from "./main/pages/public/terms-of-use/termsOfUse.component";
@@ -58,6 +58,12 @@ const appRoutes: Routes = [
     path: "subscription-detail",
     canActivate: [PaymentGuard],
     component: Checkout1Component,
+    data: { animation: "auth" },
+  },
+  {
+    path: "active-subscription",
+    canActivate: [PaymentGuard],
+    component: ActiveSubscription,
     data: { animation: "auth" },
   },
   {
@@ -146,9 +152,6 @@ const appRoutes: Routes = [
     LayoutModule,
     SecureModule,
     NgxSpinnerModule.forRoot({ type: "ball-scale-multiple" }),
-    NgxStripeModule.forRoot(
-      "pk_live_51OpInML7MEQHcjwNtcHMqFdDQd2xhImkDL8W0eMUAcCi0KPMBsNOfnQD4li1LLkWDYOM9q9ihfGsDHwysz2x5Pwf00OBmIS7mJ"
-    ),
   ],
   providers: [
     {

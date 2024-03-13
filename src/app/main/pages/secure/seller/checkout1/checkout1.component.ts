@@ -1,17 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  AfterViewInit,
-  AfterContentChecked,
-  ViewChild,
-} from "@angular/core";
-import { StripeService, StripeCardComponent } from "ngx-stripe";
-import {
-  StripeCardElementOptions,
-  StripeElementsOptions,
-} from "@stripe/stripe-js";
+import { Component, OnInit, AfterContentChecked } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CoreConfigService } from "@core/services/config.service";
 import { Router } from "@angular/router";
@@ -20,7 +7,7 @@ import { UserService } from "@core/services/services/user.service";
 import { AuthenticationService } from "@core/services/authentication.service";
 import { HttpClient } from "@angular/common/http";
 import { FormControl, Validators } from "@angular/forms";
-// declare var Stripe: any;
+import { StripeService } from "./stripe.service";
 
 @Component({
   selector: "app-checkout1",
@@ -28,27 +15,6 @@ import { FormControl, Validators } from "@angular/forms";
   styleUrls: ["./checkout1.component.scss"],
 })
 export class Checkout1Component implements OnInit, AfterContentChecked {
-  @ViewChild(StripeCardComponent) card: StripeCardComponent;
-
-  cardOptions: StripeCardElementOptions = {
-    style: {
-      base: {
-        iconColor: "#666EE8",
-        color: "#31325F",
-        fontWeight: "300",
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: "18px",
-        "::placeholder": {
-          color: "#CFD7E0",
-        },
-      },
-    },
-  };
-
-  elementsOptions: StripeElementsOptions = {
-    locale: "en",
-  };
-
   // public
   agreeToTerms = new FormControl(false, Validators.requiredTrue);
   public contentHeader: object;
@@ -1373,21 +1339,6 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     };
   }
 
-  createToken(): void {
-    const name = "Moventag";
-    this.stripeService
-      .createToken(this.card.element, { name })
-      .subscribe((result) => {
-        if (result.token) {
-          // Use the token
-          console.log(result.token.id);
-        } else if (result.error) {
-          // Error creating the token
-          console.log(result.error.message);
-        }
-      });
-  }
-
   licensefileChangeEvent(event: any): void {
     if (
       event.target.files[0].type === "application/pdf" ||
@@ -1439,7 +1390,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   /**
    * On init
    */
-  ngOnInit() {
+  async ngOnInit() {
     this.contentHeader = {
       headerTitle: "Dashboard",
       actionButton: false,
@@ -1449,6 +1400,39 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
       hidden: false,
     };
     this.getCountries();
+    this.generateToken();
+  }
+
+  async generateToken() {
+    const stripe = await this.stripeService.createStripe();
+    const cardElement = await this.stripeService.createCardElement();
+    cardElement.mount("#card-element");
+
+    const submitButton = document.getElementById("submit");
+    if (submitButton) {
+      submitButton.addEventListener("click", async () => {
+        if (!this.agreeToTerms.valid) {
+          this.toastrService.error(
+            "Please accept Terms & Conditions",
+            "Terms & Conditions"
+          );
+          return;
+        }
+
+        const tokenResult = (await this.stripeService.createToken(
+          cardElement
+        )) as { token: { id: string; card: { id: string } } } | string;
+
+        if (typeof tokenResult === "string") {
+          console.log("Error generating token");
+        } else {
+          console.log(tokenResult.token.id);
+          console.log(tokenResult.token.card.id);
+        }
+      });
+    } else {
+      console.error("Submit button not found.");
+    }
   }
 
   getCountries() {
@@ -1476,12 +1460,29 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     this.phoneCode = code.dial_code;
   }
 
-  ngAfterViewInit(): void {
+  async ngAfterViewInit(): Promise<void> {
     this.sellerProfile = this.sellerProfile;
   }
 
-  ngAfterContentChecked(): void {
+  async ngAfterContentChecked(): Promise<void> {
+    if (this.cardDetail && !this.cardElementMounted) {
+      this.mountCardElement();
+      this.cardElementMounted = true;
+    }
+
     this.sellerProfile = this.sellerProfile;
+  }
+
+  private cardElementMounted = false;
+
+  private async mountCardElement() {
+    if (!this.cardElementMounted) {
+      const stripe = await this.stripeService.createStripe();
+      const cardElement = await this.stripeService.createCardElement();
+      cardElement.mount("#card-element");
+      this.cardElementMounted = true;
+      this.generateToken();
+    }
   }
 
   logout() {
@@ -1514,6 +1515,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
       );
       return;
     }
+    return;
     if (
       this.cvc &&
       this.cardNumber &&
@@ -1605,5 +1607,24 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     this.discount = "199.00";
     this.total = "199.00";
     this.free_trial = "0";
+    // if (this.radioModel === 1) {
+    //   this.priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
+    //   this.charges = "9.99";
+    //   this.discount = "0.00";
+    //   this.total = "9.99";
+    //   this.free_trial = "1";
+    // } else if (this.radioModel === 2) {
+    //   this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
+    //   this.charges = "8.25";
+    //   this.discount = "20.88";
+    //   this.total = "99.00";
+    //   this.free_trial = "7";
+    // } else {
+    //   this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
+    //   this.charges = "200.00";
+    //   this.discount = "00.00";
+    //   this.total = "200.00";
+    //   this.free_trial = "7";
+    // }
   }
 }

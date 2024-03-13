@@ -1,146 +1,165 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgSelectModule } from "@ng-select/ng-select";
 
-import { CoreCommonModule } from '@core/common.module';
-import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
-import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from '@core/guards/auth.guards';
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { DashboardService } from '@core/services/services/dashboard.service';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
-import { NouisliderModule } from 'ng2-nouislider';
-import { CoreSidebarModule } from '@core/components';
-import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
-import { SwiperConfigInterface, SwiperModule, SWIPER_CONFIG } from 'ngx-swiper-wrapper';
-import { FileUploadModule } from 'ng2-file-upload';
-import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { ChartsModule } from 'ng2-charts';
-import { ProfileComponent } from './profile/profile.component';
-import { ImageCropperModule } from 'ngx-image-cropper';
-import { HomeComponent } from './home/home.component';
-import { OrdermanagementComponent } from './order-management/ordermanagement.component';
-import { CustomerlistingsComponent } from './customer-listing/customerlistings.component';
-import { EarningsComponent } from './earnings/earnings.component';
-import { VerificationsComponent } from './verifications/verifications.component';
-import { RefferalsComponent } from './refferals/refferals.component';
-import { SettingsComponent } from './settings/settings.component';
-import { ClipboardModule } from 'ngx-clipboard';
-import { GoogleMapsModule } from '@angular/google-maps';
-import { ChatComponent } from './chat/chat.component';
+import { CoreCommonModule } from "@core/common.module";
+import { ContentHeaderModule } from "app/layout/components/content-header/content-header.module";
+import { RouterModule, Routes } from "@angular/router";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AuthGuard } from "@core/guards/auth.guards";
+import { NgApexchartsModule } from "ng-apexcharts";
+import { DashboardService } from "@core/services/services/dashboard.service";
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { CardSnippetModule } from "@core/components/card-snippet/card-snippet.module";
+import { NouisliderModule } from "ng2-nouislider";
+import { CoreSidebarModule } from "@core/components";
+import { CoreTouchspinModule } from "@core/components/core-touchspin/core-touchspin.module";
+import {
+  SwiperConfigInterface,
+  SwiperModule,
+  SWIPER_CONFIG,
+} from "ngx-swiper-wrapper";
+import { FileUploadModule } from "ng2-file-upload";
+import { Ng2FlatpickrModule } from "ng2-flatpickr";
+import { ChartsModule } from "ng2-charts";
+import { ProfileComponent } from "./profile/profile.component";
+import { ImageCropperModule } from "ngx-image-cropper";
+import { HomeComponent } from "./home/home.component";
+import { OrdermanagementComponent } from "./order-management/ordermanagement.component";
+import { CustomerlistingsComponent } from "./customer-listing/customerlistings.component";
+import { EarningsComponent } from "./earnings/earnings.component";
+import { VerificationsComponent } from "./verifications/verifications.component";
+import { RefferalsComponent } from "./refferals/refferals.component";
+import { SettingsComponent } from "./settings/settings.component";
+import { ClipboardModule } from "ngx-clipboard";
+import { GoogleMapsModule } from "@angular/google-maps";
+import { ChatComponent } from "./chat/chat.component";
 
-import { Checkout1Component } from './checkout1/checkout1.component';
-import { PaymentComponent } from './payment/payment.component';
-import { ReviewComponent } from './review/review.component';
-import { ContactComponent } from './contact/contact.component';
-import { SubscriptionRenewelComponent } from './subscription-renewel/subscription-renewel.component';
+import { Checkout1Component } from "./checkout1/checkout1.component";
+import { ActiveSubscription } from "./active-subscription/active-subscription.component";
+import { PaymentComponent } from "./payment/payment.component";
+import { ReviewComponent } from "./review/review.component";
+import { ContactComponent } from "./contact/contact.component";
+import { SubscriptionRenewelComponent } from "./subscription-renewel/subscription-renewel.component";
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: "dashboard",
     canActivate: [AuthGuard],
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
-    path: 'profile',
+    path: "profile",
     canActivate: [AuthGuard],
-    component: ProfileComponent
+    component: ProfileComponent,
   },
   {
-    path: 'home',
+    path: "home",
     component: HomeComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'home' }
+    data: { animation: "home" },
   },
   {
-    path: 'order-management',
+    path: "order-management",
     component: OrdermanagementComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'order-management' }
+    data: { animation: "order-management" },
   },
   {
-    path: 'quotation-listing/:id',
+    path: "quotation-listing/:id",
     component: CustomerlistingsComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'customer-listing' }
+    data: { animation: "customer-listing" },
   },
   {
-    path: 'earnings',
+    path: "earnings",
     component: EarningsComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'earnings' }
+    data: { animation: "earnings" },
   },
   {
-    path: 'verifications',
+    path: "verifications",
     component: VerificationsComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'verifications' }
+    data: { animation: "verifications" },
   },
   {
-    path: 'refferals',
+    path: "refferals",
     component: RefferalsComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'refferals' }
+    data: { animation: "refferals" },
   },
   {
-    path: 'profile',
+    path: "profile",
     component: ProfileComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'profile' }
+    data: { animation: "profile" },
   },
   {
-    path: 'payment',
+    path: "payment",
     component: PaymentComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'payment' }
+    data: { animation: "payment" },
   },
   {
-    path: 'reviews',
+    path: "reviews",
     component: ReviewComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'review' }
+    data: { animation: "review" },
   },
   {
-    path: 'help',
+    path: "help",
     component: ContactComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'help' }
+    data: { animation: "help" },
   },
   {
-    path: 'subscription-plan',
+    path: "subscription-plan",
     component: Checkout1Component,
     canActivate: [AuthGuard],
-    data: { animation: 'about-your-business' }
+    data: { animation: "about-your-business" },
   },
   {
-    path: 'subscription-renewel',
+    path: "active-subscription",
+    component: ActiveSubscription,
+    canActivate: [AuthGuard],
+    data: { animation: "about-your-business" },
+  },
+  {
+    path: "subscription-renewel",
     component: SubscriptionRenewelComponent,
     canActivate: [AuthGuard],
-    data: { animation: 'about-your-business' }
+    data: { animation: "about-your-business" },
   },
   {
-    path: 'chats',
-    loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
+    path: "chats",
+    loadChildren: () => import("./chat/chat.module").then((m) => m.ChatModule),
   },
-]
+];
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  direction: 'horizontal',
-  observer: true
+  direction: "horizontal",
+  observer: true,
 };
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ProfileComponent,
-    HomeComponent, OrdermanagementComponent, CustomerlistingsComponent, EarningsComponent, RefferalsComponent, SettingsComponent, Checkout1Component,ContactComponent,
+    HomeComponent,
+    OrdermanagementComponent,
+    CustomerlistingsComponent,
+    EarningsComponent,
+    RefferalsComponent,
+    SettingsComponent,
+    Checkout1Component,
+    ActiveSubscription,
+    ContactComponent,
     ReviewComponent,
     PaymentComponent,
-    SubscriptionRenewelComponent
+    SubscriptionRenewelComponent,
   ],
   imports: [
     CommonModule,
@@ -168,8 +187,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DashboardService,
     {
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
-  ]
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
+  ],
 })
 export class SellerModule {}
