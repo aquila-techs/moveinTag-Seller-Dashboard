@@ -1,5 +1,5 @@
-@import '~@core/scss/angular/libs/datatables.component.scss';
-@import '@core/scss/angular/libs/ratings.component.scss';
+@import "~@core/scss/angular/libs/datatables.component.scss";
+@import "@core/scss/angular/libs/ratings.component.scss";
 
 .datatable-scroll {
   width: auto !important;
@@ -17,4 +17,18 @@
   border-radius: 0rem !important;
   background-color: white !important;
   color: #38b6ff !important;
+}
+
+.custom-column-header {
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+}
+
+.datatable-header-cell-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+}
+
+.datatable-header-inner {
+  background-color: white;
 }

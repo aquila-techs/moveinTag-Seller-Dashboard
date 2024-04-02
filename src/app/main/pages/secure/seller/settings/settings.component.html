@@ -1,39 +1,89 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
-
     <section>
       <div class="container">
-        
         <div class="profile_banner">
           <div class="banner_wrapper">
-            <img *ngIf="!sellerProfile?.coverImage" src="../../../assets/images/site/outsite-co-R-LK3sqLiBw-unsplash%201.jpg" alt="" class="banner_img">
-            <img *ngIf="sellerProfile?.coverImage" src="{{baseURL}}{{sellerProfile?.coverImage}}"  alt="" class="banner_img">
+            <img
+              *ngIf="!sellerProfile?.coverImage"
+              src="../../../assets/images/site/outsite-co-R-LK3sqLiBw-unsplash%201.jpg"
+              alt=""
+              class="banner_img"
+            />
+            <img
+              *ngIf="sellerProfile?.coverImage"
+              src="{{ baseURL }}{{ sellerProfile?.coverImage }}"
+              alt=""
+              class="banner_img"
+            />
             <div class="action_wrapper">
-                <button class="btn btn-dark2" (click)="modalUpdatePhoto(modalVCCover)"><img src="../../../assets/images/site/highlight.png" alt="">Update Cover Photo</button>
+              <button
+                class="btn btn-dark2"
+                (click)="modalUpdatePhoto(modalVCCover)"
+              >
+                <img
+                  src="../../../assets/images/site/highlight.png"
+                  alt=""
+                />Update Cover Photo
+              </button>
             </div>
           </div>
           <div class="info_wrapper">
-              <div class="profile_img_wrapper">
-              <img *ngIf="!sellerProfile?.profileImage"src="../../../assets/images/site/company-logo.png" (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
-              <img *ngIf="sellerProfile?.profileImage" src="{{baseURL}}{{sellerProfile?.profileImage}}" (click)="modalUpdatePhoto(modalVCProfilePic)" alt="" class="profile_img">
+            <div class="profile_img_wrapper">
+              <img
+                *ngIf="!sellerProfile?.profileImage"
+                src="../../../assets/images/site/company-logo.png"
+                (click)="modalUpdatePhoto(modalVCProfilePic)"
+                alt=""
+                class="profile_img"
+              />
+              <img
+                *ngIf="sellerProfile?.profileImage"
+                src="{{ baseURL }}{{ sellerProfile?.profileImage }}"
+                (click)="modalUpdatePhoto(modalVCProfilePic)"
+                alt=""
+                class="profile_img"
+              />
             </div>
-              <div class="profile_details">
-                  <h1 class="title">{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</h1>
-                  <ul>
-                      <li *ngIf="sellerProfile?.address"><img src="../../../assets/images/site/map-pin-2.png" alt="">{{sellerProfile?.address ? sellerProfile.address: ''}} 
-                        {{sellerProfile?.city ? sellerProfile.city: ''}} {{sellerProfile?.country ? sellerProfile.country: ''}}
-                      </li>
-                  </ul>
-              </div>
+            <div class="profile_details">
+              <h1 class="title">
+                {{
+                  sellerProfile?.companyName ? sellerProfile.companyName : ""
+                }}
+              </h1>
               <ul>
-                  <li><img src="../../../assets/images/site/color-swatch.png" alt="">{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}
-                  </li>
-                  <li><img src="../../../assets/images/site/tool.png" alt="">{{sellerProfile?.companyType ? sellerProfile.companyType: ''}}</li>
-                  <li><img src="../../../assets/images/site/map-pin-2.png" alt="">{{sellerProfile?.address ? sellerProfile.address: ''}} 
-                    {{sellerProfile?.city ? sellerProfile.city: ''}} {{sellerProfile?.country ? sellerProfile.country: ''}}
-                  </li>
+                <li *ngIf="sellerProfile?.address">
+                  <img
+                    src="../../../assets/images/site/map-pin-2.png"
+                    alt=""
+                  />{{ sellerProfile?.address ? sellerProfile.address : "" }}
+                  {{ sellerProfile?.city ? sellerProfile.city : "" }}
+                  {{ sellerProfile?.country ? sellerProfile.country : "" }}
+                </li>
               </ul>
-             
+            </div>
+            <ul>
+              <li>
+                <img
+                  src="../../../assets/images/site/color-swatch.png"
+                  alt=""
+                />{{
+                  sellerProfile?.companyName ? sellerProfile.companyName : ""
+                }}
+              </li>
+              <li>
+                <img src="../../../assets/images/site/tool.png" alt="" />{{
+                  sellerProfile?.companyType ? sellerProfile.companyType : ""
+                }}
+              </li>
+              <li>
+                <img src="../../../assets/images/site/map-pin-2.png" alt="" />{{
+                  sellerProfile?.address ? sellerProfile.address : ""
+                }}
+                {{ sellerProfile?.city ? sellerProfile.city : "" }}
+                {{ sellerProfile?.country ? sellerProfile.country : "" }}
+              </li>
+            </ul>
           </div>
         </div>
         <div class="row">
@@ -41,10 +91,15 @@
             <div class="card card-terms">
               <div class="card-header pb-1">
                 <h5 class="mb-0">Description:</h5>
-                <button class="edit absolute" (click)="modalOpenVCAbout(modalVCAbout)"><img src="../../../assets/images/site/edit.png" alt=""></button>
+                <button
+                  class="edit absolute"
+                  (click)="modalOpenVCAbout(modalVCAbout)"
+                >
+                  <img src="../../../assets/images/site/edit.png" alt="" />
+                </button>
               </div>
               <div class="card-body pt-0">
-                <p>{{sellerProfile?.description}}</p>
+                <p>{{ sellerProfile?.description }}</p>
               </div>
             </div>
           </div>
@@ -57,31 +112,103 @@
               </div>
               <div class="card-body">
                 <ul class="">
-                    <li><img src="../../../assets/images/site/user.png" alt=""><span>Company Name: </span>{{sellerProfile?.companyName ? sellerProfile.companyName: ''}}</li>
-                    <li><img src="../../../assets/images/site/check.png" alt=""><span>No. of Employees: </span>{{sellerProfile?.noOfEmployee ? sellerProfile.noOfEmployee: ''}}</li>
-                    <li><img src="../../../assets/images/site/crown.png" alt=""><span>Return Policy: </span>{{sellerProfile?.returnPolicy ? sellerProfile.returnPolicy: ''}}</li>
-                    <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Liability Insurance: </span>{{sellerProfile?.liabilityInsurance ? "Yes": 'No'}}</li>
-                    <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Workers Compensation: </span>{{sellerProfile?.workerCompensation ? "Yes": 'No'}}</li>
-                    <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Project Minimum: </span>{{sellerProfile?.projectMinimum ? "Yes": 'No'}}</li>
-                    <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Bonded: </span>{{sellerProfile?.bonded ? "Yes": 'No'}}</li>
-                    <li><img src="../../../assets/images/site/file-text.png" alt=""><span>Written Contract: </span>{{sellerProfile?.writtenContract ? "Yes": 'No'}}</li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/user.png"
+                      alt=""
+                    /><span>Company Name: </span
+                    >{{
+                      sellerProfile?.companyName
+                        ? sellerProfile.companyName
+                        : ""
+                    }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/check.png"
+                      alt=""
+                    /><span>No. of Employees: </span
+                    >{{
+                      sellerProfile?.noOfEmployee
+                        ? sellerProfile.noOfEmployee
+                        : ""
+                    }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/crown.png"
+                      alt=""
+                    /><span>Return Policy: </span
+                    >{{
+                      sellerProfile?.returnPolicy
+                        ? sellerProfile.returnPolicy
+                        : ""
+                    }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/file-text.png"
+                      alt=""
+                    /><span>Liability Insurance: </span
+                    >{{ sellerProfile?.liabilityInsurance ? "Yes" : "No" }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/file-text.png"
+                      alt=""
+                    /><span>Workers Compensation: </span
+                    >{{ sellerProfile?.workerCompensation ? "Yes" : "No" }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/file-text.png"
+                      alt=""
+                    /><span>Project Minimum: </span
+                    >{{ sellerProfile?.projectMinimum ? "Yes" : "No" }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/file-text.png"
+                      alt=""
+                    /><span>Bonded: </span
+                    >{{ sellerProfile?.bonded ? "Yes" : "No" }}
+                  </li>
+                  <li>
+                    <img
+                      src="../../../assets/images/site/file-text.png"
+                      alt=""
+                    /><span>Written Contract: </span
+                    >{{ sellerProfile?.writtenContract ? "Yes" : "No" }}
+                  </li>
                 </ul>
-            </div>
+              </div>
             </div>
           </div>
           <div class="col-lg-8 col-md-7">
             <div class="card card-categories">
               <div class="card-header">
-                <button class="edit absolute" (click)="modalOpenVCCategories(modalVCCategories)"><img src="../../../assets/images/site/edit.png" alt=""></button>
-                <img class="card-img" src="../../../assets/images/site/list-details.png">
+                <button
+                  class="edit absolute"
+                  (click)="modalOpenVCCategories(modalVCCategories)"
+                >
+                  <img src="../../../assets/images/site/edit.png" alt="" />
+                </button>
+                <img
+                  class="card-img"
+                  src="../../../assets/images/site/list-details.png"
+                />
                 <h1 class="card-title">Categories</h1>
               </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-6">
-                    <h2 class="list-title">{{sellerCategories[0]?.category?.title}}</h2>
+                    <h2 class="list-title">
+                      {{ sellerCategories[0]?.category?.title }}
+                    </h2>
                     <ul class="">
-                      <li *ngFor="let item of sellerCategories">{{item?.subCategory?.title}}</li>
+                      <li *ngFor="let item of sellerCategories">
+                        {{ item?.subCategory?.title }}
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -92,33 +219,76 @@
         <div class="row equal">
           <div class="col-xl-3 col-md-6 order-xl-1 order-md-1 order-1">
             <div class="card card-info">
-              <button class="edit absolute" (click)="modalOpenVCContactDet(modalVCContactDet)"><img src="../../../assets/images/site/edit.png" alt=""></button>
+              <button
+                class="edit absolute"
+                (click)="modalOpenVCContactDet(modalVCContactDet)"
+              >
+                <img src="../../../assets/images/site/edit.png" alt="" />
+              </button>
               <div class="card-body">
                 <ul class="info_list">
-                    <li><a href=""><img src="../../../assets/images/site/phone-call.png" alt="">{{sellerProfile?.phone ? sellerProfile.phone: ''}}</a></li>
-                    <li><a href=""><img src="../../../assets/images/site/brand-dribbble.png" alt="">{{sellerProfile?.webURL ? sellerProfile.webURL: ''}}</a></li>
+                  <li>
+                    <a href=""
+                      ><img
+                        src="../../../assets/images/site/phone-call.png"
+                        alt=""
+                      />{{ sellerProfile?.phone ? sellerProfile.phone : "" }}</a
+                    >
+                  </li>
+                  <li>
+                    <a href=""
+                      ><img
+                        src="../../../assets/images/site/brand-dribbble.png"
+                        alt=""
+                      />{{
+                        sellerProfile?.webURL ? sellerProfile.webURL : ""
+                      }}</a
+                    >
+                  </li>
                 </ul>
                 <ul class="social_list">
-                    <li><a href=""><img src="../../../assets/images/site/brand-facebook.png" alt=""></a></li>
-                    <li><a href=""><img src="../../../assets/images/site/brand-instagram.png" alt=""></a></li>
-                    <li><a href=""><img src="../../../assets/images/site/brand-twitter.png" alt=""></a></li>
+                  <li>
+                    <a href=""
+                      ><img
+                        src="../../../assets/images/site/brand-facebook.png"
+                        alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a href=""
+                      ><img
+                        src="../../../assets/images/site/brand-instagram.png"
+                        alt=""
+                    /></a>
+                  </li>
+                  <li>
+                    <a href=""
+                      ><img
+                        src="../../../assets/images/site/brand-twitter.png"
+                        alt=""
+                    /></a>
+                  </li>
                 </ul>
-            </div>
+              </div>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-12 order-xl-2 order-md-3 order-2" *ngIf="sellerProfile?.referralCode">
+          <div
+            class="col-xl-4 col-lg-12 order-xl-2 order-md-3 order-2"
+            *ngIf="sellerProfile?.referralCode"
+          >
             <div class="card">
               <div class="card-body d-flex align-items-center">
                 <div>
                   <h1 class="card-title">Partner’s Referral Code</h1>
-                  <p>{{sellerProfile?.referralCode}}</p>
-                  <button class="btn btn-primary" (click)="copyText()">Copy</button>
+                  <p>{{ sellerProfile?.referralCode }}</p>
+                  <button class="btn btn-primary" (click)="copyText()">
+                    Copy
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-5 col-md-6 order-xl-3 order-md-2 order-3">
-          </div>
+          <div class="col-xl-5 col-md-6 order-xl-3 order-md-2 order-3"></div>
         </div>
 
         <div class="row">
@@ -126,11 +296,16 @@
             <div class="gallery_wrapper">
               <div class="d-flex align-items-center mb-2">
                 <h1 class="title mb-0">Services photos</h1>
-                <button class="edit ml-2" (click)="modalOpenVC(modalVC)"><img src="../../../assets/images/site/edit.png" alt=""></button>
+                <button class="edit ml-2" (click)="modalOpenVC(modalVC)">
+                  <img src="../../../assets/images/site/edit.png" alt="" />
+                </button>
               </div>
-              <div class="gallery" >
-                <img *ngFor="let item of sellerServicePhotos" src="{{baseURL}}{{item.path}}" alt="">
-                
+              <div class="gallery">
+                <img
+                  *ngFor="let item of sellerServicePhotos"
+                  src="{{ baseURL }}{{ item.path }}"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -140,179 +315,376 @@
 
     <ng-template #modalVCCover let-modal>
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Cover image</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <h5
+          class="modal-title text-center w-100 my-2"
+          id="exampleModalCenterTitle"
+        >
+          Change Cover image
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <!-- File Uploader -->
-        <section >
-          <label for="file-upload" style="width: 100%;" *ngIf="!coverPhotoCroppedImage"
-          class="py-5 mb-3 text-center file-drop-zone">
-        <h6>Drop pictures here or click to upload</h6>
-        <p class="font-small-3">(This is just a demo drop zone. Selected files are not actually uploaded.)</p>
-       </label>
-        <input id="file-upload" type="file" (change)="coverfileChangeEvent($event)" />
-        <image-cropper
+        <section>
+          <label
+            for="file-upload"
+            style="width: 100%"
+            *ngIf="!coverPhotoCroppedImage"
+            class="py-5 mb-3 text-center file-drop-zone"
+          >
+            <h6>Drop pictures here or click to upload</h6>
+            <p class="font-small-3">
+              (This is just a demo drop zone. Selected files are not actually
+              uploaded.)
+            </p>
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            (change)="coverfileChangeEvent($event)"
+          />
+          <image-cropper
             [imageChangedEvent]="coverPhotoChangedEvent"
             format="png"
-            maintainAspectRatio ="true"
-            [aspectRatio]="32/9"
+            maintainAspectRatio="true"
+            [aspectRatio]="32 / 9"
             (imageCropped)="coverimageCropped($event)"
             (imageLoaded)="imageLoaded()"
             (cropperReady)="cropperReady()"
             (loadImageFailed)="loadImageFailed()"
-        ></image-cropper>
-        
+          ></image-cropper>
         </section>
         <!--/ File Uploader -->
       </div>
       <div class="modal-footer justify-content-center my-2">
-        <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="uploadCoverPhoto()" *ngIf="coverPhotoCroppedImage"  rippleEffect><i data-feather="check"></i> Save</button>
-        <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+        <button
+          type="button"
+          class="btn btn-dark2 mx-1 btn-md px-3"
+          (click)="uploadCoverPhoto()"
+          *ngIf="coverPhotoCroppedImage"
+          rippleEffect
+        >
+          <i data-feather="check"></i> Save
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark mx-1 btn-md px-3"
+          (click)="modal.dismiss('Cross click')"
+          rippleEffect
+        >
+          <i data-feather="x"></i> Discard
+        </button>
       </div>
     </ng-template>
     <ng-template #modalVCProfilePic let-modal>
       <div class="modal-header">
-        <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">Change Profile Picture</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <h5
+          class="modal-title text-center w-100 my-2"
+          id="exampleModalCenterTitle"
+        >
+          Change Profile Picture
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <!-- File Uploader -->
-        <section >
-            <label for="file-upload" style="width: 100%;" *ngIf="!CompanyPhotoCroppedImage"
-                class="py-5 mb-3 text-center file-drop-zone">
-              <h6>Drop pictures here or click to upload</h6>
-              <p class="font-small-3">(This is just a demo drop zone. Selected files are not actually uploaded.)</p>
-            </label>
-            <input id="file-upload" type="file" (change)="companyfileChangeEvent($event)"/>
-            <image-cropper
-                [imageChangedEvent]="companyPhotoChangedEvent"
-                format="png"
-                maintainAspectRatio ="true"
-                [aspectRatio]="4/4"
-                (imageCropped)="companyimageCropped($event)"
-                (imageLoaded)="imageLoaded()"
-                (cropperReady)="cropperReady()"
-                (loadImageFailed)="loadImageFailed()"
-            ></image-cropper>
-
+        <section>
+          <label
+            for="file-upload"
+            style="width: 100%"
+            *ngIf="!CompanyPhotoCroppedImage"
+            class="py-5 mb-3 text-center file-drop-zone"
+          >
+            <h6>Drop pictures here or click to upload</h6>
+            <p class="font-small-3">
+              (This is just a demo drop zone. Selected files are not actually
+              uploaded.)
+            </p>
+          </label>
+          <input
+            id="file-upload"
+            type="file"
+            (change)="companyfileChangeEvent($event)"
+          />
+          <image-cropper
+            [imageChangedEvent]="companyPhotoChangedEvent"
+            format="png"
+            maintainAspectRatio="true"
+            [aspectRatio]="4 / 4"
+            (imageCropped)="companyimageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
         </section>
         <!--/ File Uploader -->
       </div>
       <div class="modal-footer justify-content-center my-2">
-        <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="uploadProfilePhoto()" *ngIf="CompanyPhotoCroppedImage" rippleEffect><i data-feather="check"></i> Save</button>
-        <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+        <button
+          type="button"
+          class="btn btn-dark2 mx-1 btn-md px-3"
+          (click)="uploadProfilePhoto()"
+          *ngIf="CompanyPhotoCroppedImage"
+          rippleEffect
+        >
+          <i data-feather="check"></i> Save
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark mx-1 btn-md px-3"
+          (click)="modal.dismiss('Cross click')"
+          rippleEffect
+        >
+          <i data-feather="x"></i> Discard
+        </button>
       </div>
     </ng-template>
     <ng-template #modalVC let-modal>
-        <div class="modal-header">
-            <h5 class="modal-title text-center w-100 my-2" id="exampleModalCenterTitle">upload Service Images</h5>
-            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-          <!-- File Uploader -->
-          <label for="file-upload" style="width: 100%;" 
-                class="py-5 mb-3 text-center file-drop-zone">
-              <h6>Drop pictures here or click to upload</h6>
-              <p class="font-small-3">(This is just a demo drop zone. Selected files are not actually uploaded.)</p>
-            </label>
-            <input id="file-upload"  
-            class="form-control"
-            (change)="onFileChange($event)" type="file" />
-          <!--/ File Uploader -->
-        </div>
-        <div class="modal-footer justify-content-center my-2">
-            <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" *ngIf="myFiles.length > 0" (click)="uploadServicePhotos()" rippleEffect><i data-feather="check"></i> Save</button>
-            <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
-        </div>
-    </ng-template>
-  
-    <ng-template #modalVCContactDet let-modal>
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Change Contact Details</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <h5
+          class="modal-title text-center w-100 my-2"
+          id="exampleModalCenterTitle"
+        >
+          upload Service Images
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
-        <form  [formGroup]="sellerWebLinksForm" (ngSubmit)="onUpdateLinks()"  class="px-1">
+        <!-- File Uploader -->
+        <label
+          for="file-upload"
+          style="width: 100%"
+          class="py-5 mb-3 text-center file-drop-zone"
+        >
+          <h6>Drop pictures here or click to upload</h6>
+          <p class="font-small-3">
+            (This is just a demo drop zone. Selected files are not actually
+            uploaded.)
+          </p>
+        </label>
+        <input
+          id="file-upload"
+          class="form-control"
+          (change)="onFileChange($event)"
+          type="file"
+        />
+        <!--/ File Uploader -->
+      </div>
+      <div class="modal-footer justify-content-center my-2">
+        <button
+          type="button"
+          class="btn btn-dark2 mx-1 btn-md px-3"
+          *ngIf="myFiles.length > 0"
+          (click)="uploadServicePhotos()"
+          rippleEffect
+        >
+          <i data-feather="check"></i> Save
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark mx-1 btn-md px-3"
+          (click)="modal.dismiss('Cross click')"
+          rippleEffect
+        >
+          <i data-feather="x"></i> Discard
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #modalVCContactDet let-modal>
+      <div class="modal-header">
+        <h5
+          class="modal-title w-100 px-1 pt-1 pb-0"
+          id="exampleModalCenterTitle"
+        >
+          Change Contact Details
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <form
+          [formGroup]="sellerWebLinksForm"
+          (ngSubmit)="onUpdateLinks()"
+          class="px-1"
+        >
           <div class="form-group">
             <label for="email">Phone Number</label>
-            <input type="text" class="form-control" formControlName="phone" placeholder="123-456-789" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="phone"
+              placeholder="123-456-789"
+            />
           </div>
           <div class="form-group">
             <label for="email">website(optional)</label>
-            <input type="text" class="form-control" formControlName="webURL" placeholder="www.domain.com" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="webURL"
+              placeholder="www.domain.com"
+            />
           </div>
           <div class="form-group">
             <label for="email">Facebook</label>
-            <input type="text" class="form-control" formControlName="facebookURL" placeholder="facebook.com" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="facebookURL"
+              placeholder="facebook.com"
+            />
           </div>
           <div class="form-group">
             <label for="email">Instagram</label>
-            <input type="text" class="form-control" formControlName="instagramURL" placeholder="instagram.com" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="instagramURL"
+              placeholder="instagram.com"
+            />
           </div>
           <div class="form-group">
-            <label for="email">twitter</label>
-            <input type="text" class="form-control" formControlName="twitterURL" placeholder="twitter.com" />
+            <label for="email">Linkedin</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="twitterURL"
+              placeholder="linkedin.com"
+            />
           </div>
-          <button type="submit" class="btn btn-dark2 btn-md px-3 mb-2" rippleEffect>Update</button>
+          <button
+            type="submit"
+            class="btn btn-dark2 btn-md px-3 mb-2"
+            rippleEffect
+          >
+            Update
+          </button>
         </form>
       </div>
     </ng-template>
     <ng-template #modalVCAbout let-modal>
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">About</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <h5
+          class="modal-title w-100 px-1 pt-1 pb-0"
+          id="exampleModalCenterTitle"
+        >
+          About
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
-        <form [formGroup]="profileUpdateForm" (ngSubmit)="onSubmit()"  class="px-1" >
+        <form
+          [formGroup]="profileUpdateForm"
+          (ngSubmit)="onSubmit()"
+          class="px-1"
+        >
           <div class="form-group">
             <label for="email">Description</label>
-            <textarea formControlName="description" class="form-control" id="" cols="30" rows="4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry Lorem Ipsum is simply dummy text of the printing and typesetting industry. </textarea>
+            <textarea
+              formControlName="description"
+              class="form-control"
+              id=""
+              cols="30"
+              rows="4"
+            >
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry Lorem Ipsum is simply dummy text of the printing and typesetting industry. </textarea
+            >
           </div>
           <div class="form-group">
             <label for="email">Company name</label>
-            <input type="text" class="form-control" formControlName="companyName" placeholder="XYZ" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="companyName"
+              placeholder="XYZ"
+            />
           </div>
-          
+
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Address</label>
-                <input type="text" class="form-control" formControlName="address"  />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="address"
+                />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Postal Code</label>
-                <input type="text" class="form-control" formControlName="postalCode" placeholder="77640" />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="postalCode"
+                  placeholder="77640"
+                />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">No. Employees</label>
-                <input type="text" class="form-control" formControlName="noOfEmployee" placeholder="30" />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="noOfEmployee"
+                  placeholder="30"
+                />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Return Policy</label>
-                <input type="text" class="form-control" formControlName="returnPolicy" />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="returnPolicy"
+                />
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Liability Insurance</label>
-                <select class="form-control" formControlName="liabilityInsurance" >
+                <select
+                  class="form-control"
+                  formControlName="liabilityInsurance"
+                >
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -322,7 +694,10 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Workers Compensation</label>
-                <select class="form-control"  formControlName="workerCompensation" >
+                <select
+                  class="form-control"
+                  formControlName="workerCompensation"
+                >
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -332,7 +707,7 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="email">Project Minimum</label>
-                <select class="form-control" formControlName="projectMinimum" >
+                <select class="form-control" formControlName="projectMinimum">
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -352,7 +727,7 @@
             <div class="col-lg-12">
               <div class="form-group">
                 <label for="email">Written Contract</label>
-                <select class="form-control" formControlName="writtenContract" >
+                <select class="form-control" formControlName="writtenContract">
                   <option>Select a choice</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -362,41 +737,92 @@
           </div>
         </form>
         <div class="d-flex justify-content-center my-2">
-          <button type="button"  (click)="onSubmit()" class="btn btn-dark2 mx-1 btn-md px-3"  rippleEffect><i data-feather="check"></i> Save</button>
-          <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+          <button
+            type="button"
+            (click)="onSubmit()"
+            class="btn btn-dark2 mx-1 btn-md px-3"
+            rippleEffect
+          >
+            <i data-feather="check"></i> Save
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark mx-1 btn-md px-3"
+            (click)="modal.dismiss('Cross click')"
+            rippleEffect
+          >
+            <i data-feather="x"></i> Discard
+          </button>
         </div>
       </div>
     </ng-template>
     <ng-template #modalVCCategories let-modal>
       <div class="modal-header">
-        <h5 class="modal-title w-100 px-1 pt-1 pb-0" id="exampleModalCenterTitle">Select Categories</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <h5
+          class="modal-title w-100 px-1 pt-1 pb-0"
+          id="exampleModalCenterTitle"
+        >
+          Select Categories
+        </h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <div class="modal-body" tabindex="0" ngbAutofocus>
           <div class="form-wrapper row">
-            <div class="col-12 mb-2" *ngFor="let category of categories; let i=index">
-                <h4>{{category.title}}</h4>
-                <div class="row">
-                    <div class="col-3" *ngFor="let subCate of category.subCategories; let c=index">
-                        <div class="custom-control custom-checkbox ">
-                            <input type="checkbox"  class="custom-control-input" (click)="selectCategory(subCate)" id="customCheck{{i}}{{c}}"/>
-                            <label class="custom-control-label" for="customCheck{{i}}{{c}}">{{subCate.title}}</label>
-                        </div>
-                    </div>
+            <div
+              class="col-12 mb-2"
+              *ngFor="let category of categories; let i = index"
+            >
+              <h4>{{ category.title }}</h4>
+              <div class="row">
+                <div
+                  class="col-3"
+                  *ngFor="let subCate of category.subCategories; let c = index"
+                >
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      (click)="selectCategory(subCate)"
+                      id="customCheck{{ i }}{{ c }}"
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="customCheck{{ i }}{{ c }}"
+                      >{{ subCate.title }}</label
+                    >
+                  </div>
                 </div>
-               
+              </div>
             </div>
-            </div>
-         </div>
+          </div>
+        </div>
         <div class="d-flex justify-content-center my-2">
-          <button type="button" class="btn btn-dark2 mx-1 btn-md px-3" (click)="saveCategories()" rippleEffect><i data-feather="check"></i> Save</button>
-          <button type="button" class="btn btn-dark mx-1 btn-md px-3" (click)="modal.dismiss('Cross click')" rippleEffect><i data-feather="x"></i> Discard</button>
+          <button
+            type="button"
+            class="btn btn-dark2 mx-1 btn-md px-3"
+            (click)="saveCategories()"
+            rippleEffect
+          >
+            <i data-feather="check"></i> Save
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark mx-1 btn-md px-3"
+            (click)="modal.dismiss('Cross click')"
+            rippleEffect
+          >
+            <i data-feather="x"></i> Discard
+          </button>
         </div>
       </div>
     </ng-template>
-
   </div>
 </div>

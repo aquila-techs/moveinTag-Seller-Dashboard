@@ -1,34 +1,50 @@
 <!-- Admin user profile area -->
 <div *ngIf="chatUser">
   <div class="chat-user-sidebar">
-
-    <div *ngIf="!chatUser.firstName" class="d-flex justify-content-center align-items-center vh-100" style="background-color: #ffffff;">
-
-    </div>
+    <div
+      *ngIf="!chatUser.firstName"
+      class="d-flex justify-content-center align-items-center vh-100"
+      style="background-color: #ffffff"
+    ></div>
 
     <div *ngIf="chatUser.firstName">
       <div class="chat-profile-header">
-
-        <div class="header-profile-sidebar" style="text-align: center; padding-top: 20px;">
+        <div
+          class="header-profile-sidebar"
+          style="text-align: center; padding-top: 20px"
+        >
           <div class="mb-1" *ngIf="chatUser.profileImage; else customAvatar">
-            <img class="rounded-circle" src="{{baseURL}}{{chatUser.profileImage}}" height="100" width="100" />
+            <img
+              class="rounded-circle"
+              src="{{ baseURL }}{{ chatUser.profileImage }}"
+              height="100"
+              width="100"
+            />
           </div>
           <ng-template #customAvatar>
-            <div class="avatar mr-1 ml-0" style="background-color: #56c1ff;" [ngClass]="{
-            'avatar-status-offline': chatUser.status == 'offline',
-            'avatar-status-online': chatUser.status == 'online',
-            'avatar-status-busy': chatUser.status == 'busy',
-            'avatar-status-away': chatUser.status == 'away'
-          }">
-              <div class="avatar-content" style="width: 100px;height: 100px;font-size: 34px;">{{ chatUser.firstName +
-                chatUser.lastName | initials }}</div>
+            <div
+              class="avatar mr-1 ml-0"
+              style="background-color: #56c1ff"
+              [ngClass]="{
+                'avatar-status-offline': chatUser.status == 'offline',
+                'avatar-status-online': chatUser.status == 'online',
+                'avatar-status-busy': chatUser.status == 'busy',
+                'avatar-status-away': chatUser.status == 'away'
+              }"
+            >
+              <div
+                class="avatar-content"
+                style="width: 100px; height: 100px; font-size: 34px"
+              >
+                {{ chatUser.firstName + chatUser.lastName | initials }}
+              </div>
             </div>
           </ng-template>
 
-
           <div class="chat-info flex-grow-1">
-            <span style=" font-size: 22px; font-weight: 700; " class="mb-1">{{ chatUser.firstName + chatUser.lastName
-              }}</span>
+            <span style="font-size: 22px; font-weight: 700" class="mb-1"
+              >{{ chatUser.firstName }} {{ chatUser.lastName }}</span
+            >
           </div>
         </div>
         <!--/ User Information -->
@@ -39,23 +55,74 @@
         <!-- To set user status -->
         <ul class="list-unstyled user-status">
           <li class="pb-1 pt-2">
-            <div class="col-12">
-              <span class="ml-1" style=" font-size: 17px; font-weight: 700; ">Email: &nbsp;</span>
-              <span style=" font-size: 14px; font-weight: 600; ">{{chatUser.email}}</span>
+            <div class="col-12" *ngIf="chatUser.email">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Email: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.email
+              }}</span>
             </div>
-            <div class="col-12">
-              <span class="ml-1" style=" font-size: 17px; font-weight: 700; ">Phone no: &nbsp;</span>
-              <span style=" font-size: 14px; font-weight: 600; ">{{chatUser.phone}}</span>
+            <div class="col-12" *ngIf="chatUser.phone">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Phone no: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.phone
+              }}</span>
             </div>
-            <!-- <div class="col-12">
-          <span class="ml-2" style=" font-size: 17px; font-weight: 700; ">Website: &nbsp;</span>
-          <span style=" font-size: 16px; font-weight: 600; ">{{chatUser.webURL}}</span>
-        </div> -->
+            <div class="col-12" *ngIf="chatUser.address">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Address: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.address
+              }}</span>
+            </div>
+            <div class="col-12" *ngIf="chatUser.postalCode">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Zip / Postal Code: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.postalCode
+              }}</span>
+            </div>
+            <div class="col-12" *ngIf="chatUser.country">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Country: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.country
+              }}</span>
+            </div>
+            <div class="col-12" *ngIf="chatUser.facebookURL">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Facebook: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.facebookURL
+              }}</span>
+            </div>
+            <div class="col-12" *ngIf="chatUser.instagramURL">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Instagram: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.instagramURL
+              }}</span>
+            </div>
+            <div class="col-12" *ngIf="chatUser.twitterURL">
+              <span class="ml-1" style="font-size: 17px; font-weight: 700"
+                >Linkedin: &nbsp;</span
+              >
+              <span style="font-size: 14px; font-weight: 600">{{
+                chatUser.twitterURL
+              }}</span>
+            </div>
           </li>
         </ul>
         <!-- User settings -->
       </div>
     </div>
-
   </div>
 </div>

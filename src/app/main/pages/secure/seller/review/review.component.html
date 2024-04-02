@@ -1,179 +1,305 @@
-<div class="content-wrapper container-xxl" style="background: none;">
-    <div class="content-body">
-        <!-- Content-Header Component -->
-        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+<div class="content-wrapper container-xxl" style="background: none">
+  <div class="content-body">
+    <!-- Content-Header Component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
-        <div class="mb-2" style="position: relative; display: flex; flex-wrap: wrap;">
-            <div class="form-outline">
-                <form (submit)="onSubmitSearch()">
-                    <input type="text" class="form-control" placeholder="Search by lead number, customer name..."
-                        [(ngModel)]="searchText" name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
-                </form>
-            </div>
-            <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
-                <i class="fa fa-search"></i>
-            </button>
-            <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
-                <i class="fa fa-close"></i>
-            </button>
-        </div>
+    <div
+      class="mb-2"
+      style="position: relative; display: flex; flex-wrap: wrap"
+    >
+      <div class="form-outline">
+        <form (submit)="onSubmitSearch()">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search by lead number, customer name..."
+            [(ngModel)]="searchText"
+            name="searchText"
+            style="
+              border: 1px solid #38b6ff;
+              width: 500px;
+              font-family: 'Montserrat', sans-serif;
+            "
+          />
+        </form>
+      </div>
+      <button
+        type="button"
+        (click)="onSubmitSearch()"
+        class="btn btn-primary"
+        style="margin-left: 5px"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+      <button
+        type="button"
+        (click)="onSubmitClear()"
+        class="btn btn-danger"
+        style="margin-left: 5px"
+      >
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
 
-        <section>
-            <div class="table-wrapper">
-                <div class="row" id="basic-table">
-                    <div class="col-12">
-                        <div class="card">
-                            <!-- <h4 class="table-title"></h4> -->
-                            <ngx-datatable #myTable class="bootstrap core-bootstrap" [columnMode]="ColumnMode.force"
-                                [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="false"
-                                [rows]="userQuote" (page)="onPage($event)" [limit]="10">
+    <section>
+      <div class="table-wrapper">
+        <div class="row" id="basic-table">
+          <div class="col-12">
+            <div class="card">
+              <!-- <h4 class="table-title"></h4> -->
+              <ngx-datatable
+                #myTable
+                class="bootstrap core-bootstrap"
+                [columnMode]="ColumnMode.force"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="50"
+                [scrollbarV]="false"
+                [rows]="userQuote"
+                (page)="onPage($event)"
+                [limit]="10"
+              >
+                <ngx-datatable-column
+                  *ngIf="!userQuote || userQuote.length <= 0"
+                  [width]="140"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <strong>No Reviews to show</strong>
+                  </ng-template>
+                </ngx-datatable-column>
 
-                                <ngx-datatable-column *ngIf="!userQuote || userQuote.length <=0 " [width]="140"
-                                    [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <strong>No Reviews to show</strong>
-                                    </ng-template>
-                                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Lead Number"
+                  [width]="140"
+                  [sortable]="false"
+                  class="custom-column-header"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <strong style="font-family: 'Montserrat', sans-serif">{{
+                      row.order.orderNum
+                    }}</strong>
+                  </ng-template>
+                </ngx-datatable-column>
 
-                                <ngx-datatable-column name="Lead Number" [width]="140" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <strong>{{ row.order.orderNum }}</strong>
-                                    </ng-template>
-                                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Customer Name"
+                  [width]="140"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <strong style="font-family: 'Montserrat', sans-serif">{{
+                      row.user.firstName + " " + row.user.lastName
+                    }}</strong>
+                  </ng-template>
+                </ngx-datatable-column>
 
-                                <ngx-datatable-column name="Customer Name" [width]="140" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <strong>{{ row.user.firstName +" "+ row.user.lastName}}</strong>
-                                    </ng-template>
-                                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Earning"
+                  [width]="140"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <strong style="font-family: 'Montserrat', sans-serif">{{
+                      row.order.ammount
+                    }}</strong>
+                  </ng-template>
+                </ngx-datatable-column>
 
-                                <ngx-datatable-column name="Earning" [width]="140" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <strong>{{ row.order.ammount}}</strong>
-                                    </ng-template>
-                                </ngx-datatable-column>
-
-                                <!-- <ngx-datatable-column name="Company Name" [width]="140" [sortable]="false">
+                <!-- <ngx-datatable-column name="Company Name" [width]="140" [sortable]="false">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <strong>{{ row.seller.companyName}}</strong>
                                     </ng-template>
                                 </ngx-datatable-column> -->
 
-                                <ngx-datatable-column name="Rating" [width]="200" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div class="rating text-center">
-                                            <ngb-rating [(rate)]="row.ratingCount" [max]="5" readonly="true">
-                                                <ng-template let-fill="fill" let-index="index"><span
-                                                        class="fa fa-star-o"
-                                                        [class.fa-star]="fill===100"></span></ng-template>
-                                            </ngb-rating>
-                                        </div>
-                                    </ng-template>
-                                </ngx-datatable-column>
-                                <ngx-datatable-column name="Description" [width]="300" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div
-                                            style="margin-left: 0px;width: 300px;overflow: hidden;text-overflow: ellipsis;">
-                                            {{row.description}}</div>
-                                    </ng-template>
-                                </ngx-datatable-column>
-                                <ngx-datatable-column name="Review Details" [width]="200" [sortable]="false">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div (click)="modalOpenVC(modalRating,row)"
-                                            class="badge badge-pill  badge-light-success mr-1 cursor-pointer">
-                                            Detail
-                                        </div>
-                                    </ng-template>
-                                </ngx-datatable-column>
-
-
-
-                            </ngx-datatable>
-                        </div>
+                <ngx-datatable-column
+                  name="Rating"
+                  [width]="200"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div class="rating text-center">
+                      <ngb-rating
+                        [(rate)]="row.ratingCount"
+                        [max]="5"
+                        readonly="true"
+                      >
+                        <ng-template let-fill="fill" let-index="index"
+                          ><span
+                            class="fa fa-star-o"
+                            [class.fa-star]="fill === 100"
+                          ></span
+                        ></ng-template>
+                      </ngb-rating>
                     </div>
-                </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Description"
+                  [width]="300"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div
+                      style="
+                        margin-left: 0px;
+                        width: 300px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-family: 'Montserrat', sans-serif;
+                      "
+                    >
+                      {{ row.description }}
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Review Details"
+                  [width]="200"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div
+                      (click)="modalOpenVC(modalRating, row)"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      View
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
             </div>
-            <div class="d-flex justify-content-end mr-1">
-                <ngb-pagination [collectionSize]="total" [(page)]="pageNo" aria-label="Custom pagination"
-                    (pageChange)="loadPage($event)">
-                    <ng-template ngbPaginationPrevious><span [data-feather]="'chevron-left'"
-                            [class]="'font-weight-bolder'"></span>Prev
-                    </ng-template>
-                    <ng-template ngbPaginationNext>Next<span [data-feather]="'chevron-right'"
-                            [class]="'font-weight-bolder'"></span>
-                    </ng-template>
-                </ngb-pagination>
-
-            </div>
-        </section>
-
-
-    </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mr-1">
+        <ngb-pagination
+          [collectionSize]="total"
+          [(page)]="pageNo"
+          aria-label="Custom pagination"
+          (pageChange)="loadPage($event)"
+        >
+          <ng-template ngbPaginationPrevious
+            ><span
+              [data-feather]="'chevron-left'"
+              [class]="'font-weight-bolder'"
+            ></span
+            >Prev
+          </ng-template>
+          <ng-template ngbPaginationNext
+            >Next<span
+              [data-feather]="'chevron-right'"
+              [class]="'font-weight-bolder'"
+            ></span>
+          </ng-template>
+        </ngb-pagination>
+      </div>
+    </section>
+  </div>
 </div>
 
 <ng-template #modalRating let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel160">Rating</h5>
-        <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+  <div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">Rating</h5>
+    <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button> -->
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    Provided Stars
+    <div class="form-group">
+      <div class="rating text-center">
+        <ngb-rating
+          [(rate)]="ratingCount"
+          [max]="5"
+          [readonly]="readOnlyRating"
+        >
+          <ng-template let-fill="fill" let-index="index"
+            ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+          ></ng-template>
+        </ngb-rating>
+      </div>
     </div>
-    <div class="modal-body" tabindex="0" ngbAutofocus>
-        Provided Stars
-        <div class="form-group">
-            <div class="rating text-center">
-                <ngb-rating [(rate)]="ratingCount" [max]="5" [readonly]="readOnlyRating">
-                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
-                            [class.fa-star]="fill===100"></span></ng-template>
-                </ngb-rating>
-            </div>
-        </div>
 
-        <div class="form-group">
-            Response
-            <div class="rating text-center">
-                <ngb-rating [(rate)]="responsivenessCount" [max]="5" [readonly]="readOnlyRating">
-                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
-                            [class.fa-star]="fill===100"></span></ng-template>
-                </ngb-rating>
-            </div>
-        </div>
-
-        <div class="form-group">
-            Reputation
-            <div class="rating text-center">
-                <ngb-rating [(rate)]="reputationCount" [max]="5" [readonly]="readOnlyRating">
-                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
-                            [class.fa-star]="fill===100"></span></ng-template>
-                </ngb-rating>
-            </div>
-        </div>
-
-        <div class="form-group">
-            Recency
-            <div class="rating text-center">
-                <ngb-rating [(rate)]="recencyCount" [max]="5" [readonly]="readOnlyRating">
-                    <ng-template let-fill="fill" let-index="index"><span class="fa fa-star-o"
-                            [class.fa-star]="fill===100"></span></ng-template>
-                </ngb-rating>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 px-50" *ngFor="let item of reviewImages">
-                <img height="100" width="100" src="{{baseURL}}{{item.path}}" alt="" class="img-fluid w-100">
-            </div>
-            <!-- <img height="100" width="100" *ngIf="ratingImagePath" src="{{baseURL}}{{ratingImagePath}}" alt="" > -->
-        </div>
-        <div class="form-group">
-            <label for="basicInput">Description</label>
-            <textarea type="text" [(ngModel)]="description" [readonly]="readOnlyRating" class="form-control"
-                placeholder="Add some detail about your order and service for other customers"></textarea>
-        </div>
+    <div class="form-group">
+      Response
+      <div class="rating text-center">
+        <ngb-rating
+          [(rate)]="responsivenessCount"
+          [max]="5"
+          [readonly]="readOnlyRating"
+        >
+          <ng-template let-fill="fill" let-index="index"
+            ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+          ></ng-template>
+        </ngb-rating>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button *ngIf="readOnlyRating" type="button" class="btn btn-primary" (click)="modal.dismiss('Cross click')"
-            rippleEffect>
-            Close
-        </button>
+
+    <div class="form-group">
+      Reputation
+      <div class="rating text-center">
+        <ngb-rating
+          [(rate)]="reputationCount"
+          [max]="5"
+          [readonly]="readOnlyRating"
+        >
+          <ng-template let-fill="fill" let-index="index"
+            ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+          ></ng-template>
+        </ngb-rating>
+      </div>
     </div>
+
+    <div class="form-group">
+      Recency
+      <div class="rating text-center">
+        <ngb-rating
+          [(rate)]="recencyCount"
+          [max]="5"
+          [readonly]="readOnlyRating"
+        >
+          <ng-template let-fill="fill" let-index="index"
+            ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+          ></ng-template>
+        </ngb-rating>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 px-50" *ngFor="let item of reviewImages">
+        <a href="{{ baseURL }}{{ item.path }}" target="_blank">
+          <img
+            height="100"
+            width="100"
+            src="{{ baseURL }}{{ item.path }}"
+            alt=""
+            class="img-fluid w-100"
+          />
+        </a>
+      </div>
+      <!-- <img height="100" width="100" *ngIf="ratingImagePath" src="{{baseURL}}{{ratingImagePath}}" alt="" > -->
+    </div>
+    <div class="form-group">
+      <label for="basicInput">Description</label>
+      <textarea
+        type="text"
+        [(ngModel)]="description"
+        [readonly]="readOnlyRating"
+        class="form-control"
+        placeholder="Add some detail about your order and service for other customers"
+      ></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      *ngIf="readOnlyRating"
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.dismiss('Cross click')"
+      rippleEffect
+    >
+      Close
+    </button>
+  </div>
 </ng-template>

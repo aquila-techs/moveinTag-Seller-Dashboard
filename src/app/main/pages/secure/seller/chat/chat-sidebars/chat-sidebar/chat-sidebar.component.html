@@ -1,6 +1,9 @@
 <!-- Chat Sidebar area -->
 <div class="chat-sidebar bg-white">
-  <button class="btn sidebar-close-icon" (click)="toggleSidebar('chat-sidebar')">
+  <button
+    class="btn sidebar-close-icon"
+    (click)="toggleSidebar('chat-sidebar')"
+  >
     <i data-feather="x"></i>
   </button>
   <!-- Sidebar header start -->
@@ -10,8 +13,8 @@
         <button class="btn avatar avatar-border bg-transparent p-0" 
         
         > -->
-        <!-- (click)="toggleSidebar('chat-user-sidebar')" -->
-          <!-- <img [src]="userProfile.avatar" alt="user_avatar" height="42" width="42" />
+  <!-- (click)="toggleSidebar('chat-user-sidebar')" -->
+  <!-- <img [src]="userProfile.avatar" alt="user_avatar" height="42" width="42" />
           <span
             [ngClass]="{
               'avatar-status-offline': userProfile.status == 'offline',
@@ -41,12 +44,24 @@
   <!-- Sidebar header end -->
 
   <!-- Sidebar Users start -->
-  <div id="users-list" class="chat-user-list-wrapper list-group" [perfectScrollbar]>
+  <div
+    id="users-list"
+    class="chat-user-list-wrapper list-group"
+    [perfectScrollbar]
+  >
     <h4 class="chat-list-title">Chats</h4>
-    <ng-container *ngIf="(chatUsers | filter: searchText:'fullName').length; else noResultsChats"></ng-container>
+    <ng-container
+      *ngIf="
+        (chatUsers | filter : searchText : 'fullName').length;
+        else noResultsChats
+      "
+    ></ng-container>
     <ul class="chat-users-list chat-list media-list">
       <li
-        *ngFor="let chatUser of chatUsers | filter: searchText:'fullName'; let i = index"
+        *ngFor="
+          let chatUser of chatUsers | filter : searchText : 'fullName';
+          let i = index
+        "
         [class.active]="selectedIndex === i"
         (click)="openChat(chatUser); toggleSidebar('chat-sidebar'); setIndex(i)"
       >
@@ -65,14 +80,15 @@
         <div *ngIf="chatUser.user.profileImage; else customAvatar">
           <img
             class="rounded-circle mr-1"
-            src="{{baseURL}}{{chatUser.user.profileImage}}" 
+            src="{{ baseURL }}{{ chatUser.user.profileImage }}"
             height="32"
             width="32"
           />
         </div>
         <ng-template #customAvatar>
           <div
-            class="avatar mr-1 ml-0" style="background-color: #3591C9;"
+            class="avatar mr-1 ml-0"
+            style="background-color: #3591c9"
             [ngClass]="{
               'avatar-status-offline': chatUser.status == 'offline',
               'avatar-status-online': chatUser.status == 'online',
@@ -80,25 +96,43 @@
               'avatar-status-away': chatUser.status == 'away'
             }"
           >
-            <div class="avatar-content">{{ chatUser.user.firstName + " " + chatUser.user.lastName | initials }}</div>
+            <div class="avatar-content">
+              {{
+                chatUser.user.firstName + " " + chatUser.user.lastName
+                  | initials
+              }}
+            </div>
           </div>
         </ng-template>
         <div class="chat-info flex-grow-1">
-          <h5 class="mb-0">{{ chatUser.user.firstName }} {{ chatUser.user.lastName }}</h5>
+          <h5 class="mb-0">
+            {{ chatUser.user.firstName }} {{ chatUser.user.lastName }}
+          </h5>
           <p class="card-text text-truncate">
             <!-- {{ chatUser.about }} -->
           </p>
         </div>
         <div class="chat-meta text-nowrap">
-          <small class="float-right mb-25 chat-time">Lead # {{ chatUser.order.orderNum }}</small>
-          <span *ngIf="chatUser.unseenMsgs >= 1" class="float-right badge badge-danger badge-pill">{{
+          <small class="float-right mb-25 chat-time"
+            >Lead number {{ chatUser.order.orderNum }}</small
+          >
+          <span
+            *ngIf="chatUser.unseenMsgs >= 1"
+            class="float-right badge badge-danger badge-pill"
+            >{{
             <!-- chatUser.unseenMsgs -->
-          }}</span>
+            }}</span
+          >
         </div>
       </li>
 
       <ng-template #noResultsChats>
-        <li class="no-results" [ngClass]="{ show: (chatUsers | filter: searchText:'fullName').length <= 0 }">
+        <li
+          class="no-results"
+          [ngClass]="{
+            show: (chatUsers | filter : searchText : 'fullName').length <= 0
+          }"
+        >
           <h6 class="mb-0">No Chats Found</h6>
         </li>
       </ng-template>

@@ -1,122 +1,280 @@
-<div class="content-wrapper container-xxl" style="background: none;">
-    <div class="content-body">
-        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+<div class="content-wrapper mt-2" style="background: none">
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
-
-        <section>
-            <div class="row">
-
-                <div class="col-lg-6">
-                    <div class="card auto pb-2" style="max-width: 600px; height: 360px;">
-                        <div class="card-body">
-                            <form (submit)="onSubmitSendEmail()">
-                                <div class="form-group mb-2">
-                                    <select class="form-control" (change)="onSelected($event)"
-                                        style="min-width: 165px;">
-                                        <option>Select Category</option>
-                                        <option value="Technical difficulties">Technical difficulties</option>
-                                        <option value="Service not working as expected">Service not working as expected
-                                        </option>
-                                        <option value="Slow loading times">Slow loading times</option>
-                                        <option value="Error messages">Error messages</option>
-                                        <option value="Account Isssue">Account Isssue</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label class="font-medium-2 font-weight-bold mb-1"
-                                        for="basicInput">Description</label>
-                                    <textarea class="form-control" [(ngModel)]="description" name="description"
-                                        id="description" cols="30" rows="5"
-                                        placeholder="Briefly describe your issue...."></textarea>
-                                </div>
-                                <button class="btn btn-dark2 btn-md d-flex align-items-center"><i class="font-large-1"
-                                        data-feather="check"></i> &nbsp;Submit</button>
-                            </form>
-
-                        </div>
-                    </div>
+    <section>
+      <div class="row justify-content-center mt-0">
+        <div class="col-lg-6">
+          <div class="card auto pb-2" style="height: 550px">
+            <div class="card-body">
+              <div
+                class="row m-0 mb-2 mt-2 justify-content-center align-items-center"
+              >
+                <div class="col-md-6 p-0 text-center">
+                  <div class="with-icon">
+                    <img
+                      width="32"
+                      src="../../../assets/images/site/new-icons/letter.png"
+                    />
+                    <h5
+                      class="title mt-2"
+                      style="
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 300;
+                      "
+                    >
+                      support@moventag.com
+                    </h5>
+                  </div>
                 </div>
-
-
-                <div class="col-lg-6">
-                    <div class="card auto pb-2" style="max-width: 600px; height:360px;">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="title-section mb-2">
-                                        <h2 class="main-title" style="font-family: 'Montserrat', sans-serif;">Contact Us
-                                        </h2>
-                                    </div>
-                                    <div class="ml-1">
-                                        <div class="row">
-                                            <div><img width="28"
-                                                    src="../../../assets/images/site/new-icons/location_darkBlue.png">
-                                            </div>
-                                            <div class="col-sm-10"
-                                                style="font-family: 'Open Sans', sans-serif; margin-top: 10px;">123
-                                                Anywhere
-                                                St.
-                                                Any City, ST 12345</div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div><img width="32"
-                                                    src="../../../assets/images/site/new-icons/telephone_darkBlue.png">
-                                            </div>
-                                            <div class="col-sm-10" style="font-family: 'Open Sans', sans-serif;">(123)
-                                                456-7890
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div><img width="32"
-                                                    src="../../../assets/images/site/new-icons/letter_darkBlue.png">
-                                            </div>
-                                            <div class="col-sm-10" style="font-family: 'Open Sans', sans-serif;">
-                                                hello@reallygreatsite.com</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="title-section mb-2">
-                                        <h2 class="main-title" style="font-family: 'Montserrat', sans-serif;">
-                                            Office Hours
-                                        </h2>
-                                    </div>
-                                    <div style="margin-left: -10px;">
-                                        <div class="col-sm-12"
-                                            style="color: #042243;font-family: 'Open Sans', sans-serif;">
-                                            Monday to
-                                            Friday
-                                        </div>
-                                        <div class="col-sm-12" style="font-family: 'Open Sans', sans-serif;">
-                                            9:00 am to 6:00 pm
-                                        </div>
-                                        <br>
-                                        <div class="col-sm-12"
-                                            style="color: #042243;font-family: 'Open Sans', sans-serif;">
-                                            Saturday
-                                        </div>
-                                        <div class="col-sm-12" style="font-family: 'Open Sans', sans-serif;">9:00 am to
-                                            12 noon
-                                        </div>
-                                        <br>
-                                        <div class="col-sm-12"
-                                            style="color: #042243;font-family: 'Open Sans', sans-serif;">
-                                            Closed on
-                                            Sundays
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                <div class="col-md-6 p-0 text-center">
+                  <div class="with-icon">
+                    <img
+                      width="28"
+                      src="../../../assets/images/site/new-icons/location.png"
+                    />
+                    <h5
+                      class="title mt-2"
+                      style="
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 300;
+                      "
+                    >
+                      203 - 3500 Dufferin Street, <br />
+                      North York, ON M3K 1N2
+                    </h5>
+                  </div>
                 </div>
+              </div>
+
+              <form (submit)="onSubmitSendEmail()" class="mx-auto">
+                <!-- Center align the form -->
+                <div class="form-group mb-2">
+                  <select
+                    class="form-control"
+                    (change)="onSelected($event)"
+                    style="min-width: 165px"
+                  >
+                    <option>Select Category</option>
+                    <option value="General Support Inquiry">
+                      General Support Inquiry
+                    </option>
+                    <option value="Technical Issues">Technical Issues</option>
+                    <option value="Service Request Issues">
+                      Service Request Issues
+                    </option>
+                    <option value="Review Assistance">Review Assistance</option>
+                    <option value="Account Assistance">
+                      Account Assistance
+                    </option>
+                    <option value="Feedback and Suggestions">
+                      Feedback and Suggestions
+                    </option>
+                    <option value="Escalated Concerns">
+                      Escalated Concerns
+                    </option>
+                    <option value="General Support Inquiry">Others</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label
+                    class="font-medium-2 font-weight-bold mb-1"
+                    for="basicInput"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    [(ngModel)]="description"
+                    name="description"
+                    id="description"
+                    cols="30"
+                    rows="5"
+                    placeholder="Briefly describe your issue...."
+                  ></textarea>
+                </div>
+                <button class="btn btn-dark2 btn-md d-flex align-items-center">
+                  <i class="font-large-1" data-feather="check"></i>
+                  &nbsp;Submit
+                </button>
+              </form>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- <section>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card auto pb-2" style="max-width: 600px; height: 360px">
+            <div class="card-body">
+              <form (submit)="onSubmitSendEmail()">
+                <div class="form-group mb-2">
+                  <select
+                    class="form-control"
+                    (change)="onSelected($event)"
+                    style="min-width: 165px"
+                  >
+                    <option>Select Category</option>
+                    <option value="Technical difficulties">
+                      Technical difficulties
+                    </option>
+                    <option value="Service not working as expected">
+                      Service not working as expected
+                    </option>
+                    <option value="Slow loading times">
+                      Slow loading times
+                    </option>
+                    <option value="Error messages">Error messages</option>
+                    <option value="Account Isssue">Account Isssue</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+                <div class="form-group mb-2">
+                  <label
+                    class="font-medium-2 font-weight-bold mb-1"
+                    for="basicInput"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    [(ngModel)]="description"
+                    name="description"
+                    id="description"
+                    cols="30"
+                    rows="5"
+                    placeholder="Briefly describe your issue...."
+                  ></textarea>
+                </div>
+                <button class="btn btn-dark2 btn-md d-flex align-items-center">
+                  <i class="font-large-1" data-feather="check"></i> &nbsp;Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
 
-    </div>
+        <div class="col-lg-6">
+          <div class="card auto pb-2" style="max-width: 600px; height: 360px">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="title-section mb-2">
+                    <h2
+                      class="main-title"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Contact Us
+                    </h2>
+                  </div>
+                  <div class="ml-1">
+                    <div class="row">
+                      <div>
+                        <img
+                          width="28"
+                          src="../../../assets/images/site/new-icons/location_darkBlue.png"
+                        />
+                      </div>
+                      <div
+                        class="col-sm-10"
+                        style="
+                          font-family: 'Open Sans', sans-serif;
+                          margin-top: 10px;
+                        "
+                      >
+                        123 Anywhere St. Any City, ST 12345
+                      </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                      <div>
+                        <img
+                          width="32"
+                          src="../../../assets/images/site/new-icons/telephone_darkBlue.png"
+                        />
+                      </div>
+                      <div
+                        class="col-sm-10"
+                        style="font-family: 'Open Sans', sans-serif"
+                      >
+                        (123) 456-7890
+                      </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                      <div>
+                        <img
+                          width="32"
+                          src="../../../assets/images/site/new-icons/letter_darkBlue.png"
+                        />
+                      </div>
+                      <div
+                        class="col-sm-10"
+                        style="font-family: 'Open Sans', sans-serif"
+                      >
+                        hello@reallygreatsite.com
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="title-section mb-2">
+                    <h2
+                      class="main-title"
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      Office Hours
+                    </h2>
+                  </div>
+                  <div style="margin-left: -10px">
+                    <div
+                      class="col-sm-12"
+                      style="
+                        color: #042243;
+                        font-family: 'Open Sans', sans-serif;
+                      "
+                    >
+                      Monday to Friday
+                    </div>
+                    <div
+                      class="col-sm-12"
+                      style="font-family: 'Open Sans', sans-serif"
+                    >
+                      9:00 am to 6:00 pm
+                    </div>
+                    <br />
+                    <div
+                      class="col-sm-12"
+                      style="
+                        color: #042243;
+                        font-family: 'Open Sans', sans-serif;
+                      "
+                    >
+                      Saturday
+                    </div>
+                    <div
+                      class="col-sm-12"
+                      style="font-family: 'Open Sans', sans-serif"
+                    >
+                      9:00 am to 12 noon
+                    </div>
+                    <br />
+                    <div
+                      class="col-sm-12"
+                      style="
+                        color: #042243;
+                        font-family: 'Open Sans', sans-serif;
+                      "
+                    >
+                      Closed on Sundays
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+  </div>
 </div>

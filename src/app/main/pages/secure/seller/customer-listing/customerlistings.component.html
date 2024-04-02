@@ -2,12 +2,15 @@
   <div class="content-body">
     <!-- content-header component -->
 
-    <div style="padding-left: 20px;">
+    <div style="padding-left: 20px">
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
-          <div class="col-12 d-flex" style="padding-left: 0px;">
-            <h2 class="content-header-title float-left mb-0" style="font-family: 'Montserrat', sans-serif;">
-              {{category.title}}
+          <div class="col-12 d-flex" style="padding-left: 0px">
+            <h2
+              class="content-header-title float-left mb-0"
+              style="font-family: 'Montserrat', sans-serif"
+            >
+              {{ category.title }}
             </h2>
           </div>
         </div>
@@ -15,18 +18,45 @@
     </div>
 
     <div *ngIf="requiredDocument == false">
-      <div class="mb-2" style="position: relative; display: flex; flex-wrap: wrap; margin-left:15px">
+      <div
+        class="mb-2"
+        style="
+          position: relative;
+          display: flex;
+          flex-wrap: wrap;
+          margin-left: 15px;
+        "
+      >
         <div class="form-outline">
           <form (submit)="onSubmitSearch()">
-            <input type="text" class="form-control"
-              placeholder="Search by lead number, customer name, postal code, services.." [(ngModel)]="searchText"
-              name="searchText" style="border: 1px solid #38B6FF; width: 500px;" />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search by lead number, customer name, postal code, services.."
+              [(ngModel)]="searchText"
+              name="searchText"
+              style="
+                border: 1px solid #38b6ff;
+                width: 500px;
+                font-family: 'Montserrat', sans-serif;
+              "
+            />
           </form>
         </div>
-        <button type="button" (click)="onSubmitSearch()" class="btn btn-primary" style="margin-left: 5px;">
+        <button
+          type="button"
+          (click)="onSubmitSearch()"
+          class="btn btn-primary"
+          style="margin-left: 5px"
+        >
           <i class="fa fa-search"></i>
         </button>
-        <button type="button" (click)="onSubmitClear()" class="btn btn-danger" style="margin-left: 5px;">
+        <button
+          type="button"
+          (click)="onSubmitClear()"
+          class="btn btn-danger"
+          style="margin-left: 5px"
+        >
           <i class="fa fa-close"></i>
         </button>
       </div>
@@ -37,13 +67,17 @@
             <div class="col-12">
               <div class="card auto">
                 <h4 class="table-title"></h4>
-                <div class="table-responsive" style="
-              font-size: 20px;
-              text-align: center;
-              margin: 30px;
-              margin-top: -15px;
-              margin-bottom: 20px;
-          ">
+                <div
+                  class="table-responsive"
+                  style="
+                    font-size: 20px;
+                    text-align: center;
+                    margin: 30px;
+                    margin-top: -15px;
+                    margin-bottom: 20px;
+                    font-family: 'Montserrat', sans-serif;
+                  "
+                >
                   No Quotation Found
                 </div>
               </div>
@@ -59,27 +93,66 @@
               <table class="table table-s1">
                 <thead>
                   <tr>
-                    <th>Lead Number</th>
-                    <th>Customer Name</th>
-                    <th>Services</th>
-                    <th>Status</th>
-                    <th>Postal Code</th>
-                    <th>Quote Details</th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Lead Number
+                    </th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Customer Name
+                    </th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Services
+                    </th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Status
+                    </th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Postal Code
+                    </th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Country
+                    </th>
+                    <th style="font-family: 'Montserrat', sans-serif">City</th>
+                    <th style="font-family: 'Montserrat', sans-serif">
+                      Quote Details
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="mb-1" *ngFor="let item of userQuote">
-                    <td>{{item.orderNum}}</td>
-                    <td>{{item?.buyer?.firstName}}</td>
-                    <td>{{item?.subCategory?.title}}</td>
-                    <td><span class="badge badge-pill badge-light-success mr-1">
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      {{ item.orderNum }}
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      {{ item?.buyer?.firstName }}
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      {{ item?.subCategory?.title }}
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      <span class="badge badge-pill badge-light-success mr-1">
                         <span *ngIf="item?.status === 'QUOTE'"> Pending </span>
-                        <span *ngIf="item?.status === 'ACTIVE'"> Approved </span>
-                      </span></td>
-                    <td>{{item?.postal_code}}</td>
-                    <td><a class="text-success px-2 py-1 box-shadow-0" (click)="modalOpenVC(modalVC, item)"
-                        rippleEffect>View</a></td>
-
+                        <span *ngIf="item?.status === 'ACTIVE'">
+                          Approved
+                        </span>
+                      </span>
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      {{ item?.postal_code }}
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      {{ item?.country }}
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      {{ item?.city }}
+                    </td>
+                    <td style="font-family: 'Montserrat', sans-serif">
+                      <a
+                        class="text-success px-2 py-1 box-shadow-0"
+                        (click)="modalOpenVC(modalVC, item)"
+                        rippleEffect
+                        >View</a
+                      >
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -91,19 +164,32 @@
     <div *ngIf="requiredDocument == true">
       <div class="table-wrapper">
         <div class="row" id="basic-table">
-          <div class="col-11 mx-auto"> <!-- Added mx-auto class -->
+          <div class="col-11 mx-auto">
+            <!-- Added mx-auto class -->
             <div class="card auto">
               <h4 class="table-title"></h4>
-              <div class="table-responsive" style="
-                font-size: 20px;
-                text-align: center;
-                margin: 30px;
-                margin-top: -15px;
-                margin-bottom: 20px;
-              ">
+              <div
+                class="table-responsive"
+                style="
+                  font-size: 20px;
+                  text-align: center;
+                  margin: 30px;
+                  margin-top: -15px;
+                  margin-bottom: 20px;
+                  font-family: 'Montserrat', sans-serif;
+                "
+              >
                 Please upload documents first in verification tab
-                <p style="font-size: 15px; margin-top: 20px;"><b>Note:</b> if you have submitted, please wait for admin
-                  approval.</p>
+                <p
+                  style="
+                    font-size: 15px;
+                    margin-top: 20px;
+                    font-family: 'Montserrat', sans-serif;
+                  "
+                >
+                  <b>Note:</b> if you have submitted, please wait for admin
+                  approval.
+                </p>
               </div>
             </div>
           </div>
@@ -111,12 +197,15 @@
       </div>
     </div>
 
-
-
     <ng-template #modalVC let-modal>
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">Quotes</h5>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss('Cross click')"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -124,41 +213,89 @@
         <form action="">
           <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
             <label for="basicInput">What do you need to be done?</label>
-            <input readonly type="text" [value]="selectedOrder?.subCategory?.title" class="form-control" id="basicInput"
-              placeholder="" />
+            <input
+              readonly
+              type="text"
+              [value]="selectedOrder?.subCategory?.title"
+              class="form-control"
+              id="basicInput"
+              placeholder=""
+            />
           </div>
           <div class="form-group" [hidden]="!selectedOrder?.place">
             <label for="basicInput">What do you need to be done?</label>
-            <input readonly type="text" class="form-control" [value]="selectedOrder?.place" id="basicInput"
-              placeholder="Townhall" />
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              [value]="selectedOrder?.place"
+              id="basicInput"
+              placeholder="Townhall"
+            />
           </div>
           <div class="form-group" [hidden]="!selectedOrder?.startTime">
-            <label for="basicInput">When do you want to start this project?</label>
-            <input readonly type="text" class="form-control" [value]="selectedOrder?.startTime" id="basicInput"
-              placeholder="Within a week" />
+            <label for="basicInput"
+              >When do you want to start this project?</label
+            >
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              [value]="selectedOrder?.startTime"
+              id="basicInput"
+              placeholder="Within a week"
+            />
           </div>
           <div class="form-group" [hidden]="!selectedOrder?.notes">
-            <label for="basicInput">Please provide some details about project? </label>
-            <textarea readonly style="height: 150px;" [value]="selectedOrder?.notes" class="form-control"></textarea>
+            <label for="basicInput"
+              >Please provide some details about project?
+            </label>
+            <textarea
+              readonly
+              style="height: 150px"
+              [value]="selectedOrder?.notes"
+              class="form-control"
+            ></textarea>
           </div>
-          <div class="form-group" [hidden]="selectedOrder.orderImages.length <= 0">
+          <div
+            class="form-group"
+            [hidden]="selectedOrder.orderImages.length <= 0"
+          >
             <label for="basicInput">Service Images</label>
             <div class="row px-1">
-              <div class="col-lg-3 px-50" *ngFor="let item of selectedOrder.orderImages">
-                <img src="{{baseURL}}{{item.path}}" alt="" class="img-fluid w-100">
+              <div
+                class="col-lg-3 px-50"
+                *ngFor="let item of selectedOrder.orderImages"
+              >
+                <a href="{{ baseURL }}{{ item.path }}" target="_blank">
+                  <img
+                    src="{{ baseURL }}{{ item.path }}"
+                    alt=""
+                    class="img-fluid w-100"
+                  />
+                </a>
               </div>
-
             </div>
           </div>
           <div class="form-group my-2">
             <div class="row">
               <div class="col-lg-6">
-                <button type="button" class="btn btn-success w-100" (click)="startChat(selectedOrder)" rippleEffect>
+                <button
+                  type="button"
+                  class="btn btn-success w-100"
+                  (click)="startChat(selectedOrder)"
+                  rippleEffect
+                >
                   Start Chat
                 </button>
               </div>
               <div class="col-lg-6">
-                <button type="button" class="btn btn-danger w-100" (click)="modal.dismiss('Cross click')" rippleEffect>
+                <button
+                  type="button"
+                  class="btn btn-danger w-100"
+                  (click)="modal.dismiss('Cross click')"
+                  rippleEffect
+                >
                   Not Interested
                 </button>
               </div>
@@ -177,6 +314,5 @@
         </form>
       </div>
     </ng-template>
-
   </div>
 </div>

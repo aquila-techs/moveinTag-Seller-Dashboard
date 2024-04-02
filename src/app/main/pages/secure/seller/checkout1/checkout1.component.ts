@@ -24,7 +24,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   lastName = "";
   firstName = "";
   countryName = "";
-  phoneCode = "";
+  phoneCode = "+1";
+  isLoading = "false";
   phone = "";
   cvc = "";
   cardNumber = "";
@@ -1390,6 +1391,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   /**
    * On init
    */
+
   async ngOnInit() {
     this.contentHeader = {
       headerTitle: "Dashboard",
@@ -1399,6 +1401,23 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     this.navbar = {
       hidden: false,
     };
+    this.isLoading = "true";
+    this.userService.getProfile(this.user._id).subscribe({
+      next: (res: any) => {
+        if (res.phoneCode && res.phone && res.country) {
+          this.licensePhotoChangedEvent = null;
+          this.libilityInsurancePhotoChangedEvent = null;
+          this.IdentityCardPhotoChangedEvent = null;
+          this.getSellerProfile = false;
+          this.subscriptionPacakge = false;
+          this.cardDetail = true;
+          this.isLoading = "false";
+        } else {
+          this.isLoading = "false";
+        }
+      },
+    });
+
     this.getCountries();
     this.generateToken();
   }
@@ -1426,8 +1445,63 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         if (typeof tokenResult === "string") {
           console.log("Error generating token");
         } else {
-          console.log(tokenResult.token.id);
-          console.log(tokenResult.token.card.id);
+          let subscriptionData = {
+            _id: this.user._id,
+            email: this.user.email,
+            name: this.user.companyName,
+            token: tokenResult.token.id,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            country: this.country,
+            postalCode: this.postalCode,
+            phone: this.phone,
+            priceId: this.priceId,
+            free_trial: this.free_trial,
+          };
+          this.userService
+            .createSubscriptionCustomer(subscriptionData)
+            .subscribe({
+              next: (res) => {
+                console.log(res);
+                let data = {
+                  _id: this.user._id,
+                  paymentMethodId: tokenResult.token.card.id,
+                };
+                this.userService.setPaymentMethodAsDefault(data).subscribe({
+                  next: (value) => {},
+                });
+
+                if (this.isAfterSingup) {
+                  const OBJ = {
+                    userId: this.user._id,
+                    purchaseAmount: this.total,
+                  };
+
+                  this.userService.affMakePurchase(OBJ).subscribe({
+                    next: (value) => {},
+                  });
+
+                  this.toastrService.success(
+                    "You have successfully subscribed."
+                  );
+                  this._router.navigate(["/pages/seller/home"]);
+                  // this._router.navigate(['/login']);
+                } else {
+                  const OBJ = {
+                    userId: this.user._id,
+                    purchaseAmount: this.total,
+                  };
+
+                  this.userService.affMakePurchase(OBJ).subscribe({
+                    next: (value) => {},
+                  });
+
+                  this.user["payment"] = true;
+                  this._authenticationService.updateUserData(this.user);
+                  this._router.navigate(["/pages/seller/home"]);
+                }
+              },
+            });
         }
       });
     } else {
@@ -1490,18 +1564,53 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     this._router.navigate(["/login"]);
   }
 
+  public userProfile: any = {};
+
+  updateUserProfile() {
+    let data = this.userProfile;
+    data["id"] = this.user;
+    this.userService.updateProfile(data).subscribe({
+      next: (res) => {
+        this.userProfile = JSON.parse(JSON.stringify(res));
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   goToNextStep() {
     if (this.phoneCode && this.phone && this.countryName) {
-      this.licensePhotoChangedEvent = null;
-      this.libilityInsurancePhotoChangedEvent = null;
-      this.IdentityCardPhotoChangedEvent = null;
-      this.getSellerProfile = false;
-      this.subscriptionPacakge = false;
-      this.cardDetail = true;
+      let data = this.userProfile;
+      data["id"] = this.user;
+
+      const OBJ = {
+        id: this.user._id,
+        phoneCode: this.phoneCode,
+        phone: this.phone,
+        country: this.countryName,
+      };
+
+      this.userService.updateProfile(OBJ).subscribe({
+        next: (res) => {
+          this.userProfile = JSON.parse(JSON.stringify(res));
+
+          this.licensePhotoChangedEvent = null;
+          this.libilityInsurancePhotoChangedEvent = null;
+          this.IdentityCardPhotoChangedEvent = null;
+          this.getSellerProfile = false;
+          this.subscriptionPacakge = false;
+          this.cardDetail = true;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     } else {
       this.toastrService.error("Please enter all fields.", "");
     }
   }
+
   goToFinalStep() {
     this.subscriptionPacakge = false;
     this.cardDetail = true;

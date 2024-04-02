@@ -1,4 +1,11 @@
-<div class="content-area-wrapper container-xxl p-0" style="height: calc(var(--vh, 1vh) * 92 - ( calc(2rem * 2) + 0rem + 0rem + 0rem + 0rem ));">
+<div
+  class="content-area-wrapper container-xxl p-0"
+  style="
+    height: calc(
+      var(--vh, 1vh) * 92 - (calc(2rem * 2) + 0rem + 0rem + 0rem + 0rem)
+    );
+  "
+>
   <!-- sidebar Left -->
 
   <!-- chat-sidebar -->
@@ -51,7 +58,7 @@
   </div>
   <!--/ content-right -->
 
-  <div class="sidebar-left" style=" width: 25%;">
+  <div class="sidebar-left" style="width: 25%; background-color: white">
     <div class="sidebar">
       <core-sidebar
         class="sidebar-content"
@@ -59,7 +66,9 @@
         overlayClass="body-content-overlay"
         collapsibleSidebar="bs-gt-lg"
       >
-        <app-chat-user-sidebar-detail class="chat-sidebar-wrapper"></app-chat-user-sidebar-detail>
+        <app-chat-user-sidebar-detail
+          class="chat-sidebar-wrapper"
+        ></app-chat-user-sidebar-detail>
       </core-sidebar>
     </div>
   </div>

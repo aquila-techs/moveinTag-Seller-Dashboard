@@ -1,7 +1,7 @@
 <div class="body-content-overlay"></div>
 <!-- Main chat area -->
 <div *ngFor="let item of messageList">
-  {{item}}
+  {{ item }}
 </div>
 
 <section *ngIf="chatUser.firstName" class="chat-app-window">
@@ -15,57 +15,94 @@
   <!--/ To load Conversation -->
 
   <!-- Active Chat -->
-  <div class="active-chat" [ngClass]="{ 'd-none': activeChat !== true }" *ngIf="activeChat === true">
+  <div
+    class="active-chat"
+    [ngClass]="{ 'd-none': activeChat !== true }"
+    *ngIf="activeChat === true"
+  >
     <!-- Chat Header -->
     <div class="chat-navbar">
       <header class="chat-header">
         <div class="d-flex align-items-center">
-          <button class="btn sidebar-toggle d-block d-lg-none mr-1 p-0" (click)="toggleSidebar('chat-sidebar')">
+          <button
+            class="btn sidebar-toggle d-block d-lg-none mr-1 p-0"
+            (click)="toggleSidebar('chat-sidebar')"
+          >
             <i data-feather="menu" class="font-medium-5"></i>
           </button>
 
           <div *ngIf="chatUser.profileImage; else customAvatar">
-            <img class="rounded-circle mr-1" src="{{baseURL}}{{chatUser.profileImage}}" height="32" width="32" />
+            <img
+              class="rounded-circle mr-1"
+              src="{{ baseURL }}{{ chatUser.profileImage }}"
+              height="32"
+              width="32"
+            />
           </div>
           <ng-template #customAvatar>
-            <div class="avatar mr-1 ml-0" style="background-color: #38b6ff;" [ngClass]="{
+            <div
+              class="avatar mr-1 ml-0"
+              style="background-color: #38b6ff"
+              [ngClass]="{
                 'avatar-status-offline': chatUser.status == 'offline',
                 'avatar-status-online': chatUser.status == 'online',
                 'avatar-status-busy': chatUser.status == 'busy',
                 'avatar-status-away': chatUser.status == 'away'
-              }">
-              <div class="avatar-content">{{ chatUser.firstName + " " + chatUser.lastName | initials }}</div>
+              }"
+            >
+              <div class="avatar-content">
+                {{ chatUser.firstName + " " + chatUser.lastName | initials }}
+              </div>
             </div>
           </ng-template>
           <h6 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h6>
         </div>
         <div class="d-flex align-items-center">
-          <div class="d-flex align-items-center" *ngIf="chats.order.status === 'QUOTE'">
-            <div class="col-lg-6" style="margin-right:-15px">
-              <button type="button" class="btn btn-success w-100" (click)="modalOpenVC(modalApproval,row)" rippleEffect>
+          <div
+            class="d-flex align-items-center"
+            *ngIf="chats.order.status === 'QUOTE'"
+          >
+            <div class="col-lg-12">
+              <button
+                type="button"
+                class="btn btn-success w-100"
+                (click)="modalOpenVC(modalApproval, row)"
+                rippleEffect
+              >
                 Interested
               </button>
             </div>
-            <div class="col-lg-7">
-              <button type="button" class="btn btn-danger w-100" (click)="modalOpenVC(modalDecline,row)" rippleEffect>
+            <!-- <div class="col-lg-7">
+              <button
+                type="button"
+                class="btn btn-danger w-100"
+                (click)="modalOpenVC(modalDecline, row)"
+                rippleEffect
+              >
                 Not Interested
               </button>
-            </div>
+            </div> -->
           </div>
-
         </div>
       </header>
     </div>
     <!--/ Chat Header -->
 
     <!-- User Chat messages -->
-    <div class="user-chats" [perfectScrollbar] #scrollMe [scrollTop]="scrolltop">
+    <div
+      class="user-chats"
+      [perfectScrollbar]
+      #scrollMe
+      [scrollTop]="scrolltop"
+    >
       <div class="chats">
-        <div class="chat" *ngFor="let chatRef of chats.chat"
-          [ngClass]="{ 'chat-left': chatRef.uId != userProfile._id }">
+        <div
+          class="chat"
+          *ngFor="let chatRef of chats.chat"
+          [ngClass]="{ 'chat-left': chatRef.uId != userProfile._id }"
+        >
           <div class="chat-avatar">
             <span>
-
               <div *ngIf="chatRef.uId != userProfile._id; else alternateAvatar">
                 <!-- <img
                 src="{{baseURL}}{{chatUser.profileImage}}"
@@ -75,41 +112,61 @@
               /> -->
 
                 <div *ngIf="chatUser.profileImage; else customAvatar">
-                  <img class="rounded-circle mr-1" src="{{baseURL}}{{chatUser.profileImage}}" height="32" width="32" />
+                  <img
+                    class="rounded-circle mr-1"
+                    src="{{ baseURL }}{{ chatUser.profileImage }}"
+                    height="32"
+                    width="32"
+                  />
                 </div>
                 <ng-template #customAvatar>
-                  <div class="avatar mr-1 ml-0" style="background-color: #38b6ff;" [ngClass]="{
-                    'avatar-status-offline': chatUser.status == 'offline',
-                    'avatar-status-online': chatUser.status == 'online',
-                    'avatar-status-busy': chatUser.status == 'busy',
-                    'avatar-status-away': chatUser.status == 'away'
-                  }">
-                    <div class="avatar-content">{{ chatUser.firstName + " " + chatUser.lastName | initials }}</div>
+                  <div
+                    class="avatar mr-1 ml-0"
+                    style="background-color: #38b6ff"
+                    [ngClass]="{
+                      'avatar-status-offline': chatUser.status == 'offline',
+                      'avatar-status-online': chatUser.status == 'online',
+                      'avatar-status-busy': chatUser.status == 'busy',
+                      'avatar-status-away': chatUser.status == 'away'
+                    }"
+                  >
+                    <div class="avatar-content">
+                      {{
+                        chatUser.firstName + " " + chatUser.lastName | initials
+                      }}
+                    </div>
                   </div>
                 </ng-template>
               </div>
               <ng-template #alternateAvatar>
                 <div>
                   <div *ngIf="userProfile.profileImage; else customAvatar">
-                    <img class="rounded-circle mr-1" src="{{baseURL}}{{userProfile.profileImage}}" height="32"
-                      width="32" />
+                    <img
+                      class="rounded-circle mr-1"
+                      src="{{ baseURL }}{{ userProfile.profileImage }}"
+                      height="32"
+                      width="32"
+                    />
                   </div>
                   <ng-template #customAvatar>
-                    <div class="avatar mr-1 ml-0" style="background-color: #38b6ff;" [ngClass]="{
+                    <div
+                      class="avatar mr-1 ml-0"
+                      style="background-color: #38b6ff"
+                      [ngClass]="{
                         'avatar-status-offline': chatUser.status == 'offline',
                         'avatar-status-online': chatUser.status == 'online',
                         'avatar-status-busy': chatUser.status == 'busy',
                         'avatar-status-away': chatUser.status == 'away'
-                      }">
-                      <div class="avatar-content">{{ userProfile.companyName | initials }}</div>
+                      }"
+                    >
+                      <div class="avatar-content">
+                        {{ userProfile.companyName | initials }}
+                      </div>
                     </div>
                   </ng-template>
                   <!-- <img src="{{baseURL}}{{userProfile.profileImage}}" alt="avatar" height="36" width="36" /> -->
                 </div>
               </ng-template>
-
-
-
             </span>
           </div>
           <div class="chat-body">
@@ -130,8 +187,14 @@
             <!-- <i data-feather="mic" class="cursor-pointer"></i> -->
           </span>
         </div>
-        <input type="text" class="form-control message" placeholder="Type your message here." [(ngModel)]="chatMessage"
-          (keydown.enter)="sendMessage()" name="chat-message" />
+        <input
+          type="text"
+          class="form-control message"
+          placeholder="Type your message here."
+          [(ngModel)]="chatMessage"
+          (keydown.enter)="sendMessage()"
+          name="chat-message"
+        />
         <!-- <div class="input-group-append">
           <span class="input-group-text">
             <label for="attach-doc" class="attachment-icon mb-0">
@@ -140,8 +203,13 @@
           ></span>
         </div> -->
       </div>
-      <button type="button" class="btn btn-primary send" (keydown.enter)="sendMessage()" (click)="sendMessage()"
-        rippleEffect>
+      <button
+        type="button"
+        class="btn btn-primary send"
+        (keydown.enter)="sendMessage()"
+        (click)="sendMessage()"
+        rippleEffect
+      >
         <i data-feather="send" class="d-lg-none"></i>
         <span class="d-none d-lg-block">Send</span>
       </button>
@@ -152,12 +220,18 @@
 </section>
 <!--/ Main chat area -->
 
-<section *ngIf="!chatUser.firstName" class="chat-app-window" style="text-align: center; background-color: #ffffff;">
-  <div class="active-chat" style="display: flex; align-items: center; justify-content: center;">
+<section
+  *ngIf="!chatUser.firstName"
+  class="chat-app-window"
+  style="text-align: center; background-color: #ffffff"
+>
+  <div
+    class="active-chat"
+    style="display: flex; align-items: center; justify-content: center"
+  >
     <h3>No Chats Found</h3>
   </div>
 </section>
-
 
 <ng-template #modalDecline let-modal>
   <div class="text-center mt-2">
@@ -170,10 +244,20 @@
     You really want to decline this quotation?
   </div>
   <div class="text-center mb-2">
-    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')" rippleEffect>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.dismiss('Cross click')"
+      rippleEffect
+    >
       Decline
     </button>
-    <button type="button" class="btn btn-primary  ml-1" (click)="modal.dismiss('Cross click')" rippleEffect>
+    <button
+      type="button"
+      class="btn btn-primary ml-1"
+      (click)="modal.dismiss('Cross click')"
+      rippleEffect
+    >
       Cancel
     </button>
   </div>
@@ -188,14 +272,24 @@
   </div>
   <div class="modal-body text-center mb-2" tabindex="0" ngbAutofocus>
     Are you interested in this quote request?
-    <br>
+    <br />
     After approve you can check this lead under lead management tab.
   </div>
   <div class="text-center mb-2">
-    <button type="button" class="btn btn-success" (click)="changeOrderStatus()" rippleEffect>
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="changeOrderStatus()"
+      rippleEffect
+    >
       Approve
     </button>
-    <button type="button" class="btn btn-primary ml-1" (click)="modal.dismiss('Cross click')" rippleEffect>
+    <button
+      type="button"
+      class="btn btn-primary ml-1"
+      (click)="modal.dismiss('Cross click')"
+      rippleEffect
+    >
       Cancel
     </button>
   </div>

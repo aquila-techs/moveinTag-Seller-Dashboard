@@ -6,7 +6,11 @@
           class="container-fluid"
           style="padding-left: 0px; padding-right: 0px"
         >
-          <div class="step-header" style="background-color: #ffffff">
+          <div
+            *ngIf="isLoading === 'false'"
+            class="step-header"
+            style="background-color: #ffffff"
+          >
             <img
               src="../assets/images/logo/logo.png"
               alt=""
@@ -49,7 +53,7 @@
             </ul>
           </div>
 
-          <div class="step">
+          <div class="step" *ngIf="isLoading === 'false'">
             <div
               class="row align-items-center"
               style="background-color: #ffffff"
@@ -138,13 +142,13 @@
                         provided pursuant to
 
                         <a
-                          href="https://home.moventag.com/#/terms-of-use"
+                          href="https://moventag.com/#/terms-of-use"
                           target="_blank"
                           >Moventag Terms of Use</a
                         >
                         and
                         <a
-                          href="https://home.moventag.com/#/privacy-policy"
+                          href="https://moventag.com/#/privacy-policy"
                           target="_blank"
                           >Privacy Policy</a
                         ></span
@@ -157,14 +161,12 @@
                 >
                 <p class="font-small-2 text-dark">
                   By clicking or tapping "next", I agree to the
-                  <a
-                    href="https://home.moventag.com/#/terms-of-use"
-                    target="_blank"
+                  <a href="https://moventag.com/#/terms-of-use" target="_blank"
                     >Terms of use</a
                   >
                   and
                   <a
-                    href="https://home.moventag.com/#/privacy-policy"
+                    href="https://moventag.com/#/privacy-policy"
                     target="_blank"
                     >Privacy Policy.</a
                   >
@@ -574,13 +576,13 @@
                       >
                         By creating an account, you agree to the
                         <a
-                          href="https://home.moventag.com/#/terms-of-use"
+                          href="https://moventag.com/#/terms-of-use"
                           target="_blank"
                           >Terms of use</a
                         >
                         and
                         <a
-                          href="https://home.moventag.com/#/privacy-policy"
+                          href="https://moventag.com/#/privacy-policy"
                           target="_blank"
                           >Privacy Policy.</a
                         >

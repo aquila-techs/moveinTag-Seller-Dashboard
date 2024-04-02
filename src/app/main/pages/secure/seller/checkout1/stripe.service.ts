@@ -12,8 +12,8 @@ export class StripeService {
 
   async createStripe(): Promise<any> {
     this.stripe = Stripe(
-      "pk_test_51FMVPnBsGswEgNabZmzIsj0Wfm70T55gJpUeJHpehwSTlGfwZFdG72qUyuG3NooBq9XDE11gOUmZRAOzckkFNiEK00THKSIghZ"
-    ); // Replace 'YOUR_STRIPE_PUBLIC_KEY' with your actual Stripe public key
+      "pk_live_51OpInML7MEQHcjwNtcHMqFdDQd2xhImkDL8W0eMUAcCi0KPMBsNOfnQD4li1LLkWDYOM9q9ihfGsDHwysz2x5Pwf00OBmIS7mJ"
+    );
     return this.stripe;
   }
 

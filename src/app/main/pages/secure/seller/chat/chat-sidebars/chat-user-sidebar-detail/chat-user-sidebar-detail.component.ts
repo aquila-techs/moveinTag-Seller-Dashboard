@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
-import { ChatService } from '../../chat.service';
-import { environment } from 'environments/environment';
-import { UserService } from '@core/services/services/user.service';
-import { Router } from '@angular/router';
-
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
+import { ChatService } from "../../chat.service";
+import { environment } from "environments/environment";
+import { UserService } from "@core/services/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-chat-user-sidebar-detail',
-  templateUrl: './chat-user-sidebar-detail.component.html'
+  selector: "app-chat-user-sidebar-detail",
+  templateUrl: "./chat-user-sidebar-detail.component.html",
 })
 export class ChatUserSidebarDetailComponent implements OnInit {
   // Public
@@ -17,7 +16,7 @@ export class ChatUserSidebarDetailComponent implements OnInit {
   public chats;
   public chatUser;
   public userProfile;
-  public chatMessage = '';
+  public chatMessage = "";
   public newChat;
   public baseURL = environment.serverURL;
   public chatRoom;
@@ -29,8 +28,12 @@ export class ChatUserSidebarDetailComponent implements OnInit {
    * @param {ChatService} _chatService
    * @param {CoreSidebarService} _coreSidebarService
    */
-  constructor(private _chatService: ChatService, private _coreSidebarService: CoreSidebarService,
-    private userService: UserService, private router: Router) {}
+  constructor(
+    private _chatService: ChatService,
+    private _coreSidebarService: CoreSidebarService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -59,15 +62,19 @@ export class ChatUserSidebarDetailComponent implements OnInit {
    */
   searchedSeller;
   ngOnInit(): void {
-    this._chatService.onSelectedChatUserChange.subscribe(res => {
+    this._chatService.onSelectedChatUserChange.subscribe((res) => {
       this.chatUser = res;
+      console.log("===============");
+      console.log(res);
+      console.log("===============");
     });
-
   }
 
-  openCompanyPorfile(){
-    window.localStorage.setItem('seller', JSON.stringify(this.searchedSeller[0]));
-    this.router.navigate(['/company-detail']);
-
+  openCompanyPorfile() {
+    window.localStorage.setItem(
+      "seller",
+      JSON.stringify(this.searchedSeller[0])
+    );
+    this.router.navigate(["/company-detail"]);
   }
 }

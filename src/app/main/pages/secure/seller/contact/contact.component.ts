@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CoreConfigService } from '@core/services/config.service';
-import { AdminService } from '@core/services/services/admin.service';
-import { colors } from 'app/colors.const';
-import { AuthenticationService } from '@core/services/authentication.service';
-import { ToastrService } from 'ngx-toastr';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { CoreConfigService } from "@core/services/config.service";
+import { AdminService } from "@core/services/services/admin.service";
+import { colors } from "app/colors.const";
+import { AuthenticationService } from "@core/services/authentication.service";
+import { ToastrService } from "ngx-toastr";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  selector: "app-dashboard",
+  templateUrl: "./contact.component.html",
+  styleUrls: ["./contact.component.scss"],
 })
 export class ContactComponent implements OnInit {
   public contentHeader: object;
@@ -17,8 +17,13 @@ export class ContactComponent implements OnInit {
   category: string = "";
   description: string = "";
   public user;
-  constructor(private authenticationService: AuthenticationService, private adminService: AdminService, private _coreConfigService: CoreConfigService, private toatrService: ToastrService, private http: HttpClient) {
-
+  constructor(
+    private authenticationService: AuthenticationService,
+    private adminService: AdminService,
+    private _coreConfigService: CoreConfigService,
+    private toatrService: ToastrService,
+    private http: HttpClient
+  ) {
     // this._coreConfigService.config = {
     //   layout: {
     //     navbar: {
@@ -38,12 +43,12 @@ export class ContactComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this.authenticationService.currentUser.subscribe(x => (this.user = x));
+    this.authenticationService.currentUser.subscribe((x) => (this.user = x));
     this.contentHeader = {
-      headerTitle: 'Contact Us',
+      headerTitle: "Contact Us",
       actionButton: false,
       breadcrumb: {
-        type: '',
+        type: "",
         links: [
           // {
           //   name: 'Home',
@@ -59,8 +64,8 @@ export class ContactComponent implements OnInit {
           //   name: 'Chartjs',
           //   isLink: false
           // }
-        ]
-      }
+        ],
+      },
     };
   }
 
@@ -69,32 +74,32 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmitSendEmail() {
-
     if (this.category === "") {
-      this.toatrService.error('Please select your category');
+      this.toatrService.error("Please select your category");
       return;
     }
     if (this.description === "") {
-      this.toatrService.error('Please enter your description');
+      this.toatrService.error("Please enter your description");
       return;
     }
 
     try {
-
-      this.http.post("https://api.moventag.com/user/helpSendEmail", {
-        email: this.user.email,
-        category: this.category,
-        description: this.description
-      }).subscribe({
-        next: (res: any) => {
-          this.toatrService.success('We have recieved your email. We will get back to you ASAP!');
-        }
-      })
-
+      this.http
+        .post("https://api.moventag.com/user/helpSendEmail", {
+          name: this.user.companyName,
+          email: this.user.email,
+          category: this.category,
+          description: this.description,
+        })
+        .subscribe({
+          next: (res: any) => {
+            this.toatrService.success(
+              "We have recieved your email. We will get back to you ASAP!"
+            );
+          },
+        });
     } catch (error) {
       this.toatrService.error(error);
     }
-
   }
-
 }
