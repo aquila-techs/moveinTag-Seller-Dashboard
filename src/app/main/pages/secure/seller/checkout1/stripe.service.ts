@@ -12,7 +12,7 @@ export class StripeService {
 
   async createStripe(): Promise<any> {
     this.stripe = Stripe(
-      "pk_test_51OpInML7MEQHcjwNU367fibxmzTw2PaMeG1kJRrPddEYeeaQL9UgllVC6rx7ZzkmRHG1GAfvIkEufvkXGlkQzHHD00uuXE849c"
+      "pk_live_51OpInML7MEQHcjwNtcHMqFdDQd2xhImkDL8W0eMUAcCi0KPMBsNOfnQD4li1LLkWDYOM9q9ihfGsDHwysz2x5Pwf00OBmIS7mJ"
     );
     return this.stripe;
   }

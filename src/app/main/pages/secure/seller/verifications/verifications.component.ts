@@ -62,6 +62,26 @@ export class VerificationsComponent implements OnInit {
     if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png") {
 
       let data: FormData = new FormData();
+
+      data.append('companyName', this.sellerProfile?.companyName ? this.sellerProfile.companyName : '')
+      data.append('description', this.sellerProfile?.description ? this.sellerProfile.description : '')
+      data.append('termsConditions', this.sellerProfile?.termsConditions ? this.sellerProfile.termsConditions : '')
+      data.append('companyType', this.sellerProfile?.companyType ? this.sellerProfile.companyType : '')
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee ? this.sellerProfile.noOfEmployee : '')
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy ? this.sellerProfile.returnPolicy : '')
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance ? this.sellerProfile.liabilityInsurance : '')
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation ? this.sellerProfile.workerCompensation : '')
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum ? this.sellerProfile.projectMinimum : '')
+      data.append('bonded', this.sellerProfile?.bonded ? this.sellerProfile.bonded : '')
+      data.append('writtenContract', this.sellerProfile?.writtenContract ? this.sellerProfile.writtenContract : '')
+      data.append('address', this.sellerProfile?.address ? this.sellerProfile.address : '')
+      data.append('postalCode', this.sellerProfile?.postalCode ? this.sellerProfile.postalCode : '')
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod ? this.sellerProfile.paymentMethod : '')
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms ? this.sellerProfile.warrantyTerms : '')
+      data.append('country', this.sellerProfile?.country ? this.sellerProfile.country : '')
+      data.append('state', this.sellerProfile?.state ? this.sellerProfile.state : '')
+      data.append('city', this.sellerProfile?.city ? this.sellerProfile.city : '')
+
       data.append('license', event.target.files[0])
       data.append('id', this.userId)
       this.userService.updateSellerLicense(data).subscribe({
@@ -84,6 +104,25 @@ export class VerificationsComponent implements OnInit {
 
     if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png") {
       let data: FormData = new FormData();
+      data.append('companyName', this.sellerProfile?.companyName ? this.sellerProfile.companyName : '')
+      data.append('description', this.sellerProfile?.description ? this.sellerProfile.description : '')
+      data.append('termsConditions', this.sellerProfile?.termsConditions ? this.sellerProfile.termsConditions : '')
+      data.append('companyType', this.sellerProfile?.companyType ? this.sellerProfile.companyType : '')
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee ? this.sellerProfile.noOfEmployee : '')
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy ? this.sellerProfile.returnPolicy : '')
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance ? this.sellerProfile.liabilityInsurance : '')
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation ? this.sellerProfile.workerCompensation : '')
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum ? this.sellerProfile.projectMinimum : '')
+      data.append('bonded', this.sellerProfile?.bonded ? this.sellerProfile.bonded : '')
+      data.append('writtenContract', this.sellerProfile?.writtenContract ? this.sellerProfile.writtenContract : '')
+      data.append('address', this.sellerProfile?.address ? this.sellerProfile.address : '')
+      data.append('postalCode', this.sellerProfile?.postalCode ? this.sellerProfile.postalCode : '')
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod ? this.sellerProfile.paymentMethod : '')
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms ? this.sellerProfile.warrantyTerms : '')
+      data.append('country', this.sellerProfile?.country ? this.sellerProfile.country : '')
+      data.append('state', this.sellerProfile?.state ? this.sellerProfile.state : '')
+      data.append('city', this.sellerProfile?.city ? this.sellerProfile.city : '')
+
       data.append('libilityInsurance', event.target.files[0])
       data.append('id', this.userId)
       this.userService.updateSellerLibilityInsurance(data).subscribe({
@@ -106,6 +145,26 @@ export class VerificationsComponent implements OnInit {
 
     if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png") {
       let data: FormData = new FormData();
+
+      data.append('companyName', this.sellerProfile?.companyName ? this.sellerProfile.companyName : '')
+      data.append('description', this.sellerProfile?.description ? this.sellerProfile.description : '')
+      data.append('termsConditions', this.sellerProfile?.termsConditions ? this.sellerProfile.termsConditions : '')
+      data.append('companyType', this.sellerProfile?.companyType ? this.sellerProfile.companyType : '')
+      data.append('noOfEmployee', this.sellerProfile?.noOfEmployee ? this.sellerProfile.noOfEmployee : '')
+      data.append('returnPolicy', this.sellerProfile?.returnPolicy ? this.sellerProfile.returnPolicy : '')
+      data.append('liabilityInsurance', this.sellerProfile?.liabilityInsurance ? this.sellerProfile.liabilityInsurance : '')
+      data.append('workerCompensation', this.sellerProfile?.workerCompensation ? this.sellerProfile.workerCompensation : '')
+      data.append('projectMinimum', this.sellerProfile?.projectMinimum ? this.sellerProfile.projectMinimum : '')
+      data.append('bonded', this.sellerProfile?.bonded ? this.sellerProfile.bonded : '')
+      data.append('writtenContract', this.sellerProfile?.writtenContract ? this.sellerProfile.writtenContract : '')
+      data.append('address', this.sellerProfile?.address ? this.sellerProfile.address : '')
+      data.append('postalCode', this.sellerProfile?.postalCode ? this.sellerProfile.postalCode : '')
+      data.append('paymentMethod', this.sellerProfile?.paymentMethod ? this.sellerProfile.paymentMethod : '')
+      data.append('warrantyTerms', this.sellerProfile?.warrantyTerms ? this.sellerProfile.warrantyTerms : '')
+      data.append('country', this.sellerProfile?.country ? this.sellerProfile.country : '')
+      data.append('state', this.sellerProfile?.state ? this.sellerProfile.state : '')
+      data.append('city', this.sellerProfile?.city ? this.sellerProfile.city : '')
+      
       data.append('IdentityCard', event.target.files[0])
       data.append('id', this.userId)
       this.userService.updateSellerIdentityCard(data).subscribe({
