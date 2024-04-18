@@ -113,7 +113,7 @@
                     </th>
                     <th style="font-family: 'Montserrat', sans-serif">City</th>
                     <th style="font-family: 'Montserrat', sans-serif">
-                      Quote Details
+                      Lead Details
                     </th>
                   </tr>
                 </thead>
@@ -199,7 +199,7 @@
 
     <ng-template #modalVC let-modal>
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Quotes</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Lead Info</h5>
         <button
           type="button"
           class="close"
@@ -212,7 +212,7 @@
       <div class="modal-body" tabindex="0" ngbAutofocus>
         <form action="">
           <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
-            <label for="basicInput">What do you need to be done?</label>
+            <label for="basicInput">What needs to be done?</label>
             <input
               readonly
               type="text"
@@ -223,7 +223,7 @@
             />
           </div>
           <div class="form-group" [hidden]="!selectedOrder?.place">
-            <label for="basicInput">What do you need to be done?</label>
+            <label for="basicInput">What type of property?</label>
             <input
               readonly
               type="text"
@@ -248,7 +248,7 @@
           </div>
           <div class="form-group" [hidden]="!selectedOrder?.notes">
             <label for="basicInput"
-              >Please provide some details about project?
+              >Please provide some details about project
             </label>
             <textarea
               readonly
