@@ -131,6 +131,7 @@ export class OrdermanagementComponent implements OnInit {
     this.orderService
       .getAllCompleteSellerOrders(queryParams)
       .subscribe((res) => {
+        console.log(res);
         if (res[0].results.length > 0) {
           this.completedOrderTotal = res[0]["count"][0].totalCount;
           this.completedOrders = res[0].results;
