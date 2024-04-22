@@ -1703,15 +1703,15 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     }
   }
 
-  priceId = "price_1Ot4C0L7MEQHcjwNDArk5F8p";
-  signupCost = "price_1Ot4CxL7MEQHcjwNBbliGj8u";
+  priceId = "price_1P3AMSL7MEQHcjwNsnSSUyQo";
+  signupCost = "price_1P3APGL7MEQHcjwNZ94I8WJy";
   charges = "398.00";
   discount = "199.00";
   total = "199.00";
   free_trial = "0";
   selectPackage() {
-    this.priceId = "price_1Ot4C0L7MEQHcjwNDArk5F8p";
-    this.signupCost = "price_1Ot4CxL7MEQHcjwNBbliGj8u";
+    this.priceId = "price_1P3AMSL7MEQHcjwNsnSSUyQo";
+    this.signupCost = "price_1P3APGL7MEQHcjwNZ94I8WJy";
     this.charges = "398.00";
     this.discount = "199.00";
     this.total = "199.00";

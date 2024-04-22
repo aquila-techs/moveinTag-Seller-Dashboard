@@ -1581,64 +1581,22 @@ export class SubscriptionRenewelComponent
             });
         },
       });
-      // this.createToken();
-      //   const stripe = require('stripe')('sk_test_HzHrz8pdKuKRvc7ZCfkNySw3');
-
-      //   const token = this.stripe.tokens.create({
-      //     card: {
-      //       number: '4242424242424242',
-      //       exp_month: 4,
-      //       exp_year: 2024,
-      //       cvc: '314',
-      //     },
-      //   });
-      // }else{
-      //   this.toastrService.error('Please enter all fields.','');
     }
   }
 
-  // createToken() {
-
-  //   this.stripe.tokens.create('card', {
-  //     name: this.cardname,
-  //     number: this.cardNumber,
-  //     exp_month: this.selectedMonth,
-  //     exp_year: this.selectedYear,
-  //     cvc: this.cvc,
-  //   }).then(result => {
-  //     if (result.error) {
-  //       // Handle error
-  //     } else {
-  //       const token = result.token;
-  //       // Send token to your server to complete the charge
-  //     }
-  //   });
-  // }
-  priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
-  charges = "9.99";
-  discount = "0.00";
-  total = "9.99";
-  free_trial = "1";
+  priceId = "price_1P3AMSL7MEQHcjwNsnSSUyQo";
+  signupCost = "price_1P3APGL7MEQHcjwNZ94I8WJy";
+  charges = "398.00";
+  discount = "199.00";
+  total = "199.00";
+  free_trial = "0";
   selectPackage() {
-    if (this.radioModel === 1) {
-      this.priceId = "price_1NhaU9DmnN3Lb8U78yKEA2id";
-      this.charges = "9.99";
-      this.discount = "0.00";
-      this.total = "9.99";
-      this.free_trial = "1";
-    } else if (this.radioModel === 2) {
-      this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
-      this.charges = "8.25";
-      this.discount = "20.88";
-      this.total = "99.00";
-      this.free_trial = "7";
-    } else {
-      this.priceId = "price_1NhaUqDmnN3Lb8U7IsN8Lc5u";
-      this.charges = "200.00";
-      this.discount = "00.00";
-      this.total = "200.00";
-      this.free_trial = "7";
-    }
+    this.priceId = "price_1P3AMSL7MEQHcjwNsnSSUyQo";
+    this.signupCost = "price_1P3APGL7MEQHcjwNZ94I8WJy";
+    this.charges = "398.00";
+    this.discount = "199.00";
+    this.total = "199.00";
+    this.free_trial = "0";
   }
 
   public subscription: any;
