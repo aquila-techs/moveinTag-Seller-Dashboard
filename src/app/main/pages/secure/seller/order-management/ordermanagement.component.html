@@ -323,6 +323,12 @@
                               {{ item?.subCategory?.title }}
                             </td>
                             <td style="font-family: 'Montserrat', sans-serif">
+                              <span
+                                class="edit-icon"
+                                style="cursor: pointer; margin-right: 3px"
+                                (click)="openOrderDetailPopup(modalVC, item)"
+                                >✏️</span
+                              >
                               {{ item?.ammount }}
                             </td>
                             <td style="font-family: 'Montserrat', sans-serif">
@@ -747,6 +753,30 @@
           class="form-control"
         ></textarea>
       </div>
+
+      <div *ngIf="selectedOrder?.status === 'COMPLETED'">
+        <div class="form-group" [hidden]="!selectedOrder?.startTime">
+          <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+            >Earning</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            [value]="selectedOrder?.ammount"
+            (input)="updateEarningAmount($event.target.value)"
+            id="basicInput"
+            placeholder="Earning"
+          />
+        </div>
+
+        <button
+          class="btn btn-primary mt-0 mb-3"
+          (click)="updateEarning(selectedOrder)"
+        >
+          Update Earning
+        </button>
+      </div>
+
       <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
         <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
           >Service Images</label

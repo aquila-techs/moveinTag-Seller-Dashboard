@@ -1,71 +1,72 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { HttpService } from '../http.service';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+import { HttpService } from "../http.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class OrderService {
-
   public selectOrder: BehaviorSubject<any>;
 
   constructor(private _http: HttpService) {
     this.selectOrder = new BehaviorSubject({});
-   }
+  }
 
-  setSelectedOrder(user: any){
+  setSelectedOrder(user: any) {
     this.selectOrder.next(user);
   }
 
-  getSelectedProduct(){
+  getSelectedProduct() {
     return this.selectOrder.asObservable();
   }
 
-  getAllOrders(){
-    return this._http.get('order/get-all-orders')
+  getAllOrders() {
+    return this._http.get("order/get-all-orders");
   }
 
-  getAllCompleteSellerOrders(queryParams){
-    return this._http.get('order/get-all-orders'+queryParams)
+  getAllCompleteSellerOrders(queryParams) {
+    return this._http.get("order/get-all-orders" + queryParams);
   }
-  getEarningAnalytics(queryParams){
-    return this._http.get('order/get-all-earning-analytics'+queryParams)
-  }
-
-  getAllQuotesOrders(queryParams){
-    return this._http.get('order/get-all-orders'+queryParams)
+  getEarningAnalytics(queryParams) {
+    return this._http.get("order/get-all-earning-analytics" + queryParams);
   }
 
-  getAllActiveSellerOrders(queryParams){
-    return this._http.get('order/get-all-orders'+queryParams)
-  }
-  getAllUserEarningOrders(queryParams){
-    return this._http.get('order/get-all-earning'+queryParams)
+  getAllQuotesOrders(queryParams) {
+    return this._http.get("order/get-all-orders" + queryParams);
   }
 
-  getAllCancelledSellerOrders(queryParams){
-    return this._http.get('order/get-all-orders'+queryParams)
+  getAllActiveSellerOrders(queryParams) {
+    return this._http.get("order/get-all-orders" + queryParams);
+  }
+  getAllUserEarningOrders(queryParams) {
+    return this._http.get("order/get-all-earning" + queryParams);
   }
 
-  getAllBuyerOrders(queryParams){
-    return this._http.get('order/get-user-all-order'+queryParams)
+  getAllCancelledSellerOrders(queryParams) {
+    return this._http.get("order/get-all-orders" + queryParams);
   }
 
-  changeOrderStatus(data){
-    return this._http.put('order/update-status-order',data)
+  getAllBuyerOrders(queryParams) {
+    return this._http.get("order/get-user-all-order" + queryParams);
   }
 
-  changeOrderStatusFromChat(data){
-    return this._http.put('order/update-status-order-from-chat',data)
+  changeOrderStatus(data) {
+    return this._http.put("order/update-status-order", data);
   }
 
-  exportOrders(){
-    return this._http.get('order/export-orders')
+  changeOrderAmounnt(data) {
+    return this._http.put("order/update-amout-order", data);
   }
 
-  getAllReviews(queryParams){
-    return this._http.get('reviews'+queryParams)
-
+  changeOrderStatusFromChat(data) {
+    return this._http.put("order/update-status-order-from-chat", data);
   }
 
+  exportOrders() {
+    return this._http.get("order/export-orders");
+  }
+
+  getAllReviews(queryParams) {
+    return this._http.get("reviews" + queryParams);
+  }
 }

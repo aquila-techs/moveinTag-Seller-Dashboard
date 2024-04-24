@@ -9,6 +9,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NotificationsService } from "app/layout/components/navbar/navbar-notification/notifications.service";
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-ordermanagement",
@@ -23,7 +24,8 @@ export class OrdermanagementComponent implements OnInit {
     private http: HttpClient,
     private _formBuilder: UntypedFormBuilder,
     private orderService: OrderService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private toatrService: ToastrService
   ) {
     this.userId = JSON.parse(window.localStorage.getItem("currentUser"))._id;
   }
@@ -75,6 +77,11 @@ export class OrdermanagementComponent implements OnInit {
   public latedOrder = [];
   public completedOrderAmmountForm: UntypedFormGroup;
   public searchText: string = "";
+  public updatedEarningAmount: string = "";
+
+  updateEarningAmount(e) {
+    this.updatedEarningAmount = e;
+  }
 
   onSubmitExportOrders() {
     this.http
@@ -127,7 +134,7 @@ export class OrdermanagementComponent implements OnInit {
       this.pageSize +
       "&pageNo=" +
       this.completedOrderPage +
-      "&sortBy=updatedAt&order=desc";
+      "&sortBy=orderNum&order=asc";
     this.orderService
       .getAllCompleteSellerOrders(queryParams)
       .subscribe((res) => {
@@ -202,6 +209,7 @@ export class OrdermanagementComponent implements OnInit {
     });
   }
   openOrderDetailPopup(modalVC, selectedOrders) {
+    this.updatedEarningAmount = "";
     this.selectedOrder = selectedOrders;
 
     this.modalService.open(modalVC, {
@@ -211,6 +219,7 @@ export class OrdermanagementComponent implements OnInit {
   }
   public selectedOrderForComplete: any;
   public selectedType: any;
+
   changeOrderStatus(order, event, type, modalComplete) {
     if (event.target.value === "COMPLETED") {
       this.selectedOrderForComplete = order;
@@ -234,6 +243,25 @@ export class OrdermanagementComponent implements OnInit {
           senderId: order.seller._id,
         };
         this.notificationService.sendMessage(data, order.buyer._id);
+
+        if (event.target.value.toLowerCase() === "active") {
+          this.toatrService.success(
+            "Lead status changed to active!",
+            "Status Changed!"
+          );
+        }
+        if (event.target.value.toLowerCase() === "cancelled") {
+          this.toatrService.success(
+            "Lead status changed to cancelled!",
+            "Status Changed!"
+          );
+        }
+        if (event.target.value.toLowerCase() === "completed") {
+          this.toatrService.success(
+            "Lead status changed to completed!",
+            "Status Changed!"
+          );
+        }
       }
       // this.getUserActiveOrder();
       if (type === "active") {
@@ -242,6 +270,22 @@ export class OrdermanagementComponent implements OnInit {
       if (type === "cancelled") {
         this.getUSerCanceledOrder();
       }
+    });
+  }
+
+  updateEarning(order) {
+    let data = {
+      orderId: order._id,
+      status: order.status,
+      ammount: this.updatedEarningAmount
+        ? parseInt(this.updatedEarningAmount)
+        : order.ammount,
+    };
+
+    this.orderService.changeOrderAmounnt(data).subscribe((res) => {
+      this.modalService.dismissAll();
+      this.getUserCompletedOrders();
+      this.toatrService.success("Updated!.", "Earning has been updated!");
     });
   }
 
@@ -275,6 +319,12 @@ export class OrdermanagementComponent implements OnInit {
           this.selectedOrderForComplete.buyer._id
         );
       }
+
+      this.toatrService.success(
+        "Lead status changed to completed!",
+        "Status Changed!"
+      );
+
       // this.getUserActiveOrder();
       if (this.selectedType === "active") {
         this.getUserActiveOrder();
@@ -282,6 +332,7 @@ export class OrdermanagementComponent implements OnInit {
       if (this.selectedType === "cancelled") {
         this.getUSerCanceledOrder();
       }
+
       this.selectedOrderForComplete = null;
       this.selectedType = null;
     });
