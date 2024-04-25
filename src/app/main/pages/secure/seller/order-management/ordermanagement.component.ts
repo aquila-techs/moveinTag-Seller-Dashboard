@@ -285,7 +285,7 @@ export class OrdermanagementComponent implements OnInit {
     this.orderService.changeOrderAmounnt(data).subscribe((res) => {
       this.modalService.dismissAll();
       this.getUserCompletedOrders();
-      this.toatrService.success("Updated!.", "Earning has been updated!");
+      this.toatrService.success("", "Earning has been updated!");
     });
   }
 
