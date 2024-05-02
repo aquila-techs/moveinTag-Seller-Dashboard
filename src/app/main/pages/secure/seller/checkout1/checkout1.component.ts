@@ -1462,13 +1462,29 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             .createSubscriptionCustomer(subscriptionData)
             .subscribe({
               next: (res) => {
+                console.log("=================");
                 console.log(res);
+                console.log("=================");
+                console.log(res.status);
+                if (res.status === "incomplete") {
+                  let body = {
+                    _id: this.user._id,
+                  };
+                  this.userService.sendEmailOnCardDecline(body).subscribe({
+                    next: (value) => {},
+                  });
+                }
+
                 let data = {
                   _id: this.user._id,
                   paymentMethodId: tokenResult.token.card.id,
                 };
                 this.userService.setPaymentMethodAsDefault(data).subscribe({
-                  next: (value) => {},
+                  next: (value) => {
+                    console.log("=================111");
+                    console.log(value);
+                    console.log("=================111");
+                  },
                 });
 
                 if (this.isAfterSingup) {
@@ -1478,7 +1494,11 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
                   };
 
                   this.userService.affMakePurchase(OBJ).subscribe({
-                    next: (value) => {},
+                    next: (value) => {
+                      console.log("=================111222");
+                      console.log(value);
+                      console.log("=================111222");
+                    },
                   });
 
                   this.toastrService.success(
@@ -1500,6 +1520,14 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
                   this._authenticationService.updateUserData(this.user);
                   this._router.navigate(["/pages/seller/home"]);
                 }
+              },
+              error: (err) => {
+                let body = {
+                  _id: this.user._id,
+                };
+                this.userService.sendEmailOnCardDecline(body).subscribe({
+                  next: (value) => {},
+                });
               },
             });
         }
