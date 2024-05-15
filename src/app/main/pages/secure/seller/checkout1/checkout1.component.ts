@@ -1462,63 +1462,55 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             .createSubscriptionCustomer(subscriptionData)
             .subscribe({
               next: (res) => {
-                console.log("=================");
-                console.log(res);
-                console.log("=================");
-                console.log(res.status);
                 if (res.status === "incomplete") {
                   let body = {
                     _id: this.user._id,
                   };
                   this.userService.sendEmailOnCardDecline(body).subscribe({
-                    next: (value) => {},
-                  });
-                }
-
-                let data = {
-                  _id: this.user._id,
-                  paymentMethodId: tokenResult.token.card.id,
-                };
-                this.userService.setPaymentMethodAsDefault(data).subscribe({
-                  next: (value) => {
-                    console.log("=================111");
-                    console.log(value);
-                    console.log("=================111");
-                  },
-                });
-
-                if (this.isAfterSingup) {
-                  const OBJ = {
-                    userId: this.user._id,
-                    purchaseAmount: this.total,
-                  };
-
-                  this.userService.affMakePurchase(OBJ).subscribe({
                     next: (value) => {
-                      console.log("=================111222");
-                      console.log(value);
-                      console.log("=================111222");
+                      this.toastrService.error(
+                        "You card is declined. We have sent you an email for this issue. Please check!"
+                      );
                     },
                   });
-
-                  this.toastrService.success(
-                    "You have successfully subscribed."
-                  );
-                  this._router.navigate(["/pages/seller/home"]);
-                  // this._router.navigate(['/login']);
                 } else {
-                  const OBJ = {
-                    userId: this.user._id,
-                    purchaseAmount: this.total,
+                  let data = {
+                    _id: this.user._id,
+                    paymentMethodId: tokenResult.token.card.id,
                   };
-
-                  this.userService.affMakePurchase(OBJ).subscribe({
+                  this.userService.setPaymentMethodAsDefault(data).subscribe({
                     next: (value) => {},
                   });
 
-                  this.user["payment"] = true;
-                  this._authenticationService.updateUserData(this.user);
-                  this._router.navigate(["/pages/seller/home"]);
+                  if (this.isAfterSingup) {
+                    const OBJ = {
+                      userId: this.user._id,
+                      purchaseAmount: this.total,
+                    };
+
+                    this.userService.affMakePurchase(OBJ).subscribe({
+                      next: (value) => {},
+                    });
+
+                    this.toastrService.success(
+                      "You have successfully subscribed."
+                    );
+                    this._router.navigate(["/pages/seller/home"]);
+                    // this._router.navigate(['/login']);
+                  } else {
+                    const OBJ = {
+                      userId: this.user._id,
+                      purchaseAmount: this.total,
+                    };
+
+                    this.userService.affMakePurchase(OBJ).subscribe({
+                      next: (value) => {},
+                    });
+
+                    this.user["payment"] = true;
+                    this._authenticationService.updateUserData(this.user);
+                    this._router.navigate(["/pages/seller/home"]);
+                  }
                 }
               },
               error: (err) => {
