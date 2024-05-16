@@ -24,6 +24,7 @@ export class AuthGuard implements CanActivate {
   // canActivate
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this._authenticationService.currentUserValue;
+
     if (currentUser) {
       // check if route is restricted by role
       if (
@@ -35,8 +36,10 @@ export class AuthGuard implements CanActivate {
         return false;
       }
       if (
-        !currentUser.payment &&
-        route.routeConfig.path !== "subscription-plan"
+        (!currentUser.payment &&
+          route.routeConfig.path !== "subscription-plan") ||
+        (!currentUser.packageBuyName &&
+          route.routeConfig.path !== "subscription-plan")
       ) {
         this._router.navigate(["/pages/seller/subscription-plan"]);
         return false;

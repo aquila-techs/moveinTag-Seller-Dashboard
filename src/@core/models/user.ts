@@ -1,4 +1,4 @@
-﻿import { Role } from './role';
+﻿import { Role } from "./role";
 
 export class User {
   id: number;
@@ -15,4 +15,5 @@ export class User {
   payment?: boolean;
   accessToken?: string;
   subscriptionStatus?: string;
+  packageBuyName: any;
 }
