@@ -1430,8 +1430,13 @@ export class SubscriptionRenewelComponent
         next: (res: any) => {
           this.countriesData = res;
 
+          const filteredData = this.countriesData.filter(
+            (item) =>
+              item.country === "Canada" || item.country === "United States"
+          );
+
           const country = [
-            ...new Set(this.countriesData.map((item) => item.country)),
+            ...new Set(filteredData.map((item) => item.country)),
           ];
           this.countriesList = country;
         },
