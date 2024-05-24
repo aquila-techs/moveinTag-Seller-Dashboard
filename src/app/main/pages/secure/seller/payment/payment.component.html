@@ -1,38 +1,69 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <!-- content-header component -->
-   <h4>Subscription Status</h4>
+    <h4>Subscription Status</h4>
 
-
-   <section>
+    <section>
       <ul ngbNav #nav="ngbNav" class="nav-tabs">
         <li [ngbNavItem]="1">
-          <a ngbNavLink  (click)="getPaymentStatus()" style="font-family: 'Montserrat', sans-serif;">Subscription Detail</a>
+          <a
+            ngbNavLink
+            (click)="getPaymentStatus()"
+            style="font-family: 'Montserrat', sans-serif"
+            >Subscription Detail</a
+          >
           <ng-template ngbNavContent>
-            <section class="mb-1" >
+            <section class="mb-1">
               <div class="table-wrapper">
                 <div class="row" id="basic-table">
                   <div class="col-12">
                     <div class="card auto">
-                      <div *ngIf="!subscription" class="table-responsive" style="
-                      font-size: 20px;
-                      text-align: center;
-                      margin: 30px;
-                  ">
-                        
-                        <span >No subscription found</span>
+                      <div
+                        *ngIf="!subscription"
+                        class="table-responsive"
+                        style="
+                          font-size: 20px;
+                          text-align: center;
+                          margin: 30px;
+                        "
+                      >
+                        <span>No subscription found</span>
                       </div>
-                      <div *ngIf="subscription" class="row" style="padding: 20px;">
-                        <h6 class="mb-2 col-sm-12" style="margin-left: 20px;">Payment Details:</h6>
-                        <div class="col-xl-6 ">
+                      <div
+                        *ngIf="subscription"
+                        class="row"
+                        style="padding: 20px"
+                      >
+                        <h6 class="mb-2 col-sm-12" style="margin-left: 20px">
+                          Payment Details:
+                        </h6>
+                        <div class="col-xl-6">
                           <table>
                             <tbody>
                               <tr>
-                                <td class="pr-1"><svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 141.732 141.732"><g fill="#2566af"><path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z"/></g><path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="#e6a540"/><path fill="none" d="M0 0h141.732v141.732H0z"/></svg>
+                                <td class="pr-1">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="300"
+                                    height="200"
+                                    viewBox="0 0 141.732 141.732"
+                                  >
+                                    <g fill="#2566af">
+                                      <path
+                                        d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z"
+                                      />
+                                    </g>
+                                    <path
+                                      d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z"
+                                      fill="#e6a540"
+                                    />
+                                    <path
+                                      fill="none"
+                                      d="M0 0h141.732v141.732H0z"
+                                    />
+                                  </svg>
                                 </td>
-                                <td>
-                                  
-                                </td>
+                                <td></td>
                               </tr>
                             </tbody>
                           </table>
@@ -43,55 +74,182 @@
                             <tbody>
                               <tr>
                                 <td class="pr-1">Card#</td>
-                                <td>...........{{subscription.card.last4}}</td>
+                                <td>
+                                  ...........{{ subscription.card.last4 }}
+                                </td>
                               </tr>
                               <tr>
                                 <td class="pr-1">Charge Type:</td>
-                                <td class="text-capitalize">{{subscription.subscription.collection_method.replace('_', ' ')}}</td>
+                                <td class="text-capitalize">
+                                  {{
+                                    subscription.subscription.collection_method.replace(
+                                      "_",
+                                      " "
+                                    )
+                                  }}
+                                </td>
                               </tr>
                               <tr>
                                 <td class="pr-1">Amount:</td>
-                                <td>${{subscription.subscription.items.data[0].plan.amount/100}}</td>
+                                <td>
+                                  ${{
+                                    subscription.subscription.items.data[0].plan
+                                      .amount / 100
+                                  }}
+                                </td>
                               </tr>
                               <tr>
                                 <td class="pr-1">Interval:</td>
-                                <td class="text-capitalize" >{{subscription.subscription.items.data[0].plan.interval}}</td>
+                                <td class="text-capitalize">
+                                  {{
+                                    subscription.subscription.items.data[0].plan
+                                      .interval
+                                  }}
+                                </td>
                               </tr>
-                              <tr *ngIf="subscription.subscription.status === 'trialing'">
+                              <tr
+                                *ngIf="
+                                  subscription.subscription.status ===
+                                  'trialing'
+                                "
+                              >
                                 <td class="pr-1">Trial Start:</td>
-                                <td>{{getDateFormat(subscription.subscription.trial_start)}}</td>
+                                <td>
+                                  {{
+                                    getDateFormat(
+                                      subscription.subscription.trial_start
+                                    )
+                                  }}
+                                </td>
                               </tr>
-                              <tr *ngIf="subscription.subscription.status === 'trialing'">
+                              <tr
+                                *ngIf="
+                                  subscription.subscription.status ===
+                                  'trialing'
+                                "
+                              >
                                 <td class="pr-1">Trial End:</td>
-                                <td>{{getDateFormat(subscription.subscription.trial_end)}}</td>
+                                <td>
+                                  {{
+                                    getDateFormat(
+                                      subscription.subscription.trial_end
+                                    )
+                                  }}
+                                </td>
                               </tr>
-                              <tr *ngIf="subscription.subscription.status !== 'trialing'">
+                              <tr
+                                *ngIf="
+                                  subscription.subscription.status !==
+                                  'trialing'
+                                "
+                              >
                                 <td class="pr-1">Subscription Start:</td>
-                                <td>{{getDateFormat(subscription.subscription.current_period_start)}}</td>
+                                <td>
+                                  {{
+                                    getDateFormat(
+                                      subscription.subscription
+                                        .current_period_start
+                                    )
+                                  }}
+                                </td>
                               </tr>
-                              <tr *ngIf="subscription.subscription.status !== 'trialing'">
+                              <tr
+                                *ngIf="
+                                  subscription.subscription.status !==
+                                  'trialing'
+                                "
+                              >
                                 <td class="pr-1">Subscription End:</td>
-                                <td>{{getDateFormat(subscription.subscription.current_period_end)}}</td>
+                                <td>
+                                  {{
+                                    getDateFormat(
+                                      subscription.subscription
+                                        .current_period_end
+                                    )
+                                  }}
+                                </td>
                               </tr>
                               <tr>
                                 <td class="pr-1">Status:</td>
-                                <td class="text-capitalize">{{subscription.subscription.status}}</td>
+                                <td class="text-capitalize">
+                                  {{ subscription.subscription.status }}
+                                </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                        <div class="col-sm-12" *ngIf="subscription.subscription.status === 'trialing'">
-                          *<b>NOTE: </b>Currently your subscription status is 'trialing' that why you didn't pause or cancel your subscription. 
+                        <div
+                          class="col-sm-12"
+                          *ngIf="
+                            subscription.subscription.status === 'trialing'
+                          "
+                        >
+                          *<b>NOTE: </b>Currently your subscription status is
+                          'trialing' that why you didn't pause or cancel your
+                          subscription.
                         </div>
-                        <div class="col-sm-12" *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled' && subscription.subscription.cancel_at_period_end">
-                          *<b>NOTE: </b>Currently your subscription is cancelled. You can still use it till end of subscription date and time. 
+                        <div
+                          class="col-sm-12"
+                          *ngIf="
+                            subscription.subscription.status !== 'pause' &&
+                            subscription.subscription.status !== 'trialing' &&
+                            subscription.subscription.status !== 'canceled' &&
+                            subscription.subscription.cancel_at_period_end
+                          "
+                        >
+                          *<b>NOTE: </b>Currently your subscription is
+                          cancelled. You can still use it till end of
+                          subscription date and time.
                         </div>
-                        <div class="col-sm-12 float-right" style=" text-align: end; ">
-                          <button *ngIf="subscription.subscription.status !== 'active' && subscription.subscription.status !== 'trialing'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="activePayment()" rippleEffect>Activate Subscription</button>
+                        <div
+                          class="col-sm-12 float-right"
+                          style="text-align: end"
+                        >
+                          <button
+                            *ngIf="
+                              subscription.subscription.status !== 'active' &&
+                              subscription.subscription.status !== 'trialing'
+                            "
+                            type="button"
+                            class="btn btn-dark2 btn-md px-3 mb-2 mr-1"
+                            (click)="activePayment()"
+                            rippleEffect
+                          >
+                            Activate Subscription
+                          </button>
                           <!-- <button *ngIf="subscription.subscription.status === 'active'" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="pausePayment()" rippleEffect>Pause Subscription</button> -->
-                          <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled' && !subscription.subscription.cancel_at_period_end" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="cancelPayment(subscription.subscription.id)" rippleEffect>Cancel Subscription</button>
-                          <button *ngIf="subscription.subscription.status !== 'pause' && subscription.subscription.status !== 'trialing' && subscription.subscription.status !== 'canceled' && subscription.subscription.cancel_at_period_end" type="button" class="btn btn-dark2 btn-md px-3 mb-2 mr-1" (click)="reactivatePayment(subscription.subscription.id)" rippleEffect>Reactivate Subscription</button>
-
+                          <button
+                            *ngIf="
+                              subscription.subscription.status !== 'pause' &&
+                              subscription.subscription.status !== 'trialing' &&
+                              subscription.subscription.status !== 'canceled' &&
+                              !subscription.subscription.cancel_at_period_end
+                            "
+                            type="button"
+                            class="btn btn-dark2 btn-md px-3 mb-2 mr-1"
+                            (click)="
+                              cancelPayment(subscription.subscription.id)
+                            "
+                            rippleEffect
+                          >
+                            Cancel Subscription
+                          </button>
+                          <button
+                            *ngIf="
+                              subscription.subscription.status !== 'pause' &&
+                              subscription.subscription.status !== 'trialing' &&
+                              subscription.subscription.status !== 'canceled' &&
+                              subscription.subscription.cancel_at_period_end
+                            "
+                            type="button"
+                            class="btn btn-dark2 btn-md px-3 mb-2 mr-1"
+                            (click)="
+                              reactivatePayment(subscription.subscription.id)
+                            "
+                            rippleEffect
+                          >
+                            Reactivate Subscription
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -102,127 +260,164 @@
           </ng-template>
         </li>
         <li [ngbNavItem]="2">
-          <a ngbNavLink  (click)="getCardListAndDetails(); getCustomerPaymentMethodDetailInfo();"  style="font-family: 'Montserrat', sans-serif;">Card Details</a>
+          <a
+            ngbNavLink
+            (click)="
+              getCardListAndDetails(); getCustomerPaymentMethodDetailInfo()
+            "
+            style="font-family: 'Montserrat', sans-serif"
+            >Card Details</a
+          >
           <ng-template ngbNavContent>
-            <section class="mb-1" >
+            <section class="mb-1">
               <div class="table-wrapper">
                 <div class="row" id="basic-table">
                   <div class="col-12">
-                    <div class="card auto" style="padding: 10px;">
-                      <div *ngIf="!subscription" class="table-responsive" style="
-                      font-size: 20px;
-                      text-align: center;
-                      margin: 30px;
-                  ">
-                        
-                        <span >No payment method found</span>
+                    <div class="card auto" style="padding: 10px">
+                      <div
+                        *ngIf="!subscription"
+                        class="table-responsive"
+                        style="
+                          font-size: 20px;
+                          text-align: center;
+                          margin: 30px;
+                        "
+                      >
+                        <span>No payment method found</span>
                       </div>
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>
-                                Method
-                              </th>
-                              <th>
-                                Expires
-                              </th>
-                              <th>
-                                
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of cardList">
-                              <td>
-                                {{item.brand}} ending in {{item.last4}} <span style="
-                                background: #38b6ff;
-                                padding: 4px 10px 4px 10px;
-                                border-radius: 5px;
-                                color: white;
-                                font-size: 12px;margin-left: 10px;
-                            " *ngIf="customer.invoice_settings.default_payment_method === item.id">Default</span>
-                              </td>
-                              <td>
-                                {{item.exp_month}}/{{item.exp_year}}
-                              </td>
-                              <td>
-                                <a *ngIf="customer.invoice_settings.default_payment_method != item.id" style="margin-left: 5px; color: #FF0000 !important;" 
-                                (click)="deleteCard(item.id)">Delete</a>
-                                <a *ngIf="customer.invoice_settings.default_payment_method != item.id" style="margin-left: 5px;color:#38b6ff;margin-left:10px" 
-                                (click)="setPaymentMethodAsDefault(item.id)" >Set Default</a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                          
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Method</th>
+                            <th>Expires</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of cardList">
+                            <td>
+                              {{ item.brand }} ending in {{ item.last4 }}
+                              <span
+                                style="
+                                  background: #38b6ff;
+                                  padding: 4px 10px 4px 10px;
+                                  border-radius: 5px;
+                                  color: white;
+                                  font-size: 12px;
+                                  margin-left: 10px;
+                                "
+                                *ngIf="
+                                  customer.invoice_settings
+                                    .default_payment_method === item.id
+                                "
+                                >Default</span
+                              >
+                            </td>
+                            <td>{{ item.exp_month }}/{{ item.exp_year }}</td>
+                            <td>
+                              <a
+                                *ngIf="
+                                  customer.invoice_settings
+                                    .default_payment_method != item.id
+                                "
+                                style="
+                                  margin-left: 5px;
+                                  color: #ff0000 !important;
+                                "
+                                (click)="deleteCard(item.id)"
+                                >Delete</a
+                              >
+                              <a
+                                *ngIf="
+                                  customer.invoice_settings
+                                    .default_payment_method != item.id
+                                "
+                                style="
+                                  margin-left: 5px;
+                                  color: #38b6ff;
+                                  margin-left: 10px;
+                                "
+                                (click)="setPaymentMethodAsDefault(item.id)"
+                                >Set Default</a
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                   <div class="col-12">
-                    <button class="btn btn-primary" (click)="modalOpenVC(modalAddPayment)">Add Payment Method</button>
-                    
+                    <button
+                      class="btn btn-primary"
+                      (click)="modalOpenVC(modalAddPayment)"
+                    >
+                      Add Payment Method
+                    </button>
                   </div>
-                 
                 </div>
               </div>
             </section>
           </ng-template>
         </li>
         <li [ngbNavItem]="3">
-          <a ngbNavLink   style="font-family: 'Montserrat', sans-serif;">Transaction Detail</a>
+          <a ngbNavLink style="font-family: 'Montserrat', sans-serif"
+            >Transaction Detail</a
+          >
           <ng-template ngbNavContent>
-            <section class="mb-1" >
+            <section class="mb-1">
               <div class="table-wrapper">
                 <div class="row" id="basic-table">
                   <div class="col-12">
-                    <div class="card auto" style="padding: 10px;">
-                      <div *ngIf="!transactions" class="table-responsive" style="
-                      font-size: 20px;
-                      text-align: center;
-                      margin: 30px;
-                  ">
-                        <span >No transaction history found</span>
+                    <div class="card auto" style="padding: 10px">
+                      <div
+                        *ngIf="!transactions"
+                        class="table-responsive"
+                        style="
+                          font-size: 20px;
+                          text-align: center;
+                          margin: 30px;
+                        "
+                      >
+                        <span>No transaction history found</span>
                       </div>
-                        <table *ngIf="transactions">
-                          <thead>
-                            <tr>
-                              <th>
-                                Start Subscription Time
-                              </th>
-                              <th>
-                                End Subscription Time
-                              </th>
-                              <th>
-                                Status
-                              </th>
-                              <th>
-                                Amount
-                              </th>
-                              <th>
-                                Invoice
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of transactions">
-                              <td>
-                                {{item.lines.data[0].period.start * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
-                              </td>
-                              <td>
-                                {{item.lines.data[0].period.end * 1000 | date:'dd-MM-yyyy hh:mm:ss a'}}
-                              </td>
-                              <td>
-                                {{item.status}}
-                              </td>
-                              <td>
-                                ${{item.subtotal/100}}
-                              </td>
-                              <td>
-                               <a target="_blank" href="{{item.hosted_invoice_url}}">View</a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                          
+                      <table *ngIf="transactions">
+                        <thead>
+                          <tr>
+                            <th>Start Subscription Time</th>
+                            <th>End Subscription Time</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                            <th>Invoice</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of transactions">
+                            <td>
+                              {{
+                                item.lines.data[0].period.start * 1000
+                                  | date : "dd-MM-yyyy hh:mm:ss a"
+                              }}
+                            </td>
+                            <td>
+                              {{
+                                item.lines.data[0].period.end * 1000
+                                  | date : "dd-MM-yyyy hh:mm:ss a"
+                              }}
+                            </td>
+                            <td>
+                              {{ item.status }}
+                            </td>
+                            <td>${{ item.subtotal / 100 }}</td>
+                            <td>
+                              <a
+                                target="_blank"
+                                href="{{ item.hosted_invoice_url }}"
+                                >View</a
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -232,30 +427,38 @@
         </li>
       </ul>
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
     </section>
-
-   
- 
   </div>
 </div>
 <ng-template #modalAddPayment let-modal>
   <div class="modal-header">
-      <h5 class="modal-title" id="myModalLabel160">Add Payment Method</h5>
-      <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+    <h5 class="modal-title" id="myModalLabel160">Add Payment Method</h5>
+    <!-- <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button> -->
   </div>
   <div class="modal-body" tabindex="0" ngbAutofocus>
     <div class="form-group">
       <label for="basicInput">Name on Card *</label>
-      <input type="text" [(ngModel)]="cardname" name="name" class="form-control" id="basicInput"
-        placeholder="" />
+      <input
+        type="text"
+        [(ngModel)]="cardname"
+        name="name"
+        class="form-control"
+        id="basicInput"
+        placeholder=""
+      />
     </div>
     <div class="form-group">
       <label for="basicInput2">Card Number *</label>
-      <input type="text" [(ngModel)]="cardNumber" name="cardNumber" class="form-control" id="basicInput2"
-        placeholder="" />
+      <input
+        type="text"
+        [(ngModel)]="cardNumber"
+        name="cardNumber"
+        class="form-control"
+        id="basicInput2"
+        placeholder=""
+      />
     </div>
     <div class="row">
       <div class="col-lg-8">
@@ -264,14 +467,18 @@
           <div class="col-lg-6">
             <div class="form-group">
               <ng-select [(ngModel)]="selectedMonth" name="month">
-                <ng-option *ngFor="let month of months" [value]="month.id">{{month.name}}</ng-option>
+                <ng-option *ngFor="let month of months" [value]="month.id">{{
+                  month.name
+                }}</ng-option>
               </ng-select>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="form-group">
               <ng-select [(ngModel)]="selectedYear" name="year">
-                <ng-option *ngFor="let year of years" [value]="year.id">{{year.name}}</ng-option>
+                <ng-option *ngFor="let year of years" [value]="year.id">{{
+                  year.name
+                }}</ng-option>
               </ng-select>
             </div>
           </div>
@@ -280,20 +487,34 @@
       <div class="col-lg-4">
         <div class="form-group">
           <label for="basicInput3">Security Code *</label>
-          <input type="text" class="form-control" [(ngModel)]="cvc" name="cvc" id="basicInput3"
-            placeholder="CVV" />
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="cvc"
+            name="cvc"
+            id="basicInput3"
+            placeholder="CVV"
+          />
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="addNewCard()"
-        rippleEffect>
-        Add
-      </button>
-      <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')"
-          rippleEffect>
-          Close
-      </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="addNewCard()"
+      rippleEffect
+    >
+      Add
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.dismiss('Cross click')"
+      rippleEffect
+    >
+      Close
+    </button>
   </div>
 </ng-template>
