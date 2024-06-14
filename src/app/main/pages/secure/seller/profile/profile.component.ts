@@ -1578,6 +1578,46 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
   }
 
+  // getAllCategories() {
+  //   this.userService
+  //     .getSellerCategoriesWithSubCategories(this.userId)
+  //     .subscribe({
+  //       next: (res: any) => {
+  //         this.sellerCategories = res[0]["results"];
+
+  //         this.sellerCategories.forEach((element) => {
+
+  //           if (!element.subcategory.isDisabled) {
+
+  //             let categoryAdded = false;
+
+  //             if (this.filterCategories.length <= 0) {
+
+  //               let item = element.category;
+  //               item["subcategory"] = [element.subcategory];
+  //               this.filterCategories.push(item);
+  //             } else {
+
+  //               this.filterCategories.forEach((item) => {
+  //                 if (item._id === element.category._id) {
+
+  //                   item["subcategory"].push(element.subcategory);
+  //                   categoryAdded = true;
+  //                 }
+  //               });
+
+  //               if (!categoryAdded) {
+  //                 let item = element.category;
+  //                 item["subcategory"] = [element.subcategory];
+  //                 this.filterCategories.push(item);
+  //               }
+  //             }
+  //           }
+  //         });
+  //       },
+  //     });
+  // }
+
   ngOnInit() {
     this.getAllCategories();
     this.getUserAllZipCodes();
