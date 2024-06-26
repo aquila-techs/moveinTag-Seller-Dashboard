@@ -1897,7 +1897,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       next: (res: any) => {
         const CATEGORIES = res[0]["results"];
         const FILTER_CATEGORIES = CATEGORIES.filter(
-          (item) => item.title != "Hotels and Travel"
+          (item) => item.title != "Hotels & Travel"
         );
         this.categories = FILTER_CATEGORIES;
       },
