@@ -2109,10 +2109,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if (this.sellerWebLinksForm.invalid) {
       return;
     }
-    if (this.phoneCode == "") {
-      this.toastrService.error("Please select phone code");
-      return;
-    }
 
     const OBJ = {
       facebookURL: this.sellerWebLinksForm.value.facebookURL,
