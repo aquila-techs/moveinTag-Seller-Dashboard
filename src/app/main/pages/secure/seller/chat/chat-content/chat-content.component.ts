@@ -163,7 +163,7 @@ export class ChatContentComponent implements OnInit {
     });
   }
 
-  changeOrderStatus() {
+  changeOrderStatus(chatroom) {
     let currentUser = JSON.parse(window.localStorage.getItem("currentUser"));
     let userId = currentUser._id;
     let data = {
@@ -181,8 +181,14 @@ export class ChatContentComponent implements OnInit {
       this.notificationService.sendMessage(data, this.chats.userId);
     }
     this.orderService.changeOrderStatusFromChat(data).subscribe((res) => {
-      this.chats.order.status = "ACTIVE";
-      this.modalService.dismissAll();
+      const body = {
+        chatroom,
+        assignTo: userId,
+      };
+      this._chatService.assignChatRoom(body).subscribe((res) => {
+        this.chats.order.status = "ACTIVE";
+        this.modalService.dismissAll();
+      });
     });
   }
 }

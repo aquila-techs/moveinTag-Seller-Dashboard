@@ -170,7 +170,14 @@
     <!-- User Chat messages -->
 
     <!-- Submit Chat form -->
-    <form class="chat-app-form" action="javascript:void(0);">
+    <form
+      *ngIf="
+        chats.assignTo === chats.sellerId || !chats.assignTo;
+        else leadUnavailable
+      "
+      class="chat-app-form"
+      action="javascript:void(0);"
+    >
       <div class="input-group input-group-merge mr-1 form-send-message">
         <div class="input-group-prepend">
           <span class="speech-to-text input-group-text">
@@ -204,6 +211,12 @@
         <span class="d-none d-lg-block">Send</span>
       </button>
     </form>
+
+    <ng-template #leadUnavailable>
+      <div style="padding: 20px; text-align: center">
+        <p>This lead is no longer available.</p>
+      </div>
+    </ng-template>
     <!--/ Submit Chat form -->
   </div>
   <!--/ Active Chat -->
@@ -269,7 +282,7 @@
     <button
       type="button"
       class="btn btn-success"
-      (click)="changeOrderStatus()"
+      (click)="changeOrderStatus(chats.chatroom)"
       rippleEffect
     >
       Approve
