@@ -141,6 +141,7 @@ export class ChatContentComponent implements OnInit {
       this.chatUser = res;
     });
     this.userProfile = this._chatService.userProfile;
+
     this._chatService.getNewMessage().subscribe((message: string) => {
       if (message != "") {
         this.newChat = {
@@ -163,7 +164,7 @@ export class ChatContentComponent implements OnInit {
     });
   }
 
-  changeOrderStatus(chatroom) {
+  changeOrderStatus(orderId) {
     let currentUser = JSON.parse(window.localStorage.getItem("currentUser"));
     let userId = currentUser._id;
     let data = {
@@ -182,7 +183,7 @@ export class ChatContentComponent implements OnInit {
     }
     this.orderService.changeOrderStatusFromChat(data).subscribe((res) => {
       const body = {
-        chatroom,
+        orderId,
         assignTo: userId,
       };
       this._chatService.assignChatRoom(body).subscribe((res) => {

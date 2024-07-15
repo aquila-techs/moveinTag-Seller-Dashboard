@@ -172,7 +172,7 @@
     <!-- Submit Chat form -->
     <form
       *ngIf="
-        chats.assignTo === chats.sellerId || !chats.assignTo;
+        chats.assignTo === userProfile._id || !chats.assignTo;
         else leadUnavailable
       "
       class="chat-app-form"
@@ -282,7 +282,7 @@
     <button
       type="button"
       class="btn btn-success"
-      (click)="changeOrderStatus(chats.chatroom)"
+      (click)="changeOrderStatus(chats.orderId)"
       rippleEffect
     >
       Approve
