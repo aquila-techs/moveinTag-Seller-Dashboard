@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
   public error = "";
   public loading = false;
   public affcode: string;
+  captchaText: string;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -78,13 +79,32 @@ export class SignupComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
+  generateCaptcha() {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < 6; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    this.captchaText = result;
+  }
+
   /**
    * On Submit
    */
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.registerForm.value.agreeToTerms);
+    if (
+      this.registerForm.invalid ||
+      this.registerForm.value.captcha !== this.captchaText
+    ) {
+      this.registerForm.get("captcha").setValue("");
+      this.registerForm.get("captcha").markAsUntouched();
+      return;
+    }
+
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
@@ -108,7 +128,8 @@ export class SignupComponent implements OnInit {
 
       this._adminService.createSeller(OBJ).subscribe({
         next: (res) => {
-          console.log(res);
+          this.captchaText = "";
+          this.generateCaptcha();
           window.sessionStorage.setItem(
             "currentUser",
             JSON.stringify(res.user)
@@ -116,7 +137,10 @@ export class SignupComponent implements OnInit {
           // this._toastrService.success('','Seller register please wait for admin approval');
           this._rotuer.navigate(["/subscription-detail"]);
         },
-        error: (err) => {},
+        error: (err) => {
+          this.captchaText = "";
+          this.generateCaptcha();
+        },
       });
     } else {
       const OBJ = {
@@ -127,7 +151,8 @@ export class SignupComponent implements OnInit {
 
       this._adminService.createSeller(OBJ).subscribe({
         next: (res) => {
-          console.log(res);
+          this.captchaText = "";
+          this.generateCaptcha();
           window.sessionStorage.setItem(
             "currentUser",
             JSON.stringify(res.user)
@@ -135,7 +160,10 @@ export class SignupComponent implements OnInit {
           // this._toastrService.success('','Seller register please wait for admin approval');
           this._rotuer.navigate(["/subscription-detail"]);
         },
-        error: (err) => {},
+        error: (err) => {
+          this.captchaText = "";
+          this.generateCaptcha();
+        },
       });
     }
   }
@@ -158,14 +186,18 @@ export class SignupComponent implements OnInit {
         companyName: ["", Validators.required],
         referralCode: [this.affcode, Validators.required],
         agreeToTerms: [false, Validators.required],
+        captcha: ["", Validators.required],
       });
+      this.generateCaptcha();
     } else {
       this.registerForm = this._formBuilder.group({
         email: ["", [Validators.required, Validators.email]],
         password: ["", Validators.required],
         companyName: ["", Validators.required],
         agreeToTerms: [false, Validators.required],
+        captcha: ["", Validators.required],
       });
+      this.generateCaptcha();
     }
 
     // Subscribe to config changes
