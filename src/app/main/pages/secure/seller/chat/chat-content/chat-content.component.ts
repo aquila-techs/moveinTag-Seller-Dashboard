@@ -164,7 +164,7 @@ export class ChatContentComponent implements OnInit {
     });
   }
 
-  changeOrderStatus(orderId) {
+  changeOrderStatus(orderId, chats) {
     let currentUser = JSON.parse(window.localStorage.getItem("currentUser"));
     let userId = currentUser._id;
     let data = {
@@ -185,6 +185,9 @@ export class ChatContentComponent implements OnInit {
       const body = {
         orderId,
         assignTo: userId,
+        customerName: chats.user.firstName + " " + chats.user.lastName,
+        customerEmail: chats.user.email,
+        orderNum: chats.order.orderNum,
       };
       this._chatService.assignChatRoom(body).subscribe((res) => {
         this.chats.order.status = "ACTIVE";
