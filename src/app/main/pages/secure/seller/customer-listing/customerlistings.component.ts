@@ -147,6 +147,12 @@ export class CustomerlistingsComponent implements OnInit {
       userId: "",
       sellerId: "",
       orderId: "",
+      customerName:
+        selectedOrder.buyer.firstName + " " + selectedOrder.buyer.lastName,
+      customerEmail: selectedOrder.buyer.email,
+      companyName: this.currentUser.companyName,
+      serviceName: selectedOrder.subCategory.title,
+      orderNum: selectedOrder.orderNum,
     };
 
     let emailString = selectedOrder.buyer.email + "" + this.currentUser.email;
