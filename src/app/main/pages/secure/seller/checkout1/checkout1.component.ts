@@ -352,7 +352,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   onCountryPhoneCode(code: any) {
-    this.phoneCode = code.dial_code;
+    this.phoneCode = "+1";
   }
 
   async ngAfterViewInit(): Promise<void> {
@@ -401,6 +401,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   goToNextStep() {
+    console.log(this.phoneCode);
     if (this.phoneCode && this.phone && this.countryName) {
       let data = this.userProfile;
       data["id"] = this.user;
