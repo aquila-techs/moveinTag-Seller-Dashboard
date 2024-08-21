@@ -6,7 +6,12 @@ import { ToastrService } from "ngx-toastr";
 import { UserService } from "@core/services/services/user.service";
 import { AuthenticationService } from "@core/services/authentication.service";
 import { HttpClient } from "@angular/common/http";
-import { FormControl, Validators } from "@angular/forms";
+import {
+  FormControl,
+  Validators,
+  UntypedFormGroup,
+  UntypedFormBuilder,
+} from "@angular/forms";
 import { StripeService } from "./stripe.service";
 
 @Component({
@@ -39,10 +44,15 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   ];
   user = null;
   public countriesData: any;
+  public CouponForm: UntypedFormGroup;
+  public loading = false;
+  public submitted = false;
   public countriesList = [];
   public getSellerProfile = true;
   public subscriptionPacakge = false;
   public cardDetail = false;
+  public applyCoupon = false;
+  public invalidCoupon = false;
   public postalCode = "";
   // private stripe: any;
 
@@ -106,7 +116,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     private _authenticationService: AuthenticationService,
     private _router: Router,
     private toastrService: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private _formBuilder: UntypedFormBuilder
   ) {
     // this.stripe = Stripe('pk_test_krO93K0IJTYIZQI4Kji8oDtK'); // Replace with your Stripe public key
     this.user =
@@ -189,6 +200,10 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
    */
 
   async ngOnInit() {
+    this.CouponForm = this._formBuilder.group({
+      couponCode: [""],
+    });
+
     this.contentHeader = {
       headerTitle: "Dashboard",
       actionButton: false,
@@ -253,6 +268,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             phone: this.phone,
             priceId: this.priceId,
             free_trial: this.free_trial,
+            coupon: this.applyCoupon === true ? "GdnsqZfH" : "",
           };
           this.userService
             .createSubscriptionCustomer(subscriptionData)
@@ -345,6 +361,39 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           this.countriesList = country;
         },
       });
+  }
+
+  transformToUppercase(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const uppercasedValue = input.value.toUpperCase();
+    input.value = uppercasedValue;
+
+    // Update the form control value to reflect the uppercase transformation
+    this.CouponForm.get("couponCode")?.setValue(uppercasedValue, {
+      emitEvent: false,
+    });
+  }
+  onSubmit() {
+    this.submitted = true;
+
+    this.invalidCoupon = false;
+
+    if (this.CouponForm.invalid) {
+      return;
+    }
+
+    const Form = this.CouponForm.value;
+    if (Form.couponCode && Form.couponCode !== "FREE2024") {
+      this.invalidCoupon = true;
+    } else {
+      this.invalidCoupon = false;
+      this.applyCoupon = true;
+
+      if (Form.couponCode !== "") {
+        this.discount = "398.00";
+        this.total = "0.00";
+      }
+    }
   }
 
   onCountryChange(country: any) {

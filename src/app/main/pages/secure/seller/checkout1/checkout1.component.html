@@ -546,7 +546,52 @@
                     </label>
                   </div>
 
-                  <ul class="list">
+                  <form
+                    class="auth-login-form mt-2"
+                    [formGroup]="CouponForm"
+                    (ngSubmit)="onSubmit()"
+                  >
+                    <div class="form-group mt-2 mb-2">
+                      <label
+                        class="form-label"
+                        style="font-family: 'Montserrat', sans-serif"
+                        for="login-couponCode"
+                        >Coupon Code</label
+                      >
+                      <div class="input-group">
+                        <input
+                          formControlName="couponCode"
+                          type="text"
+                          class="form-control"
+                          placeholder="Write your coupon code..."
+                          (input)="transformToUppercase($event)"
+                        />
+                      </div>
+                      <small
+                        *ngIf="submitted && invalidCoupon"
+                        class="text-danger"
+                      >
+                        Coupon code is not valid.
+                      </small>
+                    </div>
+
+                    <button
+                      [disabled]="loading"
+                      type="submit"
+                      class="btn btn-dark btn-block"
+                      tabindex="4"
+                      rippleEffect
+                      style="font-family: 'Montserrat', sans-serif"
+                    >
+                      <span
+                        *ngIf="loading"
+                        class="spinner-border spinner-border-sm mr-1"
+                      ></span
+                      >Apply
+                    </button>
+                  </form>
+
+                  <ul class="list mt-5">
                     <li>
                       <span>Essential Plan - 1 User Included</span>
                       <span>${{ charges }}</span>
