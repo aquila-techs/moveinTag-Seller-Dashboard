@@ -330,8 +330,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     let formattedPostalCode = "";
     if (country === "Canada") {
       // Format for Canada postal code (e.g. A1A 1A1)
-      formattedPostalCode = cleanedPostalCode.replace(/(\d{3})/, "$1 ");
-      formattedPostalCode = formattedPostalCode.replace(/(\d{3})$/, " $1");
+      formattedPostalCode = cleanedPostalCode.replace(/^(\d{3})/, "$1 ");
+      formattedPostalCode = formattedPostalCode.replace(/(\w{3})$/, " $1");
     } else if (country === "USA") {
       // Format for USA postal code (e.g. 12345-6789)
       formattedPostalCode = cleanedPostalCode.replace(/(\d{5})/, "$1-");
@@ -556,6 +556,10 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   onCountryChange(country: any) {
+    this.addressForm.get("postalCode").valueChanges.subscribe((value) => {
+      this.formatPostalCodeProfile(value);
+    });
+
     let state = this.countriesData.filter((state) => state.country === country);
     state = [...new Set(state.map((item) => item.subcountry))];
     state.sort();
