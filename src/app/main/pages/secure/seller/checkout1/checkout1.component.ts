@@ -28,7 +28,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   country: number;
   lastName = "";
   firstName = "";
-  countryName = "";
+  countryName = "Canada";
   phoneCode = "+1";
   isLoading = "false";
   phone = "";
@@ -45,15 +45,32 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   user = null;
   public countriesData: any;
   public CouponForm: UntypedFormGroup;
+  public addressForm: UntypedFormGroup;
   public loading = false;
   public submitted = false;
   public countriesList = [];
+  countryCities: string[] = [];
   public getSellerProfile = true;
   public subscriptionPacakge = false;
   public cardDetail = false;
   public applyCoupon = false;
   public invalidCoupon = false;
   public postalCode = "";
+  public countryStates = [
+    { code: "AB", name: "Alberta" },
+    { code: "BC", name: "British Columbia" },
+    { code: "MB", name: "Manitoba" },
+    { code: "NB", name: "New Brunswick" },
+    { code: "NL", name: "Newfoundland and Labrador" },
+    { code: "NS", name: "Nova Scotia" },
+    { code: "NT", name: "Northwest Territories" },
+    { code: "NU", name: "Nunavut" },
+    { code: "ON", name: "Ontario" },
+    { code: "PE", name: "Prince Edward Island" },
+    { code: "QC", name: "Quebec" },
+    { code: "SK", name: "Saskatchewan" },
+    { code: "YT", name: "Yukon" },
+  ];
   // private stripe: any;
 
   // public
@@ -231,6 +248,37 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
 
     this.getCountries();
     this.generateToken();
+    this.addressFormBuilder();
+  }
+
+  addressFormBuilder() {
+    this.addressForm = this._formBuilder.group({
+      address: ["", Validators.required],
+      postalCode: ["", Validators.required],
+      country: ["", Validators.required],
+      state: ["", Validators.required],
+      city: ["", Validators.required],
+    });
+
+    this.addressForm.get("postalCode").valueChanges.subscribe((value) => {
+      this.formatPostalCodeProfile(value);
+    });
+  }
+
+  formatPostalCodeProfile(value: string): void {
+    // Remove spaces from the current postal code value
+    let cleanedPostalCode = value.replace(/\s/g, "");
+
+    // Add a space after every 3 characters
+    let formattedPostalCode = "";
+    for (let i = 0; i < cleanedPostalCode.length; i += 3) {
+      formattedPostalCode += cleanedPostalCode.substr(i, 3) + " ";
+    }
+
+    // Trim any extra spaces at the end
+    this.addressForm
+      .get("postalCode")
+      .setValue(formattedPostalCode.trim(), { emitEvent: false });
   }
 
   async generateToken() {
@@ -249,6 +297,28 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           return;
         }
 
+        let data = this.addressForm.value;
+
+        if (!data.address) {
+          this.toastrService.error("Please add address", "Address");
+          return;
+        }
+
+        if (!data.postalCode) {
+          this.toastrService.error("Please add postal code", "Postal Code");
+          return;
+        }
+
+        if (!data.state) {
+          this.toastrService.error("Please select your state", "State");
+          return;
+        }
+
+        if (!data.city) {
+          this.toastrService.error("Please select your city", "City");
+          return;
+        }
+
         const tokenResult = (await this.stripeService.createToken(
           cardElement
         )) as { token: { id: string; card: { id: string } } } | string;
@@ -263,12 +333,17 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             token: tokenResult.token.id,
             firstName: this.firstName,
             lastName: this.lastName,
-            country: this.country,
             postalCode: this.postalCode,
+            country: "canada",
             phone: this.phone,
             priceId: this.priceId,
             free_trial: this.free_trial,
             coupon: this.applyCoupon === true ? "GdnsqZfH" : "",
+            street_address: data.address,
+            postal_code: data.postalCode,
+            country_address: "CA",
+            state: data.state,
+            city: data.city,
           };
           this.userService
             .createSubscriptionCustomer(subscriptionData)
@@ -350,9 +425,10 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         next: (res: any) => {
           this.countriesData = res;
 
+          console.log(res);
+
           const filteredData = this.countriesData.filter(
-            (item) =>
-              item.country === "Canada" || item.country === "United States"
+            (item) => item.country === "Canada"
           );
 
           const country = [
@@ -373,7 +449,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
       emitEvent: false,
     });
   }
-  onSubmit() {
+  onSubmitCoupon() {
     this.submitted = true;
 
     this.invalidCoupon = false;
@@ -396,8 +472,14 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     }
   }
 
-  onCountryChange(country: any) {
-    this.countryName = country;
+  onCountryChange(country: any) {}
+
+  onStateChange(state: any) {
+    state = state.name;
+    let city = this.countriesData.filter((city) => city.subcountry === state);
+    city = [...new Set(city.map((item) => item.name))];
+    city.sort();
+    this.countryCities = city;
   }
 
   onCountryPhoneCode(code: any) {
