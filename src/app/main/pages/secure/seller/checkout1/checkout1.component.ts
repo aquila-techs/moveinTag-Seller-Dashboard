@@ -56,7 +56,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   public applyCoupon = false;
   public invalidCoupon = false;
   public postalCode = "";
-  public countryStates = [
+  public countryStates = [];
+  public countryStatesCanada = [
     { code: "AB", name: "Alberta" },
     { code: "BC", name: "British Columbia" },
     { code: "MB", name: "Manitoba" },
@@ -71,6 +72,59 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     { code: "SK", name: "Saskatchewan" },
     { code: "YT", name: "Yukon" },
   ];
+  public countryStatesUSA = [
+    { code: "AL", name: "Alabama" },
+    { code: "AK", name: "Alaska" },
+    { code: "AZ", name: "Arizona" },
+    { code: "AR", name: "Arkansas" },
+    { code: "CA", name: "California" },
+    { code: "CO", name: "Colorado" },
+    { code: "CT", name: "Connecticut" },
+    { code: "DE", name: "Delaware" },
+    { code: "FL", name: "Florida" },
+    { code: "GA", name: "Georgia" },
+    { code: "HI", name: "Hawaii" },
+    { code: "ID", name: "Idaho" },
+    { code: "IL", name: "Illinois" },
+    { code: "IN", name: "Indiana" },
+    { code: "IA", name: "Iowa" },
+    { code: "KS", name: "Kansas" },
+    { code: "KY", name: "Kentucky" },
+    { code: "LA", name: "Louisiana" },
+    { code: "ME", name: "Maine" },
+    { code: "MD", name: "Maryland" },
+    { code: "MA", name: "Massachusetts" },
+    { code: "MI", name: "Michigan" },
+    { code: "MN", name: "Minnesota" },
+    { code: "MS", name: "Mississippi" },
+    { code: "MO", name: "Missouri" },
+    { code: "MT", name: "Montana" },
+    { code: "NE", name: "Nebraska" },
+    { code: "NV", name: "Nevada" },
+    { code: "NH", name: "New Hampshire" },
+    { code: "NJ", name: "New Jersey" },
+    { code: "NM", name: "New Mexico" },
+    { code: "NY", name: "New York" },
+    { code: "NC", name: "North Carolina" },
+    { code: "ND", name: "North Dakota" },
+    { code: "OH", name: "Ohio" },
+    { code: "OK", name: "Oklahoma" },
+    { code: "OR", name: "Oregon" },
+    { code: "PA", name: "Pennsylvania" },
+    { code: "RI", name: "Rhode Island" },
+    { code: "SC", name: "South Carolina" },
+    { code: "SD", name: "South Dakota" },
+    { code: "TN", name: "Tennessee" },
+    { code: "TX", name: "Texas" },
+    { code: "UT", name: "Utah" },
+    { code: "VT", name: "Vermont" },
+    { code: "VA", name: "Virginia" },
+    { code: "WA", name: "Washington" },
+    { code: "WV", name: "West Virginia" },
+    { code: "WI", name: "Wisconsin" },
+    { code: "WY", name: "Wyoming" },
+  ];
+
   // private stripe: any;
 
   // public
@@ -269,10 +323,21 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     // Remove spaces from the current postal code value
     let cleanedPostalCode = value.replace(/\s/g, "");
 
-    // Add a space after every 3 characters
+    // Get the country value from the form
+    const country = this.addressForm.get("country").value;
+
+    // Format the postal code based on the country
     let formattedPostalCode = "";
-    for (let i = 0; i < cleanedPostalCode.length; i += 3) {
-      formattedPostalCode += cleanedPostalCode.substr(i, 3) + " ";
+    if (country === "Canada") {
+      // Format for Canada postal code (e.g. A1A 1A1)
+      formattedPostalCode = cleanedPostalCode.replace(/(\d{3})/, "$1 ");
+      formattedPostalCode = formattedPostalCode.replace(/(\d{3})$/, " $1");
+    } else if (country === "USA") {
+      // Format for USA postal code (e.g. 12345-6789)
+      formattedPostalCode = cleanedPostalCode.replace(/(\d{5})/, "$1-");
+    } else {
+      // Default format (e.g. 123456)
+      formattedPostalCode = cleanedPostalCode;
     }
 
     // Trim any extra spaces at the end
@@ -309,6 +374,11 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           return;
         }
 
+        if (!data.country) {
+          this.toastrService.error("Please select your country", "Country");
+          return;
+        }
+
         if (!data.state) {
           this.toastrService.error("Please select your state", "State");
           return;
@@ -317,6 +387,18 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         if (!data.city) {
           this.toastrService.error("Please select your city", "City");
           return;
+        }
+
+        let selectedState = this.countryStatesCanada.find(
+          (state) => state.name === data.state
+        );
+        let stateCode = selectedState ? selectedState.code : "";
+
+        if (data.country === "United States") {
+          selectedState = this.countryStatesUSA.find(
+            (state) => state.name === data.state
+          );
+          stateCode = selectedState ? selectedState.code : "";
         }
 
         const tokenResult = (await this.stripeService.createToken(
@@ -341,8 +423,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             coupon: this.applyCoupon === true ? "GdnsqZfH" : "",
             street_address: data.address,
             postal_code: data.postalCode,
-            country_address: "CA",
-            state: data.state,
+            country_address: data.country === "United States" ? "US" : "CA",
+            state: stateCode,
             city: data.city,
           };
           this.userService
@@ -428,7 +510,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           console.log(res);
 
           const filteredData = this.countriesData.filter(
-            (item) => item.country === "Canada"
+            (item) =>
+              item.country === "Canada" || item.country === "United States"
           );
 
           const country = [
@@ -472,16 +555,19 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     }
   }
 
-  onCountryChange(country: any) {}
+  onCountryChange(country: any) {
+    let state = this.countriesData.filter((state) => state.country === country);
+    state = [...new Set(state.map((item) => item.subcountry))];
+    state.sort();
+    this.countryStates = state;
+  }
 
   onStateChange(state: any) {
-    state = state.name;
     let city = this.countriesData.filter((city) => city.subcountry === state);
     city = [...new Set(city.map((item) => item.name))];
     city.sort();
     this.countryCities = city;
   }
-
   onCountryPhoneCode(code: any) {
     this.phoneCode = "+1";
   }

@@ -489,38 +489,44 @@
                           />
                         </div>
                       </div>
+
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label
                             for="email"
                             style="font-family: 'Montserrat', sans-serif"
-                            >Postal Code/Zip Code</label
+                            >Country</label
                           >
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="postalCode"
-                            placeholder="77640"
-                            maxlength="7"
-                            style="text-transform: uppercase"
-                          />
+                          <ng-select
+                            formControlName="country"
+                            (change)="onCountryChange($event)"
+                            bindLabel="immigration_s_title"
+                          >
+                            <ng-option
+                              *ngFor="let country of countriesList"
+                              [value]="country"
+                              >{{ country }}</ng-option
+                            >
+                          </ng-select>
                         </div>
                       </div>
 
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label
-                            for="state"
+                            for="email"
                             style="font-family: 'Montserrat', sans-serif"
                             >Province/State</label
                           >
                           <ng-select
                             formControlName="state"
                             (change)="onStateChange($event)"
-                            [items]="countryStates"
-                            bindLabel="name"
-                            bindValue="code"
                           >
+                            <ng-option
+                              *ngFor="let state of countryStates"
+                              [value]="state"
+                              >{{ state }}</ng-option
+                            >
                           </ng-select>
                         </div>
                       </div>
@@ -539,6 +545,24 @@
                               >{{ city }}</ng-option
                             >
                           </ng-select>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label
+                            for="email"
+                            style="font-family: 'Montserrat', sans-serif"
+                            >Postal Code/Zip Code</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="postalCode"
+                            placeholder="77640"
+                            maxlength="7"
+                            style="text-transform: uppercase"
+                          />
                         </div>
                       </div>
                     </div>
