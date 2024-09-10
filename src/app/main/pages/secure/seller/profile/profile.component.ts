@@ -1423,6 +1423,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.userService.saveSellerCategories(data).subscribe((res) => {
       this.selectedCategories = [];
+      window.location.reload();
       setTimeout(() => {
         this.modalService.dismissAll();
         this.userService
@@ -1454,7 +1455,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 }
               });
               console.log(this.filterCategories);
-              window.location.reload();
             },
           });
       }, 3000);
