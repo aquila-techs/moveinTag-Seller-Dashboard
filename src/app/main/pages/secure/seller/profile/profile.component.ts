@@ -1908,7 +1908,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   onSubmitSearch() {
     const Text = this.searchText;
     this.http
-      .get(`https://api.moventag.com/category/getAllSubCategory?q=${Text}`)
+      .get(`https://services.moventag.com/category/getAllSubCategory?q=${Text}`)
       .subscribe({
         next: (res: any) => {
           this.searchSubCategories = res;

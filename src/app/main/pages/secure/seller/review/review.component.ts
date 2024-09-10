@@ -95,7 +95,7 @@ export class ReviewComponent implements OnInit {
   onSubmitSearch() {
     const Text = this.searchText;
     this.http
-      .post("https://api.moventag.com/reviews/searchSellerReview", {
+      .post("https://services.moventag.com/reviews/searchSellerReview", {
         sellerId: this.user._id,
         userReviewed: true,
         text: Text,

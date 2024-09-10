@@ -85,10 +85,12 @@ export class OrdermanagementComponent implements OnInit {
 
   onSubmitExportOrders() {
     this.http
-      .get(`https://api.moventag.com/order/export-orders?userId=${this.userId}`)
+      .get(
+        `https://services.moventag.com/order/export-orders?userId=${this.userId}`
+      )
       .subscribe({
         next: (res: any) => {
-          window.open(`https://api.moventag.com/${res.path}`, "_blank");
+          window.open(`https://services.moventag.com/${res.path}`, "_blank");
         },
       });
   }
@@ -98,7 +100,7 @@ export class OrdermanagementComponent implements OnInit {
 
     this.http
       .get(
-        `https://api.moventag.com/order/searchSellerOrders?userId=${this.userId}&pageSize=10&pageNo=1&sortBy=createdAt&order=desc&text=${Text}`
+        `https://services.moventag.com/order/searchSellerOrders?userId=${this.userId}&pageSize=10&pageNo=1&sortBy=createdAt&order=desc&text=${Text}`
       )
       .subscribe({
         next: (res: any) => {

@@ -85,7 +85,7 @@ export class ContactComponent implements OnInit {
 
     try {
       this.http
-        .post("https://api.moventag.com/user/helpSendEmail", {
+        .post("https://services.moventag.com/user/helpSendEmail", {
           name: this.user.companyName,
           email: this.user.email,
           category: this.category,

@@ -236,11 +236,11 @@ export class HomeComponent implements OnInit {
 
       this.http
         .get(
-          `https://api.moventag.com/order/export-earnings?userId=${this.userId}&fromDate=${dateFrom}&toDate=${dateTo}`
+          `https://services.moventag.com/order/export-earnings?userId=${this.userId}&fromDate=${dateFrom}&toDate=${dateTo}`
         )
         .subscribe({
           next: (res: any) => {
-            window.open(`https://api.moventag.com/${res.path}`, "_blank");
+            window.open(`https://services.moventag.com/${res.path}`, "_blank");
           },
         });
     } else {
