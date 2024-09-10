@@ -1454,6 +1454,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 }
               });
               console.log(this.filterCategories);
+              window.location.reload();
             },
           });
       }, 3000);
