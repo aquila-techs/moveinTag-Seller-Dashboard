@@ -1,10 +1,10 @@
-<div class="content-wrapper container-xxl p-0">
+<div class="content-wrapper container-xxl pt-1 card">
   <div class="content-body">
     <!-- content-header component -->
     <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
     <div
-      class="mb-2"
+      class="pl-1 pr-3 mb-1 mt-1"
       style="position: relative; display: flex; flex-wrap: wrap"
     >
       <div class="form-outline">
@@ -16,88 +16,88 @@
             [(ngModel)]="searchText"
             name="searchText"
             style="
-              border: 1px solid #38b6ff;
+              border: 1px solid #e1e1e1;
               width: 500px;
-              font-family: 'Montserrat', sans-serif;
+              font-family: 'Public Sans', sans-serif;
             "
           />
         </form>
       </div>
       <button
-        type="button"
-        (click)="onSubmitSearch()"
-        class="btn btn-primary"
-        style="margin-left: 5px"
-      >
-        <i class="fa fa-search"></i>
-      </button>
-      <button
-        type="button"
-        (click)="onSubmitClear()"
-        class="btn btn-danger"
-        style="margin-left: 5px"
-      >
-        <i class="fa fa-close"></i>
-      </button>
-      <div class="ml-auto">
+          type="button"
+          (click)="onSubmitSearch()"
+          class="btn btn-relief-primary"
+                    rippleEffect
+          style="margin-left: 5px"
+        >
+          <i class="fa fa-search"></i>
+        </button>
         <button
           type="button"
-          (click)="onSubmitExportOrders()"
-          class="btn btn-primary"
+          (click)="onSubmitClear()"
+          class="btn btn-relief-danger"
+                    rippleEffect
+          style="margin-left: 5px"
         >
-          Export Leads
+          <i class="fa fa-close"></i>
         </button>
+      <div class="ml-auto">
+        
+        <button
+                  type="button"
+                  class="btn btn-outline-primary waves-effect"
+                  rippleEffect
+                  (click)="onSubmitExportOrders()"
+
+                >
+                  <i data-feather="download"></i> &nbsp; Export Leads
+                </button>
       </div>
     </div>
 
     <section>
-      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <ul ngbNav #nav="ngbNav" class="nav-tabs pl-1">
         <li [ngbNavItem]="2">
           <a
             ngbNavLink
             (click)="getUserActiveOrder()"
-            style="font-family: 'Montserrat', sans-serif"
-            >Active</a
+            
+            ><span [data-feather]="'pocket'"></span> Active</a
           >
           <ng-template ngbNavContent>
             <div class="table-wrapper card">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
-                    <div class="row">
-                      <div class="col-lg-10">
-                        <h4 class="table-title">Active</h4>
-                      </div>
-                    </div>
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
                           <tr>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th style="width: 160px">
                               Lead Number
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th  style="width: 185px">
                               Customer Name
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Email
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th  style="width: 160px">
                               Postal Code
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Services
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th  style="width: 175px">
                               Date Accepted
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Status
                             </th>
                             <th
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                               class="text-center"
-                            >
+                              style="width: 160px">
                               Lead Detail
                             </th>
                           </tr>
@@ -106,46 +106,46 @@
                           <tr *ngIf="!activeOrders || activeOrders.length <= 0">
                             <td
                               colspan="6"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               No Acive leads to show
                             </td>
                           </tr>
                           <tr *ngFor="let item of activeOrders">
-                            <td style="font-family: 'Montserrat', sans-serif">
-                              {{ item?.orderNum }}
+                            <td class="text-primary">
+                              #{{ item?.orderNum }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.buyer?.firstName }}
                               {{ item?.buyer?.lastName }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.buyer?.email }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.postal_code }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.subCategory?.title }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item.updatedAt | date }}
                             </td>
                             <td
                               *ngIf="item.status == 'COMPLETED'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               {{ item.status }}
                             </td>
                             <td
                               *ngIf="item.status == 'CANCELLED'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               {{ item.status }}
                             </td>
                             <td
                               *ngIf="item.status == 'ACTIVE'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               <select
                                 class="form-control"
@@ -169,7 +169,7 @@
                                 </option>
                                 <option
                                   value="COMPLETED"
-                                  style="font-family: 'Montserrat', sans-serif"
+                                  
                                   [selected]="
                                     item.status === 'COMPLETED'
                                       ? 'selected'
@@ -180,7 +180,7 @@
                                 </option>
                                 <option
                                   value="CANCELLED"
-                                  style="font-family: 'Montserrat', sans-serif"
+                                  
                                   [selected]="
                                     item.status === 'CANCELLED'
                                       ? 'selected'
@@ -192,15 +192,16 @@
                               </select>
                             </td>
                             <td
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                               class="text-center"
                             >
-                              <a
-                                class="text-success px-2 py-1 box-shadow-0"
-                                (click)="openOrderDetailPopup(modalVC, item)"
-                                rippleEffect
-                                >Detail</a
-                              >
+                              
+                            <div
+                            (click)="openOrderDetailPopup(modalVC, item)"
+                    class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                    style=" min-width: 45px;">
+                    Detail
+                  </div>
                             </td>
                           </tr>
                         </tbody>
@@ -210,8 +211,7 @@
                 </div>
                 <div
                   *ngIf="activeOrders && activeOrders.length > 0"
-                  class="d-flex justify-content-end mr-1"
-                  style="bottom: 0; position: absolute; right: 0"
+                  class="d-flex justify-content-end mr-2 w-100"
                 >
                   <ngb-pagination
                     [collectionSize]="activeOrderTotal"
@@ -242,50 +242,44 @@
           <a
             ngbNavLink
             (click)="getUserCompletedOrders()"
-            style="font-family: 'Montserrat', sans-serif"
-            >Completed</a
+            
+            ><span [data-feather]="'check'"></span> Completed</a
           >
           <ng-template ngbNavContent>
             <div class="table-wrapper card">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
-                    <h4
-                      class="table-title"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Completed
-                    </h4>
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
                           <tr>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Lead Number
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Consumers
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Email
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Postal Code
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Services
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Earning
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Updated on
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Status
                             </th>
                             <th
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                               class="text-center"
                             >
                               Lead Detail
@@ -300,29 +294,29 @@
                           >
                             <td
                               colspan="6"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               No Complete leads to show
                             </td>
                           </tr>
                           <tr *ngFor="let item of completedOrders">
-                            <td style="font-family: 'Montserrat', sans-serif">
-                              {{ item?.orderNum }}
+                            <td >
+                              #{{ item?.orderNum }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.buyer?.firstName }}
                               {{ item?.buyer?.lastName }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.buyer?.email }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.postal_code }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.subCategory?.title }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               <span
                                 class="edit-icon"
                                 style="cursor: pointer; margin-right: 3px"
@@ -331,24 +325,24 @@
                               >
                               {{ item?.ammount }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item.updatedAt | date }}
                             </td>
                             <td
                               *ngIf="item.status == 'COMPLETED'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               Completed
                             </td>
                             <td
                               *ngIf="item.status == 'CANCELLED'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               Cancelled
                             </td>
                             <td
                               *ngIf="item.status == 'ACTIVE'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               <select
                                 class="form-control"
@@ -372,7 +366,7 @@
                                 </option>
                                 <option
                                   value="COMPLETED"
-                                  style="font-family: 'Montserrat', sans-serif"
+                                  
                                   [selected]="
                                     item.status === 'COMPLETED'
                                       ? 'selected'
@@ -383,7 +377,7 @@
                                 </option>
                                 <option
                                   value="CANCELLED"
-                                  style="font-family: 'Montserrat', sans-serif"
+                                  
                                   [selected]="
                                     item.status === 'CANCELLED'
                                       ? 'selected'
@@ -395,13 +389,12 @@
                               </select>
                             </td>
                             <td class="text-center">
-                              <a
-                                class="text-success px-2 py-1 box-shadow-0"
-                                (click)="openOrderDetailPopup(modalVC, item)"
-                                style="font-family: 'Montserrat', sans-serif"
-                                rippleEffect
-                                >Detail</a
-                              >
+                              <div
+                              (click)="openOrderDetailPopup(modalVC, item)"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style=" min-width: 45px;">
+                      Detail
+                    </div>
                             </td>
                           </tr>
                         </tbody>
@@ -443,47 +436,42 @@
           <a
             ngbNavLink
             (click)="getUSerCanceledOrder()"
-            style="font-family: 'Montserrat', sans-serif"
-            >Cancelled</a
+            
+            ><span [data-feather]="'x'"></span> Cancelled</a
           >
           <ng-template ngbNavContent>
             <div class="table-wrapper card">
               <div class="row" id="basic-table">
                 <div class="col-12">
                   <div class="card">
-                    <h4
-                      class="table-title"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Cancelled
-                    </h4>
+                    
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
                           <tr>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Lead Number
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Consumers
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Email
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Post Code
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Services
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Updated on
                             </th>
-                            <th style="font-family: 'Montserrat', sans-serif">
+                            <th >
                               Status
                             </th>
                             <th
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                               class="text-center"
                             >
                               Lead Detail
@@ -498,46 +486,46 @@
                           >
                             <td
                               colspan="6"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               No Cancelled leads to show
                             </td>
                           </tr>
                           <tr *ngFor="let item of cancelledOrder">
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.orderNum }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.buyer?.firstName }}
                               {{ item?.buyer?.lastName }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.buyer?.email }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.postal_code }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item?.subCategory?.title }}
                             </td>
-                            <td style="font-family: 'Montserrat', sans-serif">
+                            <td >
                               {{ item.updatedAt | date }}
                             </td>
                             <td
                               *ngIf="item.status == 'COMPLETED'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               Completed
                             </td>
                             <td
                               *ngIf="item.status == 'CANCELLED'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               Cancelled
                             </td>
                             <td
                               *ngIf="item.status == 'ACTIVE'"
-                              style="font-family: 'Montserrat', sans-serif"
+                              
                             >
                               <select
                                 class="form-control"
@@ -561,7 +549,7 @@
                                 </option>
                                 <option
                                   value="COMPLETED"
-                                  style="font-family: 'Montserrat', sans-serif"
+                                  
                                   [selected]="
                                     item.status === 'COMPLETED'
                                       ? 'selected'
@@ -572,7 +560,7 @@
                                 </option>
                                 <option
                                   value="CANCELLED"
-                                  style="font-family: 'Montserrat', sans-serif"
+                                  
                                   [selected]="
                                     item.status === 'CANCELLED'
                                       ? 'selected'
@@ -584,13 +572,13 @@
                               </select>
                             </td>
                             <td class="text-center">
-                              <a
-                                class="text-success px-2 py-1 box-shadow-0"
-                                (click)="openOrderDetailPopup(modalVC, item)"
-                                style="font-family: 'Montserrat', sans-serif"
-                                rippleEffect
-                                >Detail</a
-                              >
+                            
+                              <div
+                              (click)="openOrderDetailPopup(modalVC, item)"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style=" min-width: 45px;">
+                      Detail
+                    </div>
                             </td>
                           </tr>
                         </tbody>
@@ -638,7 +626,7 @@
     <h5
       class="modal-title w-100 px-1 pt-1 pb-0"
       id="exampleModalCenterTitle"
-      style="font-family: 'Montserrat', sans-serif"
+      
     >
       Please enter total charges you have taken from the customer
     </h5>
@@ -654,7 +642,7 @@
   <div class="modal-body" tabindex="0" ngbAutofocus>
     <form [formGroup]="completedOrderAmmountForm" class="px-1">
       <div class="form-group">
-        <label for="email" style="font-family: 'Montserrat', sans-serif"
+        <label for="email" 
           >Enter total charges</label
         >
         <input type="number" class="form-control" formControlName="ammount" />
@@ -673,7 +661,7 @@
       <button
         type="button"
         class="btn btn-dark mx-1 btn-md px-3"
-        style="font-family: 'Montserrat', sans-serif"
+        
         (click)="modal.dismiss('Cross click')"
         rippleEffect
       >
@@ -688,7 +676,7 @@
     <h5
       class="modal-title"
       id="exampleModalCenterTitle"
-      style="font-family: 'Montserrat', sans-serif"
+      
     >
       Lead Details
     </h5>
@@ -704,7 +692,7 @@
   <div class="modal-body" tabindex="0" ngbAutofocus>
     <form action="">
       <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >What needs to be done?</label
         >
         <input
@@ -717,7 +705,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.place">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >What type of property?</label
         >
         <input
@@ -730,7 +718,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.startTime">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >When do you want to start this project</label
         >
         <input
@@ -743,7 +731,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.notes">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >Please provide some details about project
         </label>
         <textarea
@@ -756,7 +744,7 @@
 
       <div *ngIf="selectedOrder?.status === 'COMPLETED'">
         <div class="form-group" [hidden]="!selectedOrder?.startTime">
-          <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+          <label for="basicInput" 
             >Earning</label
           >
           <input
@@ -778,7 +766,7 @@
       </div>
 
       <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >Service Images</label
         >
         <div class="row px-1">

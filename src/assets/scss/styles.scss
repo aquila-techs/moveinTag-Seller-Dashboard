@@ -27,12 +27,13 @@ $skyBlue: #00cfe8;
 $green: #34a853;
 $red: #ff0000;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 body {
-  font-family: "Poppins", sans-serif;
-
+  font-family: 'Public Sans', sans-serif !important;
   h1,
   h2,
   h3,
@@ -134,14 +135,6 @@ body {
   .nav-tabs {
     .nav-link {
       color: $lightGray;
-    }
-
-    .nav-link.active {
-      color: $BalticSea;
-
-      &:after {
-        background: $BalticSea !important;
-      }
     }
   }
 
@@ -365,18 +358,17 @@ body {
   }
 
   .profile_banner {
-    border-radius: 34px 34px 6px 6px;
+    border-radius: 20px 20px 0px 0px;
     box-shadow: 0 4px 18px 0 rgba($black, 0.1);
     overflow: hidden;
     margin-bottom: 30px;
 
     .banner_wrapper {
       position: relative;
-      border-radius: 34px;
       overflow: hidden;
 
       .banner_img {
-        height: 300px;
+        height: 400px;
         width: 100%;
         object-fit: cover;
       }
@@ -540,7 +532,7 @@ body {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 0px;
 
       img {
         width: 100%;
@@ -565,7 +557,7 @@ body {
           a {
             color: $dark1;
             font-size: 16px;
-            line-height: 24px;
+            line-height: 32px;
             display: flex;
             transition: color 0.1s linear;
             word-break: break-all;

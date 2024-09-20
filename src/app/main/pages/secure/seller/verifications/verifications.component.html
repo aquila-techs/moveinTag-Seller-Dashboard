@@ -1,4 +1,4 @@
-<div class="content-wrapper container-xxl p-0">
+<div class="content-wrapper container-xxl p-0 card">
   <div class="content-body">
     <!-- content-header component -->
     <div style="padding-left: 20px">
@@ -6,8 +6,8 @@
         <div class="row breadcrumbs-top">
           <div class="col-12 d-flex">
             <h2
-              class="content-header-title float-left mb-0"
-              style="font-family: 'Montserrat', sans-serif"
+              class="content-header-title float-left mb-0 pt-3"
+              
             >
               Verifications
             </h2>
@@ -17,24 +17,24 @@
     </div>
 
     <section>
-      <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
+      <div class="col-lg-12 mb-12 mb-lg-0 pb-1 table-padding">
         <div class="card h-100">
           <div class="table-responsive">
             <table class="table table-s1">
               <thead>
                 <tr>
                   <th></th>
-                  <th style="font-family: 'Montserrat', sans-serif">
+                  <th >
                     File name
                   </th>
                   <th
-                    style="font-family: 'Montserrat', sans-serif"
+                    
                     class="text-center"
                   >
                     View File
                   </th>
                   <th
-                    style="font-family: 'Montserrat', sans-serif"
+                    
                     class="text-center"
                   >
                     Upload File
@@ -45,22 +45,21 @@
                 <tr>
                   <td style="width: 175px"></td>
                   <td
-                    style="width: 200px; font-family: 'Montserrat', sans-serif"
+                    style="width: 200px; "
                   >
                     Business License
                   </td>
                   <td class="text-center">
-                    <a
-                      class="text-success px-2 py-1 box-shadow-0"
-                      style="font-family: 'Montserrat', sans-serif"
-                      (click)="openLicense()"
-                      rippleEffect
-                      >Preview</a
-                    >
+                    <div
+                    (click)="openLicense()"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style=" min-width: 45px;">
+                      Preview
+                    </div>
                   </td>
                   <td
                     class="text-center"
-                    style="font-family: 'Montserrat', sans-serif"
+                    
                   >
                     <input
                       type="file"
@@ -71,16 +70,18 @@
                     />
                     <label
                       for="upload"
-                      class="btn btn-dark2"
+                      type="button"
+                      class="btn btn-relief-primary"
+                                rippleEffect
                       style="
-                        width: 200px;
-                        font-family: 'Montserrat', sans-serif;
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
                       "
                       ><img
                         style="width: 20px; height: 20px"
                         src="../../../assets/images/site/highlight.png"
                         alt=""
-                      />{{
+                      /> &nbsp;{{
                         LisenceURL == undefined || LisenceURL == ""
                           ? "Upload"
                           : "Update"
@@ -93,22 +94,21 @@
                 <tr>
                   <td style="width: 175px"></td>
                   <td
-                    style="width: 200px; font-family: 'Montserrat', sans-serif"
+                    style="width: 200px; "
                   >
                     Liability Insurance
                   </td>
                   <td class="text-center">
-                    <a
-                      class="text-success px-2 py-1 box-shadow-0"
-                      style="font-family: 'Montserrat', sans-serif"
-                      (click)="openLibilityInsurance()"
-                      rippleEffect
-                      >Preview</a
-                    >
+                    <div
+                    (click)="openLibilityInsurance()"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style=" min-width: 45px;">
+                      Preview
+                    </div>
                   </td>
                   <td
                     class="text-center"
-                    style="font-family: 'Montserrat', sans-serif"
+                    
                   >
                     <input
                       type="file"
@@ -119,17 +119,21 @@
                     />
                     <label
                       for="upload2"
-                      class="btn btn-dark2"
-                      style="width: 200px"
+                      class="btn btn-relief-primary"
+                                rippleEffect
+                      style="
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
+                      "
                       ><img
                         style="
                           width: 20px;
                           height: 20px;
-                          font-family: 'Montserrat', sans-serif;
+                          font-family: 'Public Sans', sans-serif;
                         "
                         src="../../../assets/images/site/highlight.png"
                         alt=""
-                      />{{
+                      /> &nbsp; {{
                         LibilityInsuranceURL == undefined ||
                         LibilityInsuranceURL == ""
                           ? "Upload"
@@ -143,24 +147,23 @@
                 <tr>
                   <td style="width: 175px"></td>
                   <td
-                    style="width: 200px; font-family: 'Montserrat', sans-serif"
+                    style="width: 200px; "
                   >
                     Identification
                   </td>
                   <td class="text-center">
-                    <a
-                      class="text-success px-2 py-1 box-shadow-0"
-                      style="font-family: 'Montserrat', sans-serif"
-                      (click)="openIdentityCard()"
-                      rippleEffect
-                    >
+                   
+                    <div
+                    (click)="openIdentityCard()"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style=" min-width: 45px;">
                       Preview
-                    </a>
+                    </div>
                   </td>
 
                   <td
                     class="text-center"
-                    style="font-family: 'Montserrat', sans-serif"
+                    
                   >
                     <input
                       type="file"
@@ -171,13 +174,17 @@
                     />
                     <label
                       for="upload3"
-                      class="btn btn-dark2"
-                      style="width: 200px"
+                      class="btn btn-relief-primary"
+                      rippleEffect
+            style="
+              width: 250px;
+              font-family: 'Public Sans', sans-serif;
+            "
                       ><img
                         style="width: 20px; height: 20px"
                         src="../../../assets/images/site/highlight.png"
                         alt=""
-                      />{{
+                      />&nbsp; {{
                         IdentityCardURL == undefined || IdentityCardURL == ""
                           ? "Upload"
                           : "Update"

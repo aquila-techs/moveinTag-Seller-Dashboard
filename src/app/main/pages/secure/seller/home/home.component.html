@@ -1,18 +1,18 @@
 <div class="content-wrapper container-xxl p-0">
-  <div class="content-body">
+  <div class="content-body" style="margin-right: -15px; margin-left: -15px;">
     <div class="col-lg-12">
-      <div class="row">
-        <div class="col-xl-5 col-md-6 col-12">
-          <div class="card card-congratulation-medal" style="height: 190px">
+      <div class="row"> 
+        <div class="col-xl-4 col-md-6 col-12">
+          <div class="card card-congratulation-medal" style="height: 170px;">
             <div class="card-body">
               <div class="row">
                 <div class="col-8">
-                  <h2 style="font-family: 'Montserrat', sans-serif">
+                  <h2 class="card-title">
                     Welcome {{ user?.companyName }}
                   </h2>
                   <p
                     class="card-text font-small-5"
-                    style="font-family: 'Montserrat', sans-serif"
+                    
                   >
                     You have {{ analytics["total-approved-orders"] }}/{{
                       analytics["total"]
@@ -22,8 +22,7 @@
                   <button
                     routerLink="/pages/seller/order-management"
                     type="button"
-                    class="btn btn-primary waves-effect waves-float waves-light mt-2"
-                    style="font-family: 'Montserrat', sans-serif"
+                    class="btn btn-relief-primary"
                     rippleEffect
                   >
                     View Leads
@@ -33,7 +32,7 @@
                   <div *ngIf="user?.profileImage; else customAvatar">
                     <img
                       style="background: white; box-shadow: 1px 5px 8px gray"
-                      class="rounded-circle mr-1 v-img__img v-img__img--contain"
+                      class=""
                       src="{{ baseURL }}{{ user?.profileImage }}"
                       height="100"
                       width="100"
@@ -63,10 +62,10 @@
           </div>
         </div>
 
-        <div class="col-xl-3 col-md-4 col-6">
+        <!-- <div class="col-xl-3 col-md-4 col-6">
           <div class="card">
             <div class="card-body text-center mb-1 mt-2">
-              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif">
+              <h2 class="mt-2" >
                 Your Score
               </h2>
               <div
@@ -83,19 +82,52 @@
               </div>
             </div>
           </div>
+        </div> -->
+
+
+        <div class="col-xl-4 col-md-4 col-12">
+          <div class="card card-congratulation-medal" style="height: 170px;">
+            <div class="card-body">
+              <h2 class="card-title">Congratulations 🎉</h2>
+              <p class="card-text font-small-3">You have got the rating from customers</p>
+              <h1 class="mb-75 mt-2">
+                <a href="javascript:void(0);">{{ sellerProfile.totalRating }}%</a>
+              </h1>
+              <img src="assets/images/illustration/badge.svg" class="congratulation-medal" alt="Medal Pic" />
+            </div>
+          </div>
         </div>
 
-        <div class="col-xl-4 col-md-4 col-6">
-          <div class="card">
+
+        <div class="col-xl-4 col-md-4 col-12">
+          <!-- <div class="card">
             <div class="card-body text-center mb-2 mt-2">
-              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif">
+              <h2 class="mt-2" >
                 ${{ allEarningAnalytics.totalAmmount }}
               </h2>
-              <h2 class="mt-2" style="font-family: 'Montserrat', sans-serif">
+              <h2 class="mt-2" >
                 Total Revenue
               </h2>
             </div>
-          </div>
+          </div> -->
+
+          <div class="card card-congratulations" style=" height: 170px;
+          background: linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7));
+      ">
+            <div class="card-body text-center">
+              <img src="assets/images/elements/decore-left.png" class="congratulations-img-left" alt="card-img-left" />
+              <img src="assets/images/elements/decore-right.png" class="congratulations-img-right" alt="card-img-right" />
+              <div class="text-center" style="
+              margin-top: 87px;
+              font-size: 19px;
+              color: white !important;
+          ">
+                <h2 class="card-title" style="color:white" *ngIf="allEarningAnalytics.totalAmmount">
+                  You have done <strong>${{ allEarningAnalytics.totalAmmount }}</strong> total revenue
+                </h2>
+              </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>
@@ -104,16 +136,16 @@
     <div class="col-lg-12">
       <div class="row">
         <!-- Earning Reports -->
-        <div class="col-lg-5 mb-4">
+        <div class="col-lg-6 mb-4">
           <div class="card h-100">
             <div class="row card-header">
               <div class="col-lg-6 pt-1">
-                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif">
+                <h2 class="mb-0 card-title" >
                   Earning Report
                 </h2>
                 <small
                   class="text-muted"
-                  style="font-family: 'Montserrat', sans-serif"
+                  
                   >Today's Earning</small
                 >
               </div>
@@ -122,12 +154,12 @@
               >
                 <button
                   type="button"
-                  class="btn btn-primary waves-effect waves-float waves-light"
-                  style="font-family: 'Montserrat', sans-serif"
+                  class="btn btn-outline-primary waves-effect"
+                  
                   rippleEffect
                   (click)="modalOpenExpoprtReport(modalAddCompany)"
                 >
-                  Export Report
+                  <i data-feather="download"></i> &nbsp; Export Report
                 </button>
               </div>
             </div>
@@ -180,7 +212,7 @@
                         style="
                           margin-left: 5px;
                           color: #5d596c;
-                          font-family: 'Montserrat', sans-serif;
+                          font-family: 'Public Sans', sans-serif;
                         "
                       >
                         Daily
@@ -202,11 +234,11 @@
                   </div>
                   <div class="col-12 col-sm-4">
                     <div class="d-flex gap-2 align-items-center">
-                      <div class="avatar bg-light-info rounded">
+                      <div class="avatar bg-light-success rounded">
                         <div class="avatar-content">
                           <i
                             data-feather="dollar-sign"
-                            class="avatar-icon font-medium-3"
+                            class="avatar-icon font-medium-3 text-success"
                           ></i>
                         </div>
                       </div>
@@ -215,7 +247,7 @@
                         style="
                           margin-left: 5px;
                           color: #5d596c;
-                          font-family: 'Montserrat', sans-serif;
+                          font-family: 'Public Sans', sans-serif;
                         "
                       >
                         Monthly
@@ -226,7 +258,7 @@
                     </h3>
                     <div class="progress w-75" style="height: 4px">
                       <div
-                        class="progress-bar bg-info"
+                        class="progress-bar bg-success"
                         role="progressbar"
                         style="width: 50%"
                         aria-valuenow="50"
@@ -250,7 +282,7 @@
                         style="
                           margin-left: 5px;
                           color: #5d596c;
-                          font-family: 'Montserrat', sans-serif;
+                          font-family: 'Public Sans', sans-serif;
                         "
                       >
                         Yearly
@@ -277,357 +309,184 @@
         </div>
         <!--/ Earning Reports -->
 
-        <!-- Monthly Campaign State -->
-        <div class="col-lg-4 mb-4">
-          <div class="card h-100">
-            <div class="card-header d-flex justify-content-between">
-              <div class="card-title mb-0">
-                <h2 class="mb-0" style="font-family: 'Montserrat', sans-serif">
-                  Clicks Statistics
-                </h2>
+        <!-- Transactions Card -->
+      <div class="col-lg-3 mb-4">
+        <div class="card card-transaction h-100">
+          <div class="card-header">
+            <h2 class="card-title">Clicks Statistics
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-primary rounded">
+                  <div class="avatar-content">
+                    <i data-feather="user" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Profile
+                  </h6>
+                  <small>Views</small>
+                </div>
               </div>
+              <div class="font-weight-bolder text-primary">{{ sellerProfile.viewedCount }}</div>
             </div>
-            <div class="card-body">
-              <ul class="p-0 m-0">
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/profile.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-success rounded">
+                  <div class="avatar-content">
+                    <i data-feather="inbox" class="avatar-icon font-medium-3"></i>
                   </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Profile View
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.viewedCount }}</b>
-                      </p>
-                    </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Email</h6>
+                  <small>Clicks</small>
+                </div>
+              </div>
+              <div class="font-weight-bolder text-success">{{ sellerProfile.emailCount }}</div>
+            </div>
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-danger rounded">
+                  <div class="avatar-content">
+                    <i data-feather="tablet" class="avatar-icon font-medium-3"></i>
                   </div>
-                </li>
-
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/email.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Phone Number</h6>
+                  <small>Clicks</small>
+                </div>
+              </div>
+              <div class="font-weight-bolder text-danger">{{ sellerProfile.phoneCount }}</div>
+            </div>
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-warning rounded">
+                  <div class="avatar-content">
+                    <i data-feather="monitor" class="avatar-icon font-medium-3"></i>
                   </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Email
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.emailCount }}</b>
-                      </p>
-                    </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Website</h6>
+                  <small>Clicks</small>
+                </div>
+              </div>
+              <div class="font-weight-bolder text-warning" style="
+              color: #ff9f43 !important;
+              ">{{ sellerProfile.webCount }}</div>
+            </div>
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-danger rounded">
+                  <div class="avatar-content">
+                    <i data-feather="facebook" class="avatar-icon font-medium-3"></i>
                   </div>
-                </li>
-
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/phone.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Facebook</h6>
+                  <small>Profile Views</small>
+                </div>
+              </div>
+              <div class="font-weight-bolder text-danger">{{ sellerProfile.fbCount }}</div>
+            </div>
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-primary rounded">
+                  <div class="avatar-content">
+                    <i data-feather="instagram" class="avatar-icon font-medium-3"></i>
                   </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Phone Number
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.phoneCount }}</b>
-                      </p>
-                    </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Instagram</h6>
+                  <small>Profile Vews</small>
+                </div>
+              </div>
+              <div class="font-weight-bolder text-primary">{{ sellerProfile.instCount }}</div>
+            </div>
+            <div class="transaction-item">
+              <div class="media">
+                <div class="avatar bg-light-success rounded">
+                  <div class="avatar-content">
+                    <i data-feather="linkedin" class="avatar-icon font-medium-3"></i>
                   </div>
-                </li>
-
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/website.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Website Clicks
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.webCount }}</b>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/facebook.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Facebook
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.fbCount }}</b>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/instagram.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Instagram
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.instCount }}</b>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-
-                <li
-                  class="pb-0 d-flex justify-content-between align-items-center"
-                >
-                  <div class="avatar rounded" style="background-color: #e2e2e2">
-                    <div class="avatar-content">
-                      <img
-                        src="assets/images/icons/new/linkedin.png"
-                        style="width: 20px; height: 20px"
-                      />
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-between w-100 flex-wrap">
-                    <h5
-                      class="mb-0 ms-3 p-1 align-self-center"
-                      style="font-family: 'Montserrat', sans-serif"
-                    >
-                      Linkedin
-                    </h5>
-                    <div class="d-flex align-items-center">
-                      <p
-                        class="mb-0 fw-semibold"
-                        style="font-size: 17px; margin-right: 10px"
-                      >
-                        <b>{{ sellerProfile.twitterCount }}</b>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">Linkedin</h6>
+                  <small>Profile Views</small>
+                </div>
+              </div>
+              <div class="font-weight-bolder text-success">{{ sellerProfile.twitterCount }}</div>
             </div>
           </div>
         </div>
-        <!--/ Monthly Campaign State -->
+      </div>
+      <!-- Transactions Card -->
 
-        <div
-          class="col-lg-3 mb-4"
-          style="padding-right: 0px; padding-left: 0px"
-        >
-          <div class="col-lg-12 col-md-6 col-12">
-            <div class="card card-transaction" style="margin-bottom: 0px">
-              <div class="card-header">
-                <h4
-                  class="card-title"
-                  style="
-                    font-size: 24px;
-                    font-weight: 600;
-                    font-family: 'Montserrat', sans-serif;
-                  "
-                >
-                  Leads Tracker
-                </h4>
-              </div>
-              <div class="card-body mt-1">
+        
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="card card-transaction" style="
+          height: 512px;
+      ">
+            <div class="card-header">
+              <h2 class="card-title">Leads Tracker
+              </h2>
+              <!-- <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i> -->
+            </div>
+            <div class="card-body">
                 <div class="row">
                   <div class="col-8">
-                    <h2 style="font-family: 'Montserrat', sans-serif">
+                    <h2 >
                       {{ analytics["total"] }}
                     </h2>
                     <p
                       class="card-text font-small-5"
-                      style="font-family: 'Montserrat', sans-serif"
                     >
                       Total Leads
                     </p>
                   </div>
                 </div>
+              <div class="transaction-item mt-2">
+                <div class="media">
+                  <div class="avatar bg-light-primary rounded">
+                    <div class="avatar-content">
+                      <i data-feather="pocket" class="avatar-icon font-medium-3"></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Active</h6>
+                    <small>Leads</small>
+                  </div>
+                </div>
+                <div class="font-weight-bolder text-primary">{{ analytics["total-approved-orders"] }}</div>
               </div>
-
-              <div class="card-body">
-                <div class="transaction-item mb-2">
-                  <div class="media">
-                    <div
-                      class="avatar rounded"
-                      style="background-color: #e2e2e2"
-                    >
-                      <div class="avatar-content">
-                        <img
-                          src="assets/images/icons/new/active.png"
-                          style="width: 25px; height: 25px"
-                        />
-                      </div>
-                    </div>
-                    <div class="media-body">
-                      <h6
-                        class="transaction-title"
-                        style="font-family: 'Montserrat', sans-serif"
-                      >
-                        Active
-                      </h6>
-                      <small>{{ analytics["total-approved-orders"] }}</small>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-success rounded">
+                    <div class="avatar-content">
+                      <i data-feather="check" class="avatar-icon font-medium-3"></i>
                     </div>
                   </div>
-                </div>
-                <div class="transaction-item mb-2">
-                  <div class="media">
-                    <div
-                      class="avatar rounded"
-                      style="background-color: #e2e2e2"
-                    >
-                      <div class="avatar-content">
-                        <img
-                          src="assets/images/icons/new/complete.png"
-                          style="width: 25px; height: 25px"
-                        />
-                      </div>
-                    </div>
-                    <div class="media-body">
-                      <h6
-                        class="transaction-title"
-                        style="font-family: 'Montserrat', sans-serif"
-                      >
-                        Completed
-                      </h6>
-                      <small>{{ analytics["total-completed-orders"] }}</small>
-                    </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Completed</h6>
+                    <small>Leads</small>
                   </div>
                 </div>
-                <div class="transaction-item mb-2">
-                  <div class="media">
-                    <div
-                      class="avatar rounded"
-                      style="background-color: #e2e2e2"
-                    >
-                      <div class="avatar-content">
-                        <img
-                          src="assets/images/icons/new/pending.png"
-                          style="width: 25px; height: 25px"
-                        />
-                      </div>
-                    </div>
-                    <div class="media-body">
-                      <h6
-                        class="transaction-title"
-                        style="font-family: 'Montserrat', sans-serif"
-                      >
-                        Pending
-                      </h6>
-                      <small>{{ analytics["total-pending-orders"] }}</small>
+                <div class="font-weight-bolder text-success">{{ analytics["total-completed-orders"] }}</div>
+              </div>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-danger rounded">
+                    <div class="avatar-content">
+                      <i data-feather="x" class="avatar-icon font-medium-3"></i>
                     </div>
                   </div>
-                </div>
-                <div class="transaction-item mb-5">
-                  <div class="media">
-                    <div
-                      class="avatar rounded"
-                      style="background-color: #e2e2e2"
-                    >
-                      <div class="avatar-content">
-                        <img
-                          src="assets/images/icons/new/cancel.png"
-                          style="width: 25px; height: 25px"
-                        />
-                      </div>
-                    </div>
-                    <div class="media-body">
-                      <h6
-                        class="transaction-title"
-                        style="font-family: 'Montserrat', sans-serif"
-                      >
-                        Cancelled
-                      </h6>
-                      <small>{{ analytics["total-cancelled-orders"] }}</small>
-                    </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Cancelled</h6>
+                    <small>Leads</small>
                   </div>
                 </div>
+                <div class="font-weight-bolder text-danger">{{ analytics["total-cancelled-orders"] }}</div>
               </div>
             </div>
           </div>

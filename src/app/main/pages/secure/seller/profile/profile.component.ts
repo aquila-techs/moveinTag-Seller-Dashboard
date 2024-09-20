@@ -1334,6 +1334,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   progressProfileStart: boolean;
   modelSize: "xl";
 
+
+  selectedServiceImage = "";
   constructor(
     private _coreConfigService: CoreConfigService,
     private modalService: NgbModal,
@@ -1955,6 +1957,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   modalOpenVCAbout(modalVCAbout) {
     this.modalService.open(modalVCAbout, {
+      centered: true,
+      size: "lg", // size: 'xs' | 'sm' | 'lg' | 'xl'
+    });
+  }
+
+  modalOpenImageZoom(modalImage, path) {
+    this.selectedServiceImage = path;
+    this.modalService.open(modalImage, {
       centered: true,
       size: "lg", // size: 'xs' | 'sm' | 'lg' | 'xl'
     });

@@ -35,8 +35,8 @@
             <img
               class="rounded-circle mr-1"
               src="{{ baseURL }}{{ chatUser.profileImage }}"
-              height="32"
-              width="32"
+              height="40"
+              width="40"
             />
           </div>
           <ng-template #customAvatar>
@@ -51,11 +51,16 @@
               }"
             >
               <div class="avatar-content">
-                {{ chatUser.firstName + " " + chatUser.lastName | initials }}
+                aa{{ chatUser.firstName + " " + chatUser.lastName | initials }}
               </div>
             </div>
           </ng-template>
-          <h6 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h6>
+          <div>
+            <h5 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h5>
+            <h6 class="mb-0">{{ chatUser.email }}</h6>
+          </div>
+          
+
         </div>
         <div *ngIf="chats.accepted === true" class="d-flex align-items-center">
           <div
@@ -202,7 +207,7 @@
       </div>
       <button
         type="button"
-        class="btn btn-primary send"
+        class="btn btn-relief-primary send"
         (keydown.enter)="sendMessage()"
         (click)="sendMessage()"
         rippleEffect

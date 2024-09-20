@@ -245,8 +245,8 @@
       // Outline buttons
       @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white') {
         .btn-outline-#{$color_name} {
-          border: 1px solid $color_value !important;
-          background-color: transparent;
+          border: 0px solid $color_value !important;
+          background-color: rgba($color: $color_value, $alpha: 0.2) !important;
           color: $color_value;
 
           &:hover:not(.disabled):not(:disabled) {

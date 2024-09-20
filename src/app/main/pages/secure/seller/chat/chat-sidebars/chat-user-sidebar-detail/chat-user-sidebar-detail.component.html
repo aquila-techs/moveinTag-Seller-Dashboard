@@ -9,18 +9,57 @@
 
     <div *ngIf="chatUser.firstName">
       <div class="chat-profile-header">
+        
         <div
           class="header-profile-sidebar"
           style="text-align: center; padding-top: 20px"
         >
-          <div class="mb-1" *ngIf="chatUser.profileImage; else customAvatar">
+
+        <div class="d-flex align-items-center justify-content-center">
+          <div *ngIf="chatUser.profileImage; else customAvatar">
+            <img
+              class="rounded-circle mr-1"
+              src="{{ baseURL }}{{ chatUser.profileImage }}"
+              height="80"
+              width="80"
+            />
+          </div>
+          <div>
+            <!-- <h5 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h5> -->
+             <div class="chat-info flex-grow-1">
+            <span style="font-size: 22px; font-weight: 700" class="mb-1"
+              >{{ chatUser.firstName }} {{ chatUser.lastName }}</span
+            >
+          </div>
+            <!-- <h6 class="mb-0">{{ chatUser.email }}</h6> -->
+             <div class="transaction-item  mb-1">
+              <div class="media">
+                
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.email? chatUser.email : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- <div class="mb-1" *ngIf="chatUser.profileImage; else customAvatar">
             <img
               class="rounded-circle"
               src="{{ baseURL }}{{ chatUser.profileImage }}"
               height="100"
               width="100"
             />
-          </div>
+          </div> -->
           <ng-template #customAvatar>
             <div
               class="avatar mr-1 ml-0"
@@ -41,11 +80,11 @@
             </div>
           </ng-template>
 
-          <div class="chat-info flex-grow-1">
+          <!-- <div class="chat-info flex-grow-1">
             <span style="font-size: 22px; font-weight: 700" class="mb-1"
               >{{ chatUser.firstName }} {{ chatUser.lastName }}</span
             >
-          </div>
+          </div> -->
         </div>
         <!--/ User Information -->
       </div>
@@ -54,76 +93,197 @@
       <div class="profile-sidebar-area" [perfectScrollbar]>
         <!-- To set user status -->
         <ul class="list-unstyled user-status">
-          <li class="pb-1 pt-2">
-            <div class="col-12" *ngIf="chatUser.email">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Email: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.email
-              }}</span>
+          <li class="pb-1 pt-2 ml-2">
+            <!-- <div class="transaction-item  mb-1">
+              <div class="media">
+                <div class="avatar bg-light-primary rounded">
+                  <div class="avatar-content">
+                    <i data-feather="mail" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.email? chatUser.email : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
+            </div> -->
+          
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-success rounded">
+                  <div class="avatar-content">
+                    <i data-feather="phone" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.phone? chatUser.phone : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
-            <div class="col-12" *ngIf="chatUser.phone">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Phone no: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.phone
-              }}</span>
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-danger rounded">
+                  <div class="avatar-content">
+                    <i data-feather="home" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.address? chatUser.address : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
-            <div class="col-12" *ngIf="chatUser.address">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Address: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.address
-              }}</span>
+
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-primary rounded">
+                  <div class="avatar-content">
+                    <i data-feather="map-pin" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.postalCode? chatUser.postalCode : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
-            <div class="col-12" *ngIf="chatUser.postalCode">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Zip / Postal Code: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.postalCode
-              }}</span>
+
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-success rounded">
+                  <div class="avatar-content">
+                    <i data-feather="globe" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.country? chatUser.country : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
-            <div class="col-12" *ngIf="chatUser.country">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Country: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.country
-              }}</span>
+
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-danger rounded">
+                  <div class="avatar-content">
+                    <i data-feather="facebook" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.facebookURL? chatUser.facebookURL : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
-            <div class="col-12" *ngIf="chatUser.facebookURL">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Facebook: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.facebookURL
-              }}</span>
+
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-primary rounded">
+                  <div class="avatar-content">
+                    <i data-feather="instagram" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.instagramURL? chatUser.instagramURL : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
-            <div class="col-12" *ngIf="chatUser.instagramURL">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Instagram: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.instagramURL
-              }}</span>
-            </div>
-            <div class="col-12" *ngIf="chatUser.twitterURL">
-              <span class="ml-1" style="font-size: 17px; font-weight: 700"
-                >Linkedin: &nbsp;</span
-              >
-              <span style="font-size: 14px; font-weight: 600">{{
-                chatUser.twitterURL
-              }}</span>
+
+
+            
+            <div class="transaction-item mb-1">
+              <div class="media">
+                <div class="avatar bg-light-success rounded">
+                  <div class="avatar-content">
+                    <i data-feather="linkedin" class="avatar-icon font-medium-3"></i>
+                  </div>
+                </div>
+                <div class="media-body" style="
+                display: flex;
+                justify-content: start;
+                height: 30px;
+                align-items: center;
+                padding-left: 10px;
+            ">
+                  <span class="transaction-title"><b>{{
+                    chatUser.twitterURL ? chatUser.twitterURL : '--'
+                  }}</b>
+                </span>
+                  
+                </div>
+              </div>
             </div>
           </li>
         </ul>
 
         <div class="d-flex justify-content-center mt-3">
-          <button class="btn btn-primary" (click)="orderDetails(modalVC)">
+          <button  class="btn btn-relief-primary"
+          rippleEffect (click)="orderDetails(modalVC)">
             Lead Info
           </button>
         </div>
@@ -139,7 +299,7 @@
     <h5
       class="modal-title"
       id="exampleModalCenterTitle"
-      style="font-family: 'Montserrat', sans-serif"
+      
     >
       Lead Details
     </h5>
@@ -155,7 +315,7 @@
   <div class="modal-body" tabindex="0" ngbAutofocus>
     <form action="">
       <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >What needs to be done?</label
         >
         <input
@@ -168,7 +328,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.place">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >What type of property?</label
         >
         <input
@@ -181,7 +341,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.startTime">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >When do you want to start this project</label
         >
         <input
@@ -194,7 +354,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.notes">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >Please provide some details about project
         </label>
         <textarea
@@ -207,7 +367,7 @@
 
       <div *ngIf="selectedOrder?.status === 'COMPLETED'">
         <div class="form-group" [hidden]="!selectedOrder?.startTime">
-          <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+          <label for="basicInput" 
             >Earning</label
           >
           <input
@@ -223,7 +383,7 @@
       </div>
 
       <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
-        <label for="basicInput" style="font-family: 'Montserrat', sans-serif"
+        <label for="basicInput" 
           >Service Images</label
         >
         <div class="row px-1">

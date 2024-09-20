@@ -1,10 +1,10 @@
-<div class="content-wrapper mt-2" style="background: none">
+<div class="content-wrapper container-xxl pt-1 card" style="background: none">
   <div class="content-body">
     <app-content-header [contentHeader]="contentHeader"></app-content-header>
 
     <section>
       <div class="row justify-content-center mt-0">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="card auto pb-2" style="height: 550px">
             <div class="card-body">
               <div
@@ -12,36 +12,36 @@
               >
                 <div class="col-md-6 p-0 text-center">
                   <div class="with-icon">
-                    <img
-                      width="32"
-                      src="../../../assets/images/site/new-icons/letter.png"
-                    />
+                    <div class="avatar bg-light-primary rounded">
+                      <div class="avatar-content" style="width: 50px; height: 40px;">
+                        <i
+                          data-feather="mail"
+                          class="avatar-icon font-large-1" 
+                        ></i>
+                      </div>
+                    </div>
                     <h5
-                      class="title mt-2"
-                      style="
-                        font-family: 'Montserrat', sans-serif;
-                        font-weight: 300;
-                      "
+                      class="title mt-1"
                     >
-                      support@moventag.com
+                     <b> support@moventag.com</b>
                     </h5>
                   </div>
                 </div>
                 <div class="col-md-6 p-0 text-center">
                   <div class="with-icon">
-                    <img
-                      width="28"
-                      src="../../../assets/images/site/new-icons/location.png"
-                    />
+                    <div class="avatar bg-light-warning rounded">
+                      <div class="avatar-content" style="width: 50px; height: 40px;">
+                        <i
+                          data-feather="map-pin"
+                          class="avatar-icon font-large-1" 
+                        ></i>
+                      </div>
+                    </div>
                     <h5
-                      class="title mt-2"
-                      style="
-                        font-family: 'Montserrat', sans-serif;
-                        font-weight: 300;
-                      "
+                      class="title mt-1"
                     >
-                      203 - 3500 Dufferin Street, <br />
-                      North York, ON M3K 1N2
+                      <b>203 - 3500 Dufferin Street, <br />
+                      North York, ON M3K 1N2</b>
                     </h5>
                   </div>
                 </div>
@@ -92,10 +92,18 @@
                     placeholder="Briefly describe your issue...."
                   ></textarea>
                 </div>
-                <button class="btn btn-dark2 btn-md d-flex align-items-center">
-                  <i class="font-large-1" data-feather="check"></i>
-                  &nbsp;Submit
-                </button>
+                <div
+                  class="col-sm-12 "
+                  style="text-align: center"
+                >
+                    <button
+                      type="button"
+                      class="btn btn-relief-primary btn-md px-3"
+                      rippleEffect
+                    >
+                    <i data-feather="check"></i>&nbsp; Submit
+                    </button>
+                  </div>
               </form>
             </div>
           </div>
@@ -162,7 +170,7 @@
                   <div class="title-section mb-2">
                     <h2
                       class="main-title"
-                      style="font-family: 'Montserrat', sans-serif"
+                      
                     >
                       Contact Us
                     </h2>
@@ -221,7 +229,7 @@
                   <div class="title-section mb-2">
                     <h2
                       class="main-title"
-                      style="font-family: 'Montserrat', sans-serif"
+                      
                     >
                       Office Hours
                     </h2>

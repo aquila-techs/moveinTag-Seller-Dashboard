@@ -74,7 +74,7 @@ export class CoreMenuComponent implements OnInit {
               if(this.filterCategories.length <= 0){
                 let itemData = {
                   id: 'home-services',
-                  icon: '',
+                  icon: 'circle',
                   title: element.category.title,
                   type: 'item',
                   url: 'pages/seller/quotation-listing/'+element.category._id
@@ -91,7 +91,7 @@ export class CoreMenuComponent implements OnInit {
                 if(!matchAdded){
                   let itemData = {
                     id: 'home-services',
-                    icon: '',
+                    icon: 'circle',
                     title: element.category.title,
                     type: 'item',
                     url: 'pages/seller/quotation-listing/'+element.category._id

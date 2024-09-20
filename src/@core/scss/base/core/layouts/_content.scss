@@ -33,7 +33,7 @@ html {
     min-height: calc(100% - #{$footer-height});
     margin-left: $menu-expanded-width;
     &.app-content {
-      padding: calc(#{$content-padding} + #{$navbar-height} + #{$floating-nav-margin}) #{$content-padding} 0;
+      padding: calc(#{$content-padding+1} + #{$navbar-height} + #{$floating-nav-margin}) #{$content-padding+6} 0;
       &.show-overlay {
         .content-overlay {
           z-index: 10;
@@ -390,7 +390,7 @@ html {
   body {
     // Normal sidebar
     .content-right {
-      width: calc(75vw - (100vw - 100%) - #{$sidebar-width});
+      width: calc(100vw - (100vw - 100%) - #{$sidebar-width});
       float: right;
     }
     .content-left {

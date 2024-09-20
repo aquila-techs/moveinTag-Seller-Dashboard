@@ -129,8 +129,9 @@ $chat-profile-sidebar-head-height: 200px;
       }
     }
     .chat-list-title {
-      color: $primary;
-      margin: 2rem 1.286rem 0.5rem;
+      padding: 1.6rem 1.286rem 1.5rem;
+      border-bottom: 1px solid #e5e1e1;
+      margin-bottom: 0px;
     }
     // Sidebar chat list
     .chat-user-list-wrapper {

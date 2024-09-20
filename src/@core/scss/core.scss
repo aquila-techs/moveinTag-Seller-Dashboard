@@ -15,3 +15,11 @@
 
 // Vue Specific
 @import './angular/index';
+.table thead tr th {
+    padding-block: 1.161rem !important;
+}
+
+.table-padding{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}

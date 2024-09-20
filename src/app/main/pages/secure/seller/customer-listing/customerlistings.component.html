@@ -1,4 +1,4 @@
-<div class="content-wrapper container-xxl p-0">
+<div class="content-wrapper container-xxl p-0 card">
   <div class="content-body">
     <!-- content-header component -->
 
@@ -8,7 +8,7 @@
           <div class="col-12 d-flex" style="padding-left: 0px">
             <h2
               class="content-header-title float-left mb-0"
-              style="font-family: 'Montserrat', sans-serif"
+              
             >
               {{ category.title }}
             </h2>
@@ -19,7 +19,7 @@
 
     <div *ngIf="requiredDocument == false">
       <div
-        class="mb-2"
+        class="pl-1 pr-3 mb-1 mt-1"
         style="
           position: relative;
           display: flex;
@@ -36,9 +36,9 @@
               [(ngModel)]="searchText"
               name="searchText"
               style="
-                border: 1px solid #38b6ff;
+                border: 1px solid #e1e1e1;
                 width: 500px;
-                font-family: 'Montserrat', sans-serif;
+                font-family: 'Public Sans', sans-serif;
               "
             />
           </form>
@@ -46,7 +46,8 @@
         <button
           type="button"
           (click)="onSubmitSearch()"
-          class="btn btn-primary"
+          class="btn btn-relief-primary"
+                    rippleEffect
           style="margin-left: 5px"
         >
           <i class="fa fa-search"></i>
@@ -54,7 +55,8 @@
         <button
           type="button"
           (click)="onSubmitClear()"
-          class="btn btn-danger"
+          class="btn btn-relief-danger"
+                    rippleEffect
           style="margin-left: 5px"
         >
           <i class="fa fa-close"></i>
@@ -75,7 +77,7 @@
                     margin: 30px;
                     margin-top: -15px;
                     margin-bottom: 20px;
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: 'Public Sans', sans-serif;
                   "
                 >
                   No Quotation Found
@@ -87,48 +89,48 @@
       </section>
 
       <section *ngIf="userQuote && userQuote.length > 0">
-        <div class="col-lg-12 mb-12 mb-lg-0 pb-1">
+        <div class="col-lg-12 mb-12 mb-lg-0 pb-1 table-padding">
           <div class="card h-100">
             <div class="table-responsive">
               <table class="table table-s1">
                 <thead>
                   <tr>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >
                       Lead Number
                     </th>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >
                       Customer Name
                     </th>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >
                       Services
                     </th>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >
                       Status
                     </th>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >
                       Postal Code
                     </th>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >
                       Country
                     </th>
-                    <th style="font-family: 'Montserrat', sans-serif">City</th>
-                    <th style="font-family: 'Montserrat', sans-serif">
+                    <th >City</th>
+                    <th >
                       Lead Details
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="mb-1" *ngFor="let item of userQuote">
-                    <td style="font-family: 'Montserrat', sans-serif">
-                      {{ item.orderNum }}
+                    <td class="text-primary">
+                      #{{ item.orderNum }}
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
+                    <td >
                       {{ item?.buyer?.firstName }}
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
+                    <td >
                       {{ item?.subCategory?.title }}
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
+                    <td >
                       <span class="badge badge-pill badge-light-success mr-1">
                         <span *ngIf="item?.status === 'QUOTE'"> Pending </span>
                         <span *ngIf="item?.status === 'ACTIVE'">
@@ -136,22 +138,22 @@
                         </span>
                       </span>
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
+                    <td >
                       {{ item?.postal_code }}
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
+                    <td >
                       {{ item?.country }}
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
+                    <td >
                       {{ item?.city }}
                     </td>
-                    <td style="font-family: 'Montserrat', sans-serif">
-                      <a
-                        class="text-success px-2 py-1 box-shadow-0"
-                        (click)="modalOpenVC(modalVC, item)"
-                        rippleEffect
-                        >View</a
-                      >
+                    <td >
+                      <div
+                      (click)="modalOpenVC(modalVC, item)"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style=" min-width: 45px;">
+                      View
+                    </div>
                     </td>
                   </tr>
                 </tbody>
@@ -176,7 +178,7 @@
                   margin: 30px;
                   margin-top: -15px;
                   margin-bottom: 20px;
-                  font-family: 'Montserrat', sans-serif;
+                  font-family: 'Public Sans', sans-serif;
                 "
               >
                 Please upload documents first in verification tab
@@ -184,7 +186,7 @@
                   style="
                     font-size: 15px;
                     margin-top: 20px;
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: 'Public Sans', sans-serif;
                   "
                 >
                   <b>Note:</b> if you have submitted, please wait for admin

@@ -68,7 +68,7 @@
     top: 0;
     right: 0;
     margin-top: #{$floating-nav-margin};
-    width: calc(100vw - (100vw - 100%) - calc(#{$content-padding} * 2) - #{$menu-expanded-width});
+    width: calc(100vw - (100vw - 91.4%) - calc(#{$content-padding} * 2) - #{$menu-expanded-width});
     border-radius: $card-border-radius;
     z-index: 12;
     margin-left: auto;

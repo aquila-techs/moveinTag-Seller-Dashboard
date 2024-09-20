@@ -5,6 +5,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  host: { class: 'chat-application' }
+  host: { class: 'chat-application d-flex' }
 })
 export class ChatComponent {}
