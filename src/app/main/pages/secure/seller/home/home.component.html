@@ -1,19 +1,14 @@
 <div class="content-wrapper container-xxl p-0">
-  <div class="content-body" style="margin-right: -15px; margin-left: -15px;">
+  <div class="content-body" style="margin-right: -15px; margin-left: -15px">
     <div class="col-lg-12">
-      <div class="row"> 
+      <div class="row">
         <div class="col-xl-4 col-md-6 col-12">
-          <div class="card card-congratulation-medal" style="height: 170px;">
+          <div class="card card-congratulation-medal" style="height: 170px">
             <div class="card-body">
               <div class="row">
                 <div class="col-8">
-                  <h2 class="card-title">
-                    Welcome {{ user?.companyName }}
-                  </h2>
-                  <p
-                    class="card-text font-small-5"
-                    
-                  >
+                  <h2 class="card-title">Welcome {{ user?.companyName }}</h2>
+                  <p class="card-text font-small-5">
                     You have {{ analytics["total-approved-orders"] }}/{{
                       analytics["total"]
                     }}
@@ -84,20 +79,42 @@
           </div>
         </div> -->
 
-
         <div class="col-xl-4 col-md-4 col-12">
-          <div class="card card-congratulation-medal" style="height: 170px;">
+          <div class="card card-congratulation-medal" style="height: 170px">
             <div class="card-body">
-              <h2 class="card-title">Congratulations 🎉</h2>
-              <p class="card-text font-small-3">You have got the rating from customers</p>
+              <h2 *ngIf="sellerProfile.totalRating > 0" class="card-title">
+                Congratulations 🎉
+              </h2>
+              <p
+                *ngIf="sellerProfile.totalRating > 0"
+                class="card-text font-small-3"
+              >
+                You have got the rating from clients
+              </p>
               <h1 class="mb-75 mt-2">
-                <a href="javascript:void(0);">{{ sellerProfile.totalRating }}%</a>
+                <ng-container
+                  *ngIf="sellerProfile.totalRating > 0; else noReviews"
+                >
+                  <a href="javascript:void(0);"
+                    >{{ sellerProfile.totalRating }}%</a
+                  >
+                </ng-container>
+                <ng-template #noReviews>
+                  <p class="card-text font-small-3">
+                    Looks like there are no reviews or ratings just yet.<br />
+                    Remember to kindly ask your client to leave a review on your
+                    profile!
+                  </p>
+                </ng-template>
               </h1>
-              <img src="assets/images/illustration/badge.svg" class="congratulation-medal" alt="Medal Pic" />
+              <img
+                src="assets/images/illustration/badge.svg"
+                class="congratulation-medal"
+                alt="Medal Pic"
+              />
             </div>
           </div>
         </div>
-
 
         <div class="col-xl-4 col-md-4 col-12">
           <!-- <div class="card">
@@ -111,23 +128,59 @@
             </div>
           </div> -->
 
-          <div class="card card-congratulations" style=" height: 170px;
-          background: linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7));
-      ">
+          <div
+            class="card card-congratulations"
+            style="
+              height: 170px;
+              background: linear-gradient(
+                118deg,
+                #7367f0,
+                rgba(115, 103, 240, 0.7)
+              );
+            "
+          >
             <div class="card-body text-center">
-              <img src="assets/images/elements/decore-left.png" class="congratulations-img-left" alt="card-img-left" />
-              <img src="assets/images/elements/decore-right.png" class="congratulations-img-right" alt="card-img-right" />
-              <div class="text-center" style="
-              margin-top: 87px;
-              font-size: 19px;
-              color: white !important;
-          ">
-                <h2 class="card-title" style="color:white" *ngIf="allEarningAnalytics.totalAmmount">
-                  You have done <strong>${{ allEarningAnalytics.totalAmmount }}</strong> total revenue
+              <img
+                src="assets/images/elements/decore-left.png"
+                class="congratulations-img-left"
+                alt="card-img-left"
+              />
+              <img
+                src="assets/images/elements/decore-right.png"
+                class="congratulations-img-right"
+                alt="card-img-right"
+              />
+              <div
+                class="text-center"
+                style="
+                  margin-top: 87px;
+                  font-size: 19px;
+                  color: white !important;
+                "
+              >
+                <h2 class="card-title" style="color: white">
+                  <ng-container
+                    *ngIf="
+                      allEarningAnalytics.totalAmmount < 1;
+                      else earnedAmount
+                    "
+                  >
+                    You haven't completed any tasks yet.<br />
+                    Once you do, your earnings will be displayed here!
+                  </ng-container>
+                  <ng-template #earnedAmount>
+                    You've earned
+                    <strong
+                      >${{
+                        allEarningAnalytics.totalAmmount | number : "1.0-0"
+                      }}</strong
+                    >
+                    with Moventag so far.<br />Your hard work is paying off!
+                  </ng-template>
                 </h2>
               </div>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -140,13 +193,9 @@
           <div class="card h-100">
             <div class="row card-header">
               <div class="col-lg-6 pt-1">
-                <h2 class="mb-0 card-title" >
-                  Earning Report
-                </h2>
-                <small
-                  class="text-muted"
-                  
-                  >Today's Earning</small
+                <h2 class="mb-0 card-title">Earnings Overview</h2>
+                <small class="text-muted"
+                  >Your earnings for this week will be displayed here</small
                 >
               </div>
               <div
@@ -155,7 +204,6 @@
                 <button
                   type="button"
                   class="btn btn-outline-primary waves-effect"
-                  
                   rippleEffect
                   (click)="modalOpenExpoprtReport(modalAddCompany)"
                 >
@@ -175,6 +223,7 @@
                     <h1 class="mb-0" style="margin-right: 5px; font-size: 35px">
                       ${{
                         allEarningAnalytics.totalAmountWeekly[currentDayIndex]
+                          | number : "1.0-0"
                       }}
                     </h1>
                   </div>
@@ -219,7 +268,9 @@
                       </h5>
                     </div>
                     <h3 class="my-2 pt-1">
-                      ${{ allEarningAnalytics.totalAmountDaily }}
+                      ${{
+                        allEarningAnalytics.totalAmountDaily | number : "1.0-0"
+                      }}
                     </h3>
                     <div class="progress w-75" style="height: 4px">
                       <div
@@ -254,7 +305,10 @@
                       </h5>
                     </div>
                     <h3 class="my-2 pt-1">
-                      ${{ allEarningAnalytics.totalAmountMonthly }}
+                      ${{
+                        allEarningAnalytics.totalAmountMonthly
+                          | number : "1.0-0"
+                      }}
                     </h3>
                     <div class="progress w-75" style="height: 4px">
                       <div
@@ -289,7 +343,9 @@
                       </h5>
                     </div>
                     <h3 class="my-2 pt-1">
-                      ${{ allEarningAnalytics.totalAmountYealy }}
+                      ${{
+                        allEarningAnalytics.totalAmountYealy | number : "1.0-0"
+                      }}
                     </h3>
                     <div class="progress w-75" style="height: 4px">
                       <div
@@ -310,147 +366,176 @@
         <!--/ Earning Reports -->
 
         <!-- Transactions Card -->
-      <div class="col-lg-3 mb-4">
-        <div class="card card-transaction h-100">
-          <div class="card-header">
-            <h2 class="card-title">Clicks Statistics
-            </h2>
-          </div>
-          <div class="card-body">
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-primary rounded">
-                  <div class="avatar-content">
-                    <i data-feather="user" class="avatar-icon font-medium-3"></i>
-                  </div>
-                </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Profile
-                  </h6>
-                  <small>Views</small>
-                </div>
-              </div>
-              <div class="font-weight-bolder text-primary">{{ sellerProfile.viewedCount }}</div>
+        <div class="col-lg-3 mb-4">
+          <div class="card card-transaction h-100">
+            <div class="card-header">
+              <h2 class="card-title">Clicks Statistics</h2>
             </div>
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-success rounded">
-                  <div class="avatar-content">
-                    <i data-feather="inbox" class="avatar-icon font-medium-3"></i>
+            <div class="card-body">
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-primary rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="user"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Profile</h6>
+                    <small>Views</small>
                   </div>
                 </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Email</h6>
-                  <small>Clicks</small>
+                <div class="font-weight-bolder text-primary">
+                  {{ sellerProfile.viewedCount }}
                 </div>
               </div>
-              <div class="font-weight-bolder text-success">{{ sellerProfile.emailCount }}</div>
-            </div>
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-danger rounded">
-                  <div class="avatar-content">
-                    <i data-feather="tablet" class="avatar-icon font-medium-3"></i>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-success rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="inbox"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Email</h6>
+                    <small>Clicks</small>
                   </div>
                 </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Phone Number</h6>
-                  <small>Clicks</small>
+                <div class="font-weight-bolder text-success">
+                  {{ sellerProfile.emailCount }}
                 </div>
               </div>
-              <div class="font-weight-bolder text-danger">{{ sellerProfile.phoneCount }}</div>
-            </div>
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-warning rounded">
-                  <div class="avatar-content">
-                    <i data-feather="monitor" class="avatar-icon font-medium-3"></i>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-danger rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="tablet"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Phone Number</h6>
+                    <small>Clicks</small>
                   </div>
                 </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Website</h6>
-                  <small>Clicks</small>
+                <div class="font-weight-bolder text-danger">
+                  {{ sellerProfile.phoneCount }}
                 </div>
               </div>
-              <div class="font-weight-bolder text-warning" style="
-              color: #ff9f43 !important;
-              ">{{ sellerProfile.webCount }}</div>
-            </div>
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-danger rounded">
-                  <div class="avatar-content">
-                    <i data-feather="facebook" class="avatar-icon font-medium-3"></i>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-warning rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="monitor"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Website</h6>
+                    <small>Clicks</small>
                   </div>
                 </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Facebook</h6>
-                  <small>Profile Views</small>
+                <div
+                  class="font-weight-bolder text-warning"
+                  style="color: #ff9f43 !important"
+                >
+                  {{ sellerProfile.webCount }}
                 </div>
               </div>
-              <div class="font-weight-bolder text-danger">{{ sellerProfile.fbCount }}</div>
-            </div>
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-primary rounded">
-                  <div class="avatar-content">
-                    <i data-feather="instagram" class="avatar-icon font-medium-3"></i>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-danger rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="facebook"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Facebook</h6>
+                    <small>Profile Views</small>
                   </div>
                 </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Instagram</h6>
-                  <small>Profile Vews</small>
+                <div class="font-weight-bolder text-danger">
+                  {{ sellerProfile.fbCount }}
                 </div>
               </div>
-              <div class="font-weight-bolder text-primary">{{ sellerProfile.instCount }}</div>
-            </div>
-            <div class="transaction-item">
-              <div class="media">
-                <div class="avatar bg-light-success rounded">
-                  <div class="avatar-content">
-                    <i data-feather="linkedin" class="avatar-icon font-medium-3"></i>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-primary rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="instagram"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Instagram</h6>
+                    <small>Profile Vews</small>
                   </div>
                 </div>
-                <div class="media-body">
-                  <h6 class="transaction-title">Linkedin</h6>
-                  <small>Profile Views</small>
+                <div class="font-weight-bolder text-primary">
+                  {{ sellerProfile.instCount }}
                 </div>
               </div>
-              <div class="font-weight-bolder text-success">{{ sellerProfile.twitterCount }}</div>
+              <div class="transaction-item">
+                <div class="media">
+                  <div class="avatar bg-light-success rounded">
+                    <div class="avatar-content">
+                      <i
+                        data-feather="linkedin"
+                        class="avatar-icon font-medium-3"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h6 class="transaction-title">Linkedin</h6>
+                    <small>Profile Views</small>
+                  </div>
+                </div>
+                <div class="font-weight-bolder text-success">
+                  {{ sellerProfile.twitterCount }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Transactions Card -->
+        <!-- Transactions Card -->
 
-        
         <div class="col-lg-3 col-md-6 col-12">
-          <div class="card card-transaction" style="
-          height: 512px;
-      ">
+          <div class="card card-transaction" style="height: 512px">
             <div class="card-header">
-              <h2 class="card-title">Leads Tracker
-              </h2>
+              <h2 class="card-title">Leads Tracker</h2>
               <!-- <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i> -->
             </div>
             <div class="card-body">
-                <div class="row">
-                  <div class="col-8">
-                    <h2 >
-                      {{ analytics["total"] }}
-                    </h2>
-                    <p
-                      class="card-text font-small-5"
-                    >
-                      Total Leads
-                    </p>
-                  </div>
+              <div class="row">
+                <div class="col-8">
+                  <h2>
+                    {{ analytics["total"] }}
+                  </h2>
+                  <p class="card-text font-small-5">Total Leads</p>
                 </div>
+              </div>
               <div class="transaction-item mt-2">
                 <div class="media">
                   <div class="avatar bg-light-primary rounded">
                     <div class="avatar-content">
-                      <i data-feather="pocket" class="avatar-icon font-medium-3"></i>
+                      <i
+                        data-feather="pocket"
+                        class="avatar-icon font-medium-3"
+                      ></i>
                     </div>
                   </div>
                   <div class="media-body">
@@ -458,13 +543,18 @@
                     <small>Leads</small>
                   </div>
                 </div>
-                <div class="font-weight-bolder text-primary">{{ analytics["total-approved-orders"] }}</div>
+                <div class="font-weight-bolder text-primary">
+                  {{ analytics["total-approved-orders"] }}
+                </div>
               </div>
               <div class="transaction-item">
                 <div class="media">
                   <div class="avatar bg-light-success rounded">
                     <div class="avatar-content">
-                      <i data-feather="check" class="avatar-icon font-medium-3"></i>
+                      <i
+                        data-feather="check"
+                        class="avatar-icon font-medium-3"
+                      ></i>
                     </div>
                   </div>
                   <div class="media-body">
@@ -472,7 +562,9 @@
                     <small>Leads</small>
                   </div>
                 </div>
-                <div class="font-weight-bolder text-success">{{ analytics["total-completed-orders"] }}</div>
+                <div class="font-weight-bolder text-success">
+                  {{ analytics["total-completed-orders"] }}
+                </div>
               </div>
               <div class="transaction-item">
                 <div class="media">
@@ -486,7 +578,9 @@
                     <small>Leads</small>
                   </div>
                 </div>
-                <div class="font-weight-bolder text-danger">{{ analytics["total-cancelled-orders"] }}</div>
+                <div class="font-weight-bolder text-danger">
+                  {{ analytics["total-cancelled-orders"] }}
+                </div>
               </div>
             </div>
           </div>

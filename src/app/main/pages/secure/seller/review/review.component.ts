@@ -128,7 +128,7 @@ export class ReviewComponent implements OnInit {
    */
   ngOnInit(): void {
     this.contentHeader = {
-      headerTitle: "Lead Reviews",
+      headerTitle: "Reviews",
       actionButton: false,
       breadcrumb: {
         type: "",

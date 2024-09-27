@@ -24,73 +24,88 @@
         </form>
       </div>
       <button
-          type="button"
-          (click)="onSubmitSearch()"
-          class="btn btn-relief-primary"
-                    rippleEffect
-          style="margin-left: 5px"
-        >
-          <i class="fa fa-search"></i>
-        </button>
-        <button
-          type="button"
-          (click)="onSubmitClear()"
-          class="btn btn-relief-danger"
-                    rippleEffect
-          style="margin-left: 5px"
-        >
-          <i class="fa fa-close"></i>
-        </button>
+        type="button"
+        (click)="onSubmitSearch()"
+        class="btn btn-relief-primary"
+        rippleEffect
+        style="margin-left: 5px"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+      <button
+        type="button"
+        (click)="onSubmitClear()"
+        class="btn btn-relief-danger"
+        rippleEffect
+        style="margin-left: 5px"
+      >
+        <i class="fa fa-close"></i>
+      </button>
     </div>
 
-    <section>
+    <section class="mb-1" *ngIf="userQuote && userQuote.length <= 0">
+      <div class="table-wrapper">
+        <div class="row" id="basic-table">
+          <div class="col-12">
+            <div class="card auto">
+              <h4 class="table-title"></h4>
+              <div
+                class="table-responsive"
+                style="
+                  font-size: 20px;
+                  text-align: center;
+                  margin: 30px;
+                  margin-top: 25px;
+                  margin-bottom: 20px;
+                  font-family: 'Public Sans', sans-serif;
+                "
+              >
+                It seems there are no reviews yet.<br />
+                Once you start working with clients, their feedbacks will appear
+                here!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="userQuote && userQuote.length > 0">
       <div class="table-wrapper">
         <div class="row" id="basic-table">
           <div class="col-12 table-padding">
-            <div class="card ">
-
-
+            <div class="card">
               <section *ngIf="userQuote && userQuote.length > 0">
                 <div class="col-lg-12 mb-12 table-padding">
-                  <div class="card ">
+                  <div class="card">
                     <div class="table-responsive">
                       <table class="table table-s1">
                         <thead>
                           <tr>
-                            <th >
-                              Lead Number
-                            </th>
-                            <th >
-                              Customer Name
-                            </th>
-                            <th >
-                              Earning
-                            </th>
-                            <th >
-                              Rating
-                            </th>
-                            <th >
-                              Description
-                            <th >
-                              Review Details
-                            </th>
+                            <th>Lead Number</th>
+                            <th>Customer Name</th>
+                            <th>Earning</th>
+                            <th>Rating</th>
+                            <th>Description</th>
+
+                            <th>Review Details</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr class="mb-1" *ngFor="let item of userQuote">
                             <td class="text-primary">
-                              #{{
-                                item.order.orderNum
+                              #{{ item.order.orderNum }}
+                            </td>
+                            <td>
+                              {{
+                                item?.user.firstName + " " + item?.user.lastName
                               }}
                             </td>
-                            <td >
-                              {{ item?.user.firstName + " " + item?.user.lastName }}
-                            </td>
-                            <td >
+                            <td>
                               {{ item?.order.ammount }}
                             </td>
-                            <td >
-                              <div class="rating ">
+                            <td>
+                              <div class="rating">
                                 <ngb-rating
                                   [(rate)]="item.ratingCount"
                                   [max]="5"
@@ -105,16 +120,17 @@
                                 </ngb-rating>
                               </div>
                             </td>
-                            <td >
+                            <td>
                               {{ item?.description }}
                             </td>
-                            <td >
+                            <td>
                               <div
-                      (click)="modalOpenVC(modalRating, item)"
-                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
-                      style=" min-width: 45px;">
-                      View
-                    </div>
+                                (click)="modalOpenVC(modalRating, item)"
+                                class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                                style="min-width: 45px"
+                              >
+                                View
+                              </div>
                             </td>
                           </tr>
                         </tbody>
@@ -147,13 +163,10 @@
                   </ngb-pagination>
                 </div>
               </div>
-              
             </div>
           </div>
-          
         </div>
       </div>
-      
     </section>
   </div>
 </div>

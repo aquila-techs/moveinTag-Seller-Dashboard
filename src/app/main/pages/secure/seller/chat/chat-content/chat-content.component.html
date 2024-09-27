@@ -56,11 +56,11 @@
             </div>
           </ng-template>
           <div>
-            <h5 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h5>
+            <h5 class="mb-0">
+              {{ chatUser.firstName }} {{ chatUser.lastName }}
+            </h5>
             <h6 class="mb-0">{{ chatUser.email }}</h6>
           </div>
-          
-
         </div>
         <div *ngIf="chats.accepted === true" class="d-flex align-items-center">
           <div
@@ -237,7 +237,11 @@
     class="active-chat"
     style="display: flex; align-items: center; justify-content: center"
   >
-    <h3>No Chats Found</h3>
+    <h3>
+      It looks like you don’t have any chats yet.<br />
+      Once you connect with your first client, you'll be able to communicate
+      with them right here!
+    </h3>
   </div>
 </section>
 
