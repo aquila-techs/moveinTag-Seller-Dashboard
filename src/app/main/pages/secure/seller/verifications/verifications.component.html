@@ -1,14 +1,10 @@
-<div class="content-wrapper container-xxl p-0 card">
+<!-- <div class="content-wrapper container-xxl p-0 card">
   <div class="content-body">
-    <!-- content-header component -->
     <div style="padding-left: 20px">
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12 d-flex">
-            <h2
-              class="content-header-title float-left mb-0 pt-3"
-              
-            >
+            <h2 class="content-header-title float-left mb-0 pt-3">
               Verifications
             </h2>
           </div>
@@ -24,43 +20,264 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th >
-                    File name
-                  </th>
-                  <th
-                    
-                    class="text-center"
-                  >
-                    View File
-                  </th>
-                  <th
-                    
-                    class="text-center"
-                  >
-                    Upload File
-                  </th>
+                  <th>File name</th>
+                  <th class="text-center">View File</th>
+                  <th class="text-center">Upload File</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 0px"></td>
+                  <td style="width: 600px">
+                    <img
+                      style="
+                        width: 20px;
+                        height: 20px;
+                        font-family: 'Public Sans', sans-serif;
+                        margin-right: 20px;
+                      "
+                      src="../../../assets/images/icons/info.png"
+                      alt=""
+                    />
+                    Business Registration Certificate
+                  </td>
+                  <td class="text-center">
+                    <div
+                      (click)="openLicense()"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style="min-width: 45px"
+                    >
+                      Preview
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <input
+                      type="file"
+                      id="upload"
+                      (change)="licensefileChangeEvent($event)"
+                      accept=".pdf,.jpg,.png"
+                      hidden
+                    />
+                    <label
+                      for="upload"
+                      type="button"
+                      class="{{
+                        licensefileSelected
+                          ? 'btn btn-relief-success'
+                          : 'btn btn-relief-primary'
+                      }}"
+                      rippleEffect
+                      style="
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
+                      "
+                    >
+                      {{ licensefileSelected ? "Uploaded" : "Upload" }}</label
+                    >
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="width: 0px"></td>
+                  <td style="width: 350px">
+                    <img
+                      style="
+                        width: 20px;
+                        height: 20px;
+                        font-family: 'Public Sans', sans-serif;
+                        margin-right: 20px;
+                      "
+                      src="../../../assets/images/icons/info.png"
+                      alt=""
+                    />Liability Insurance
+                  </td>
+                  <td class="text-center">
+                    <div
+                      (click)="openLibilityInsurance()"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style="min-width: 45px"
+                    >
+                      Preview
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <input
+                      type="file"
+                      id="upload2"
+                      (change)="libilityInsurancefileChangeEvent($event)"
+                      accept=".pdf,.jpg,.png"
+                      hidden
+                    />
+                    <label
+                      for="upload2"
+                      class="{{
+                        libilityInsurancefileSelected
+                          ? 'btn btn-relief-success'
+                          : 'btn btn-relief-primary'
+                      }}"
+                      rippleEffect
+                      style="
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
+                      "
+                    >
+                      {{
+                        libilityInsurancefileSelected ? "Uploaded" : "Upload"
+                      }}
+                    </label>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="width: 0px"></td>
+                  <td style="width: 350px">
+                    <img
+                      style="
+                        width: 20px;
+                        height: 20px;
+                        font-family: 'Public Sans', sans-serif;
+                        margin-right: 20px;
+                      "
+                      src="../../../assets/images/icons/info.png"
+                      alt=""
+                    />
+                    Proof Of Address
+                  </td>
+                  <td class="text-center">
+                    <div
+                      (click)="openIdentityCard()"
+                      class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                      style="min-width: 45px"
+                    >
+                      Preview
+                    </div>
+                  </td>
+
+                  <td class="text-center">
+                    <input
+                      type="file"
+                      id="upload3"
+                      (change)="IdentityCardfileChangeEvent($event)"
+                      accept=".pdf,.jpg,.png"
+                      hidden
+                    />
+                    <label
+                      for="upload3"
+                      class="{{
+                        IdentityCardfile
+                          ? 'btn btn-relief-success'
+                          : 'btn btn-relief-primary'
+                      }}"
+                      rippleEffect
+                      style="
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
+                      "
+                    >
+                      {{ IdentityCardfile ? "Uploaded" : "Upload" }}
+                    </label>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="width: 0px"></td>
+                  <td style="width: 350px; padding-top: 30px">
+                    By clicking
+                    <span style="color: #000000"><b>‘Submit’</b></span> you
+                    confirm and agree that all information provided is accurate,
+                    complete, and belongs to you. You acknowledge that you
+                    understand this information may be verified by our team, and
+                    any false of misleading statements could result in the
+                    rejection of your application or other legal consequences,
+                    Please. Ensure you have read and understood our
+                    <span style="color: #38b6ff">
+                      <a
+                        href="https://moventag.com/#/privacy-policy"
+                        target="_blank"
+                        >Privacy Policy</a
+                      ></span
+                    >
+                    and
+                    <span style="color: #38b6ff"
+                      ><a
+                        href="https://moventag.com/#/terms-of-use"
+                        target="_blank"
+                        >Terms of Service</a
+                      ></span
+                    >
+                    before submitting.
+                  </td>
+                  <td class="text-center"></td>
+
+                  <td class="text-center">
+                    <button
+                      class="btn btn-relief-primary"
+                      [disabled]="
+                        !licensefileSelected ||
+                        !libilityInsurancefileSelected ||
+                        !IdentityCardfile
+                      "
+                      (click)="filesUpload()"
+                      style="
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
+                      "
+                    >
+                      Submit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div> -->
+
+<div class="content-wrapper container-xxl p-0 card">
+  <div class="content-body">
+    <!-- content-header component -->
+    <div style="padding-left: 20px">
+      <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+          <div class="col-12 d-flex">
+            <h2 class="content-header-title float-left mb-0 pt-3">
+              Verifications
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="col-lg-12 mb-12 mb-lg-0 pb-1 table-padding">
+        <div class="card h-100">
+          <div class="table-responsive">
+            <table class="table table-s1">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>File name</th>
+                  <th class="text-center">View File</th>
+                  <th class="text-center">Upload File</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td style="width: 175px"></td>
-                  <td
-                    style="width: 200px; "
-                  >
-                    Business License
-                  </td>
+                  <td style="width: 200px">Business License</td>
                   <td class="text-center">
                     <div
-                    (click)="openLicense()"
+                      (click)="openLicense()"
                       class="badge badge-pill badge-light-success mr-1 cursor-pointer"
-                      style=" min-width: 45px;">
+                      style="min-width: 45px"
+                    >
                       Preview
                     </div>
                   </td>
-                  <td
-                    class="text-center"
-                    
-                  >
+                  <td class="text-center">
                     <input
                       type="file"
                       id="upload"
@@ -72,7 +289,7 @@
                       for="upload"
                       type="button"
                       class="btn btn-relief-primary"
-                                rippleEffect
+                      rippleEffect
                       style="
                         width: 250px;
                         font-family: 'Public Sans', sans-serif;
@@ -81,7 +298,8 @@
                         style="width: 20px; height: 20px"
                         src="../../../assets/images/site/highlight.png"
                         alt=""
-                      /> &nbsp;{{
+                      />
+                      &nbsp;{{
                         LisenceURL == undefined || LisenceURL == ""
                           ? "Upload"
                           : "Update"
@@ -93,23 +311,17 @@
 
                 <tr>
                   <td style="width: 175px"></td>
-                  <td
-                    style="width: 200px; "
-                  >
-                    Liability Insurance
-                  </td>
+                  <td style="width: 200px">Liability Insurance</td>
                   <td class="text-center">
                     <div
-                    (click)="openLibilityInsurance()"
+                      (click)="openLibilityInsurance()"
                       class="badge badge-pill badge-light-success mr-1 cursor-pointer"
-                      style=" min-width: 45px;">
+                      style="min-width: 45px"
+                    >
                       Preview
                     </div>
                   </td>
-                  <td
-                    class="text-center"
-                    
-                  >
+                  <td class="text-center">
                     <input
                       type="file"
                       id="upload2"
@@ -120,7 +332,7 @@
                     <label
                       for="upload2"
                       class="btn btn-relief-primary"
-                                rippleEffect
+                      rippleEffect
                       style="
                         width: 250px;
                         font-family: 'Public Sans', sans-serif;
@@ -133,7 +345,9 @@
                         "
                         src="../../../assets/images/site/highlight.png"
                         alt=""
-                      /> &nbsp; {{
+                      />
+                      &nbsp;
+                      {{
                         LibilityInsuranceURL == undefined ||
                         LibilityInsuranceURL == ""
                           ? "Upload"
@@ -146,25 +360,18 @@
 
                 <tr>
                   <td style="width: 175px"></td>
-                  <td
-                    style="width: 200px; "
-                  >
-                    Identification
-                  </td>
+                  <td style="width: 200px">Identification</td>
                   <td class="text-center">
-                   
                     <div
-                    (click)="openIdentityCard()"
+                      (click)="openIdentityCard()"
                       class="badge badge-pill badge-light-success mr-1 cursor-pointer"
-                      style=" min-width: 45px;">
+                      style="min-width: 45px"
+                    >
                       Preview
                     </div>
                   </td>
 
-                  <td
-                    class="text-center"
-                    
-                  >
+                  <td class="text-center">
                     <input
                       type="file"
                       id="upload3"
@@ -176,15 +383,16 @@
                       for="upload3"
                       class="btn btn-relief-primary"
                       rippleEffect
-            style="
-              width: 250px;
-              font-family: 'Public Sans', sans-serif;
-            "
+                      style="
+                        width: 250px;
+                        font-family: 'Public Sans', sans-serif;
+                      "
                       ><img
                         style="width: 20px; height: 20px"
                         src="../../../assets/images/site/highlight.png"
                         alt=""
-                      />&nbsp; {{
+                      />&nbsp;
+                      {{
                         IdentityCardURL == undefined || IdentityCardURL == ""
                           ? "Upload"
                           : "Update"
