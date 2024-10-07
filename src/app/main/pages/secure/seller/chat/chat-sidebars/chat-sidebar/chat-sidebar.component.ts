@@ -149,7 +149,7 @@ export class ChatSidebarComponent implements OnInit {
     };
     if (order.buyer._id) {
       let data = {
-        heading: "You task request is active now",
+        heading: "Your task request is active now",
         message: "Please check tasks page for detail.",
         receiverId: order.buyer._id,
         senderId: userId,

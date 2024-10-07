@@ -406,7 +406,7 @@
               <div
                 *ngIf="completedOrders && completedOrders.length > 0"
                 class="d-flex justify-content-end mr-1"
-                style="bottom: 0; position: absolute; right: 0"
+                style="bottom: -30px; position: absolute; right: 0"
               >
                 <ngb-pagination
                   [collectionSize]="completedOrderTotal"
@@ -590,7 +590,7 @@
               <div
                 *ngIf="cancelledOrder && cancelledOrder.length > 0"
                 class="d-flex justify-content-end mr-1"
-                style="bottom: 0; position: absolute; right: 0"
+                style="bottom: -30px; position: absolute; right: 0"
               >
                 <ngb-pagination
                   [collectionSize]="cancelledOrderTotal"

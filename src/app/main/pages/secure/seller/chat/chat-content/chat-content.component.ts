@@ -174,7 +174,7 @@ export class ChatContentComponent implements OnInit {
     };
     if (this.chats.userId) {
       let data = {
-        heading: "You task request is active now",
+        heading: "Your task request is active now",
         message: "Please check tasks page for detail.",
         receiverId: this.chats.userId,
         senderId: userId,

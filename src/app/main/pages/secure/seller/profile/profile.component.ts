@@ -1547,14 +1547,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public postalCodePattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
   public CountriesAddCustomArray = [];
   public CitiesAddCustomArray = [];
-
+  public callFinishGetCategories = false;
   getAllCategories() {
     this.userService
       .getSellerCategoriesWithSubCategories(this.userId)
       .subscribe({
         next: (res: any) => {
           this.sellerCategories = res[0]["results"];
-
           this.sellerCategories.forEach((element) => {
             if (this.filterCategories.length <= 0) {
               let item = element.category;
@@ -1577,6 +1576,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               }
             }
           });
+          this.callFinishGetCategories = true;
         },
       });
   }
