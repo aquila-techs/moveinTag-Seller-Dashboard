@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@core/services/authentication.service';
+import { CurrencyService } from '@core/services/currency.service';
 import { OrderService } from '@core/services/services/order.service';
 import { UserService } from '@core/services/services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -22,7 +23,9 @@ export class PaymentComponent implements OnInit {
      private userService: UserService,  private activateRoute: ActivatedRoute,
      private router:Router,
      private toster: ToastrService,
-     private authenticateService: AuthenticationService) {
+     private authenticateService: AuthenticationService,
+     public currencyService: CurrencyService
+     ) {
       this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'))
       this.userId = this.currentUser._id;
      }

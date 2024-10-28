@@ -16,6 +16,7 @@ import { coreConfig } from 'app/app-config';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/services/authentication.service';
 import { environment } from 'environments/environment';
+import { CurrencyService } from '@core/services/currency.service';
 
 @Component({
   selector: 'app-navbar',
@@ -34,8 +35,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public currentUser: any;
 
   public languageOptions: any;
+  public curerncyOptions: any;
   public navigation: any;
   public selectedLanguage: any;
+  public selectedCurrency: any;
+
 
   @HostBinding('class.fixed-top')
   public isFixed = false;
@@ -82,7 +86,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _coreMediaService: CoreMediaService,
     private _coreSidebarService: CoreSidebarService,
     private _mediaObserver: MediaObserver,
-    public _translateService: TranslateService
+    public _translateService: TranslateService,
+    public _currencyService: CurrencyService
   ) {
     this._authenticationService.currentUser.subscribe(x => (this.currentUser = x));
 
@@ -105,6 +110,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     };
 
+
+    this.curerncyOptions = [
+      {
+        id:'cad',
+        title: 'CAD',
+        flag: 'ca'
+      },
+      {
+        id: 'usd',
+        title: 'USD',
+        flag: 'us'
+      }
+    ];
+
+    this._currencyService.getCurrency().subscribe(value => {
+      this.selectedCurrency = value; // This will give you the latest currency value
+    });
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
@@ -134,6 +156,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._translateService.use(language);
 
     this._coreConfigService.setConfig({ app: { appLanguage: language } }, { emitEvent: true });
+  }
+
+   /**
+   * Set the Currency
+   *
+   * @param language
+   */
+   setCurrency(currency): void {
+    this.selectedCurrency = currency;
+    this._currencyService.setCurrency(currency);
+  }
+
+  getCurrencyObject(type){
+    let cOb = this.curerncyOptions.find((item) => item.id === this.selectedCurrency)
+    if(cOb){
+      return cOb[type];
+    }
   }
 
   /**

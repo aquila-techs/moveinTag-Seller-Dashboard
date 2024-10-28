@@ -9,6 +9,7 @@ import { OrderService } from "@core/services/services/order.service";
 import { environment } from "environments/environment";
 import { ToastrService } from "ngx-toastr";
 import { HttpClient } from "@angular/common/http";
+import { CurrencyService } from "@core/services/currency.service";
 
 @Component({
   selector: "app-review",
@@ -37,7 +38,8 @@ export class ReviewComponent implements OnInit {
     private _coreConfigService: CoreConfigService,
     private orderService: OrderService,
     private tosterService: ToastrService,
-    private http: HttpClient
+    private http: HttpClient,
+    public currencyService: CurrencyService
   ) {
     this.authenticationService.currentUser.subscribe((x) => (this.user = x));
   }

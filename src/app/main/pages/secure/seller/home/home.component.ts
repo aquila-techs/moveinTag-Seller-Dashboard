@@ -6,6 +6,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { colors } from "app/colors.const";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "environments/environment";
+import { CurrencyService } from "@core/services/currency.service";
 
 @Component({
   selector: "app-home",
@@ -16,12 +17,14 @@ export class HomeComponent implements OnInit {
   @ViewChild("exportEarnigReportForm") exportEarnigReportForm: NgForm;
   public currentDayIndex: number = 0;
   public userId = "";
+  public selectedCurrency;
 
   constructor(
     private userService: UserService,
     private modalService: NgbModal,
     private orderService: OrderService,
-    private http: HttpClient
+    private http: HttpClient,
+    public currencyService: CurrencyService
   ) {
     this.userId = JSON.parse(window.localStorage.getItem("currentUser"))._id;
     const currentDate = new Date();
@@ -29,6 +32,13 @@ export class HomeComponent implements OnInit {
     if (this.currentDayIndex >= 7) {
       this.currentDayIndex = 0;
     }
+
+    // this._currencyService.getCurrency().subscribe(
+    //   value => {
+    //     this.selectedCurrency = value;
+    //   }
+    // )
+
   }
 
   public contentHeader: object;

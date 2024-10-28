@@ -13,6 +13,7 @@ import {
   UntypedFormBuilder,
 } from "@angular/forms";
 import { StripeService } from "./stripe.service";
+import { CurrencyService } from "@core/services/currency.service";
 
 @Component({
   selector: "app-checkout1",
@@ -180,6 +181,10 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   IdentityCardPhotoChangedEvent: any = "";
   IdentityCardPhotoChangedEventTYPE: any = "";
 
+  public selectedLanguage: any;
+  public selectedCurrency: any;
+  public curerncyOptions: any;
+
   constructor(
     private stripeService: StripeService,
     private _coreConfigService: CoreConfigService,
@@ -188,8 +193,25 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     private _router: Router,
     private toastrService: ToastrService,
     private userService: UserService,
-    private _formBuilder: UntypedFormBuilder
+    private _formBuilder: UntypedFormBuilder,
+    public currencyService: CurrencyService
   ) {
+    this.curerncyOptions = [
+      {
+        id:'cad',
+        title: 'CAD',
+        flag: 'ca'
+      },
+      {
+        id: 'usd',
+        title: 'USD',
+        flag: 'us'
+      }
+    ];
+
+    this.currencyService.getCurrency().subscribe(value => {
+      this.selectedCurrency = value; // This will give you the latest currency value
+    });
     // this.stripe = Stripe('pk_test_krO93K0IJTYIZQI4Kji8oDtK'); // Replace with your Stripe public key
     this.user =
       (window.localStorage.getItem("currentUser") &&
@@ -217,6 +239,26 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
       },
     };
   }
+
+
+   /**
+   * Set the Currency
+   *
+   * @param language
+   */
+   setCurrency(currency): void {
+    this.selectedCurrency = currency;
+    this.currencyService.setCurrency(currency);
+  }
+
+  
+  getCurrencyObject(type){
+    let cOb = this.curerncyOptions.find((item) => item.id === this.selectedCurrency)
+    if(cOb){
+      return cOb[type];
+    }
+  }
+
 
   licensefileChangeEvent(event: any): void {
     if (
@@ -556,6 +598,12 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   onCountryChange(country: any) {
+    if(country === "United States"){
+      this.currencyService.setCurrency('usd')
+    }else if(country === "Canada"){
+      this.currencyService.setCurrency('cad')
+    }
+
     this.addressForm.get("postalCode").valueChanges.subscribe((value) => {
       this.formatPostalCodeProfile(value);
     });

@@ -49,6 +49,21 @@
     </li> -->
     <!--/ Language selection -->
 
+    <!-- ? Currency selection | Uncomment if needed-->
+    <li ngbDropdown class="nav-item dropdown dropdown-language">
+      <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle *ngIf="selectedCurrency">
+        <b>Selected Currency:</b> &nbsp; 
+        <i class="flag-icon flag-icon-{{ getCurrencyObject('flag') }}"></i
+        ><span class="selected-language">{{ getCurrencyObject('title') }}</span></a
+      >
+      <div ngbDropdownMenu aria-labelledby="dropdown-flag">
+        <a *ngFor="let currency of curerncyOptions" ngbDropdownItem (click)="setCurrency(currency.id)">
+          <i class="flag-icon flag-icon-{{ currency.flag }}"></i> {{ currency.title }}
+        </a>
+      </div>
+    </li>
+    <!--/ Currency selection -->
+
     <!-- Notification -->
     <app-navbar-notification></app-navbar-notification>
     <!--/ Notification -->

@@ -92,10 +92,8 @@
                               <tr>
                                 <td class="pr-1">Amount:</td>
                                 <td>
-                                  ${{
-                                    subscription.subscription.items.data[0].plan
-                                      .amount / 100
-                                  }}
+                                  ${{ currencyService.convert(subscription.subscription.items.data[0].plan
+                                    .amount / 100) | number : "1.2-2"}}
                                 </td>
                               </tr>
                               <tr>
@@ -408,7 +406,7 @@
                             <td>
                               {{ item.status }}
                             </td>
-                            <td>${{ item.subtotal / 100 }}</td>
+                            <td>${{ currencyService.convert( item.subtotal / 100) | number : "1.2-2"}}</td>
                             <td>
                               <a
                               target="_blank"

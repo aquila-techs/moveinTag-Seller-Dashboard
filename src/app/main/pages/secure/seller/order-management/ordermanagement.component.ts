@@ -10,6 +10,7 @@ import { NotificationsService } from "app/layout/components/navbar/navbar-notifi
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { ToastrService } from "ngx-toastr";
+import { CurrencyService } from "@core/services/currency.service";
 
 @Component({
   selector: "app-ordermanagement",
@@ -25,7 +26,8 @@ export class OrdermanagementComponent implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private orderService: OrderService,
     private notificationService: NotificationsService,
-    private toatrService: ToastrService
+    private toatrService: ToastrService,
+    public currencyService: CurrencyService
   ) {
     this.userId = JSON.parse(window.localStorage.getItem("currentUser"))._id;
   }

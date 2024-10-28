@@ -414,6 +414,21 @@
               style="width: 200px; height: 50px; margin-left: 10px"
             />
             <ul class="list">
+            <!-- ? Currency selection | Uncomment if needed-->
+            <li ngbDropdown class="nav-item dropdown dropdown-language">
+              <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle *ngIf="selectedCurrency">
+                <b>Selected Currency:</b> &nbsp; 
+                <i class="flag-icon flag-icon-{{ getCurrencyObject('flag') }}"></i
+                ><span class="selected-language">{{ getCurrencyObject('title') }}</span></a
+              >
+              <div ngbDropdownMenu aria-labelledby="dropdown-flag">
+                <a *ngFor="let currency of curerncyOptions" ngbDropdownItem (click)="setCurrency(currency.id)">
+                  <i class="flag-icon flag-icon-{{ currency.flag }}"></i> &nbsp; {{ currency.title }}
+                </a>
+              </div>
+            </li>
+            <!--/ Currency selection -->
+
               <li ngbDropdown class="nav-item dropdown-user">
                 <a
                   class="nav-link dropdown-toggle dropdown-user-link"
@@ -446,6 +461,7 @@
                   >
                 </div>
               </li>
+              
             </ul>
           </div>
 
@@ -635,7 +651,7 @@
                       >
                       <span
                         class="font-medium-3 d-block mb-2 text-black font-weight-bolder"
-                        >$199.00
+                        >$ {{currencyService.convert(199.00)  | number : "1.2-2"}}
                         <span class="font-small-2 font-weight-light"
                           >/year</span
                         ></span
@@ -687,14 +703,14 @@
                   <ul class="list mt-5">
                     <li>
                       <span>Essential Plan - 1 User Included</span>
-                      <span>${{ charges }}</span>
+                      <span>${{currencyService.convert(charges)  | number : "1.2-2"}}</span>
                     </li>
                     <li class="text-primary">
                       <span>Discount </span>
-                      <span>-${{ discount }}</span>
+                      <span>-${{currencyService.convert(discount)  | number : "1.2-2"}}</span>
                     </li>
                     <li class="font-medium-1 font-weight-bolder text-black">
-                      <span>Total</span> <span>${{ total }}</span>
+                      <span>Total</span> <span>${{currencyService.convert(total)  | number : "1.2-2"}}</span>
                     </li>
                   </ul>
 

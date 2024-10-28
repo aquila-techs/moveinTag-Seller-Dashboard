@@ -1,4 +1,4 @@
-<div class="content-wrapper container-xxl p-0">
+<div class="content-wrapper container-xxl p-0" *ngIf="allEarningAnalytics">
   <div class="content-body" style="margin-right: -15px; margin-left: -15px">
     <div class="col-lg-12">
       <div class="row">
@@ -172,7 +172,7 @@
                     You've earned
                     <strong
                       >${{
-                        allEarningAnalytics.totalAmmount | number : "1.0-0"
+                        currencyService.convert(allEarningAnalytics.totalAmmount)  | number : "1.0-0"
                       }}</strong
                     >
                     with Moventag so far.<br />Your hard work is paying off!
@@ -222,7 +222,7 @@
                   >
                     <h1 class="mb-0" style="margin-right: 5px; font-size: 35px">
                       ${{
-                        allEarningAnalytics.totalAmountWeekly[currentDayIndex]
+                        currencyService.convert(allEarningAnalytics.totalAmountWeekly[currentDayIndex])
                           | number : "1.0-0"
                       }}
                     </h1>
@@ -269,7 +269,7 @@
                     </div>
                     <h3 class="my-2 pt-1">
                       ${{
-                        allEarningAnalytics.totalAmountDaily | number : "1.0-0"
+                        currencyService.convert(allEarningAnalytics.totalAmountDaily) | number : "1.0-0"
                       }}
                     </h3>
                     <div class="progress w-75" style="height: 4px">
@@ -306,7 +306,7 @@
                     </div>
                     <h3 class="my-2 pt-1">
                       ${{
-                        allEarningAnalytics.totalAmountMonthly
+                        currencyService.convert(allEarningAnalytics.totalAmountMonthly)
                           | number : "1.0-0"
                       }}
                     </h3>
@@ -344,7 +344,7 @@
                     </div>
                     <h3 class="my-2 pt-1">
                       ${{
-                        allEarningAnalytics.totalAmountYealy | number : "1.0-0"
+                        currencyService.convert(allEarningAnalytics.totalAmountYealy) | number : "1.0-0"
                       }}
                     </h3>
                     <div class="progress w-75" style="height: 4px">
