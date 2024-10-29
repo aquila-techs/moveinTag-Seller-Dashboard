@@ -17,7 +17,7 @@ export class HeaderInterceptor implements HttpInterceptor {
    * @param next
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!request.url.includes('/chat/sendMessage')) {
+    if (!request.url.includes('/chat/sendMessage') && !request.url.includes('currency/update-user-pref-currency')) {
       this.spinner.show('main');
     }
     if (request.url.includes('/seller-category/get-nearby-zipcode')) {
