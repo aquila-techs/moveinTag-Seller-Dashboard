@@ -652,19 +652,31 @@
                 </div>
                 <div
                   *ngIf="
-                    (filterCategories == null || filterCategories.length <= 0
-                  ) && !callFinishGetCategories"
+                    (filterCategories == null ||
+                      filterCategories.length <= 0) &&
+                    !callFinishGetCategories
+                  "
                   class="d-flex justify-content-center"
                 >
                   Loading... Please wait
                 </div>
 
-                <div *ngIf="(filterCategories == null || filterCategories.length <= 0) && callFinishGetCategories"
-                  class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-relief-primary"
-                  (click)="modalOpenVCCategories(modalVCCategories)" rippleEffect>
-                  + Please add some categories
-                </button>
+                <div
+                  *ngIf="
+                    (filterCategories == null ||
+                      filterCategories.length <= 0) &&
+                    callFinishGetCategories
+                  "
+                  class="d-flex justify-content-center"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-relief-primary"
+                    (click)="modalOpenVCCategories(modalVCCategories)"
+                    rippleEffect
+                  >
+                    + Please add some categories
+                  </button>
                 </div>
               </div>
             </div>
@@ -682,7 +694,9 @@
                 </div>
               </div>
             </div> -->
-          <div class="col-xl-9 col-md-9 order-xl-3 order-md-2 order-3" *ngIf="
+          <div
+            class="col-xl-9 col-md-9 order-xl-3 order-md-2 order-3"
+            *ngIf="
               sellerProfile?.termsConditions;
               else sellerProfile?.termsConditions
             "

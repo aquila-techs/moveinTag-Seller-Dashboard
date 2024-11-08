@@ -1334,7 +1334,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   progressProfileStart: boolean;
   modelSize: "xl";
 
-
   selectedServiceImage = "";
   constructor(
     private _coreConfigService: CoreConfigService,
@@ -2206,6 +2205,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   servicePhotoCroppedImageFile: any;
 
   coverfileChangeEvent(event: any): void {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+      this.toastrService.error("Please upload a file under 5 MB");
+      return;
+    }
     this.coverPhotoChangedEvent = event;
   }
 
@@ -2214,10 +2220,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.coverPhotoCroppedImageFile = base64ToFile(this.coverPhotoCroppedImage);
   }
   companyfileChangeEvent(event: any): void {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+      this.toastrService.error("Please upload a file under 5 MB");
+      return;
+    }
+
     this.companyPhotoChangedEvent = event;
   }
 
   servicefileChangeEvent(event: any): void {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+      this.toastrService.error("Please upload a file under 5 MB");
+      return;
+    }
     this.servicePhotoChangedEvent = event;
   }
 

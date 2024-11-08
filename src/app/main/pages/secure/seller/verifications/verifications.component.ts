@@ -647,11 +647,19 @@ export class VerificationsComponent implements OnInit {
   }
 
   licensefileChangeEvent(event: any): void {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024;
+
     if (
       event.target.files[0].type === "application/pdf" ||
       event.target.files[0].type === "image/jpeg" ||
       event.target.files[0].type === "image/png"
     ) {
+      if (file.size > maxSize) {
+        this.toastrService.error("Please upload a file under 5 MB");
+        return;
+      }
+
       let data: FormData = new FormData();
 
       data.append(
@@ -773,11 +781,18 @@ export class VerificationsComponent implements OnInit {
   }
 
   libilityInsurancefileChangeEvent(event: any): void {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024;
+
     if (
       event.target.files[0].type === "application/pdf" ||
       event.target.files[0].type === "image/jpeg" ||
       event.target.files[0].type === "image/png"
     ) {
+      if (file.size > maxSize) {
+        this.toastrService.error("Please upload a file under 5 MB");
+        return;
+      }
       let data: FormData = new FormData();
       data.append(
         "companyName",
@@ -898,11 +913,18 @@ export class VerificationsComponent implements OnInit {
   }
 
   IdentityCardfileChangeEvent(event: any): void {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024;
+
     if (
       event.target.files[0].type === "application/pdf" ||
       event.target.files[0].type === "image/jpeg" ||
       event.target.files[0].type === "image/png"
     ) {
+      if (file.size > maxSize) {
+        this.toastrService.error("Please upload a file under 5 MB");
+        return;
+      }
       let data: FormData = new FormData();
 
       data.append(
