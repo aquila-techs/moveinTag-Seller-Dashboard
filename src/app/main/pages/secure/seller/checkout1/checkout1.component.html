@@ -651,7 +651,7 @@
                       >
                       <span
                         class="font-medium-3 d-block mb-2 text-black font-weight-bolder"
-                        >$ {{currencyService.convert(199.00)  | number : "1.2-2"}}
+                        >$ {{convert(199.00)  | number : "1.2-2"}}
                         <span class="font-small-2 font-weight-light"
                           >/year</span
                         ></span
@@ -703,14 +703,14 @@
                   <ul class="list mt-5">
                     <li>
                       <span>Essential Plan - 1 User Included</span>
-                      <span>${{currencyService.convert(charges)  | number : "1.2-2"}}</span>
+                      <span>${{convert(charges)  | number : "1.2-2"}}</span>
                     </li>
                     <li class="text-primary">
                       <span>Discount </span>
-                      <span>-${{currencyService.convert(discount)  | number : "1.2-2"}}</span>
+                      <span>-${{convert(discount)  | number : "1.2-2"}}</span>
                     </li>
                     <li class="font-medium-1 font-weight-bolder text-black">
-                      <span>Total</span> <span>${{currencyService.convert(total)  | number : "1.2-2"}}</span>
+                      <span>Total</span> <span>${{convert(total)  | number : "1.2-2"}}</span>
                     </li>
                   </ul>
 

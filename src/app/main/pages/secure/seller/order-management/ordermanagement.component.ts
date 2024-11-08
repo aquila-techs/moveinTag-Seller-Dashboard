@@ -360,4 +360,8 @@ export class OrdermanagementComponent implements OnInit {
       ammount: [""],
     });
   }
+
+  convert(amount){
+    return this.currencyService.convert(amount);
+  }
 }

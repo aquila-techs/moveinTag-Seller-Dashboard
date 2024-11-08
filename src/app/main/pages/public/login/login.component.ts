@@ -13,6 +13,7 @@ import { menu } from "app/menu/menu";
 import { CoreMenuService } from "@core/components/core-menu/core-menu.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { CurrencyService } from "@core/services/currency.service";
 
 @Component({
   selector: "app-login",
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _authenticationService: AuthenticationService,
     private _coreMenuService: CoreMenuService,
-    private _toastrService: ToastrService
+    private _toastrService: ToastrService,
+    private currencyService: CurrencyService
   ) {
     this._unsubscribeAll = new Subject();
     this.menu = menu;
@@ -92,6 +94,8 @@ export class LoginComponent implements OnInit {
         // Set the main menu as our current menu
         // this._toastrService.success('','Login Successfully');
         this._coreMenuService.setCurrentMenu("main");
+        this.currencyService.getDataForCurrencyConverter();
+
         this._router.navigate(["/pages/seller/home"]);
         // }
       },

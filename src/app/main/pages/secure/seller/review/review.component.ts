@@ -192,4 +192,8 @@ export class ReviewComponent implements OnInit {
     });
   }
   public description = "";
+
+  convert(amount){
+    return this.currencyService.convert(amount);
+  }
 }

@@ -323,7 +323,7 @@
                                 (click)="openOrderDetailPopup(modalVC, item)"
                                 >✏️</span
                               >
-                              ${{ currencyService.convert(item?.ammount) | number : "1.2-2"}}
+                              ${{ convert(item?.ammount) | number : "1.2-2"}}
                             </td>
                             <td >
                               {{ item.updatedAt | date }}

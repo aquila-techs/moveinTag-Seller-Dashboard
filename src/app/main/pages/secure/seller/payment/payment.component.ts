@@ -267,4 +267,8 @@ export class PaymentComponent implements OnInit {
         }
       })
     }
+
+    convert(amount){
+      return this.currencyService.convert(amount);
+    }
 }

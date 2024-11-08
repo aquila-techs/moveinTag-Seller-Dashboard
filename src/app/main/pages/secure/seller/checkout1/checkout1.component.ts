@@ -827,4 +827,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     //   this.free_trial = "7";
     // }
   }
+
+  convert(amount){
+    return this.currencyService.convert(amount);
+  }
 }

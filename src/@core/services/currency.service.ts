@@ -16,6 +16,12 @@ export class CurrencyService {
   userId;
   constructor(private _http: HttpService) {
 
+    if(window.localStorage.getItem("currentUser")){
+      this.getDataForCurrencyConverter();
+    }
+  }
+
+  getDataForCurrencyConverter(){
     this.userId = JSON.parse(window.localStorage.getItem("currentUser"))._id;
     this.getPreferedCurrency().subscribe((data)=>{
       if(data){
@@ -28,7 +34,6 @@ export class CurrencyService {
         this.conversionRates['usd'] = data.conversion_rates.USD;
       }
     })
-
   }
 
   setCurrency(currency: string) {

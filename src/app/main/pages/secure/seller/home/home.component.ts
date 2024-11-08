@@ -262,4 +262,8 @@ export class HomeComponent implements OnInit {
     const [year, month, day] = date.split("-");
     return `${parseInt(month)}/${parseInt(day)}/${year}`;
   }
+
+  convert(amount){
+    return this.currencyService.convert(amount);
+  }
 }
