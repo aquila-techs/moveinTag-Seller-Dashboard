@@ -2206,10 +2206,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   coverfileChangeEvent(event: any): void {
     const file = event.target.files[0];
-    const maxSize = 5 * 1024 * 1024;
+    const maxSize = 2 * 1024 * 1024;
 
     if (file.size > maxSize) {
-      this.toastrService.error("Please upload a file under 5 MB");
+      this.toastrService.error("Please upload a file under 2 MB");
       return;
     }
     this.coverPhotoChangedEvent = event;
@@ -2221,10 +2221,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   companyfileChangeEvent(event: any): void {
     const file = event.target.files[0];
-    const maxSize = 5 * 1024 * 1024;
+    const maxSize = 2 * 1024 * 1024;
 
     if (file.size > maxSize) {
-      this.toastrService.error("Please upload a file under 5 MB");
+      this.toastrService.error("Please upload a file under 2 MB");
       return;
     }
 
@@ -2233,10 +2233,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   servicefileChangeEvent(event: any): void {
     const file = event.target.files[0];
-    const maxSize = 5 * 1024 * 1024;
+    const maxSize = 2 * 1024 * 1024;
 
     if (file.size > maxSize) {
-      this.toastrService.error("Please upload a file under 5 MB");
+      this.toastrService.error("Please upload a file under 2 MB");
       return;
     }
     this.servicePhotoChangedEvent = event;
