@@ -267,15 +267,15 @@
               <tbody>
                 <tr>
                   <td style="width: 175px">
-                    <!-- <p *ngIf="LisenceURL !== ''">
-                      {{ LisenceURL }}
-                    </p>
                     <img
-                      *ngIf="LisenceURL && LisenceURL.trim() !== ''"
-                      src="../../../assets/images/site/uploaded.png"
+                      [src]="
+                        LisenceURL == undefined || LisenceURL == ''
+                          ? 'assets/images/site/cross.png'
+                          : 'assets/images/site/uploaded.png'
+                      "
                       alt="Valid License"
                       style="width: 25px; height: 25px"
-                    /> -->
+                    />
                   </td>
                   <td style="width: 200px">Business License</td>
                   <td class="text-center">
@@ -320,7 +320,18 @@
                 </tr>
 
                 <tr>
-                  <td style="width: 175px"></td>
+                  <td style="width: 175px">
+                    <img
+                      [src]="
+                        LibilityInsuranceURL == undefined ||
+                        LibilityInsuranceURL == ''
+                          ? 'assets/images/site/cross.png'
+                          : 'assets/images/site/uploaded.png'
+                      "
+                      alt="Valid License"
+                      style="width: 25px; height: 25px"
+                    />
+                  </td>
                   <td style="width: 200px">Liability Insurance</td>
                   <td class="text-center">
                     <div
@@ -369,7 +380,17 @@
                 </tr>
 
                 <tr>
-                  <td style="width: 175px"></td>
+                  <td style="width: 175px">
+                    <img
+                      [src]="
+                        IdentityCardURL == undefined || IdentityCardURL == ''
+                          ? 'assets/images/site/cross.png'
+                          : 'assets/images/site/uploaded.png'
+                      "
+                      alt="Valid License"
+                      style="width: 25px; height: 25px"
+                    />
+                  </td>
                   <td style="width: 200px">Identification</td>
                   <td class="text-center">
                     <div

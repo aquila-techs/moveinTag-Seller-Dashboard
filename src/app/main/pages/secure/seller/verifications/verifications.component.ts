@@ -611,7 +611,7 @@ export class VerificationsComponent implements OnInit {
   public sellerProfile: any;
 
   public LisenceExtension: "";
-  public LisenceURL: "";
+  LisenceURL: string | null = null;
 
   public LibilityInsuranceExtension: "";
   public LibilityInsuranceURL: "";
