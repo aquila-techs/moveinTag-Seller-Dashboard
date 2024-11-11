@@ -96,7 +96,9 @@
           <div class="col-8">
             <div class="card card-terms" style="min-height: 510px">
               <div class="card-header pb-1">
-                <h2 class="card-title">Description</h2>
+                <h2 *ngIf="sellerProfile?.description" class="card-title">
+                  Description
+                </h2>
                 <button
                   class="edit absolute"
                   (click)="modalOpenVCAbout(modalVCAbout)"
@@ -105,10 +107,14 @@
                 </button>
               </div>
               <div class="card-body pt-0">
-                <p [ngClass]="{ limitTextHeight: isReadMore }">
+                <p
+                  *ngIf="sellerProfile?.description"
+                  [ngClass]="{ limitTextHeight: isReadMore }"
+                >
                   {{ sellerProfile?.description }}
                 </p>
                 <a
+                  *ngIf="sellerProfile?.description"
                   style="
                     color: #38b6ff;
                     float: right;
@@ -495,7 +501,7 @@
                       </a>
                     </li>
 
-                    <li>
+                    <li *ngIf="sellerProfile?.webURL">
                       <a href="">
                         <div class="avatar bg-light-warning rounded">
                           <div class="avatar-content">
@@ -511,7 +517,7 @@
                     </li>
                   </ul>
                   <ul class="social_list">
-                    <li>
+                    <li *ngIf="sellerProfile?.facebookURL">
                       <a
                         href="{{
                           sellerProfile?.facebookURL
@@ -529,7 +535,7 @@
                         </div>
                       </a>
                     </li>
-                    <li>
+                    <li *ngIf="sellerProfile?.instagramURL">
                       <a
                         href="{{
                           sellerProfile?.instagramURL
@@ -547,7 +553,7 @@
                         </div>
                       </a>
                     </li>
-                    <li>
+                    <li *ngIf="sellerProfile?.twitterURL">
                       <a
                         href="{{
                           sellerProfile?.twitterURL
