@@ -1,0 +1,63 @@
+.reason-form{
+    /* Form container */
+  .form-container {
+    padding-left: 20px;
+  }
+  
+  /* Radio button group */
+  .radio-group {
+    margin-bottom: 20px;
+  }
+  
+  .radio-option {
+    margin-bottom: 10px;
+  }
+  
+  label{
+    font-size: 1.1rem !important;
+  }
+  /* Custom radio button styling */
+  .custom-radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+  }
+  
+  .custom-radio input[type="radio"] {
+    display: none; /* Hide native radio input */
+  }
+  
+  .custom-check {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+  }
+  
+  .custom-radio input[type="radio"]:checked + .custom-check::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+  }
+  
+  /* Other reason input field */
+  .form-control {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+  }
+  
+}

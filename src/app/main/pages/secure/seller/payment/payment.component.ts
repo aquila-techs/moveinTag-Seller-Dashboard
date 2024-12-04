@@ -38,7 +38,14 @@ export class PaymentComponent implements OnInit {
       centered: true
     });
   }
-
+  public cancelReason = null;
+  public cancelReasonOther = '';
+  cancelReasons = [
+    { value: 'Service is too Expensive', label: 'Service is too Expensive' },
+    { value: 'Found a better alternative', label: 'Found a better alternative' },
+    { value: 'Not using it enough', label: 'Not using it enough' },
+    { value: 'Other', label: 'Other' }
+  ];
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -116,10 +123,13 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  cancelPayment(id){
+  cancelPayment(){
+    let id = this.subscription.subscription.id
+    let reason = this.cancelReason === 'Other' ? this.cancelReasonOther : this.cancelReason;
     let data = {
       "_id": this.userId,
-      "subscriptionId": id
+      "subscriptionId": id,
+      "cancelReason": reason
     }
     this.userService.cancelSubscriptionCustomer(data)
     .subscribe(res => {
