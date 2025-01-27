@@ -1026,6 +1026,62 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.coverPhotoChangedEvent = event;
   }
 
+  isDragging = false;
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragging = true;
+  }
+
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragging = false;
+  }
+
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragging = false;
+
+    if (event.dataTransfer?.files?.length) {
+      const file = event.dataTransfer.files[0];
+      const fakeEvent = {
+        target: { files: [file] },
+      };
+      this.coverfileChangeEvent(fakeEvent);
+    }
+  }
+
+  isDraggingProfileIMG = false;
+
+  onDragOverProfileIMG(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDraggingProfileIMG = true;
+  }
+
+  onDragLeaveProfileIMG(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDraggingProfileIMG = false;
+  }
+
+  onDropProfileIMG(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDraggingProfileIMG = false;
+
+    if (event.dataTransfer?.files?.length) {
+      const file = event.dataTransfer.files[0];
+      const fakeEvent = {
+        target: { files: [file] },
+      };
+      this.companyfileChangeEvent(fakeEvent);
+    }
+  }
+
   coverimageCropped(event: ImageCroppedEvent) {
     this.coverPhotoCroppedImage = event.base64;
     this.coverPhotoCroppedImageFile = base64ToFile(this.coverPhotoCroppedImage);
