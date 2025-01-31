@@ -44,6 +44,7 @@ import { PaymentComponent } from "./payment/payment.component";
 import { ReviewComponent } from "./review/review.component";
 import { ContactComponent } from "./contact/contact.component";
 import { SubscriptionRenewelComponent } from "./subscription-renewel/subscription-renewel.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -85,6 +86,12 @@ const routes: Routes = [
     component: VerificationsComponent,
     canActivate: [AuthGuard],
     data: { animation: "verifications" },
+  },
+  {
+    path: "change-password",
+    component: ChangePasswordComponent,
+    canActivate: [AuthGuard],
+    data: { animation: "change-password" },
   },
   {
     path: "refferals",
@@ -160,6 +167,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ReviewComponent,
     PaymentComponent,
     SubscriptionRenewelComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

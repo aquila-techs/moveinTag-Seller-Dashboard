@@ -1,4 +1,4 @@
-import { CoreMenu } from '@core/types'
+import { CoreMenu } from "@core/types";
 
 export const menu: CoreMenu[] = [
   // {
@@ -27,47 +27,44 @@ export const menu: CoreMenu[] = [
   //   url: 'pages/seller/refferals'
   // },
 
-
-
   {
-    id: 'home',
-    title: 'Dashboard',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'activity',
-    url: 'pages/seller/home'
+    id: "home",
+    title: "Dashboard",
+    translate: "MENU.HOME",
+    type: "item",
+    icon: "activity",
+    url: "pages/seller/home",
   },
   {
-    id: 'customer-listing',
-    title: 'Active Leads',
-    translate: 'MENU.HOME',
-    icon: 'trello',
-    type: 'collapsible',
-    children: [
-    ]
+    id: "customer-listing",
+    title: "Active Leads",
+    translate: "MENU.HOME",
+    icon: "trello",
+    type: "collapsible",
+    children: [],
   },
   {
-    id: 'order-management',
-    title: 'Lead Management',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'folder',
-    url: 'pages/seller/order-management'
+    id: "order-management",
+    title: "Lead Management",
+    translate: "MENU.HOME",
+    type: "item",
+    icon: "folder",
+    url: "pages/seller/order-management",
   },
   {
-    id: 'chat',
-    title: 'Chat',
-    type: 'item',
-    icon: 'message-square',
-    url: 'pages/seller/chats'
+    id: "chat",
+    title: "Chat",
+    type: "item",
+    icon: "message-square",
+    url: "pages/seller/chats",
   },
   {
-    id: 'review',
-    title: 'Reviews',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'star',
-    url: 'pages/seller/reviews'
+    id: "review",
+    title: "Reviews",
+    translate: "MENU.HOME",
+    type: "item",
+    icon: "star",
+    url: "pages/seller/reviews",
   },
   // {
   //   id: 'earnings',
@@ -78,41 +75,48 @@ export const menu: CoreMenu[] = [
   //   url: 'pages/seller/earnings'
   // },
   {
-    id: 'verifications',
-    title: 'Verifications',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'activity',
-    url: 'pages/seller/verifications'
+    id: "verifications",
+    title: "Verifications",
+    translate: "MENU.HOME",
+    type: "item",
+    icon: "activity",
+    url: "pages/seller/verifications",
   },
   {
-    id: 'settings',
-    title: 'Setting',
-    icon: 'settings',
-    type: 'collapsible',
+    id: "settings",
+    title: "Setting",
+    icon: "settings",
+    type: "collapsible",
     children: [
       {
-        id: 'profile',
-        title: 'Profile',
-        type: 'item',
-        icon: 'user',
-        url: 'pages/seller/profile'
+        id: "profile",
+        title: "Profile",
+        type: "item",
+        icon: "user",
+        url: "pages/seller/profile",
       },
       {
-        id: 'payment',
-        title: 'Payment',
-        type: 'item',
-        icon: 'dollar-sign',
-        url: 'pages/seller/payment'
+        id: "change-password",
+        title: "Change Password",
+        type: "item",
+        icon: "lock",
+        url: "pages/seller/change-password",
       },
-    ]
+      {
+        id: "payment",
+        title: "Payment",
+        type: "item",
+        icon: "dollar-sign",
+        url: "pages/seller/payment",
+      },
+    ],
   },
   {
-    id: 'contact',
-    title: 'Help',
-    translate: 'MENU.HOME',
-    type: 'item',
-    icon: 'help-circle',
-    url: 'pages/seller/help'
+    id: "contact",
+    title: "Help",
+    translate: "MENU.HOME",
+    type: "item",
+    icon: "help-circle",
+    url: "pages/seller/help",
   },
-]
+];
