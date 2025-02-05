@@ -1876,32 +1876,43 @@
 
                 <ng-template ngbPanelContent>
                   <div class="row">
-                    <div
-                      class="col-3"
-                      *ngFor="
-                        let subCate of category.midLevelCategory[0].subcategory;
-                        let d = index
-                      "
-                    >
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          type="checkbox"
-                          [checked]="findCheckOrNot(subCate._id)"
-                          class="custom-control-input"
-                          (click)="
-                            selectCategory(
-                              category._id,
-                              category.midLevelCategory[0]._id,
-                              subCate
-                            )
-                          "
-                          id="customCheck{{ i }}{{ c }}{{ d }}"
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="customCheck{{ i }}{{ c }}{{ d }}"
-                          >{{ subCate.title }}</label
-                        >
+                    <div class="col-12">
+                      <div
+                        *ngFor="
+                          let midCategory of category.midLevelCategory;
+                          let c = index
+                        "
+                      >
+                        <div class="row">
+                          <div
+                            class="col-3"
+                            *ngFor="
+                              let subCate of midCategory.subcategory;
+                              let d = index
+                            "
+                          >
+                            <div class="custom-control custom-checkbox">
+                              <input
+                                type="checkbox"
+                                [checked]="findCheckOrNot(subCate._id)"
+                                class="custom-control-input"
+                                (click)="
+                                  selectCategory(
+                                    category._id,
+                                    midCategory._id,
+                                    subCate
+                                  )
+                                "
+                                id="customCheck{{ i }}{{ c }}{{ d }}"
+                              />
+                              <label
+                                class="custom-control-label"
+                                for="customCheck{{ i }}{{ c }}{{ d }}"
+                                >{{ subCate.title }}</label
+                              >
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

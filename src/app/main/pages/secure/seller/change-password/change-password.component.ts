@@ -60,6 +60,7 @@ export class ChangePasswordComponent implements OnInit {
    */
   ngOnInit(): void {
     this.authenticationService.currentUser.subscribe((x) => (this.user = x));
+
     this.contentHeader = {
       headerTitle: "Change Password",
       actionButton: false,

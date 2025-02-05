@@ -2,7 +2,12 @@
 <ng-container *ngIf="layout === 'vertical'">
   <ng-container *ngFor="let item of menu">
     <!-- section -->
-    <li core-menu-vertical-section *ngIf="item.type == 'section'" [item]="item" class="navigation-header"></li>
+    <li
+      core-menu-vertical-section
+      *ngIf="item.type == 'section'"
+      [item]="item"
+      class="navigation-header"
+    ></li>
 
     <!-- sub-menu item/collapsible of sections  -->
     <ng-container *ngIf="item.type == 'section'">
@@ -16,7 +21,10 @@
           [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
           [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
         >
-          <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+          <span
+            [routerLink]="item.openInNewTab ? [] : [item.url]"
+            class="d-none"
+          ></span>
         </li>
         <!-- collapsible -->
         <li
@@ -37,10 +45,18 @@
       [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
       [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
     >
-      <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+      <span
+        [routerLink]="item.openInNewTab ? [] : [item.url]"
+        class="d-none"
+      ></span>
     </li>
     <!-- collapsible -->
-    <li core-menu-vertical-collapsible *ngIf="item.type == 'collapsible'" [item]="item" class="nav-item has-sub"></li>
+    <li
+      core-menu-vertical-collapsible
+      *ngIf="item.type == 'collapsible'"
+      [item]="item"
+      class="nav-item has-sub"
+    ></li>
   </ng-container>
 </ng-container>
 <!--/ Vertical Menu -->
@@ -49,7 +65,12 @@
 <ng-container *ngIf="layout === 'horizontal'">
   <ng-container *ngFor="let item of menu">
     <!-- section -->
-    <li core-menu-horizontal-collapsible *ngIf="item.type == 'section'" [item]="item" class="dropdown nav-item"></li>
+    <li
+      core-menu-horizontal-collapsible
+      *ngIf="item.type == 'section'"
+      [item]="item"
+      class="dropdown nav-item"
+    ></li>
 
     <!-- item | if openInNewTab set routerLink & routerLinkActive blank -->
     <li
@@ -60,7 +81,10 @@
       [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
       [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
     >
-      <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+      <span
+        [routerLink]="item.openInNewTab ? [] : [item.url]"
+        class="d-none"
+      ></span>
     </li>
 
     <!-- collapsible -->

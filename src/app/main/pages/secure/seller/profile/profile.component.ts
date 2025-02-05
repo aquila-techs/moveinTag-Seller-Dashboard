@@ -693,6 +693,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.userService.getAllCategoriesWithSubCategories().subscribe({
       next: (res: any) => {
         const CATEGORIES = res[0]["results"];
+
         const FILTER_CATEGORIES = CATEGORIES.filter(
           (item) => item.title != "Hotels & Travel"
         );
