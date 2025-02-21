@@ -779,6 +779,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.sellerProfile?.companyName ? this.sellerProfile.companyName : "",
         [Validators.required],
       ],
+      slug: [
+        this.sellerProfile?.slug ? this.sellerProfile.slug : "",
+        [Validators.required],
+      ],
       description: [
         this.sellerProfile?.description ? this.sellerProfile.description : "",
         [Validators.required],
@@ -1147,6 +1151,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       bonded: data.bonded,
       city: data.city,
       companyName: data.companyName,
+      slug: data.slug,
       companyType: data.companyType,
       country: data.country,
       description: data.description,
