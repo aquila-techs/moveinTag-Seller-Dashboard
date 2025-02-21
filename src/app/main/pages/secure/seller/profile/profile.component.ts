@@ -1146,6 +1146,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let data = this.profileUpdateForm.value;
     data["id"] = this.userId;
 
+    if (data.slug && data.slug.trim() !== "") {
+      data.slug = data.slug.trim().replace(/\s+/g, "-").toLowerCase();
+    } else {
+      data.slug = this.sellerProfile.slug;
+    }
+
     const OBJ = {
       address: data.address,
       bonded: data.bonded,
