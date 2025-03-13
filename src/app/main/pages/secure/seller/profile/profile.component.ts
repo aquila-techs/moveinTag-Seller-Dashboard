@@ -275,6 +275,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             ...new Set(filteredData.map((item) => item.country)),
           ];
           this.countriesList = country;
+          this.onCountryChangeCustom(this.countryCustom);
         },
       });
   }
@@ -334,7 +335,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public countryZipCodes = "";
   public cityZipCodes = "";
 
-  public countryCustom: any;
+  public countryCustom: any = 'Canada';
   public cityCustom: any;
 
   public PostalCodeCustomArray = [];

@@ -1651,10 +1651,13 @@
                         [(ngModel)]="countryCustom"
                         (change)="onCountryChangeCustom($event)"
                         bindLabel="immigration_s_title"
+                        disabled
+
                       >
                         <ng-option
                           *ngFor="let countryZipCodes of countriesList"
                           [value]="countryZipCodes"
+                          [ngSelected]="countryZipCodes === 'Canada'" 
                         >
                           {{ countryZipCodes }}</ng-option
                         >
