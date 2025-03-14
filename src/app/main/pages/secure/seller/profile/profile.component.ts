@@ -268,7 +268,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           const filteredData = this.countriesData.filter(
             (item) =>
-              item.country === "Canada" || item.country === "United States"
+              item.country === "Canada" 
           );
 
           const country = [
@@ -1294,7 +1294,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           this.postalCodeCustom = "";
           this.PostalCodeCustomArray = [];
-          this.countryCustom = null;
           this.cityCustom = null;
           this.CountriesAddCustomArray = [];
           this.CitiesAddCustomArray = [];
@@ -2092,7 +2091,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onSaveCustomCountriescities() {
-    if (this.CountriesAddCustomArray.length < 1) {
+    if (!this.countryCustom) {
       this.toastrService.error("Please add country first.");
       return;
     }
@@ -2254,7 +2253,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       next: (res) => {
         this.modalService.dismissAll();
 
-        this.countryCustom = null;
+        // this.countryCustom = null;
         this.cityCustom = null;
         this.CountriesAddCustomArray = [];
         this.CitiesAddCustomArray = [];
