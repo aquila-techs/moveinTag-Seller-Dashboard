@@ -312,7 +312,11 @@
             </div>
           </li>
         </ul>
-        <div class="d-flex justify-content-center mt-3">
+
+        <div
+          *ngIf="!chatUsers?.directChat"
+          class="d-flex justify-content-center mt-3"
+        >
           <button
             class="btn btn-relief-primary"
             rippleEffect
