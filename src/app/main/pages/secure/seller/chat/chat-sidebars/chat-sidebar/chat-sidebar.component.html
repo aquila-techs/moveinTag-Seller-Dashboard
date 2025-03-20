@@ -113,8 +113,9 @@
           </p>
         </div>
         <div class="chat-meta text-nowrap">
-          <small class="float-right mb-25 chat-time"
-            >Lead number {{ chatUser.order.orderNum }}</small
+          <small *ngIf="chatUser?.order" class="float-right mb-25 chat-time"
+            >Lead number
+            {{ chatUser?.order?.orderNum || chatUser?.orderNum }}</small
           >
           <span
             *ngIf="chatUser.unseenMsgs >= 1"

@@ -90,7 +90,7 @@
       #scrollMe
       [scrollTop]="scrolltop"
     >
-      <div class="chats">
+      <div class="chats" *ngIf="chats?.chat?.length > 0; else">
         <div
           class="chat"
           *ngFor="let chatRef of chats.chat"

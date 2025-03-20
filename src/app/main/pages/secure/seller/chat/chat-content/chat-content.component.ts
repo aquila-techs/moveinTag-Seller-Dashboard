@@ -126,10 +126,12 @@ export class ChatContentComponent implements OnInit {
     // Subscribe to Selected Chat Change
     this._chatService.onSelectedChatChange.subscribe((res) => {
       this.chats = res;
+
       if (this.chatRoom) {
         this._chatService.LeaveChatRoom(this.chatRoom);
       }
       this.chatRoom = this.chats.chatroom;
+
       this._chatService.connectChatRoom(this.chatRoom);
       setTimeout(() => {
         this.scrolltop = this.scrollMe?.nativeElement.scrollHeight;
@@ -138,6 +140,9 @@ export class ChatContentComponent implements OnInit {
 
     // Subscribe to Selected Chat User Change
     this._chatService.onSelectedChatUserChange.subscribe((res) => {
+      console.log("==============");
+      console.log(res);
+      console.log("==============");
       this.chatUser = res;
     });
     this.userProfile = this._chatService.userProfile;

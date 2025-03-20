@@ -9,49 +9,47 @@
 
     <div *ngIf="chatUser.firstName">
       <div class="chat-profile-header">
-        
         <div
           class="header-profile-sidebar"
           style="text-align: center; padding-top: 20px"
         >
-
-        <div class="d-flex align-items-center justify-content-center">
-          <div *ngIf="chatUser.profileImage; else customAvatar">
-            <img
-              class="rounded-circle mr-1"
-              src="{{ baseURL }}{{ chatUser.profileImage }}"
-              height="80"
-              width="80"
-            />
-          </div>
-          <div>
-            <!-- <h5 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h5> -->
-             <div class="chat-info flex-grow-1">
-            <span style="font-size: 22px; font-weight: 700" class="mb-1"
-              >{{ chatUser.firstName }} {{ chatUser.lastName }}</span
-            >
-          </div>
-            <!-- <h6 class="mb-0">{{ chatUser.email }}</h6> -->
-             <div class="transaction-item  mb-1">
-              <div class="media">
-                
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.email? chatUser.email : '--'
-                  }}</b>
-                </span>
-                  
+          <div class="d-flex align-items-center justify-content-center">
+            <div *ngIf="chatUser.profileImage; else customAvatar">
+              <img
+                class="rounded-circle mr-1"
+                src="{{ baseURL }}{{ chatUser.profileImage }}"
+                height="80"
+                width="80"
+              />
+            </div>
+            <div>
+              <!-- <h5 class="mb-0">{{ chatUser.firstName }} {{ chatUser.lastName }}</h5> -->
+              <div class="chat-info flex-grow-1">
+                <span style="font-size: 22px; font-weight: 700" class="mb-1"
+                  >{{ chatUser.firstName }} {{ chatUser.lastName }}</span
+                >
+              </div>
+              <!-- <h6 class="mb-0">{{ chatUser.email }}</h6> -->
+              <div class="transaction-item mb-1">
+                <div class="media">
+                  <div
+                    class="media-body"
+                    style="
+                      display: flex;
+                      justify-content: start;
+                      height: 30px;
+                      align-items: center;
+                      padding-left: 10px;
+                    "
+                  >
+                    <span class="transaction-title"
+                      ><b>{{ chatUser.email ? chatUser.email : "--" }}</b>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
           <!-- <div class="mb-1" *ngIf="chatUser.profileImage; else customAvatar">
             <img
               class="rounded-circle"
@@ -116,26 +114,30 @@
                 </div>
               </div>
             </div> -->
-          
+
             <div class="transaction-item mb-1">
               <div class="media">
                 <div class="avatar bg-light-success rounded">
                   <div class="avatar-content">
-                    <i data-feather="phone" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="phone"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.phone? chatUser.phone : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{ chatUser.phone ? chatUser.phone : "--" }}</b>
+                  </span>
                 </div>
               </div>
             </div>
@@ -143,21 +145,25 @@
               <div class="media">
                 <div class="avatar bg-light-danger rounded">
                   <div class="avatar-content">
-                    <i data-feather="home" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="home"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.address? chatUser.address : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{ chatUser.address ? chatUser.address : "--" }}</b>
+                  </span>
                 </div>
               </div>
             </div>
@@ -166,21 +172,27 @@
               <div class="media">
                 <div class="avatar bg-light-primary rounded">
                   <div class="avatar-content">
-                    <i data-feather="map-pin" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="map-pin"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.postalCode? chatUser.postalCode : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{
+                      chatUser.postalCode ? chatUser.postalCode : "--"
+                    }}</b>
+                  </span>
                 </div>
               </div>
             </div>
@@ -189,21 +201,25 @@
               <div class="media">
                 <div class="avatar bg-light-success rounded">
                   <div class="avatar-content">
-                    <i data-feather="globe" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="globe"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.country? chatUser.country : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{ chatUser.country ? chatUser.country : "--" }}</b>
+                  </span>
                 </div>
               </div>
             </div>
@@ -212,21 +228,27 @@
               <div class="media">
                 <div class="avatar bg-light-danger rounded">
                   <div class="avatar-content">
-                    <i data-feather="facebook" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="facebook"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.facebookURL? chatUser.facebookURL : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{
+                      chatUser.facebookURL ? chatUser.facebookURL : "--"
+                    }}</b>
+                  </span>
                 </div>
               </div>
             </div>
@@ -235,55 +257,67 @@
               <div class="media">
                 <div class="avatar bg-light-primary rounded">
                   <div class="avatar-content">
-                    <i data-feather="instagram" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="instagram"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.instagramURL? chatUser.instagramURL : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{
+                      chatUser.instagramURL ? chatUser.instagramURL : "--"
+                    }}</b>
+                  </span>
                 </div>
               </div>
             </div>
 
-
-            
             <div class="transaction-item mb-1">
               <div class="media">
                 <div class="avatar bg-light-success rounded">
                   <div class="avatar-content">
-                    <i data-feather="linkedin" class="avatar-icon font-medium-3"></i>
+                    <i
+                      data-feather="linkedin"
+                      class="avatar-icon font-medium-3"
+                    ></i>
                   </div>
                 </div>
-                <div class="media-body" style="
-                display: flex;
-                justify-content: start;
-                height: 30px;
-                align-items: center;
-                padding-left: 10px;
-            ">
-                  <span class="transaction-title"><b>{{
-                    chatUser.twitterURL ? chatUser.twitterURL : '--'
-                  }}</b>
-                </span>
-                  
+                <div
+                  class="media-body"
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    height: 30px;
+                    align-items: center;
+                    padding-left: 10px;
+                  "
+                >
+                  <span class="transaction-title"
+                    ><b>{{
+                      chatUser.twitterURL ? chatUser.twitterURL : "--"
+                    }}</b>
+                  </span>
                 </div>
               </div>
             </div>
           </li>
         </ul>
-
         <div class="d-flex justify-content-center mt-3">
-          <button  class="btn btn-relief-primary"
-          rippleEffect (click)="orderDetails(modalVC)">
+          <button
+            class="btn btn-relief-primary"
+            rippleEffect
+            (click)="orderDetails(modalVC)"
+          >
             Lead Info
           </button>
         </div>
@@ -296,13 +330,7 @@
 
 <ng-template #modalVC let-modal>
   <div class="modal-header">
-    <h5
-      class="modal-title"
-      id="exampleModalCenterTitle"
-      
-    >
-      Lead Details
-    </h5>
+    <h5 class="modal-title" id="exampleModalCenterTitle">Lead Details</h5>
     <button
       type="button"
       class="close"
@@ -315,9 +343,7 @@
   <div class="modal-body" tabindex="0" ngbAutofocus>
     <form action="">
       <div class="form-group" [hidden]="!selectedOrder?.subCategory?.title">
-        <label for="basicInput" 
-          >What needs to be done?</label
-        >
+        <label for="basicInput">What needs to be done?</label>
         <input
           readonly
           type="text"
@@ -328,9 +354,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.place">
-        <label for="basicInput" 
-          >What type of property?</label
-        >
+        <label for="basicInput">What type of property?</label>
         <input
           readonly
           type="text"
@@ -341,9 +365,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.startTime">
-        <label for="basicInput" 
-          >When do you want to start this project</label
-        >
+        <label for="basicInput">When do you want to start this project</label>
         <input
           readonly
           type="text"
@@ -354,7 +376,7 @@
         />
       </div>
       <div class="form-group" [hidden]="!selectedOrder?.notes">
-        <label for="basicInput" 
+        <label for="basicInput"
           >Please provide some details about project
         </label>
         <textarea
@@ -367,9 +389,7 @@
 
       <div *ngIf="selectedOrder?.status === 'COMPLETED'">
         <div class="form-group" [hidden]="!selectedOrder?.startTime">
-          <label for="basicInput" 
-            >Earning</label
-          >
+          <label for="basicInput">Earning</label>
           <input
             type="text"
             class="form-control"
@@ -383,9 +403,7 @@
       </div>
 
       <div class="form-group" [hidden]="selectedOrder?.orderImages.length <= 0">
-        <label for="basicInput" 
-          >Service Images</label
-        >
+        <label for="basicInput">Service Images</label>
         <div class="row px-1">
           <div
             class="col-lg-3 px-50"
