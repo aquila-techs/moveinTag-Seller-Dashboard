@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  AfterViewInit,
-  Renderer2,
-} from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Renderer2 } from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
