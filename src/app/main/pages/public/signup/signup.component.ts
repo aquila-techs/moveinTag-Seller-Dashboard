@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  AfterViewInit,
+  Renderer2,
+} from "@angular/core";
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -12,6 +18,8 @@ import { CoreConfigService } from "@core/services/config.service";
 import { AdminService } from "@core/services/services/admin.service";
 import { ToastrService } from "ngx-toastr";
 import { Router, ActivatedRoute } from "@angular/router";
+
+declare const grecaptcha: any;
 
 @Component({
   selector: "app-signup",
@@ -44,7 +52,8 @@ export class SignupComponent implements OnInit {
     private _adminService: AdminService,
     private _toastrService: ToastrService,
     private activeRoute: ActivatedRoute,
-    private _rotuer: Router
+    private _rotuer: Router,
+    private renderer: Renderer2
   ) {
     this._unsubscribeAll = new Subject();
 
@@ -64,6 +73,29 @@ export class SignupComponent implements OnInit {
         enableLocalStorage: false,
       },
     };
+  }
+
+  ngAfterViewInit() {
+    this.loadRecaptcha();
+  }
+
+  loadRecaptcha() {
+    if (window["grecaptcha"]) {
+      grecaptcha.render("recaptcha-container", {
+        sitekey: "6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp",
+      });
+    } else {
+      const script = this.renderer.createElement("script");
+      script.src = "https://www.google.com/recaptcha/api.js";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        grecaptcha.render("recaptcha-container", {
+          sitekey: "6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp",
+        });
+      };
+      this.renderer.appendChild(document.body, script);
+    }
   }
 
   // convenience getter for easy access to form fields
