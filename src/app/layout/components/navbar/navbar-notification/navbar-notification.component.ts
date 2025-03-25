@@ -33,7 +33,7 @@ export class NavbarNotificationComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getAllNotification();
-    this._notificationsService.connectChatRoom(this.user._id);
+    this._notificationsService.connectChatRoom(this.user?._id);
     this._notificationsService.getNewMessage().subscribe((message: any) => {
       if (message && message.text != "") {
         this.unreadMessage++;
