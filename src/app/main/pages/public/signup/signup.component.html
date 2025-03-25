@@ -182,36 +182,13 @@
               <div
                 class="g-recaptcha"
                 formControlName="captcha"
-                data-sitekey="6Lfb1QoqAAAAAJrc05Rt-n2bcXLmM3t5s6rZ2u2B"
+                data-sitekey="6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp"
                 (click)="getCaptchaResponse()"
               ></div>
 
               <div *ngIf="submitted && !captchaResponse" class="text-danger">
                 Please verify reCAPTCHA.
               </div>
-
-              <!-- <div class="form-group mt-2 mb-2">
-                <label>CAPTCHA</label>
-                <div class="input-group">
-                  <input
-                    formControlName="captcha"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter the characters you see"
-                  />
-                  <div class="input-group-append">
-                    <span class="input-group-text bg-light">
-                      {{ captchaText }}
-                    </span>
-                  </div>
-                </div>
-                <small
-                  *ngIf="submitted && registerForm.controls.captcha.errors"
-                  class="text-danger"
-                >
-                  CAPTCHA is incorrect.
-                </small>
-              </div> -->
 
               <div class="form-group" style="margin-top: 20px">
                 <div class="custom-control custom-checkbox">
