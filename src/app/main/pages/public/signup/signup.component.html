@@ -66,10 +66,7 @@
               (ngSubmit)="onSubmit()"
             >
               <div class="form-group">
-                <label
-                  class="form-label"
-                  
-                  for="login-email"
+                <label class="form-label" for="login-email"
                   >Your Company Name</label
                 >
                 <input
@@ -94,12 +91,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label
-                  class="form-label"
-                  
-                  for="login-email"
-                  >Email</label
-                >
+                <label class="form-label" for="login-email">Email</label>
                 <input
                   type="text"
                   formControlName="email"
@@ -122,11 +114,7 @@
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between">
-                  <label
-                    for="login-password"
-                    
-                    >Password</label
-                  >
+                  <label for="login-password">Password</label>
                 </div>
                 <div class="input-group input-group-merge form-password-toggle">
                   <input
@@ -190,7 +178,19 @@
                 </div>
               </div>
 
-              <div class="form-group mt-2 mb-2">
+              <!-- Google reCAPTCHA -->
+              <div
+                class="g-recaptcha"
+                formControlName="captcha"
+                data-sitekey="6Lfb1QoqAAAAAJrc05Rt-n2bcXLmM3t5s6rZ2u2B"
+                (click)="getCaptchaResponse()"
+              ></div>
+
+              <div *ngIf="submitted && !captchaResponse" class="text-danger">
+                Please verify reCAPTCHA.
+              </div>
+
+              <!-- <div class="form-group mt-2 mb-2">
                 <label>CAPTCHA</label>
                 <div class="input-group">
                   <input
@@ -211,7 +211,7 @@
                 >
                   CAPTCHA is incorrect.
                 </small>
-              </div>
+              </div> -->
 
               <div class="form-group" style="margin-top: 20px">
                 <div class="custom-control custom-checkbox">
@@ -222,11 +222,7 @@
                     tabindex="3"
                     formControlName="agreeToTerms"
                   />
-                  <label
-                    class="custom-control-label"
-                    
-                    for="remember-me"
-                  >
+                  <label class="custom-control-label" for="remember-me">
                     By creating an account, you agree to the
                     <a
                       href="https://moventag.com/#/terms-of-use"
@@ -249,7 +245,6 @@
                 class="btn btn-dark btn-block"
                 tabindex="4"
                 rippleEffect
-                
               >
                 <span
                   *ngIf="loading"
@@ -259,10 +254,7 @@
               </button>
             </form>
 
-            <p
-              class="text-center mt-2"
-              
-            >
+            <p class="text-center mt-2">
               <span>Already have an account?</span
               ><a
                 class="text-dark text-decoration-underline"

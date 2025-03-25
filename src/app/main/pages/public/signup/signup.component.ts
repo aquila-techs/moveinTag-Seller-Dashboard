@@ -90,18 +90,24 @@ export class SignupComponent implements OnInit {
     this.captchaText = result;
   }
 
+  captchaResponse: string = "";
+
+  getCaptchaResponse() {
+    const captcha = (
+      document.querySelector(".g-recaptcha textarea") as HTMLTextAreaElement
+    )?.value;
+    this.captchaResponse = captcha || "";
+  }
+
   /**
    * On Submit
    */
   onSubmit() {
     this.submitted = true;
 
-    if (
-      this.registerForm.invalid ||
-      this.registerForm.value.captcha !== this.captchaText
-    ) {
-      this.registerForm.get("captcha").setValue("");
-      this.registerForm.get("captcha").markAsUntouched();
+    this.getCaptchaResponse();
+
+    if (!this.captchaResponse) {
       return;
     }
 
