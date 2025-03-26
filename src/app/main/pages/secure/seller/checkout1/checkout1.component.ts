@@ -198,18 +198,18 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   ) {
     this.curerncyOptions = [
       {
-        id:'cad',
-        title: 'CAD',
-        flag: 'ca'
+        id: "cad",
+        title: "CAD",
+        flag: "ca",
       },
       {
-        id: 'usd',
-        title: 'USD',
-        flag: 'us'
-      }
+        id: "usd",
+        title: "USD",
+        flag: "us",
+      },
     ];
 
-    this.currencyService.getCurrency().subscribe(value => {
+    this.currencyService.getCurrency().subscribe((value) => {
       this.selectedCurrency = value; // This will give you the latest currency value
     });
     // this.stripe = Stripe('pk_test_krO93K0IJTYIZQI4Kji8oDtK'); // Replace with your Stripe public key
@@ -240,25 +240,24 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     };
   }
 
-
-   /**
+  /**
    * Set the Currency
    *
    * @param language
    */
-   setCurrency(currency): void {
+  setCurrency(currency): void {
     this.selectedCurrency = currency;
     this.currencyService.setCurrency(currency);
   }
 
-  
-  getCurrencyObject(type){
-    let cOb = this.curerncyOptions.find((item) => item.id === this.selectedCurrency)
-    if(cOb){
+  getCurrencyObject(type) {
+    let cOb = this.curerncyOptions.find(
+      (item) => item.id === this.selectedCurrency
+    );
+    if (cOb) {
       return cOb[type];
     }
   }
-
 
   licensefileChangeEvent(event: any): void {
     if (
@@ -436,13 +435,6 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         );
         let stateCode = selectedState ? selectedState.code : "";
 
-        if (data.country === "United States") {
-          selectedState = this.countryStatesUSA.find(
-            (state) => state.name === data.state
-          );
-          stateCode = selectedState ? selectedState.code : "";
-        }
-
         const tokenResult = (await this.stripeService.createToken(
           cardElement
         )) as { token: { id: string; card: { id: string } } } | string;
@@ -465,7 +457,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             coupon: this.applyCoupon === true ? "GdnsqZfH" : "",
             street_address: data.address,
             postal_code: data.postalCode,
-            country_address: data.country === "United States" ? "US" : "CA",
+            country_address: data.country === "CA",
             state: stateCode,
             city: data.city,
           };
@@ -540,6 +532,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     }
   }
 
+  selectedCountry: any = null;
+
   getCountries() {
     this.http
       .get(
@@ -549,17 +543,17 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         next: (res: any) => {
           this.countriesData = res;
 
-          console.log(res);
-
           const filteredData = this.countriesData.filter(
-            (item) =>
-              item.country === "Canada" || item.country === "United States"
+            (item) => item.country === "Canada"
           );
 
           const country = [
             ...new Set(filteredData.map((item) => item.country)),
           ];
           this.countriesList = country;
+
+          // Preselect "Canada"
+          this.selectedCountry = this.countriesList.find((c) => c === "Canada");
         },
       });
   }
@@ -598,10 +592,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   onCountryChange(country: any) {
-    if(country === "United States"){
-      this.currencyService.setCurrency('usd')
-    }else if(country === "Canada"){
-      this.currencyService.setCurrency('cad')
+    if (country === "Canada") {
+      this.currencyService.setCurrency("cad");
     }
 
     this.addressForm.get("postalCode").valueChanges.subscribe((value) => {
@@ -667,6 +659,21 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
         console.log(err);
       },
     });
+  }
+
+  formatPhoneInput() {
+    if (this.phone) {
+      // Remove all non-numeric characters (including dashes)
+      this.phone = this.phone.replace(/\D/g, "");
+    }
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent) {
+    // Allow only numbers (0-9)
+    const charCode = event.key.charCodeAt(0);
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault(); // Stop invalid input
+    }
   }
 
   goToNextStep() {
@@ -828,7 +835,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     // }
   }
 
-  convert(amount){
+  convert(amount) {
     return this.currencyService.convert(amount);
   }
 }

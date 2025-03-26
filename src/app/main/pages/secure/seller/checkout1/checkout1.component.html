@@ -105,8 +105,10 @@
                     </div>
                     <input
                       style="height: 36px"
-                      type="number"
+                      type="text"
                       [(ngModel)]="phone"
+                      (ngModelChange)="formatPhoneInput()"
+                      (keypress)="allowOnlyNumbers($event)"
                       required
                       class="form-control"
                       placeholder="For potential clients to reach you"
@@ -116,18 +118,20 @@
                 <div class="form-group">
                   <label for="basicInput">Country *</label>
                   <ng-select
+                    [(ngModel)]="selectedCountry"
                     (change)="onCountryChange($event)"
                     bindLabel="immigration_s_title"
                   >
                     <ng-option
                       *ngFor="let country of countriesList"
                       [value]="country"
-                      >{{ country }}</ng-option
                     >
+                      {{ country }}
+                    </ng-option>
                   </ng-select>
                 </div>
 
-                <div class="form-group" style="margin-top: 20px">
+                <!-- <div class="form-group" style="margin-top: 20px">
                   <div class="custom-control custom-checkbox">
                     <input
                       type="checkbox"
@@ -142,32 +146,32 @@
                         provided pursuant to
 
                         <a
-                          href="https://moventag.com/#/terms-of-use"
+                          href="https://moventag.com/terms-of-use"
                           target="_blank"
                           >Moventag Terms of Use</a
                         >
                         and
                         <a
-                          href="https://moventag.com/#/privacy-policy"
+                          href="https://moventag.com/privacy-policy"
                           target="_blank"
                           >Privacy Policy</a
                         ></span
                       >
                     </label>
                   </div>
-                </div>
-                <a (click)="goToNextStep()" class="btn btn-primary btn-lg mb-2"
+                </div> -->
+                <a
+                  (click)="goToNextStep()"
+                  class="btn btn-primary btn-lg mb-2 mt-1"
                   >Next</a
                 >
                 <p class="font-small-2 text-dark">
                   By clicking or tapping "next", I agree to the
-                  <a href="https://moventag.com/#/terms-of-use" target="_blank"
+                  <a href="https://moventag.com/terms-of-use" target="_blank"
                     >Terms of use</a
                   >
                   and
-                  <a
-                    href="https://moventag.com/#/privacy-policy"
-                    target="_blank"
+                  <a href="https://moventag.com/privacy-policy" target="_blank"
                     >Privacy Policy.</a
                   >
                 </p>
@@ -414,20 +418,34 @@
               style="width: 200px; height: 50px; margin-left: 10px"
             />
             <ul class="list">
-            <!-- ? Currency selection | Uncomment if needed-->
-            <li ngbDropdown class="nav-item dropdown dropdown-language">
-              <a class="nav-link dropdown-toggle" id="dropdown-flag" ngbDropdownToggle *ngIf="selectedCurrency">
-                <b>Selected Currency:</b> &nbsp; 
-                <i class="flag-icon flag-icon-{{ getCurrencyObject('flag') }}"></i
-                ><span class="selected-language">{{ getCurrencyObject('title') }}</span></a
-              >
-              <div ngbDropdownMenu aria-labelledby="dropdown-flag">
-                <a *ngFor="let currency of curerncyOptions" ngbDropdownItem (click)="setCurrency(currency.id)">
-                  <i class="flag-icon flag-icon-{{ currency.flag }}"></i> &nbsp; {{ currency.title }}
-                </a>
-              </div>
-            </li>
-            <!--/ Currency selection -->
+              <!-- ? Currency selection | Uncomment if needed-->
+              <li ngbDropdown class="nav-item dropdown dropdown-language">
+                <a
+                  class="nav-link dropdown-toggle"
+                  id="dropdown-flag"
+                  ngbDropdownToggle
+                  *ngIf="selectedCurrency"
+                >
+                  <b>Selected Currency:</b> &nbsp;
+                  <i
+                    class="flag-icon flag-icon-{{ getCurrencyObject('flag') }}"
+                  ></i
+                  ><span class="selected-language">{{
+                    getCurrencyObject("title")
+                  }}</span></a
+                >
+                <div ngbDropdownMenu aria-labelledby="dropdown-flag">
+                  <a
+                    *ngFor="let currency of curerncyOptions"
+                    ngbDropdownItem
+                    (click)="setCurrency(currency.id)"
+                  >
+                    <i class="flag-icon flag-icon-{{ currency.flag }}"></i>
+                    &nbsp; {{ currency.title }}
+                  </a>
+                </div>
+              </li>
+              <!--/ Currency selection -->
 
               <li ngbDropdown class="nav-item dropdown-user">
                 <a
@@ -461,7 +479,6 @@
                   >
                 </div>
               </li>
-              
             </ul>
           </div>
 
@@ -651,7 +668,7 @@
                       >
                       <span
                         class="font-medium-3 d-block mb-2 text-black font-weight-bolder"
-                        >$ {{convert(199.00)  | number : "1.2-2"}}
+                        >$ {{ convert(199.0) | number : "1.2-2" }}
                         <span class="font-small-2 font-weight-light"
                           >/year</span
                         ></span
@@ -703,14 +720,15 @@
                   <ul class="list mt-5">
                     <li>
                       <span>Essential Plan - 1 User Included</span>
-                      <span>${{convert(charges)  | number : "1.2-2"}}</span>
+                      <span>${{ convert(charges) | number : "1.2-2" }}</span>
                     </li>
                     <li class="text-primary">
                       <span>Discount </span>
-                      <span>-${{convert(discount)  | number : "1.2-2"}}</span>
+                      <span>-${{ convert(discount) | number : "1.2-2" }}</span>
                     </li>
                     <li class="font-medium-1 font-weight-bolder text-black">
-                      <span>Total</span> <span>${{convert(total)  | number : "1.2-2"}}</span>
+                      <span>Total</span>
+                      <span>${{ convert(total) | number : "1.2-2" }}</span>
                     </li>
                   </ul>
 
@@ -726,13 +744,13 @@
                       <label class="custom-control-label" for="remember-me">
                         By creating an account, you agree to the
                         <a
-                          href="https://moventag.com/#/terms-of-use"
+                          href="https://moventag.com/terms-of-use"
                           target="_blank"
                           >Terms of use</a
                         >
                         and
                         <a
-                          href="https://moventag.com/#/privacy-policy"
+                          href="https://moventag.com/privacy-policy"
                           target="_blank"
                           >Privacy Policy.</a
                         >

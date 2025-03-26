@@ -179,12 +179,14 @@
               </div>
 
               <!-- Google reCAPTCHA -->
-              <div
-                id="recaptcha-container"
-                class="g-recaptcha"
-                data-sitekey="6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp"
-                (click)="getCaptchaResponse()"
-              ></div>
+              <div class="recaptcha-wrapper">
+                <div
+                  id="recaptcha-container"
+                  class="g-recaptcha"
+                  data-sitekey="6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp"
+                  (click)="getCaptchaResponse()"
+                ></div>
+              </div>
 
               <div *ngIf="submitted && !captchaResponse" class="text-danger">
                 Please verify reCAPTCHA.
@@ -201,14 +203,12 @@
                   />
                   <label class="custom-control-label" for="remember-me">
                     By creating an account, you agree to the
-                    <a
-                      href="https://moventag.com/#/terms-of-use"
-                      target="_blank"
+                    <a href="https://moventag.com/terms-of-use" target="_blank"
                       >Terms of use</a
                     >
                     and
                     <a
-                      href="https://moventag.com/#/privacy-policy"
+                      href="https://moventag.com/privacy-policy"
                       target="_blank"
                       >Privacy Policy.</a
                     ></label
