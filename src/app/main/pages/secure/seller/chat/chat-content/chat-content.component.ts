@@ -28,6 +28,8 @@ export class ChatContentComponent implements OnInit {
   public newChat;
   public baseURL = environment.serverURL;
   public chatRoom;
+  private socketSubscription: any; // To track the socket subscription
+
   /**
    * Constructor
    *
@@ -53,7 +55,7 @@ export class ChatContentComponent implements OnInit {
    */
   sendMessage() {
     if (this.chatMessage != "") {
-      this._chatService.sendMessage({'message':this.chatMessage, 'id': Math.floor(Math.random() * 1000000000)}, this.chatRoom);
+      this._chatService.sendMessage(this.chatMessage, this.chatRoom);
       let data = {
         uId: this.userProfile._id,
         message: this.chatMessage,
@@ -126,12 +128,10 @@ export class ChatContentComponent implements OnInit {
     // Subscribe to Selected Chat Change
     this._chatService.onSelectedChatChange.subscribe((res) => {
       this.chats = res;
-
       if (this.chatRoom) {
         this._chatService.LeaveChatRoom(this.chatRoom);
       }
       this.chatRoom = this.chats.chatroom;
-
       this._chatService.connectChatRoom(this.chatRoom);
       setTimeout(() => {
         this.scrolltop = this.scrollMe?.nativeElement.scrollHeight;
@@ -140,14 +140,11 @@ export class ChatContentComponent implements OnInit {
 
     // Subscribe to Selected Chat User Change
     this._chatService.onSelectedChatUserChange.subscribe((res) => {
-      console.log("==============");
-      console.log(res);
-      console.log("==============");
       this.chatUser = res;
     });
     this.userProfile = this._chatService.userProfile;
 
-    this._chatService.getNewMessage().subscribe((message: string) => {
+    this.socketSubscription =  this._chatService.getNewMessage().subscribe((message: string) => {
       if (message != "") {
         this.newChat = {
           message: message,
@@ -199,5 +196,12 @@ export class ChatContentComponent implements OnInit {
         this.modalService.dismissAll();
       });
     });
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from socket events to prevent memory leaks
+    if (this.socketSubscription) {
+      this.socketSubscription.unsubscribe();
+    }
   }
 }
