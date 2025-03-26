@@ -53,7 +53,7 @@ export class ChatContentComponent implements OnInit {
    */
   sendMessage() {
     if (this.chatMessage != "") {
-      this._chatService.sendMessage(this.chatMessage, this.chatRoom);
+      this._chatService.sendMessage({'message':this.chatMessage, 'id': Math.floor(Math.random() * 1000000000)}, this.chatRoom);
       let data = {
         uId: this.userProfile._id,
         message: this.chatMessage,
