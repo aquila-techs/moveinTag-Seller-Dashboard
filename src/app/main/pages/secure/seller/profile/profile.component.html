@@ -221,7 +221,7 @@
                           <small>Liability Insurance</small>
                           <h6 class="transaction-title">
                             {{
-                              sellerProfile?.liabilityInsurance
+                              (sellerProfile?.liabilityInsurance == 'Yes' || sellerProfile?.liabilityInsurance == 'No')
                                 ? sellerProfile.liabilityInsurance
                                 : ""
                             }}
@@ -247,7 +247,7 @@
                           <small>Workers Compensation</small>
                           <h6 class="transaction-title">
                             {{
-                              sellerProfile?.workerCompensation
+                              (sellerProfile?.workerCompensation  == 'Yes' || sellerProfile?.workerCompensation  == 'No')
                                 ? sellerProfile.workerCompensation
                                 : ""
                             }}
@@ -299,7 +299,7 @@
                           <small>Written Contract</small>
                           <h6 class="transaction-title">
                             {{
-                              sellerProfile?.writtenContract
+                              (sellerProfile?.writtenContract  == 'Yes' || sellerProfile?.writtenContract == 'No')
                                 ? sellerProfile.writtenContract
                                 : ""
                             }}
