@@ -129,7 +129,6 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    console.log(this.submitted);
     if (!this.registerForm.value.agreeToTerms) {
       this._toastrService.error(
         "Please accept Terms & Conditions",
@@ -190,20 +189,32 @@ export class SignupComponent implements OnInit {
     });
 
     if (this.affcode) {
-      this.registerForm = this._formBuilder.group({
-        email: ["", [Validators.required, Validators.email]],
-        password: ["", Validators.required],
-        companyName: ["", Validators.required],
-        referralCode: [this.affcode, Validators.required],
-        agreeToTerms: [false, Validators.required],
-      });
+      this.registerForm = this._formBuilder.group(
+        {
+          email: ["", [Validators.required, Validators.email]],
+          password: ["", Validators.required],
+          confirmPassword: ["", Validators.required],
+          companyName: ["", Validators.required],
+          referralCode: [this.affcode, Validators.required],
+          agreeToTerms: [false, Validators.required],
+        },
+        {
+          validator: this.mustMatch("password", "confirmPassword"),
+        }
+      );
     } else {
-      this.registerForm = this._formBuilder.group({
-        email: ["", [Validators.required, Validators.email]],
-        password: ["", Validators.required],
-        companyName: ["", Validators.required],
-        agreeToTerms: [false, Validators.required],
-      });
+      this.registerForm = this._formBuilder.group(
+        {
+          email: ["", [Validators.required, Validators.email]],
+          password: ["", Validators.required],
+          confirmPassword: ["", Validators.required],
+          companyName: ["", Validators.required],
+          agreeToTerms: [false, Validators.required],
+        },
+        {
+          validator: this.mustMatch("password", "confirmPassword"),
+        }
+      );
     }
 
     // Subscribe to config changes
@@ -212,6 +223,23 @@ export class SignupComponent implements OnInit {
       .subscribe((config) => {
         this.coreConfig = config;
       });
+  }
+
+  mustMatch(password: string, confirmPassword: string) {
+    return (formGroup: UntypedFormGroup) => {
+      const passControl = formGroup.controls[password];
+      const confirmControl = formGroup.controls[confirmPassword];
+
+      if (confirmControl.errors && !confirmControl.errors.mustMatch) {
+        return;
+      }
+
+      if (passControl.value !== confirmControl.value) {
+        confirmControl.setErrors({ mustMatch: true });
+      } else {
+        confirmControl.setErrors(null);
+      }
+    };
   }
 
   /**
