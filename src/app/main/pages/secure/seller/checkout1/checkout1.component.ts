@@ -454,7 +454,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             phone: this.phone,
             priceId: this.priceId,
             free_trial: this.free_trial,
-            coupon: this.applyCoupon === true ? "GdnsqZfH" : "",
+            coupon: this.applyCoupon === true ? this.couponId : "",
             street_address: data.address,
             postal_code: data.postalCode,
             country_address: data.country === "CA",
@@ -568,6 +568,9 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
       emitEvent: false,
     });
   }
+
+  couponId: any = "";
+
   onSubmitCoupon() {
     this.submitted = true;
 
@@ -578,6 +581,53 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
     }
 
     const Form = this.CouponForm.value;
+
+    if (Form.couponCode) {
+      const OBJ = {
+        coupon: Form.couponCode,
+      };
+      this.userService.validateCoupon(OBJ).subscribe({
+        next: (res) => {
+          console.log(res);
+
+          if (res.status === false) {
+            this.invalidCoupon = true;
+          } else {
+            this.invalidCoupon = false;
+            this.applyCoupon = true;
+
+            const totalAmount = 398.0;
+            let finalTotal = totalAmount;
+            let discountAmount = 0;
+
+            const discount = res.discount;
+
+            if (discount) {
+              this.couponId = discount.id;
+
+              if (discount.amount_off !== null) {
+                discountAmount = discount.amount_off;
+                finalTotal = totalAmount - discountAmount;
+              } else if (discount.percent_off !== null) {
+                discountAmount = (totalAmount * discount.percent_off) / 100;
+                finalTotal = totalAmount - discountAmount;
+              }
+
+              if (finalTotal < 0) finalTotal = 0;
+
+              this.discount = discountAmount.toFixed(2);
+              this.total = finalTotal.toFixed(2);
+            }
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+
+    return;
+
     if (Form.couponCode && Form.couponCode !== "FREE2024") {
       this.invalidCoupon = true;
     } else {

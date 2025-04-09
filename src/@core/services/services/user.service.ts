@@ -182,6 +182,9 @@ export class UserService {
   createSubscriptionCustomer(body) {
     return this._http.post("payment/createSubscriptionCustomer", body);
   }
+  validateCoupon(body) {
+    return this._http.post("payment/validateCouponCode", body);
+  }
   getSubscriptionCustomerInfo(body) {
     return this._http.post("payment/subscription-info", body);
   }
