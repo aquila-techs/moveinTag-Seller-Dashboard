@@ -82,6 +82,7 @@ export const menu: CoreMenu[] = [
     icon: "activity",
     url: "pages/seller/verifications",
   },
+
   {
     id: "settings",
     title: "Setting",

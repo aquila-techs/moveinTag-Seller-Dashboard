@@ -4,7 +4,7 @@
     <span class="brand-logo">
       <img
         src="assets/images/logo/logo-dashboard.png"
-        style="width: 222px;margin-top: -25px;margin-bottom: -45px;"
+        style="width: 222px; margin-top: -25px; margin-bottom: -45px"
         alt="brand-logo"
       />
     </span>
@@ -18,5 +18,13 @@
 <!-- Main menu -->
 <div class="main-menu-content" [perfectScrollbar] (scroll)="onSidebarScroll()">
   <ul class="navigation navigation-main" layout="vertical" core-menu></ul>
+
+  <button
+    class="btn-moventag-login"
+    (click)="LoginToMoventagTeam()"
+    style="padding-left: 0px"
+  >
+    <i data-feather="user" class="icon"></i>Login as Moventag Team
+  </button>
 </div>
 <!--/ Main menu -->

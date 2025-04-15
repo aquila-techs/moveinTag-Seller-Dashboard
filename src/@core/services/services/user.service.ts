@@ -241,4 +241,8 @@ export class UserService {
   updatePassword(body) {
     return this._http.put("user/updatePassword", body);
   }
+
+  sellerSignUpToForce(body) {
+    return this._http.post("user/seller-sign-up-to-force", body);
+  }
 }
