@@ -4,7 +4,7 @@
   {{ item }}
 </div>
 
-<section *ngIf="chatUser.firstName" class="chat-app-window">
+<section *ngIf="chatUser &&  chatUser.firstName" class="chat-app-window">
   <!-- To load Conversation -->
   <div class="start-chat-area" [ngClass]="{ 'd-none': activeChat === true }">
     <!-- <div class="mb-1 start-chat-icon">
@@ -229,7 +229,7 @@
 <!--/ Main chat area -->
 
 <section
-  *ngIf="!chatUser.firstName"
+  *ngIf="chatUser && !chatUser.firstName"
   class="chat-app-window"
   style="text-align: center; background-color: #ffffff"
 >
