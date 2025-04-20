@@ -76,7 +76,7 @@ export class SignupComponent implements OnInit {
   loadRecaptcha() {
     if (window["grecaptcha"]) {
       grecaptcha.render("recaptcha-container", {
-        sitekey: "6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp",
+        sitekey: "6Leo-R0rAAAAAFb5GBzupWius8mqvoouxYRRI5Pz",
       });
     } else {
       const script = this.renderer.createElement("script");
@@ -85,7 +85,7 @@ export class SignupComponent implements OnInit {
       script.defer = true;
       script.onload = () => {
         grecaptcha.render("recaptcha-container", {
-          sitekey: "6Lchav8qAAAAANrUcziZG-fCDyXlkYFDU5KAT2Rp",
+          sitekey: "6Leo-R0rAAAAAFb5GBzupWius8mqvoouxYRRI5Pz",
         });
       };
       this.renderer.appendChild(document.body, script);
