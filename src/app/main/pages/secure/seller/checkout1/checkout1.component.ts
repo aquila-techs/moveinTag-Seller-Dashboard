@@ -455,23 +455,32 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
                   this.toastrService.error("Your card was declined. We've sent you an email.");
                 });
               } else {
-                let pmData = {
+                let data = {
                   _id: this.user._id,
-                  paymentMethodId: "card_id_not_available_in_token_string", // Optional or replace with actual logic
                 };
-                this.userService.setPaymentMethodAsDefault(pmData).subscribe();
-  
-                const purchaseObj = {
-                  userId: this.user._id,
-                  purchaseAmount: this.total,
-                };
-                this.userService.affMakePurchase(purchaseObj).subscribe();
-  
-                this.user["payment"] = true;
-                this._authenticationService.updateUserData(this.user);
-  
-                this.toastrService.success("You have successfully subscribed.");
-                this._router.navigate(["/pages/seller/home"]);
+                this.userService.getCustomerCardDetailInfo(data).subscribe((res) => {
+                  
+                  let pmData = {
+                    _id: this.user._id,
+                    paymentMethodId: res.cards.data[0].id, // Optional or replace with actual logic
+                  };
+                  this.userService.setPaymentMethodAsDefault(pmData).subscribe((ress) => {
+                    const purchaseObj = {
+                      userId: this.user._id,
+                      purchaseAmount: this.total,
+                    };
+                    this.userService.affMakePurchase(purchaseObj).subscribe();
+      
+                    this.user["payment"] = true;
+                    this._authenticationService.updateUserData(this.user);
+      
+                    this.toastrService.success("You have successfully subscribed.");
+                    this._router.navigate(["/pages/seller/home"]);
+                  });
+    
+                });
+                
+                
               }
             },
 

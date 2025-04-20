@@ -37,8 +37,6 @@ export class AuthGuard implements CanActivate {
       }
       if (
         (!currentUser.payment &&
-          route.routeConfig.path !== "subscription-plan") ||
-        (!currentUser.packageBuyName &&
           route.routeConfig.path !== "subscription-plan")
       ) {
         this._router.navigate(["/pages/seller/subscription-plan"]);
