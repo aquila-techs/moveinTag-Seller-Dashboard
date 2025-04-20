@@ -15,6 +15,9 @@ import { AuthenticationService } from "@core/services/authentication.service";
 import { HttpClient } from "@angular/common/http";
 import moment from "moment";
 import { environment } from "environments/environment";
+
+
+
 // declare var Stripe: any;
 
 @Component({
@@ -1589,15 +1592,18 @@ export class SubscriptionRenewelComponent
     }
   }
 
-  priceId = "price_1P3AMSL7MEQHcjwNsnSSUyQo";
-  signupCost = "price_1P3APGL7MEQHcjwNZ94I8WJy";
+  priceId = environment.stripe.priceId;
+  signupCost = environment.stripe.signupCost;
+
+
   charges = "398.00";
   discount = "199.00";
   total = "199.00";
   free_trial = "0";
   selectPackage() {
-    this.priceId = "price_1P3AMSL7MEQHcjwNsnSSUyQo";
-    this.signupCost = "price_1P3APGL7MEQHcjwNZ94I8WJy";
+    this.priceId = environment.stripe.priceId;
+    this.signupCost = environment.stripe.signupCost;
+
     this.charges = "398.00";
     this.discount = "199.00";
     this.total = "199.00";

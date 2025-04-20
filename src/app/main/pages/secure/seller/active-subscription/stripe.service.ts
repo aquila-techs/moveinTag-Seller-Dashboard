@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { environment } from 'environments/environment';
+
 
 declare var Stripe: any;
 
@@ -11,9 +13,7 @@ export class StripeService {
   constructor() {}
 
   async createStripe(): Promise<any> {
-    this.stripe = Stripe(
-      "pk_live_51OpInML7MEQHcjwNtcHMqFdDQd2xhImkDL8W0eMUAcCi0KPMBsNOfnQD4li1LLkWDYOM9q9ihfGsDHwysz2x5Pwf00OBmIS7mJ"
-    );
+    this.stripe = Stripe(environment.stripeKey);
     return this.stripe;
   }
 
