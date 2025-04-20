@@ -391,153 +391,6 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   // 
-  
-  // async generateToken() {
-  //   const stripe = await this.stripeService.createStripe();
-  //   const cardElement = await this.stripeService.createCardElement();
-  //   cardElement.mount("#card-element");
-  
-  //   const submitButton = document.getElementById("submit");
-  //   if (submitButton) {
-  //     submitButton.addEventListener("click", async () => {
-  //       console.log("✅ SUBMIT button clicked");
-  
-  //       if (!this.agreeToTerms.valid) {
-  //         this.toastrService.error(
-  //           "Please accept Terms & Conditions",
-  //           "Terms & Conditions"
-  //         );
-  //         return;
-  //       }
-  
-  //       let data = this.addressForm.value;
-  //       console.log("📝 Address Form Data:", data);
-  
-  //       if (!data.address) {
-  //         this.toastrService.error("Please add address", "Address");
-  //         return;
-  //       }
-  
-  //       if (!data.postalCode) {
-  //         this.toastrService.error("Please add postal code", "Postal Code");
-  //         return;
-  //       }
-  
-  //       if (!data.country) {
-  //         this.toastrService.error("Please select your country", "Country");
-  //         return;
-  //       }
-  
-  //       if (!data.state) {
-  //         this.toastrService.error("Please select your state", "State");
-  //         return;
-  //       }
-  
-  //       if (!data.city) {
-  //         this.toastrService.error("Please select your city", "City");
-  //         return;
-  //       }
-  
-  //       let selectedState = this.countryStatesCanada.find(
-  //         (state) => state.name === data.state
-  //       );
-  //       let stateCode = selectedState ? selectedState.code : "";
-  
-  //       const tokenResult = (await this.stripeService.createToken(
-  //         cardElement
-  //       )) as { token: { id: string; card: { id: string } } } | string;
-  
-  //       console.log("🎟️ Stripe Token Result:", tokenResult);
-  
-  //       if (typeof tokenResult === "string") {
-  //         console.log("❌ Error generating token");
-  //       } else {
-  //         let subscriptionData = {
-  //           _id: this.user._id,
-  //           email: this.user.email,
-  //           name: this.user.companyName,
-  //           token: tokenResult.token.id,
-  //           firstName: this.firstName,
-  //           lastName: this.lastName,
-  //           postalCode: this.postalCode,
-  //           country: "canada",
-  //           phone: this.phone,
-  //           priceId: this.priceId,
-  //           free_trial: this.free_trial,
-  //           coupon: this.applyCoupon === true ? this.couponId : "",
-  //           street_address: data.address,
-  //           postal_code: data.postalCode,
-  //           country_address: data.country === "CA",
-  //           state: stateCode,
-  //           city: data.city,
-  //         };
-  
-  //         console.log("📦 Subscribing with:", subscriptionData);
-  
-  //         this.userService
-  //           .createSubscriptionCustomer(subscriptionData)
-  //           .subscribe({
-  //             next: (res) => {
-  //               console.log("📥 Subscription API Response:", res);
-  
-  //               if (res.status === "incomplete") {
-  //                 let body = { _id: this.user._id };
-  //                 this.userService.sendEmailOnCardDecline(body).subscribe({
-  //                   next: (value) => {
-  //                     this.toastrService.error(
-  //                       "You card is declined. We have sent you an email for this issue. Please check!"
-  //                     );
-  //                   },
-  //                 });
-  //               } else {
-  //                 let data = {
-  //                   _id: this.user._id,
-  //                   paymentMethodId: tokenResult.token.card.id,
-  //                 };
-  //                 this.userService.setPaymentMethodAsDefault(data).subscribe({
-  //                   next: (value) => {
-  //                     console.log("✅ Default payment method set");
-  //                   },
-  //                 });
-  
-  //                 const purchasePayload = {
-  //                   userId: this.user._id,
-  //                   purchaseAmount: this.total,
-  //                 };
-  
-  //                 this.userService.affMakePurchase(purchasePayload).subscribe({
-  //                   next: (value) => {
-  //                     console.log("💸 Purchase tracked");
-  //                   },
-  //                 });
-  
-  //                 if (this.isAfterSingup) {
-  //                   this.toastrService.success(
-  //                     "You have successfully subscribed."
-  //                   );
-  //                   this._router.navigate(["/pages/seller/home"]);
-  //                 } else {
-  //                   this.user["payment"] = true;
-  //                   this._authenticationService.updateUserData(this.user);
-  //                   this._router.navigate(["/pages/seller/home"]);
-  //                 }
-  //               }
-  //             },
-  //             error: (err) => {
-  //               console.log("❌ Subscription API Error:", err);
-  //               let body = { _id: this.user._id };
-  //               this.userService.sendEmailOnCardDecline(body).subscribe({
-  //                 next: (value) => {},
-  //               });
-  //             },
-  //           });
-  //       }
-  //     });
-  //   } else {
-  //     console.error("❌ Submit button not found.");
-  //   }
-  // }
-  
   async generateToken() {
     const stripe = await this.stripeService.createStripe();
     const cardElement = await this.stripeService.createCardElement();
@@ -574,20 +427,21 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             email: this.user.email,
             name: this.user.companyName,
             token: tokenResult,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            postalCode: this.postalCode,
-            country: "canada",
-            phone: this.phone,
+            firstName: this.firstName || "N/A",
+            lastName: this.lastName || "N/A",
+            phone: this.phone || "0000000000",
             priceId: this.priceId,
             free_trial: this.free_trial,
-            coupon: this.applyCoupon === true ? this.couponId : "",
+            coupon: this.applyCoupon === true ? this.couponId : undefined,
             street_address: data.address,
             postal_code: data.postalCode,
-            country_address: data.country === "CA",
+            country: "CA",
+            country_address: "CA",
             state: stateCode,
-            city: data.city,
+            city: data.city
           };
+          
+          
   
           console.log("📦 Subscribing with data:", subscriptionData);
   
@@ -620,6 +474,9 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
                 this._router.navigate(["/pages/seller/home"]);
               }
             },
+
+
+            
             error: (err) => {
               console.error("🚨 Subscription API Error:", err);
               let body = { _id: this.user._id };

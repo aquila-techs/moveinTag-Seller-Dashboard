@@ -1564,7 +1564,10 @@ export class SubscriptionRenewelComponent
             token: value.id,
             firstName: this.firstName,
             lastName: this.lastName,
-            country: this.country,
+            //country: this.country,
+            country: "CA",                 // Stripe expects 2-letter ISO code
+            country_address: "CA",         // Or just remove this if redundant
+
             postalCode: this.postalCode,
             phone: this.phone,
             priceId: this.priceId,
