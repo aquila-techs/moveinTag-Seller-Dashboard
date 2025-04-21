@@ -581,6 +581,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
               if (discount.amount_off !== null) {
                 discountAmount = discount.amount_off;
                 finalTotal = totalAmount - discountAmount;
+                this.couponDiscount = discountAmount;
               } else if (discount.percent_off !== null) {
                 discountAmount = (totalAmount * discount.percent_off) / 100;
                 this.couponDiscount = discountAmount;

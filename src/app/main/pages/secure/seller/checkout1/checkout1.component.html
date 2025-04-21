@@ -719,19 +719,15 @@
 
                   <ul class="list mt-5">
                     <li>
-                      <span>Essential Plan - 1 User Included</span>
-                      <span>${{ convert(charges) | number : "1.2-2" }}</span>
-                    </li>
-                    <li class="text-primary">
-                      <span>Discount </span>
-                      <span>-${{ convert(discount) | number : "1.2-2" }}</span>
+                      <span class="font-medium-1 text-black">Essential Plan - 1 User Included - For 2 Years</span>
+                      <span class="font-medium-1 font-weight-bolder" style="color:red; text-decoration: line-through;">${{ convert(charges) | number : "1.2-2" }}</span>
                     </li>
                     <li class="text-primary" *ngIf="couponDiscount">
                       <span>Coupon Discount </span>
                       <span>-${{ convert(couponDiscount) | number : "1.2-2" }}</span>
                     </li>
                     <li class="font-medium-1 font-weight-bolder text-black">
-                      <span>Total</span>
+                      <span>Amount Due Today</span>
                       <span>${{ convert(total) | number : "1.2-2" }}</span>
                     </li>
                   </ul>
