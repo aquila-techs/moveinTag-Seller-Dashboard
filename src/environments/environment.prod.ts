@@ -6,7 +6,7 @@ export const environment = {
   serverURL: "https://services.moventag.com/",
   stripeKey: 'pk_live_51OpInML7MEQHcjwNtcHMqFdDQd2xhImkDL8W0eMUAcCi0KPMBsNOfnQD4li1LLkWDYOM9q9ihfGsDHwysz2x5Pwf00OBmIS7mJ',
   stripe: {
-    priceId: "price_1RFydbL7MEQHcjwNPeoaBHi0",         // Live Price ID
-    prodId: "prod_SAJG5d62JjoJ3G"       // Live Product Id
+    priceId: "price_1RGHquL7MEQHcjwNyqRCtDXn",         // Live Price ID
+    prodId: "prod_SAd7uuSlSKHRT6"       // Live Product Id
   }
 };
