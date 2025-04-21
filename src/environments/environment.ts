@@ -4,9 +4,9 @@ export const environment = {
   apiUrl: "https://development-api.moventag.com/",
   socketURL: "https://development-api.moventag.com/",
   serverURL: "https://development-api.moventag.com/",
-  stripeKey: 'pk_test_51OpInML7MEQHcjwNU367fibxmzTw2PaMeG1kJRrPddEYeeaQL9UgllVC6rx7ZzkmRHG1GAfvIkEufvkXGlkQzHHD00uuXE849c',
+  stripeKey: 'pk_test_51RG9tCGavwoeR47DsMd96JkBy7v8TEmoR8mRtCDyPZh4IPZABbeoyoYkakTLIkOXoFuHemV5fPHjvoUjmcAaIsNc00f5n6i9yZ',
   stripe: {
-    priceId: "price_1Prxd4L7MEQHcjwNcvJN9O9y",         // Dev product
-    signupCost: "price_1PrxesL7MEQHcjwNKmptFLqT"       // Dev signup fee
+    priceId: "price_1RGAAsGavwoeR47DvQ9ZQzjV",         // Dev Price ID
+    prodId: "prod_SAVBT2Yw26odBE"       // Dev Product Id
   }
 };

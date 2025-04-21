@@ -726,6 +726,10 @@
                       <span>Discount </span>
                       <span>-${{ convert(discount) | number : "1.2-2" }}</span>
                     </li>
+                    <li class="text-primary" *ngIf="couponDiscount">
+                      <span>Coupon Discount </span>
+                      <span>-${{ convert(couponDiscount) | number : "1.2-2" }}</span>
+                    </li>
                     <li class="font-medium-1 font-weight-bolder text-black">
                       <span>Total</span>
                       <span>${{ convert(total) | number : "1.2-2" }}</span>

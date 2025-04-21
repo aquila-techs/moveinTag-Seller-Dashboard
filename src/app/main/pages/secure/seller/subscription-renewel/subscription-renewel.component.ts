@@ -1596,7 +1596,7 @@ export class SubscriptionRenewelComponent
   }
 
   priceId = environment.stripe.priceId;
-  signupCost = environment.stripe.signupCost;
+  prodId = environment.stripe.prodId;
 
 
   charges = "398.00";
@@ -1605,7 +1605,7 @@ export class SubscriptionRenewelComponent
   free_trial = "0";
   selectPackage() {
     this.priceId = environment.stripe.priceId;
-    this.signupCost = environment.stripe.signupCost;
+    this.prodId = environment.stripe.prodId;
 
     this.charges = "398.00";
     this.discount = "199.00";

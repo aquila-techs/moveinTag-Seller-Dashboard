@@ -180,7 +180,7 @@ export class UserService {
     return this._http.post("payment/create-token", body);
   }
   createSubscriptionCustomer(body) {
-    return this._http.post("payment/createSubscriptionCustomer", body);
+    return this._http.post("payment/createSubscriptionScheduler", body);
   }
   validateCoupon(body) {
     return this._http.post("payment/validateCouponCode", body);

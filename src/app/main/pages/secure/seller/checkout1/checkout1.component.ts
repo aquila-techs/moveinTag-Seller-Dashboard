@@ -431,6 +431,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             lastName: this.lastName || "N/A",
             phone: this.phone || "0000000000",
             priceId: this.priceId,
+            prodId: this.prodId,
             free_trial: this.free_trial,
             coupon: this.applyCoupon === true ? this.couponId : undefined,
             street_address: data.address,
@@ -541,12 +542,14 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   couponId: any = "";
-
+  couponDiscount: any = null;
   onSubmitCoupon() {
     this.submitted = true;
-
+    this.couponDiscount = null;
     this.invalidCoupon = false;
-
+    this.couponId = null;
+    this.applyCoupon = false;
+    this.total = (199.0).toFixed(2);
     if (this.CouponForm.invalid) {
       return;
     }
@@ -567,7 +570,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             this.invalidCoupon = false;
             this.applyCoupon = true;
 
-            const totalAmount = 398.0;
+            const totalAmount = 199.0;
             let finalTotal = totalAmount;
             let discountAmount = 0;
 
@@ -575,18 +578,16 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
 
             if (discount) {
               this.couponId = discount.id;
-
               if (discount.amount_off !== null) {
                 discountAmount = discount.amount_off;
                 finalTotal = totalAmount - discountAmount;
               } else if (discount.percent_off !== null) {
                 discountAmount = (totalAmount * discount.percent_off) / 100;
+                this.couponDiscount = discountAmount;
                 finalTotal = totalAmount - discountAmount;
               }
 
               if (finalTotal < 0) finalTotal = 0;
-
-              this.discount = discountAmount.toFixed(2);
               this.total = finalTotal.toFixed(2);
             }
           }
@@ -823,7 +824,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
   }
 
   priceId = environment.stripe.priceId;
-  signupCost = environment.stripe.signupCost;
+  prodId = environment.stripe.prodId;
 
   charges = "398.00";
   discount = "199.00";
@@ -834,7 +835,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
 
 
     this.priceId = environment.stripe.priceId;
-    this.signupCost = environment.stripe.signupCost;
+    this.prodId = environment.stripe.prodId;
 
 
 
