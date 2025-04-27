@@ -364,68 +364,101 @@
             ><span [data-feather]="'layout'"></span> Transaction Detail</a
           >
           <ng-template ngbNavContent>
-            <section class="mb-1  pl-3 pr-3 ">
+            <section class="mb-1 pl-3 pr-3">
               <div class="table-wrapper">
                 <div class="row" id="basic-table">
                   <div class="col-12">
-                    <div class="card auto" style="padding: 10px">
+                    <div class="card auto" style="padding: 10px; ">
                       <div
                         *ngIf="!transactions"
                         class="table-responsive"
-                        style="
-                          font-size: 20px;
-                          text-align: center;
-                          margin: 30px;
-                        "
+                        style="font-size: 20px; text-align: center; margin: 30px;"
                       >
                         <span>No transaction history found</span>
                       </div>
-                      <table *ngIf="transactions">
-                        <thead>
+            
+                      <table *ngIf="transactions" class="table table-striped">
+                        <thead style="background-color: #007BFF; ">
                           <tr>
                             <th>Start Subscription Time</th>
                             <th>End Subscription Time</th>
                             <th>Status</th>
                             <th>Amount</th>
+                            <th>Discount</th>
+                            <th>Coupon Code</th>
                             <th>Invoice</th>
                           </tr>
                         </thead>
+            
                         <tbody>
-                          <tr *ngFor="let item of transactions">
+                          <tr *ngFor="let item of transactions; let i = index" 
+                              [ngStyle]="{ 'background-color': i % 2 === 0 ? '#ffffff' : '#f1f1f1' }">
+                            
+                            <td>{{ item.lines.data[0].period.start * 1000 | date : "dd-MM-yyyy hh:mm:ss a" }}</td>
+            
+                            <td>{{ item.lines.data[0].period.end * 1000 | date : "dd-MM-yyyy hh:mm:ss a" }}</td>
+            
                             <td>
-                              {{
-                                item.lines.data[0].period.start * 1000
-                                  | date : "dd-MM-yyyy hh:mm:ss a"
-                              }}
+                              <span 
+                                class="badge" 
+                                [ngClass]="item.status == 'paid' ? 'badge-success' : 'badge-danger'">
+                                {{ item.status | uppercase }}
+                              </span>
                             </td>
+            
                             <td>
-                              {{
-                                item.lines.data[0].period.end * 1000
-                                  | date : "dd-MM-yyyy hh:mm:ss a"
-                              }}
+                              <strong *ngIf="item.subtotal === 0" style="color: #212529;">
+                               $0.00
+                              </strong>
+                              <strong *ngIf="item.subtotal !== 0" style="color: #212529;">
+                                ${{ convert(item.subtotal / 100) | number: "1.2-2" }}
+                              </strong>
                             </td>
+            
                             <td>
-                              {{ item.status }}
+                              <span *ngIf="item.total_discount_amounts.length > 0" style="color: #17a2b8;">
+                                -${{ convert(item.total_discount_amounts[0].amount / 100) | number: "1.2-2" }}
+                              </span>
+                              <span *ngIf="item.total_discount_amounts.length == 0 && item.subtotal !== 0 ">
+                                No Discount
+                              </span>
+                              <span *ngIf="item.total_discount_amounts.length == 0 && item.subtotal === 0">
+                                Free
+                              </span>
                             </td>
-                            <td>${{ convert( item.subtotal / 100) | number : "1.2-2"}}</td>
+            
                             <td>
-                              <a
-                              target="_blank"
-                              href="{{ item.hosted_invoice_url }}"
-                              class="badge badge-pill badge-light-success mr-1 cursor-pointer"
-                              style=" min-width: 45px;">
-                              View
-                            </a>
+                              <span *ngIf="item.discount?.coupon?.name" style="color: #fd7e14;">
+                                {{ item.discount.coupon.name }}
+                              </span>
+                              <span *ngIf="!item.discount?.coupon?.name">
+                                No Coupon
+                              </span>
                             </td>
+            
+                            <td>
+                              <a *ngIf="item.hosted_invoice_url"
+                                target="_blank"
+                                [href]="item.hosted_invoice_url"
+                                class="badge badge-pill badge-light-success mr-1 cursor-pointer"
+                                style="min-width: 45px;">
+                                View
+                              </a>
+                              <span *ngIf="!item.hosted_invoice_url" class="text-center">--</span>
+                            </td>
+                            
                           </tr>
                         </tbody>
                       </table>
+            
                     </div>
                   </div>
                 </div>
               </div>
             </section>
+            
           </ng-template>
+          
         </li>
       </ul>
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
