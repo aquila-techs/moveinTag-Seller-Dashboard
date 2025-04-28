@@ -413,10 +413,13 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           this.toastrService.error("Please fill out all address fields", "Form Error");
           return;
         }
-  
-        let selectedState = this.countryStatesCanada.find(state => state.name === data.state);
+        let selectedState = null;
+        if(data.country === 'Canada'){
+          selectedState = this.countryStatesCanada.find(state => state.name === data.state);
+        }else{
+          selectedState = this.countryStatesUSA.find(state => state.name === data.state);
+        }
         let stateCode = selectedState ? selectedState.code : "";
-  
         const tokenResult = await this.stripeService.createToken(cardElement);
   
         if (typeof tokenResult === "string") {
@@ -436,13 +439,11 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
             coupon: this.applyCoupon === true ? this.couponId : undefined,
             street_address: data.address,
             postal_code: data.postalCode,
-            country: "CA",
-            country_address: "CA",
+            country: data.country === 'Canada' ? 'CA' : 'US',
+            country_address: data.address,
             state: stateCode,
             city: data.city
           };
-          
-          
   
           console.log("📦 Subscribing with data:", subscriptionData);
   
@@ -516,7 +517,7 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           this.countriesData = res;
 
           const filteredData = this.countriesData.filter(
-            (item) => item.country === "Canada"
+            (item) => (item.country === "Canada" || item.country === 'United States')
           );
 
           const country = [
@@ -524,8 +525,8 @@ export class Checkout1Component implements OnInit, AfterContentChecked {
           ];
           this.countriesList = country;
 
-          // Preselect "Canada"
-          this.selectedCountry = this.countriesList.find((c) => c === "Canada");
+          // // Preselect "Canada"
+          // this.selectedCountry = this.countriesList.find((c) => c === "Canada");
         },
       });
   }
