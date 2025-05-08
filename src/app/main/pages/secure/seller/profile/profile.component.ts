@@ -268,7 +268,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           const filteredData = this.countriesData.filter(
             (item) =>
-              item.country === "Canada" 
+              item.country === "Canada" || item.country === "United States"
           );
 
           const country = [
@@ -335,7 +335,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public countryZipCodes = "";
   public cityZipCodes = "";
 
-  public countryCustom: any = 'Canada';
+  public countryCustom: any = "Canada";
   public cityCustom: any;
 
   public PostalCodeCustomArray = [];
@@ -1844,13 +1844,26 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   onCountryChangeCustom(country: any) {
+    // Reset city and state when country changes
     this.cityCustom = null;
+    this.profileUpdateForm.patchValue({
+      city: "",
+      state: "",
+    });
 
     this.countryCustom = country;
-    let city = this.countriesData.filter((state) => state.country === country);
-    city = [...new Set(city.map((item) => item.name))];
-    city.sort();
-    this.countryCitiesCustom = city;
+
+    // Get states for selected country
+    let states = this.countriesData.filter((item) => item.country === country);
+    states = [...new Set(states.map((item) => item.subcountry))];
+    states.sort();
+    this.countryStates = states;
+
+    // Get cities for selected country
+    let cities = this.countriesData.filter((item) => item.country === country);
+    cities = [...new Set(cities.map((item) => item.name))];
+    cities.sort();
+    this.countryCitiesCustom = cities;
   }
 
   onCityChangeCustom(city: any) {

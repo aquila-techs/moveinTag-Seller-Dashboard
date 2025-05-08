@@ -221,7 +221,8 @@
                           <small>Liability Insurance</small>
                           <h6 class="transaction-title">
                             {{
-                              (sellerProfile?.liabilityInsurance == 'Yes' || sellerProfile?.liabilityInsurance == 'No')
+                              sellerProfile?.liabilityInsurance == "Yes" ||
+                              sellerProfile?.liabilityInsurance == "No"
                                 ? sellerProfile.liabilityInsurance
                                 : ""
                             }}
@@ -247,7 +248,8 @@
                           <small>Workers Compensation</small>
                           <h6 class="transaction-title">
                             {{
-                              (sellerProfile?.workerCompensation  == 'Yes' || sellerProfile?.workerCompensation  == 'No')
+                              sellerProfile?.workerCompensation == "Yes" ||
+                              sellerProfile?.workerCompensation == "No"
                                 ? sellerProfile.workerCompensation
                                 : ""
                             }}
@@ -299,7 +301,8 @@
                           <small>Written Contract</small>
                           <h6 class="transaction-title">
                             {{
-                              (sellerProfile?.writtenContract  == 'Yes' || sellerProfile?.writtenContract == 'No')
+                              sellerProfile?.writtenContract == "Yes" ||
+                              sellerProfile?.writtenContract == "No"
                                 ? sellerProfile.writtenContract
                                 : ""
                             }}
@@ -693,7 +696,7 @@
               <div class="card">
                 <div class="card-body d-flex align-items-center">
                   <div>
-                    <h1 class="card-title">Partner’s Referral Code</h1>
+                    <h1 class="card-title">Partner's Referral Code</h1>
                     <p>{{sellerProfile?.referralCode}}</p>
                     <button class="btn btn-primary" (click)="copyText()">Copy</button>
                   </div>
@@ -1283,14 +1286,15 @@
               <div class="form-group">
                 <label for="email">Country</label>
                 <ng-select
-                  formControlName="country"
-                  (change)="onCountryChange($event)"
+                  [(ngModel)]="countryCustom"
+                  (change)="onCountryChangeCustom($event)"
                   bindLabel="immigration_s_title"
                 >
                   <ng-option
-                    *ngFor="let country of countriesList"
-                    [value]="country"
-                    >{{ country }}</ng-option
+                    *ngFor="let countryZipCodes of countriesList"
+                    [value]="countryZipCodes"
+                  >
+                    {{ countryZipCodes }}</ng-option
                   >
                 </ng-select>
               </div>
@@ -1302,6 +1306,7 @@
                 <ng-select
                   formControlName="state"
                   (change)="onStateChange($event)"
+                  [disabled]="!countryCustom"
                 >
                   <ng-option
                     *ngFor="let state of countryStates"
@@ -1651,8 +1656,6 @@
                         [(ngModel)]="countryCustom"
                         (change)="onCountryChangeCustom($event)"
                         bindLabel="immigration_s_title"
-                        disabled
-
                       >
                         <ng-option
                           *ngFor="let countryZipCodes of countriesList"
