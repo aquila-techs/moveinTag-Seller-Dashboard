@@ -1286,7 +1286,7 @@
               <div class="form-group">
                 <label for="email">Country</label>
                 <ng-select
-                  [(ngModel)]="countryCustom"
+                  formControlName="country"
                   (change)="onCountryChangeCustom($event)"
                   bindLabel="immigration_s_title"
                 >
