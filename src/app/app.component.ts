@@ -25,6 +25,7 @@ import { locale as menuEnglish } from "app/menu/i18n/en";
 import { locale as menuFrench } from "app/menu/i18n/fr";
 import { locale as menuGerman } from "app/menu/i18n/de";
 import { locale as menuPortuguese } from "app/menu/i18n/pt";
+import { environment } from "environments/environment";
 
 @Component({
   selector: "app-root",
@@ -282,6 +283,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set the application page title
     this._title.setTitle(this.coreConfig.app.appTitle);
+
+    this.loadGoogleMapsScript();
   }
 
   /**
@@ -303,5 +306,13 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   toggleSidebar(key): void {
     this._coreSidebarService.getSidebarRegistry(key).toggleOpen();
+  }
+
+  private loadGoogleMapsScript() {
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMaps.apiKey}&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
   }
 }
