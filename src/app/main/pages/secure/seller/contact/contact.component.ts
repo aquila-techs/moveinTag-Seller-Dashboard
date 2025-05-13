@@ -5,6 +5,7 @@ import { colors } from "app/colors.const";
 import { AuthenticationService } from "@core/services/authentication.service";
 import { ToastrService } from "ngx-toastr";
 import { HttpClient } from "@angular/common/http";
+import { environment } from "environments/environment";
 
 @Component({
   selector: "app-dashboard",
@@ -85,7 +86,7 @@ export class ContactComponent implements OnInit {
 
     try {
       this.http
-        .post("https://services.moventag.com/user/helpSendEmail", {
+        .post(`${environment.apiUrl}user/helpSendEmail`, {
           name: this.user.companyName,
           email: this.user.email,
           category: this.category,

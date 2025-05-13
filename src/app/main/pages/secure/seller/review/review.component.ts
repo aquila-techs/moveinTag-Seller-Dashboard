@@ -97,7 +97,7 @@ export class ReviewComponent implements OnInit {
   onSubmitSearch() {
     const Text = this.searchText;
     this.http
-      .post("https://services.moventag.com/reviews/searchSellerReview", {
+      .post(`${environment.apiUrl}reviews/searchSellerReview`, {
         sellerId: this.user._id,
         userReviewed: true,
         text: Text,
@@ -110,7 +110,6 @@ export class ReviewComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           if (res.length < 1) {
-            // this.getAllReviews();
             this.userQuote = [];
             return;
           }
@@ -193,7 +192,7 @@ export class ReviewComponent implements OnInit {
   }
   public description = "";
 
-  convert(amount){
+  convert(amount) {
     return this.currencyService.convert(amount);
   }
 }

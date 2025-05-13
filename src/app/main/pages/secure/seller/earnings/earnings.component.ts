@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { OrderService } from "@core/services/services/order.service";
 import { colors } from "app/colors.const";
 import { HttpClient } from "@angular/common/http";
+import { environment } from "environments/environment";
 
 @Component({
   selector: "app-earnings",
@@ -111,7 +112,7 @@ export class EarningsComponent implements OnInit {
   onSubmitSearch() {
     const Text = this.searchText;
     this.http
-      .post("https://services.moventag.com/order/searchSellerEarning", {
+      .post(`${environment.apiUrl}order/searchSellerEarning`, {
         orderNum: Text,
       })
       .subscribe({

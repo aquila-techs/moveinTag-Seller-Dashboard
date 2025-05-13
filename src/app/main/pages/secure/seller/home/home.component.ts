@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
     //     this.selectedCurrency = value;
     //   }
     // )
-
   }
 
   public contentHeader: object;
@@ -246,11 +245,11 @@ export class HomeComponent implements OnInit {
 
       this.http
         .get(
-          `https://services.moventag.com/order/export-earnings?userId=${this.userId}&fromDate=${dateFrom}&toDate=${dateTo}`
+          `${environment.apiUrl}order/export-earnings?userId=${this.userId}&fromDate=${dateFrom}&toDate=${dateTo}`
         )
         .subscribe({
           next: (res: any) => {
-            window.open(`https://services.moventag.com/${res.path}`, "_blank");
+            window.open(`${environment.apiUrl}${res.path}`, "_blank");
           },
         });
     } else {
@@ -263,7 +262,7 @@ export class HomeComponent implements OnInit {
     return `${parseInt(month)}/${parseInt(day)}/${year}`;
   }
 
-  convert(amount){
+  convert(amount) {
     return this.currencyService.convert(amount);
   }
 }

@@ -123,7 +123,7 @@ export class CustomerlistingsComponent implements OnInit {
 
     this.http
       .get(
-        `https://services.moventag.com/order/searchSellerOrdersActiveLeads?status=QUOTE&searchByQuote=true&categoryId=${this.categoryId}&userId=${this.userId}&sortBy=createdAt&order=desc&text=${Text}`
+        `${environment.apiUrl}order/searchSellerOrdersActiveLeads?status=QUOTE&searchByQuote=true&categoryId=${this.categoryId}&userId=${this.userId}&sortBy=createdAt&order=desc&text=${Text}`
       )
       .subscribe({
         next: (res: any) => {
