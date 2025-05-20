@@ -887,11 +887,29 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       twitterURL: [
         this.sellerProfile?.twitterURL ? this.sellerProfile.twitterURL : "",
       ],
-      phone: [
+      personalPhone: [
         this.sellerProfile?.phone ? this.sellerProfile.phone : "",
         Validators.required,
       ],
-      userEmail: [this.sellerProfile?.email ? this.sellerProfile.email : ""],
+      officePhone: [
+        this.sellerProfile?.officePhone ? this.sellerProfile.officePhone : "",
+        [
+          Validators.pattern(
+            /^(\(?[2-9][0-9]{2}\)?[-.\s]?[2-9][0-9]{2}[-.\s]?[0-9]{4})$/
+          ),
+        ],
+      ],
+      personalEmail: [
+        this.sellerProfile?.email ? this.sellerProfile.email : "",
+        Validators.required,
+      ],
+      officeEmail: [
+        this.sellerProfile?.officeEmail ? this.sellerProfile.officeEmail : "",
+        [
+          Validators.email,
+          Validators.pattern(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
+        ],
+      ],
     });
   }
 
@@ -916,34 +934,31 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   onUpdateLinks() {
     this.submitted = true;
-    // stop here if form is invalid
     if (this.sellerWebLinksForm.invalid) {
       return;
     }
-
     const ensureHttps = (url: string): string => {
       if (!url) return "";
-
       if (!url.startsWith("http")) {
         return `https://${url.replace(/^(www\.)?/, "")}`;
       }
       return `https://${url.replace(/^https?:\/\//, "").replace(/^www\./, "")}`;
     };
-
     const formatPhoneNumber = (phone: string): string => {
       if (!phone) return "";
-
-      // Remove any existing "+1" or other "+" codes and then add "+1" at the start
       return `+1${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
     };
-
     const OBJ = {
       facebookURL: ensureHttps(this.sellerWebLinksForm.value.facebookURL),
       instagramURL: ensureHttps(this.sellerWebLinksForm.value.instagramURL),
-      phone: formatPhoneNumber(this.sellerWebLinksForm.value.phone),
+      personalPhone: formatPhoneNumber(
+        this.sellerWebLinksForm.value.personalPhone
+      ),
+      officePhone: this.sellerWebLinksForm.value.officePhone,
+      personalEmail: this.sellerWebLinksForm.value.personalEmail,
+      officeEmail: this.sellerWebLinksForm.value.officeEmail,
       twitterURL: ensureHttps(this.sellerWebLinksForm.value.twitterURL),
       webURL: ensureHttps(this.sellerWebLinksForm.value.webURL),
-
       companyName: this.sellerProfile?.companyName,
       description: this.sellerProfile?.description,
       termsConditions: this.sellerProfile?.termsConditions,
@@ -963,21 +978,26 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       state: this.sellerProfile?.state,
       city: this.sellerProfile?.city,
     };
-
     let data = OBJ;
     data["id"] = this.userId;
     this.userService.updateProfile(data).subscribe({
       next: (res) => {
         this.modalService.dismissAll();
-
         this.getUserAllZipCodes();
-
-        // this.sellerProfile = res;
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  officePhoneNumberInput(event: any) {
+    // Remove all non-digit characters
+    event.target.value = event.target.value.replace(/[^0-9]/g, "");
+    // Optionally, update the form control value as well
+    this.sellerWebLinksForm
+      .get("officePhone")
+      .setValue(event.target.value, { emitEvent: false });
   }
 
   modalEditDetail(modalEditDetail) {
