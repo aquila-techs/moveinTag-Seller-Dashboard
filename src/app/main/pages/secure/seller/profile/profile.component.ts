@@ -776,9 +776,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   profileUpdateFormBuilder() {
     this.profileUpdateForm = this._formBuilder.group({
+      companyFullName: [
+        this.sellerProfile?.companyFullName
+          ? this.sellerProfile.companyFullName
+          : "",
+      ],
       companyName: [
         this.sellerProfile?.companyName ? this.sellerProfile.companyName : "",
         [Validators.required],
+      ],
+      companyTitle: [
+        this.sellerProfile?.companyTitle ? this.sellerProfile.companyTitle : "",
       ],
       slug: [
         this.sellerProfile?.slug ? this.sellerProfile.slug : "",
@@ -1178,6 +1186,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       bonded: data.bonded,
       city: data.city,
       companyName: data.companyName,
+      companyFullName: data.companyFullName,
+      companyTitle: data.companyTitle,
       slug: data.slug,
       companyType: data.companyType,
       country: data.country,
