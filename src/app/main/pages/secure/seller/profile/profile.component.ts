@@ -970,6 +970,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       companyName: this.sellerProfile?.companyName,
       description: this.sellerProfile?.description,
       termsConditions: this.sellerProfile?.termsConditions,
+      companyFullName: this.sellerProfile?.companyFullName,
+      companyTitle: this.sellerProfile?.companyTitle,
+
       companyType: this.sellerProfile?.companyType,
       noOfEmployee: this.sellerProfile?.noOfEmployee,
       returnPolicy: this.sellerProfile?.returnPolicy,
@@ -1001,11 +1004,23 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   officePhoneNumberInput(event: any) {
     // Remove all non-digit characters
-    event.target.value = event.target.value.replace(/[^0-9]/g, "");
-    // Optionally, update the form control value as well
+    let digits = event.target.value.replace(/\D/g, "");
+    let formatted = digits;
+    if (digits.length > 0) {
+      formatted = "(" + digits.substring(0, 3);
+    }
+    if (digits.length >= 4) {
+      formatted += ") " + digits.substring(3, 6);
+    }
+    if (digits.length >= 7) {
+      formatted += "-" + digits.substring(6, 10);
+    }
+    // Limit to 14 characters: (XXX) XXX-XXXX
+    formatted = formatted.substring(0, 14);
+    event.target.value = formatted;
     this.sellerWebLinksForm
       .get("officePhone")
-      .setValue(event.target.value, { emitEvent: false });
+      .setValue(formatted, { emitEvent: false });
   }
 
   modalEditDetail(modalEditDetail) {
@@ -1204,10 +1219,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       warrantyTerms: data.warrantyTerms,
       workerCompensation: data.workerCompensation,
       writtenContract: data.writtenContract,
-
+      officePhone: this.sellerProfile.officePhone,
+      officeEmail: this.sellerProfile.officeEmail,
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+      webURL: this.sellerProfile.webURL,
     };
 
     this.authenticationSerive.updateProfile(OBJ).subscribe({
