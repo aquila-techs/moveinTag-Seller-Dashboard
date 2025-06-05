@@ -474,7 +474,7 @@
                 </button>
                 <div class="card-body">
                   <ul class="info_list">
-                    <li>
+                    <li *ngIf="sellerProfile?.phone">
                       <a href="">
                         <div class="avatar bg-light-primary rounded">
                           <div class="avatar-content">
@@ -1102,6 +1102,7 @@
                 class="form-control"
                 formControlName="personalPhone"
                 placeholder="123-456-789"
+                (input)="personalPhoneNumberInput($event)"
               />
             </div>
           </div>

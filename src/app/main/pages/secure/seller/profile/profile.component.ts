@@ -896,8 +896,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.sellerProfile?.twitterURL ? this.sellerProfile.twitterURL : "",
       ],
       personalPhone: [
-        this.sellerProfile?.phone ? this.sellerProfile.phone : "",
-        Validators.required,
+        this.sellerProfile?.phone
+          ? this.sellerProfile.phone.replace(/^\+1/, "")
+          : "",
+        // No Validators.required, so it's optional
       ],
       officePhone: [
         this.sellerProfile?.officePhone ? this.sellerProfile.officePhone : "",
@@ -954,14 +956,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     };
     const formatPhoneNumber = (phone: string): string => {
       if (!phone) return "";
-      return `+1${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
     };
     const OBJ = {
       facebookURL: ensureHttps(this.sellerWebLinksForm.value.facebookURL),
       instagramURL: ensureHttps(this.sellerWebLinksForm.value.instagramURL),
-      personalPhone: formatPhoneNumber(
-        this.sellerWebLinksForm.value.personalPhone
-      ),
+      phone: formatPhoneNumber(this.sellerWebLinksForm.value.personalPhone),
       officePhone: this.sellerWebLinksForm.value.officePhone,
       personalEmail: this.sellerWebLinksForm.value.personalEmail,
       officeEmail: this.sellerWebLinksForm.value.officeEmail,
@@ -2466,5 +2466,24 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public isReadMoreTerms = true;
   showFullisTerms() {
     this.isReadMoreTerms = !this.isReadMoreTerms;
+  }
+
+  personalPhoneNumberInput(event: any) {
+    let digits = event.target.value.replace(/\D/g, "");
+    let formatted = digits;
+    if (digits.length > 0) {
+      formatted = "(" + digits.substring(0, 3);
+    }
+    if (digits.length >= 4) {
+      formatted += ") " + digits.substring(3, 6);
+    }
+    if (digits.length >= 7) {
+      formatted += "-" + digits.substring(6, 10);
+    }
+    formatted = formatted.substring(0, 14);
+    event.target.value = formatted;
+    this.sellerWebLinksForm
+      .get("personalPhone")
+      .setValue(formatted, { emitEvent: false });
   }
 }
