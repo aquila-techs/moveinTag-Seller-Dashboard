@@ -1196,6 +1196,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       data.slug = this.sellerProfile.slug;
     }
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: data.address,
       bonded: data.bonded,
@@ -1225,6 +1230,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
       webURL: this.sellerProfile.webURL,
+      phone: formatPhoneNumber(this.sellerWebLinksForm.value.personalPhone),
     };
 
     this.authenticationSerive.updateProfile(OBJ).subscribe({
@@ -1254,12 +1260,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     data["nearByPostalCodes"] = this.nearByZipCodes.toString();
     data["id"] = this.userId;
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: this.sellerProfile.address,
       bonded: this.sellerProfile.bonded,
       city: this.sellerProfile.city,
       companyName: this.sellerProfile.companyName,
       companyType: this.sellerProfile.companyType,
+
       country: this.sellerProfile.country,
       description: this.sellerProfile.description,
       liabilityInsurance: this.sellerProfile.liabilityInsurance,
@@ -1275,6 +1287,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+
+      // Added fields from the form or fallback to profile
+      phone:
+        formatPhoneNumber(this.sellerWebLinksForm?.value?.personalPhone) ||
+        formatPhoneNumber(this.sellerProfile.phone),
+      officePhone:
+        this.sellerWebLinksForm?.value?.officePhone ||
+        this.sellerProfile.officePhone,
+      officeEmail:
+        this.sellerWebLinksForm?.value?.officeEmail ||
+        this.sellerProfile.officeEmail,
+      webURL:
+        this.sellerWebLinksForm?.value?.webURL || this.sellerProfile.webURL,
+      companyTitle: this.sellerProfile.companyTitle,
+      companyFullName: this.sellerProfile.companyFullName,
 
       postalCodeSearchType: "NearBy",
       postalCode: this.postalCode,
@@ -1813,6 +1840,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     data["nearByPostalCodes"] = this.PostalCodeCustomArray.toString();
     data["id"] = this.userId;
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: this.sellerProfile.address,
       bonded: this.sellerProfile.bonded,
@@ -1834,6 +1866,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+      webURL:
+        this.sellerWebLinksForm?.value?.webURL || this.sellerProfile.webURL,
+      phone:
+        formatPhoneNumber(this.sellerWebLinksForm?.value?.personalPhone) ||
+        formatPhoneNumber(this.sellerProfile.phone),
+      officePhone:
+        this.sellerWebLinksForm?.value?.officePhone ||
+        this.sellerProfile.officePhone,
+      officeEmail:
+        this.sellerWebLinksForm?.value?.officeEmail ||
+        this.sellerProfile.officeEmail,
+      companyTitle: this.sellerProfile.companyTitle,
+      companyFullName: this.sellerProfile.companyFullName,
 
       postalCodeSearchType: "Custom",
       postalCode: " ",
@@ -2028,6 +2073,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     data["nearByPostalCodes"] = this.PostalCodeCustomArray.toString();
     data["id"] = this.userId;
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: this.sellerProfile.address,
       bonded: this.sellerProfile.bonded,
@@ -2049,6 +2099,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+      webURL:
+        this.sellerWebLinksForm?.value?.webURL || this.sellerProfile.webURL,
+      phone:
+        formatPhoneNumber(this.sellerWebLinksForm?.value?.personalPhone) ||
+        formatPhoneNumber(this.sellerProfile.phone),
+      officePhone:
+        this.sellerWebLinksForm?.value?.officePhone ||
+        this.sellerProfile.officePhone,
+      officeEmail:
+        this.sellerWebLinksForm?.value?.officeEmail ||
+        this.sellerProfile.officeEmail,
+      companyTitle: this.sellerProfile.companyTitle,
+      companyFullName: this.sellerProfile.companyFullName,
 
       postalCodeSearchType: "CountryCity",
       postalCode: " ",
@@ -2176,6 +2239,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     data["nearByPostalCodes"] = this.PostalCodeCustomArray.toString();
     data["id"] = this.userId;
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: this.sellerProfile.address,
       bonded: this.sellerProfile.bonded,
@@ -2197,6 +2265,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+      webURL:
+        this.sellerWebLinksForm?.value?.webURL || this.sellerProfile.webURL,
+      phone:
+        formatPhoneNumber(this.sellerWebLinksForm?.value?.personalPhone) ||
+        formatPhoneNumber(this.sellerProfile.phone),
+      officePhone:
+        this.sellerWebLinksForm?.value?.officePhone ||
+        this.sellerProfile.officePhone,
+      officeEmail:
+        this.sellerWebLinksForm?.value?.officeEmail ||
+        this.sellerProfile.officeEmail,
+      companyTitle: this.sellerProfile.companyTitle,
+      companyFullName: this.sellerProfile.companyFullName,
 
       savedLat: 1,
       savedLon: 1,
@@ -2256,6 +2337,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     data["nearByPostalCodes"] = this.PostalCodeCustomArray.toString();
     data["id"] = this.userId;
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: this.sellerProfile.address,
       bonded: this.sellerProfile.bonded,
@@ -2277,6 +2363,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+
+      phone:
+        formatPhoneNumber(this.sellerWebLinksForm?.value?.personalPhone) ||
+        formatPhoneNumber(this.sellerProfile.phone),
+      officePhone:
+        this.sellerWebLinksForm?.value?.officePhone ||
+        this.sellerProfile.officePhone,
+      officeEmail:
+        this.sellerWebLinksForm?.value?.officeEmail ||
+        this.sellerProfile.officeEmail,
+      webURL:
+        this.sellerWebLinksForm?.value?.webURL || this.sellerProfile.webURL,
+      companyTitle: this.sellerProfile.companyTitle,
+      companyFullName: this.sellerProfile.companyFullName,
 
       postalCodeSearchType: "Custom",
       postalCode: " ",
