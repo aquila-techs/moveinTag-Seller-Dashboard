@@ -1389,6 +1389,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
   }
 
+  formatPhoneNumber = (phone: string): string => {
+    if (!phone) return "";
+    return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+  };
+
   uploadCoverPhoto() {
     if (this.coverPhotoCroppedImageFile) {
       let data: FormData = new FormData();
@@ -1409,6 +1414,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       data.append(
         "phone",
         this.sellerProfile?.phone === undefined ? "" : this.sellerProfile.phone
+      );
+
+      data.append(
+        "officePhone",
+        this.sellerWebLinksForm?.value?.officePhone ||
+          this.sellerProfile.officePhone ||
+          ""
+      );
+      data.append("companyTitle", this.sellerProfile.companyTitle || "");
+      data.append("companyFullName", this.sellerProfile.companyFullName || "");
+      data.append(
+        "officeEmail",
+        this.sellerWebLinksForm?.value?.officeEmail ||
+          this.sellerProfile.officeEmail ||
+          ""
       );
       data.append(
         "twitterURL",
@@ -1565,7 +1585,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       );
       data.append(
         "phone",
-        this.sellerProfile?.phone === undefined ? "" : this.sellerProfile?.phone
+        this.sellerProfile?.phone === undefined ? "" : this.sellerProfile.phone
+      );
+      data.append(
+        "officePhone",
+        this.sellerWebLinksForm?.value?.officePhone ||
+          this.sellerProfile.officePhone ||
+          ""
+      );
+      data.append("companyTitle", this.sellerProfile.companyTitle || "");
+      data.append("companyFullName", this.sellerProfile.companyFullName || "");
+      data.append(
+        "officeEmail",
+        this.sellerWebLinksForm?.value?.officeEmail ||
+          this.sellerProfile.officeEmail ||
+          ""
       );
       data.append(
         "twitterURL",
@@ -2159,6 +2193,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     data["nearByPostalCodes"] = this.PostalCodeCustomArray.toString();
     data["id"] = this.userId;
 
+    const formatPhoneNumber = (phone: string): string => {
+      if (!phone) return "";
+      return `+1 ${phone.replace(/^\+1+/, "").replace(/^\+/, "")}`;
+    };
+
     const OBJ = {
       address: this.sellerProfile.address,
       bonded: this.sellerProfile.bonded,
@@ -2180,6 +2219,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       facebookURL: this.sellerProfile.facebookURL,
       instagramURL: this.sellerProfile.instagramURL,
       twitterURL: this.sellerProfile.twitterURL,
+
+      phone:
+        formatPhoneNumber(this.sellerWebLinksForm?.value?.personalPhone) ||
+        formatPhoneNumber(this.sellerProfile.phone),
+      officePhone:
+        this.sellerWebLinksForm?.value?.officePhone ||
+        this.sellerProfile.officePhone,
+      officeEmail:
+        this.sellerWebLinksForm?.value?.officeEmail ||
+        this.sellerProfile.officeEmail,
+      webURL:
+        this.sellerWebLinksForm?.value?.webURL || this.sellerProfile.webURL,
+      companyTitle: this.sellerProfile.companyTitle,
+      companyFullName: this.sellerProfile.companyFullName,
 
       postalCodeSearchType: "CountryCity",
       postalCode: " ",
