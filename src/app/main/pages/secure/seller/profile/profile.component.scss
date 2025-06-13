@@ -1,5 +1,5 @@
-@import '@core/scss/angular/libs/file-uploader.component.scss';
-@import '@core/scss/angular/libs/select.component.scss';
+@import "@core/scss/angular/libs/file-uploader.component.scss";
+@import "@core/scss/angular/libs/select.component.scss";
 
 .progress {
   height: 20px;
@@ -21,7 +21,7 @@ input[type="file"] {
 }
 
 .noUi-horizontal {
-  background: #2B2931;
+  background: #2b2931;
   border-radius: 16px;
   border: none;
   box-shadow: none;
@@ -30,12 +30,12 @@ input[type="file"] {
   .noUi-tooltip {
     border: none;
     color: $primary;
-    background-color: #2B2931;
+    background-color: #2b2931;
     padding: 5px 10px;
     margin-bottom: 6px;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       left: 50%;
       top: 100%;
@@ -45,7 +45,7 @@ input[type="file"] {
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
 
-      border-top: 8px solid #2B2931;
+      border-top: 8px solid #2b2931;
     }
   }
 
@@ -117,14 +117,73 @@ input[type="file"] {
   max-width: 100%;
 }
 
-.profile .media-body{
+.profile .media-body {
   line-height: 1;
   padding-left: 10px;
 }
-.profile .transaction-item{
-  margin-bottom: 1rem;;
+.profile .transaction-item {
+  margin-bottom: 1rem;
 }
 
-.profile .card-info .avatar-content img{
+.profile .card-info .avatar-content img {
   margin: 0px !important;
+}
+
+/* Profile image edit icon fix */
+.profile_img_wrapper {
+  position: relative;
+  display: inline-block;
+}
+.profile-edit-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  padding: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove blue border/background if present */
+.profile_img_wrapper {
+  box-shadow: none !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* Country edit icon alignment */
+li {
+  &.country-edit {
+    display: flex;
+    align-items: center;
+    img {
+      margin-right: 4px;
+    }
+    span {
+      font-size: 1rem;
+    }
+    button.edit {
+      background: none;
+      border: none;
+      padding: 0 0 0 4px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.address-edit-btn {
+  background: none;
+  border: none;
+  padding-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
 }

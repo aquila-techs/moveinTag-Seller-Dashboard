@@ -665,6 +665,12 @@ body {
     top: -12px;
     right: -12px;
   }
+  .edit.absoluteProfile {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    z-index: 1000;
+  }
 
   .card-about {
     .card-header {

@@ -47,13 +47,25 @@
                 alt=""
                 class="profile_img"
               />
+              <button
+                class="edit absoluteProfile"
+                (click)="modalUpdatePhoto(modalVCProfilePic)"
+              >
+                <img src="../../../assets/images/site/edit.png" alt="" />
+              </button>
             </div>
             <div class="profile_details">
-              <h1 class="title">
-                {{
-                  sellerProfile?.companyName ? sellerProfile.companyName : ""
-                }}
-              </h1>
+              <div style="display: flex; align-items: center; gap: 8px">
+                <h1 class="title">
+                  {{
+                    sellerProfile?.companyName ? sellerProfile.companyName : ""
+                  }}
+                </h1>
+                <button class="edit" (click)="modalOpenVCAbout(modalVCAbout)">
+                  <img src="../../../assets/images/site/edit.png" alt="" />
+                </button>
+              </div>
+
               <ul>
                 <li *ngIf="sellerProfile?.address" style="padding-left: 0px">
                   <div class="avatar bg-light-warning rounded">
@@ -68,6 +80,9 @@
                     sellerProfile?.address ? sellerProfile.address : ""
                   }}</span>
                 </li>
+                <button class="edit" (click)="modalOpenVCAbout(modalVCAbout)">
+                  <img src="../../../assets/images/site/edit.png" alt="" />
+                </button>
               </ul>
             </div>
             <ul>
